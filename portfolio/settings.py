@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from lib2to3.pytree import Base
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-3+&)l+w@os2n&-t)hcvz$askeq-pxfm1#c1&1(s*$2j6g2*py!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'portfolio-dev2.us-east-2.elasticbeanstalk.com', 
+    'portfolio-dev2.us-east-2.elasticbeanstalk.com', '*'
 ]
 
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crm_user.apps.CrmUserConfig',
 ]
 
 MIDDLEWARE = [
@@ -117,7 +119,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
