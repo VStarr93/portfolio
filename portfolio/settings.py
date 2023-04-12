@@ -29,7 +29,8 @@ SECRET_KEY = 'django-insecure-3+&)l+w@os2n&-t)hcvz$askeq-pxfm1#c1&1(s*$2j6g2*py!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'portfolio-dev2.us-east-2.elasticbeanstalk.com', '*'
+    'portfolio-dev2.us-east-2.elasticbeanstalk.com', '*',
+    'portfolio-env.us-east-2.elasticbeanstalk.com'
 ]
 
 
