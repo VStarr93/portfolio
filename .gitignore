@@ -174,10 +174,10 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/django
 
 # AWS EB 
-.ebextensions
-.ebextensions/*
+#.ebextensions
+#.ebextensions/*
 # Elastic Beanstalk Files
-.elasticbeanstalk
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+#.elasticbeanstalk
+#.elasticbeanstalk/*
+#!.elasticbeanstalk/*.cfg.yml
+#!.elasticbeanstalk/*.global.yml
