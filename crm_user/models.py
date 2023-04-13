@@ -60,7 +60,7 @@ class User(AbstractUser):
         CUSTOMER = "CUSTOMER", "Customer"
         EMPLOYEE = "EMPLOYEE", "Employee"
     
-    type = models.CharField(max_length=50, choices=Types.choices, default=Types.CUSTOMER, help_text="Please select the user type")
+    type = models.CharField(_('type'), max_length=50, choices=Types.choices, default=Types.CUSTOMER, help_text="Please select the user type")
     
     email = models.EmailField(_('email address'), unique=True, help_text="Please enter your email address")
     middle_name = models.CharField(_('middle name'), max_length=50, blank=True, help_text="Please enter your middle name")
