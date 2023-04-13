@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crm_user.apps.CrmUserConfig',
     'storages',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
