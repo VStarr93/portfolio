@@ -61,7 +61,7 @@ class User(AbstractUser):
         EMPLOYEE = "EMPLOYEE", "Employee"
     
     type = models.CharField(
-        _("type"), max_length=50, choices=Types.choices, default=Types.CUSTOMER, 
+        _("Type"), max_length=50, choices=Types.choices, default=Types.CUSTOMER, 
         help_text="Please select the user type",
         )
     
