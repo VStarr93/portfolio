@@ -181,3 +181,7 @@ cython_debug/
 #.elasticbeanstalk/*
 #!.elasticbeanstalk/*.cfg.yml
 #!.elasticbeanstalk/*.global.yml
+
+# Visual Studio
+.vs 
+bin/
