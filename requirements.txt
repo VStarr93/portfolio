@@ -4,6 +4,7 @@ boto3==1.26.111
 Django==4.2
 django-phonenumber-field==7.0.2
 django-storages==1.13.2
+phonenumberslite==8.13.9
 Pillow==9.5.0
 psycopg2-binary==2.9.6
 sqlparse==0.4.3
