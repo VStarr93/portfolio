@@ -113,4 +113,17 @@ class Employee(User):
     
     def __str__(self):
         return self.first_name + ' ' + self.last_name
+         
+# Add Admin Model
+class Admin(User):
+    objects = AdminManager()
+    username = None
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.type = User.Types.ADMIN
+        return super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
  
