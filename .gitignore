@@ -6,6 +6,8 @@
 *.pot
 *.pyc
 __pycache__/
+**/__pycache__/
+**/__pycache__/*
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -72,6 +74,8 @@ cover/
 *.mo
 
 # Django stuff:
+#Do Not include migrations, instead run makemigrations on server
+*/migrations
 
 # Flask stuff:
 instance/
