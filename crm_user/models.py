@@ -101,3 +101,16 @@ class Customer(User):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
         
+# Add Employee Model
+class Employee(User):
+    objects = EmployeeManager()
+    username = None
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.type = User.Types.EMPLOYEE
+        return super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
+ 
