@@ -8,7 +8,8 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _ 
 
 # Create your models here.
-# Create UserManager
+
+# Create UserManager from BaseUserManager
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
 
@@ -90,14 +91,17 @@ class AdminManager(UserManager):
         
 # Add Customer Model
 class Customer(User):
-    objects = CustomerManager()
-    username = None
 
+    # Define objects model
+    objects = CustomerManager()
+
+    # Customize save method to automatically add user type
     def save(self, *args, **kwargs):
         if not self.pk:
             self.type = User.Types.CUSTOMER
         return super().save(*args, **kwargs)
     
+    # Customize string method to display user name
     def __str__(self):
         return self.first_name + ' ' + self.last_name
         
