@@ -82,3 +82,8 @@ class CustomerManager(UserManager):
 class EmployeeManager(UserManager):
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(type=User.Types.EMPLOYEE)
+    
+# Create Admin Manager
+class AdminManager(UserManager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(type=User.Types.ADMIN)
