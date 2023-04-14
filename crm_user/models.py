@@ -59,6 +59,7 @@ class User(AbstractUser):
     class Types(models.TextChoices):
         CUSTOMER = "CUSTOMER", "Customer"
         EMPLOYEE = "EMPLOYEE", "Employee"
+        ADMIN = "ADMIN", "Admin"
     
     type = models.CharField(_('type'), max_length=50, choices=Types.choices, default=Types.CUSTOMER, help_text="Please select the user type")
     
