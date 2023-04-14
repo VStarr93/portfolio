@@ -87,3 +87,17 @@ class EmployeeManager(UserManager):
 class AdminManager(UserManager):
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(type=User.Types.ADMIN)
+        
+# Add Customer Model
+class Customer(User):
+    objects = CustomerManager()
+    username = None
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.type = User.Types.CUSTOMER
+        return super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
+        
