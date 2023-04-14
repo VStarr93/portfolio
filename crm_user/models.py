@@ -72,3 +72,8 @@ class User(AbstractUser):
     # First Name and Last Name Do Not Cover Name Patterns
     # Around the Globe.
     name = models.CharField(_('Name of User'), blank=True, max_length=255, help_text="Please enter your full name")
+
+# Create Customer Manager
+class CustomerManager(UserManager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(type=User.Types.CUSTOMER)
