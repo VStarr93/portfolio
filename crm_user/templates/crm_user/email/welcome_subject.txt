@@ -1,0 +1,1 @@
+Hello {{Customer.first_name}} {{Customer.last_name}}, Welcome to our team!
