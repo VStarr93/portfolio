@@ -128,7 +128,7 @@ class Customer(User):
         subject = render_to_string('crm_user/email/welcome_subject.txt', context).strip()
         text_message = render_to_string('crm_user/email/welcome_body.txt', context)
         html_message = render_to_string('crm_user/email/welcome_body.html', context)
-        email = EmailMessage(
+        email = EmailMultiAlternatives(
             subject=subject,
             body=text_message, 
             from_email=settings.EMAIL_HOST_USER,
