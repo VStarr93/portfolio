@@ -12,6 +12,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.urls import reverse 
 from django.utils.translation import gettext_lazy as _ 
 
+from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives 
+from django.conf import settings 
+from django.template.loader import render_to_string 
+
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 # Create your ModelManagers here.
@@ -112,10 +116,37 @@ class Customer(User):
     # Define objects model
     objects = CustomerManager()
 
-    # Customize save method to automatically add user type
+    # Define welcome method
+    # will send a welcome email to new user and give instructions for them to create an account online.
+    def welcome(self, *args, **kwargs):
+        customer = self 
+
+        context={
+            'Customer' : self,
+
+        }
+        subject = render_to_string('crm_user/email/welcome_subject.txt', context).strip()
+        text_message = render_to_string('crm_user/email/welcome_body.txt', context)
+        html_message = render_to_string('crm_user/email/welcome_body.html', context)
+        email = EmailMessage(
+            subject=subject,
+            body=text_message, 
+            from_email=settings.EMAIL_HOST_USER,
+            to = [settings.RECIPIENT_ADDRESS],
+        )
+        email.attach_alternative(html_message, 'text/html')
+        email.send()
+
+    # Customize save method
     def save(self, *args, **kwargs):
+        # Creating a new user
         if not self.pk:
+            # Add default Type for Customer
             self.type = User.Types.CUSTOMER
+            # Send Welcome Email to New Customer
+            self.welcome()
+
+
         return super().save(*args, **kwargs)
     
     # Customize string method to display user name
