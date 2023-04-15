@@ -1,3 +1,8 @@
+#./crm_user/models.py
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+# IMPORTS
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db.models.signals import post_save 
@@ -7,7 +12,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.urls import reverse 
 from django.utils.translation import gettext_lazy as _ 
 
-# Create your models here.
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+# Create your ModelManagers here.
+
 
 # Create UserManager from BaseUserManager
 class UserManager(BaseUserManager):
@@ -16,9 +24,10 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
-        """Create and save a User with the given email and password."""
+        """Create and save a User with the given email/phone number and password."""
         if not email:
-            raise ValueError('The given email must be set')
+            raise ValueError('You must provide an email address for user.')
+
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -42,8 +51,30 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self._create_user(email, password, **extra_fields)  
+
+# Create Customer Manager
+class CustomerManager(UserManager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(type=User.Types.CUSTOMER)
+
+# Create Employee Manager
+class EmployeeManager(UserManager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(type=User.Types.EMPLOYEE)
+    
+# Create Admin Manager
+class AdminManager(UserManager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(type=User.Types.ADMIN)
+
+
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+# Create your models here.
+     
     
 # Create User from AbstractUser
+# django.contrib.auth.models.User
 class User(AbstractUser):
     
     username = None
@@ -74,22 +105,8 @@ class User(AbstractUser):
     # Around the Globe.
     name = models.CharField(_('Name of User'), blank=True, max_length=255, help_text="Please enter your full name")
 
-# Create Customer Manager
-class CustomerManager(UserManager):
-    def get_queryset(self, *args, **kwargs):
-        return super().get_queryset(*args, **kwargs).filter(type=User.Types.CUSTOMER)
-
-# Create Employee Manager
-class EmployeeManager(UserManager):
-    def get_queryset(self, *args, **kwargs):
-        return super().get_queryset(*args, **kwargs).filter(type=User.Types.EMPLOYEE)
-    
-# Create Admin Manager
-class AdminManager(UserManager):
-    def get_queryset(self, *args, **kwargs):
-        return super().get_queryset(*args, **kwargs).filter(type=User.Types.ADMIN)
-        
 # Add Customer Model
+# crm_user.models.Customer
 class Customer(User):
 
     # Define objects model
@@ -106,6 +123,7 @@ class Customer(User):
         return self.first_name + ' ' + self.last_name
         
 # Add Employee Model
+# crm_user.models.Employee
 class Employee(User):
     objects = EmployeeManager()
     username = None
@@ -119,6 +137,7 @@ class Employee(User):
         return self.first_name + ' ' + self.last_name
          
 # Add Admin Model
+# crm_user.models.Admin
 class Admin(User):
     objects = AdminManager()
     username = None
