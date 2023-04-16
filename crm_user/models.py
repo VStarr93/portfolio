@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
-        """Create and save a User with the given email/phone number and password."""
+        """Create and save a User with the given email and password."""
         if not email:
             raise ValueError('You must provide an email address for user.')
 
