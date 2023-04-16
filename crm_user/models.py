@@ -117,6 +117,9 @@ class User(AbstractUser):
     
     # Custom Fields
     class Types(models.TextChoices):
+        """
+            Define text choices for user types.
+        """
         CUSTOMER = "CUSTOMER", "Customer"
         EMPLOYEE = "EMPLOYEE", "Employee"
         ADMIN = "ADMIN", "Admin"
