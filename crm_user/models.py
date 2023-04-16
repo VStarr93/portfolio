@@ -98,6 +98,9 @@ class AdminManager(UserManager):
 # Create User from AbstractUser
 # django.contrib.auth.models.User
 class User(AbstractUser):
+    """
+        Define custom User model based off AbstractUser.
+    """
     
     username = None
     # Required Fields
