@@ -142,11 +142,10 @@ class Customer(User):
         Define Customer model based off User model.
     """
 
-    # Define objects model
+    # Define custom model manager
     objects = CustomerManager()
 
-    # Define welcome method
-    # will send a welcome email to new user and give instructions for them to create an account online.
+    # List model methods
     def welcome(self, *args, **kwargs):
         """
             Define method to send welcome email upon creation of new Customer.
@@ -168,8 +167,7 @@ class Customer(User):
         )
         email.attach_alternative(html_message, 'text/html')
         email.send()
-
-    # Customize save method
+    
     def save(self, *args, **kwargs):
         """
             Define custom Save method.
@@ -184,13 +182,17 @@ class Customer(User):
 
         return super().save(*args, **kwargs)
     
-    # Customize string method to display user name
     def __str__(self):
         """
             Define custom String method.
         """
         return self.first_name + ' ' + self.last_name
         
+    # List model subclasses
+    
+    # List model fields
+
+
 # Add Employee Model
 # crm_user.models.Employee
 class Employee(User):
