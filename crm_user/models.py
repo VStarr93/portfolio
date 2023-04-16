@@ -195,6 +195,9 @@ class Customer(User):
 # Add Employee Model
 # crm_user.models.Employee
 class Employee(User):
+    """
+        Define Employee model based off User model.
+    """
     objects = EmployeeManager()
     username = None
     
