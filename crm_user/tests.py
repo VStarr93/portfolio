@@ -25,6 +25,12 @@ class UserCreateTests(TestCase):
         self.assertIn(new_user, all_users)
         self.assertIs(new_user.has_usable_password(), False)
 
+    def test_create_superuser_with_password(self):
+        new_superuser = User.objects.create_superuser(email="test2@example.com", password="test123")
+        all_users = User.objects.all() 
+        self.assertIn(new_superuser, all_users)
+        self.assertTrue(new_superuser.has_usable_password())
+
 # Create a TestCase for User Methods
 
 # Create a TestCase for User Field Validations
