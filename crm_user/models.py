@@ -210,6 +210,9 @@ class Employee(User):
         return super().save(*args, **kwargs)
     
     def __str__(self):
+        """
+            Define custom String method.
+        """
         return self.first_name + ' ' + self.last_name
          
 # Add Admin Model
