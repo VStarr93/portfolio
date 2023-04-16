@@ -84,6 +84,9 @@ class AdminManager(UserManager):
         Define a model manager for Admin model.
     """
     def get_queryset(self, *args, **kwargs):
+        """
+            Return users filtered by Types.ADMIN
+        """
         return super().get_queryset(*args, **kwargs).filter(type=User.Types.ADMIN)
 
 
