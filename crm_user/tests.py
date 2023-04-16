@@ -14,10 +14,16 @@ from .models import User, Customer, Employee, Admin
 # Create a TestCase for User Creation
 class UserCreateTests(TestCase):
     def test_create_user_with_password(self):
-        new_user = User(email='test@example.com',password='test123')
-        new_user.save()
+        new_user = User.objects.create_user(email='test@example.com',password='test123')
         all_users = User.objects.all() 
         self.assertIn(new_user, all_users)
+        self.assertIs(new_user.check_password('test123'), True)
+    
+    def test_create_user_without_password(self):
+        new_user = User.objects.create_user(email='test1@example.com')
+        all_users = User.objects.all() 
+        self.assertIn(new_user, all_users)
+        self.assertIs(new_user.has_usable_password(), False)
 
 # Create a TestCase for User Methods
 
