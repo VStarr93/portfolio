@@ -102,20 +102,22 @@ class User(AbstractUser):
         Define custom User model based off AbstractUser.
     """
     
-    username = None
     # Required Fields
+    username = None
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     
+    # Specify custom model manager
     objects = UserManager()
     
+    # list model methods
     def get_absolute_url(self):
         """
             Define method to get absolute url for specified User.
         """
         return reverse("users:detail", kwargs={"username": self.username})
     
-    # Custom Fields
+    # list model subclasses
     class Types(models.TextChoices):
         """
             Define text choices for user types.
@@ -124,17 +126,14 @@ class User(AbstractUser):
         EMPLOYEE = "EMPLOYEE", "Employee"
         ADMIN = "ADMIN", "Admin"
     
+    # list model fields
     type = models.CharField(_('type'), max_length=50, choices=Types.choices, default=Types.CUSTOMER, help_text="Please select the user type")
-    
     email = models.EmailField(_('email address'), unique=True, help_text="Please enter your email address")
     middle_name = models.CharField(_('middle name'), max_length=50, blank=True, help_text="Please enter your middle name")
     birth_date = models.DateField(_('birth date'), null=True, blank=True, help_text="Please enter your birth date")
     profile_photo = models.ImageField(_('profile photo'), upload_to='profile_images/', blank=True, help_text="Upload a photo of yourself")
     phone_number = PhoneNumberField(_('phone number'), blank=True, help_text="Enter a good contact phone number")
     
-    # First Name and Last Name Do Not Cover Name Patterns
-    # Around the Globe.
-    name = models.CharField(_('Name of User'), blank=True, max_length=255, help_text="Please enter your full name")
 
 # Add Customer Model
 # crm_user.models.Customer
