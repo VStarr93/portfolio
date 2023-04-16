@@ -187,6 +187,9 @@ class Customer(User):
     
     # Customize string method to display user name
     def __str__(self):
+        """
+            Define custom String method.
+        """
         return self.first_name + ' ' + self.last_name
         
 # Add Employee Model
