@@ -12,6 +12,12 @@ from .models import User, Customer, Employee, Admin
 # Create your User Model tests here.
 
 # Create a TestCase for User Creation
+class UserCreateTests(TestCase):
+    def test_create_user_with_password(self):
+        new_user = User(email='test@example.com',password='test123')
+        new_user.save()
+        all_users = User.objects.all() 
+        self.assertIn(new_user, all_users)
 
 # Create a TestCase for User Methods
 
