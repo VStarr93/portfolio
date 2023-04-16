@@ -202,6 +202,9 @@ class Employee(User):
     username = None
     
     def save(self, *args, **kwargs):
+        """
+            Define custom Save method.
+        """
         if not self.pk:
             self.type = User.Types.EMPLOYEE
         return super().save(*args, **kwargs)
