@@ -229,9 +229,11 @@ class Admin(User):
     """
         Define Admin model based off User Model.
     """
+
+    # Define custom model manager
     objects = AdminManager()
-    username = None
     
+    # List model methods
     def save(self, *args, **kwargs):
         """
             Define custom Save method.
@@ -246,3 +248,7 @@ class Admin(User):
         """
         return self.first_name + ' ' + self.last_name
  
+    # List model subclasses
+
+    # List model fields
+
