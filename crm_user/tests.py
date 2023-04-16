@@ -5,7 +5,8 @@
 
 from django.test import TestCase
 from .models import User, Customer, Employee, Admin
-
+from django.core.exceptions import ValidationError 
+import datetime 
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -54,6 +55,45 @@ class UserCreateTests(TestCase):
 # Create a TestCase for User Methods
 
 # Create a TestCase for User Field Validations
+class UserFieldTests(TestCase):
+    """
+        Test user fields for proper validation
+    """
+    def test_field_type_default(self):
+        """
+            User Type defaults to CUSTOMER
+        """
+        user = User.objects.create_user(email="test@example.com")
+        self.assertIs(user.type, User.Types.CUSTOMER)
+
+    def test_field_email_syntax(self):
+        """
+            Email field must be in email format.
+        """
+        with self.assertRaises(ValidationError):
+            User.objects.create_user(email="233345adada")
+
+    def test_field_username_is_none(self):
+        """
+            Username field must be None.
+        """
+        user = User.objects.create_user(email="test@example.com")
+        self.assertIsNone(user.username)
+
+    def test_field_birth_date_is_date(self):
+        """
+            Birth Date field must be in the past and a date.
+        """
+        user = User.objects.create_user(email="test@example.com", birth_date="1993-04-14")
+        self.assertLess(user.birth_date, datetime.date.today())
+        self.assertEqual(user.birth_date.year, 1993)
+        self.assertEqual(user.birth_date.month, 4)
+        self.assertEqual(user.birth_date.day, 14)
+
+    def test_field_profile_photo_upload(self):
+        """
+            Profile Photo is uploaded to /media/profile_images/
+        """
 
 # Create a TestCase for User Permissions
 
