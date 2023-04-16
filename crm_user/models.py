@@ -139,6 +139,9 @@ class User(AbstractUser):
 # Add Customer Model
 # crm_user.models.Customer
 class Customer(User):
+    """
+        Define Customer model based off User model.
+    """
 
     # Define objects model
     objects = CustomerManager()
@@ -146,6 +149,9 @@ class Customer(User):
     # Define welcome method
     # will send a welcome email to new user and give instructions for them to create an account online.
     def welcome(self, *args, **kwargs):
+        """
+            Define method to send welcome email upon creation of new Customer.
+        """
         customer = self 
 
         context={
