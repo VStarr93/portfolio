@@ -110,6 +110,9 @@ class User(AbstractUser):
     objects = UserManager()
     
     def get_absolute_url(self):
+        """
+            Define method to get absolute url for specified User.
+        """
         return reverse("users:detail", kwargs={"username": self.username})
     
     # Custom Fields
