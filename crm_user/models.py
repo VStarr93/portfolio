@@ -172,6 +172,9 @@ class Customer(User):
 
     # Customize save method
     def save(self, *args, **kwargs):
+        """
+            Define custom Save method.
+        """
         # Creating a new user
         if not self.pk:
             # Add default Type for Customer
