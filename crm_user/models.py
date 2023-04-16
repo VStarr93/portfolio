@@ -62,6 +62,9 @@ class CustomerManager(UserManager):
         Define a model manager for Customer model.
     """
     def get_queryset(self, *args, **kwargs):
+        """
+            Return users filtered by Types.Customer.
+        """
         return super().get_queryset(*args, **kwargs).filter(type=User.Types.CUSTOMER)
 
 # Create Employee Manager
