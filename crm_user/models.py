@@ -218,6 +218,9 @@ class Employee(User):
 # Add Admin Model
 # crm_user.models.Admin
 class Admin(User):
+    """
+        Define Admin model based off User Model.
+    """
     objects = AdminManager()
     username = None
     
