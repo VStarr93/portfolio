@@ -30,6 +30,10 @@ class UserCreateTests(TestCase):
         all_users = User.objects.all() 
         self.assertIn(new_superuser, all_users)
         self.assertTrue(new_superuser.has_usable_password())
+        
+    def test_create_superuser_without_password(self):
+        with self.assertRaises(TypeError):
+            new_superuser = User.objects.create_superuser(email="test2@example.com")
 
 # Create a TestCase for User Methods
 
