@@ -225,6 +225,9 @@ class Admin(User):
     username = None
     
     def save(self, *args, **kwargs):
+        """
+            Define custom Save method.
+        """
         if not self.pk:
             self.type = User.Types.ADMIN
         return super().save(*args, **kwargs)
