@@ -73,6 +73,9 @@ class EmployeeManager(UserManager):
         Define a model manager for Employee model.
     """
     def get_queryset(self, *args, **kwargs):
+        """
+            Return users filtered by Types.EMPLOYEE
+        """
         return super().get_queryset(*args, **kwargs).filter(type=User.Types.EMPLOYEE)
     
 # Create Admin Manager
