@@ -199,9 +199,11 @@ class Employee(User):
     """
         Define Employee model based off User model.
     """
+
+    # Define custom model manager
     objects = EmployeeManager()
-    username = None
-    
+
+    # List model methods    
     def save(self, *args, **kwargs):
         """
             Define custom Save method.
@@ -216,6 +218,11 @@ class Employee(User):
         """
         return self.first_name + ' ' + self.last_name
          
+    # List model subclasses
+
+    # List model fields
+
+
 # Add Admin Model
 # crm_user.models.Admin
 class Admin(User):
