@@ -80,6 +80,9 @@ class EmployeeManager(UserManager):
     
 # Create Admin Manager
 class AdminManager(UserManager):
+    """
+        Define a model manager for Admin model.
+    """
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(type=User.Types.ADMIN)
 
