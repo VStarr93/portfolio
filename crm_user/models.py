@@ -63,7 +63,7 @@ class CustomerManager(UserManager):
     """
     def get_queryset(self, *args, **kwargs):
         """
-            Return users filtered by Types.Customer.
+            Return users filtered by Types.CUSTOMER.
         """
         return super().get_queryset(*args, **kwargs).filter(type=User.Types.CUSTOMER)
 
