@@ -13,6 +13,9 @@ from .models import User, Customer, Employee, Admin
 
 # Create a TestCase for User Creation
 class UserCreateTests(TestCase):
+    """
+        Test user creation for regular user and superuser with and without passwords.
+    """
     def test_create_user_with_password(self):
         """
             User is created successfully with email and password.
