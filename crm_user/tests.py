@@ -78,7 +78,6 @@ class UserMethodTests(TestCase):
             Test User.age calculates correctly from given birthdate
         """
         self.user1.birth_date = '1993-04-14'
-        #self.user1.clean_fields()
         self.user1.save()
         self.assertEqual(self.user1.birth_date.year, 1993)
         self.assertEqual(self.user1.age(), 30)
