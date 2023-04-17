@@ -11,11 +11,28 @@ import datetime
 from django.core.files.uploadedfile import SimpleUploadedFile 
 import shutil, tempfile 
 
+# Management Commands
+from io import StringIO 
+from django.core.management import call_command 
+
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 # Create your Variables here.
 
 MEDIA_ROOT = tempfile.mkdtemp()
+
+
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+# Create your Management Commands tests here.
+
+# Create a TestCase for creategroup command
+class CreategroupTests(TestCase):
+    def test_creategroup_output(self):
+        out = StringIO()
+        call_command("creategroup", 'new_group', stdout=out)
+        self.assertIn("Successfully ran your own command", out.getvalue())
+
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
