@@ -95,6 +95,7 @@ class UserMethodTests(TestCase):
         self.assertEqual(self.user1.full_name(), "Sue Anne")
 
 # Create a TestCase for User Field Validations
+# crm_user.tests.UserFieldTests
 @override_settings(MEDIA_ROOT=MEDIA_ROOT)
 class UserFieldTests(TestCase):
     """
