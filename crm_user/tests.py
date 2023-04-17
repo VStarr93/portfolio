@@ -100,6 +100,15 @@ class UserFieldTests(TestCase):
         user = User.objects.create_user(email="test@example.com", profile_photo=file)
         self.assertEqual(user.profile_photo.name, 'profile_images/test_image.jpg')
 
+    def test_field_phone_number_syntax(self):
+        """
+            Phone Number should contain only numbers
+        """
+        user = User.objects.create_user(email="test@example.com", phone_number='+12818829480')
+        with self.assertRaises(TypeError):
+            User.objects.create_user(email="test1@example.com", phone_number=2818829480)
+        with self.assertRaises(ValidationError):
+            User.objects.create_user(email="test2@example.com", phone_number="2818829480")
 
 # Create a TestCase for User Permissions
 
