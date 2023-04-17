@@ -3,10 +3,13 @@
 #-------------------------------------------------------------
 # IMPORTS
 
+from threading import _profile_hook
 from django.test import TestCase
 from .models import User, Customer, Employee, Admin
 from django.core.exceptions import ValidationError 
 import datetime 
+from django.core.files.uploadedfile import SimpleUploadedFile 
+import os 
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -94,6 +97,10 @@ class UserFieldTests(TestCase):
         """
             Profile Photo is uploaded to /media/profile_images/
         """
+        file = SimpleUploadedFile("test_image.jpg",b"test_content", "image/jpeg")
+        user = User.objects.create_user(email="test@example.com", profile_photo=file)
+        self.assertEqual(user.profile_photo.name, 'profile_images/test_image.jpg')
+
 
 # Create a TestCase for User Permissions
 
