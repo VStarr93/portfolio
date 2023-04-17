@@ -15,6 +15,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives 
 from django.conf import settings 
 from django.template.loader import render_to_string 
+import datetime 
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -112,6 +113,13 @@ class User(AbstractUser):
     objects = UserManager()
     
     # list model methods
+    def age(self):
+        """
+            Define method to calculate user's age from birth date
+        """
+        today = datetime.date.today()
+        born = self.birth_date
+        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
     
     # list model subclasses
     class Types(models.TextChoices):
