@@ -9,7 +9,6 @@ from .models import User, Customer, Employee, Admin
 from django.core.exceptions import ValidationError 
 import datetime 
 from django.core.files.uploadedfile import SimpleUploadedFile 
-import os 
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
