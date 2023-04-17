@@ -121,6 +121,13 @@ class User(AbstractUser):
         born = self.birth_date
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
     
+    def save(self, *args, **kwargs):
+        """
+            Define custom Save method.
+        """
+        self.clean_fields()
+        return super().save(*args, **kwargs)
+    
     # list model subclasses
     class Types(models.TextChoices):
         """
