@@ -83,6 +83,15 @@ class UserMethodTests(TestCase):
         self.assertEqual(self.user1.age(), 30)
         self.assertNotEqual(self.user1.age(), 29)
 
+    def test_method_full_name(self):
+        """
+            Test full_name to display first and last name
+        """
+        self.user1.first_name = "Sue"
+        self.user1.last_name = "Anne"
+        self.user1.save()
+        self.assertEqual(self.user1.full_name(), "Sue Anne")
+
 # Create a TestCase for User Field Validations
 @override_settings(MEDIA_ROOT=MEDIA_ROOT)
 class UserFieldTests(TestCase):
