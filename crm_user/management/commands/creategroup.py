@@ -42,6 +42,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for group in options["group_name"]:
+            groupname = group + '_group'
+            groupname, created = Group.objects.get_or_create(name=group)
+
             self.stdout.write(
-                self.style.SUCCESS('Successfully ran your own command!')
+                self.style.SUCCESS('Successfully created %s_group!' %group)
             )
