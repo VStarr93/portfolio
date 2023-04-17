@@ -4,11 +4,18 @@
 # IMPORTS
 
 from threading import _profile_hook
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from .models import User, Customer, Employee, Admin
 from django.core.exceptions import ValidationError 
 import datetime 
 from django.core.files.uploadedfile import SimpleUploadedFile 
+import shutil, tempfile 
+
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+# Create your Variables here.
+
+MEDIA_ROOT = tempfile.mkdtemp()
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -68,10 +75,16 @@ class UserMethodTests(TestCase):
         
 
 # Create a TestCase for User Field Validations
+@override_settings(MEDIA_ROOT=MEDIA_ROOT)
 class UserFieldTests(TestCase):
     """
         Test user fields for proper validation
     """
+    @classmethod 
+    def tearDownClass(cls):
+        shutil.rmtree(MEDIA_ROOT, ignore_errors=True)
+        super().tearDownClass()
+
     def test_field_type_default(self):
         """
             User Type defaults to CUSTOMER
