@@ -128,6 +128,12 @@ class User(AbstractUser):
         self.clean_fields()
         return super().save(*args, **kwargs)
     
+    def full_name(self):
+        """
+            Define method to display first and last name
+        """
+        return self.first_name + ' ' + self.last_name 
+
     # list model subclasses
     class Types(models.TextChoices):
         """
