@@ -31,7 +31,7 @@ class CreategroupTests(TestCase):
     def test_creategroup_output(self):
         out = StringIO()
         call_command("creategroup", 'new_group', stdout=out)
-        self.assertIn("Successfully ran your own command", out.getvalue())
+        self.assertIn("Successfully created", out.getvalue())
 
 
 #-------------------------------------------------------------
