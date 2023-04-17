@@ -59,6 +59,13 @@ class UserMethodTests(TestCase):
     """
         Test User model method functionality
     """
+    def setUp(self):
+        """
+            UserMethodTests setUp method to create test users
+        """
+        self.user1 = User.objects.create_user(email="test1@example.com")
+        self.user2 = User.objects.create_user(email="test2@example.com")
+        
 
 # Create a TestCase for User Field Validations
 class UserFieldTests(TestCase):
