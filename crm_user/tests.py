@@ -55,6 +55,10 @@ class UserCreateTests(TestCase):
             new_superuser = User.objects.create_superuser(email="test2@example.com")
 
 # Create a TestCase for User Methods
+class UserMethodTests(TestCase):
+    """
+        Test User model method functionality
+    """
 
 # Create a TestCase for User Field Validations
 class UserFieldTests(TestCase):
