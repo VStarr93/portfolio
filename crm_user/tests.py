@@ -22,6 +22,7 @@ MEDIA_ROOT = tempfile.mkdtemp()
 # Create your User Model tests here.
 
 # Create a TestCase for User Creation
+# crm_user.tests.UserCreateTests
 class UserCreateTests(TestCase):
     """
         Test user creation for regular user and superuser with and without passwords.
