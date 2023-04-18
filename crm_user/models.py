@@ -152,7 +152,7 @@ class User(AbstractUser):
     phone_number = PhoneNumberField(_('phone number'), blank=True, help_text="Enter a good contact phone number")
     
 
-# Add Customer Model
+# Add Customer Model - PROXY
 # crm_user.models.Customer
 class Customer(User):
     """
@@ -206,7 +206,9 @@ class Customer(User):
         return self.first_name + ' ' + self.last_name
         
     # List model subclasses
-    
+    class Meta:
+        proxy = True
+
     # List model fields
 
 
@@ -236,6 +238,8 @@ class Employee(User):
         return self.first_name + ' ' + self.last_name
          
     # List model subclasses
+    class Meta:
+        proxy = True
 
     # List model fields
 
@@ -266,6 +270,8 @@ class Admin(User):
         return self.first_name + ' ' + self.last_name
  
     # List model subclasses
+    class Meta:
+        proxy = True
 
     # List model fields
 
