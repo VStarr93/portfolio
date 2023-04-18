@@ -30,6 +30,7 @@ MEDIA_ROOT = tempfile.mkdtemp()
 # Create your Management Commands tests here.
 
 # Create a TestCase for creategroup command
+# crm_user.tests.CreategroupTests
 class CreategroupTests(TestCase):
     """
         Test creategroup command
@@ -42,6 +43,8 @@ class CreategroupTests(TestCase):
         call_command("creategroup", 'new_group', stdout=out)
         self.assertIn("Successfully created", out.getvalue())
 
+#Create a TestCase for createperm command
+# crm_user.tests.CreatepermTests
 class CreatepermTests(TestCase):
     """
         Test createperm command
