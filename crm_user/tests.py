@@ -54,6 +54,16 @@ class CreategroupTests(TestCase):
         self.assertTrue(Group.objects.get(name='admins').permissions.get(name='Can add user'))
         self.assertTrue(Group.objects.get(name='admins').permissions.get(name='Can add customer'))
 
+    def test_createperm_two_groups(self):
+        out = StringIO()
+        call_command("createperm", "add", "-m", "user", "-g", "admins", "customers", stdout=out)
+        self.assertIn("Successfully added", out.getvalue())
+        self.assertTrue(Group.objects.get(name='admins'))
+        self.assertTrue(Group.objects.get(name='customers'))
+        self.assertTrue(Permission.objects.get(name='Can add user'))
+        self.assertTrue(Group.objects.get(name='admins').permissions.get(name='Can add user'))
+        self.assertTrue(Group.objects.get(name='customers').permissions.get(name='Can add user'))
+
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 # Create your User Model tests here.
