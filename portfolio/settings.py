@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crm_user.apps.CrmUserConfig',
+    'crm_user',
     'storages',
     'phonenumber_field',
 ]
