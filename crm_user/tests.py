@@ -14,6 +14,9 @@ import shutil, tempfile
 # Management Commands
 from io import StringIO 
 from django.core.management import call_command 
+from django.contrib.auth.models import Group, Permission 
+from django.contrib.contenttypes.models import ContentType 
+
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -33,6 +36,10 @@ class CreategroupTests(TestCase):
         call_command("creategroup", 'new_group', stdout=out)
         self.assertIn("Successfully created", out.getvalue())
 
+    def test_createperm_output(self):
+        out = StringIO()
+        call_command("createperm", "add", "-m", "user", "-g", "admins", stdout=out)
+        self.assertIn("Successfully added", out.getvalue())
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
