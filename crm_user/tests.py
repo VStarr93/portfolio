@@ -36,6 +36,7 @@ class CreategroupTests(TestCase):
         call_command("creategroup", 'new_group', stdout=out)
         self.assertIn("Successfully created", out.getvalue())
 
+class CreatepermTests(TestCase):
     def test_createperm_output(self):
         out = StringIO()
         call_command("createperm", "add", "-m", "user", "-g", "admins", stdout=out)
