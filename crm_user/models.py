@@ -151,7 +151,6 @@ class User(AbstractUser):
     profile_photo = models.ImageField(_('profile photo'), upload_to='profile_images/', blank=True, help_text="Upload a photo of yourself")
     phone_number = PhoneNumberField(_('phone number'), blank=True, help_text="Enter a good contact phone number")
     
-
 # Add Customer Model - PROXY
 # crm_user.models.Customer
 class Customer(User):
@@ -209,9 +208,6 @@ class Customer(User):
     class Meta:
         proxy = True
 
-    # List model fields
-
-
 # Add Employee Model
 # crm_user.models.Employee
 class Employee(User):
@@ -240,10 +236,7 @@ class Employee(User):
     # List model subclasses
     class Meta:
         proxy = True
-
-    # List model fields
-
-
+        
 # Add Admin Model
 # crm_user.models.Admin
 class Admin(User):
@@ -272,6 +265,3 @@ class Admin(User):
     # List model subclasses
     class Meta:
         proxy = True
-
-    # List model fields
-
