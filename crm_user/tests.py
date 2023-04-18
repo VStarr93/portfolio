@@ -31,7 +31,13 @@ MEDIA_ROOT = tempfile.mkdtemp()
 
 # Create a TestCase for creategroup command
 class CreategroupTests(TestCase):
+    """
+        Test creategroup command
+    """
     def test_creategroup_output(self):
+        """
+            creategroup command runs successfully with 1 argument
+        """
         out = StringIO()
         call_command("creategroup", 'new_group', stdout=out)
         self.assertIn("Successfully created", out.getvalue())
