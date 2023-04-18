@@ -40,6 +40,9 @@ class CreategroupTests(TestCase):
         out = StringIO()
         call_command("createperm", "add", "-m", "user", "-g", "admins", stdout=out)
         self.assertIn("Successfully added", out.getvalue())
+        self.assertTrue(Group.objects.get(name='admins'))
+        self.assertTrue(Permission.objects.get(name='Can add user'))
+        self.assertTrue(Group.objects.get(name='admins').permissions.get(name='Can add user'))
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
