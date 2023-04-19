@@ -245,6 +245,7 @@ class UserFieldTests(TestCase):
 # Create your Customer - PROXY Model tests here.
 
 # Create a TestCase for Customer Creation
+# crm_user.tests.CustomerCreateTests
 class CustomerCreateTests(TestCase):
     """
         Test Customer type creation
