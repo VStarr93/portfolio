@@ -295,6 +295,20 @@ class CustomerMethodTests(TestCase):
         user2 = Customer.objects.create_user(email="test2@example.com")
         self.assertEqual(len(mail.outbox),2)
 
+    def test_method_account_number(self):
+        """
+            Account number should increment by 1 integer from last customer.
+        """
+        user2 = Customer.objects.create_user(email="test2@example.com")
+        user3 = Customer.objects.create_user(email="test3@example.com")
+        self.assertNotEqual(self.user1.profile.acct_no, user2.profile.acct_no)
+        int1 = int(self.user1.profile.acct_no.split('ACCT')[-1])
+        int2 = int(user2.profile.acct_no.split('ACCT')[-1])
+        int3 = int(user3.profile.acct_no.split('ACCT')[-1])
+        self.assertEqual(int2 - int1, 1)
+        self.assertEqual(int3 - int1, 2)
+        self.assertEqual(int3 - int2, 1)
+
 # Create a TestCase for Customer Field Validations
 # crm_user.tests.CustomerFieldTests
 class CustomerFieldTests(TestCase):
