@@ -326,14 +326,25 @@ class CustomerFieldTests(TestCase):
         """
             Test that auto generated fields are correctly applied.
         """
-        profile1 = CustomerProfile.objects.get(user=self.user1)
-        profile2 = CustomerProfile.objects.get(user=self.user2)
+        profile = CustomerProfile.objects.get(user=self.user1)
         self.assertEqual(self.user1, profile.user )
         self.assertEqual(self.user1, profile.last_modified_by)
         self.assertIn("ACCT", profile.acct_no)
         self.assertEqual(profile.status, "NEW")
         self.assertIsNone(profile.last_job)
         self.assertEqual(profile.last_modified.date(), datetime.date.today())
+
+    def test_fields_boolean(self):
+        """
+            Test that boolean fields are correctly populating their defaults and change appropriately
+        """
+        self.assertFalse(self.user1.profile.balance_owed)
+        self.assertFalse(self.user1.profile.credit_owed)
+        self.user1.profile.balance_owed = True 
+        self.user1.profile.credit_owed = True
+        self.user1.save()
+        self.assertTrue(self.user1.profile.balance_owed)
+        self.assertTrue(self.user1.profile.credit_owed)
 
 # Create a TestCase for Customer Permissions
 
