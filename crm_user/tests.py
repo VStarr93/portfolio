@@ -5,7 +5,7 @@
 
 from threading import _profile_hook
 from django.test import TestCase, override_settings
-from .models import User, Customer, Employee, Admin
+from .models import User, Customer, Employee, Admin, CustomerProfile
 from django.core.exceptions import ValidationError 
 import datetime 
 from django.core.files.uploadedfile import SimpleUploadedFile 
@@ -242,10 +242,34 @@ class UserFieldTests(TestCase):
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
-# Create your Customer Model tests here.
+# Create your Customer - PROXY Model tests here.
 
 # Create a TestCase for Customer Creation
+class CustomerCreateTests(TestCase):
+    """
+        Test Customer type creation
+    """
+    def setUp(self):
+        """
+            CustomerCreateTests setUp method to create test users.
+        """
+        self.user1 = Customer.objects.create_user(email="test1@example.com")
+        self.user2 = Customer.objects.create_user(email="test2@example.com")
 
+    def test_create_customer(self):
+        """
+            Test that customer was created successfully with type = CUSTOMER
+        """
+        self.assertEqual(self.user1.type, 'CUSTOMER')
+        self.assertNotEqual(self.user1.type, 'EMPLOYEE')
+        self.assertEqual(self.user1, User.objects.get(email=self.user1.email))
+
+    def test_create_profile(self):
+        """
+            Test that customer profile is automatically created with the creation of new customer.
+        """
+        self.assertIsInstance(CustomerProfile.objects.get(user=self.user1), CustomerProfile)
+        
 # Create a TestCase for Customer Methods
 
 # Create a TestCase for Customer Field Validations
