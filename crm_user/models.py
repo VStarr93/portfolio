@@ -196,7 +196,6 @@ class Customer(User):
             # Send Welcome Email to New Customer
             self.welcome()
 
-
         return super().save(*args, **kwargs)
     
     def __str__(self):
@@ -275,7 +274,7 @@ class CustomerProfile(Model):
     """
 
     # Define model methods
-    def account_number(self):
+    def account_number():
         """
             Define method to calculate customer account number
         """
@@ -284,7 +283,7 @@ class CustomerProfile(Model):
         if not last_customer:
             return 'ACCT000001'
         # Define account number from last customer
-        last_acct_no = last_customer.account_number
+        last_acct_no = last_customer.acct_no
         # if you want letters infront of invoice number
         # split account number from string and return integers (last index)
         account_int = int(last_acct_no.split('ACCT')[-1])
@@ -338,9 +337,9 @@ class CustomerProfile(Model):
     acct_no = models.CharField(_('Account Number'), max_length=10, unique=True, default=account_number, help_text="Your customer account number is auto-generated and cannot be changed.")
     status = models.CharField(_('Status'), max_length=9, default=Status.NEW, choices=Status.choices, help_text="Your customer status is adjusted based on frequency of jobs.")
     user = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='profile', verbose_name="Customer", unique=True, help_text="The Customer these details/model are associated with.")
-    last_job = models.DateField(_('Last Job'), blank=True, help_text="The date of which the last job for customer was performed.")
-    last_modified = models.DateTimeField(_('Last Modified'), auto_now=True, blank=True, help_text="The date and time of which the customer profile was last modified.")
-    last_modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile_modified_by', verbose_name="Last Modified By", blank=True, help_text="The user who last modified this profile.")
+    last_job = models.DateField(_('Last Job'), blank=True, null=True, help_text="The date of which the last job for customer was performed.")
+    last_modified = models.DateTimeField(_('Last Modified'), auto_now=True, blank=True, null=True, help_text="The date and time of which the customer profile was last modified.")
+    last_modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile_modified_by', verbose_name="Last Modified By", blank=True, null=True, help_text="The user who last modified this profile.")
 
     # Define BOOLEAN model fields
     balance_owed = models.BooleanField(_("Balance Owed"), default=False, help_text="The status of the customer's account balance.")
