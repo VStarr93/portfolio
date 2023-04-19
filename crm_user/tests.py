@@ -274,6 +274,30 @@ class CustomerCreateTests(TestCase):
 # Create a TestCase for Customer Methods
 
 # Create a TestCase for Customer Field Validations
+# crm_user.tests.CustomerFieldTests
+class CustomerFieldTests(TestCase):
+    """
+        Test Customer Profile fields for proper validation
+    """
+    def setUp(self):
+        """
+            CustomerFieldTests setUp method to create test users.
+        """
+        self.user1 = Customer.objects.create_user(email="test1@example.com")
+        self.user2 = Customer.objects.create_user(email="test2@example.com")
+
+    def test_fields_auto_generated(self):
+        """
+            Test that auto generated fields are correctly applied.
+        """
+        profile1 = CustomerProfile.objects.get(user=self.user1)
+        profile2 = CustomerProfile.objects.get(user=self.user2)
+        self.assertEqual(self.user1, profile.user )
+        self.assertEqual(self.user1, profile.last_modified_by)
+        self.assertIn("ACCT", profile.acct_no)
+        self.assertEqual(profile.status, "NEW")
+        self.assertIsNone(profile.last_job)
+        self.assertEqual(profile.last_modified.date(), datetime.date.today())
 
 # Create a TestCase for Customer Permissions
 
