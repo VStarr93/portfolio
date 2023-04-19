@@ -4,6 +4,7 @@
 # IMPORTS
 
 from django.db import models
+from django.db.models import Model, TextChoices
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db.models.signals import post_save 
 from django.dispatch import receiver 
@@ -265,3 +266,87 @@ class Admin(User):
     # List model subclasses
     class Meta:
         proxy = True
+
+# Add Customer Profile Model
+# crm_user.models.CustomerProfile
+class CustomerProfile(Model):
+    """
+        Define a profile model for Users with type = Customer
+    """
+
+    # Define model methods
+    def account_number(self):
+        """
+            Define method to calculate customer account number
+        """
+        # Define last customer
+        last_customer = CustomerProfile.objects.all().order_by('pk').last()
+        if not last_customer:
+            return 'ACCT000001'
+        # Define account number from last customer
+        last_acct_no = last_customer.account_number
+        # if you want letters infront of invoice number
+        # split account number from string and return integers (last index)
+        account_int = int(last_acct_no.split('ACCT')[-1])
+        # if you want only integers
+        # invoice_int = int(invoice_no)
+        # if you want to add x amount of 0's
+        width = 6
+        new_account_int = account_int + 1
+        formatted = (width - len(str(new_account_int))) * "0" + str(new_account_int)
+        new_account_no = 'ACCT' + str(formatted)
+        return new_account_no
+        
+    # Define model subclasses
+    class Status(TextChoices):
+        """
+            Define TextChoices for customer status.
+            Customer status represents the frequncy of customer orders,
+            whether they are:
+            NEW (only 1 job), 
+            RECURRING (more than 1 job),
+            POTENTIAL (no jobs, but contact information is stored),
+            OLD (has not had a job over 1 year)
+        """
+        NEW = 'NEW', 'New'
+        RECURRING = 'RECURRING', 'Recurring'
+        POTENTIAL = 'POTENTIAL', 'Potential'
+        OLD = 'OLD', 'Old'
+    
+    class Language(TextChoices):
+        ENGLISH = 'ENGLISH', 'English'
+        SPANISH = 'SPANISH', 'Spanish'
+        MANDARIN = 'MANDARIN', 'Mandarin'
+        HINDI = 'HINDI', 'Hindi'
+        FRENCH = 'FRENCH', 'French'
+        ARABIC = 'ARABIC', 'Arabic'
+        RUSSIAN = 'RUSSIAN', 'Russian'
+        PORTUGUESE = 'PORTUGUESE', 'Portuguese'
+
+    class Colors(TextChoices):
+        RED = 'RED', 'Red'
+        BLUE = 'BLUE', 'Blue'
+        GREEN = 'GREEN', 'Green'
+        YELLOW = 'YELLOW', 'Yellow'
+        ORANGE = 'ORANGE', 'Orange'
+        PURPLE = 'PURPLE', 'Purple'
+        BLACK = 'BLACK', 'Black'
+        WHITE = 'WHITE', 'White'
+
+    # Define AUTO-GENERATED model fields
+    id = models.BigAutoField(primary_key=True) # Primary Key
+    acct_no = models.CharField(_('Account Number'), max_length=10, unique=True, default=account_number, help_text="Your customer account number is auto-generated and cannot be changed.")
+    status = models.CharField(_('Status'), max_length=9, default=Status.NEW, choices=Status.choices, help_text="Your customer status is adjusted based on frequency of jobs.")
+    user = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='profile', verbose_name="Customer", unique=True, help_text="The Customer these details/model are associated with.")
+    last_job = models.DateField(_('Last Job'), blank=True, help_text="The date of which the last job for customer was performed.")
+    last_modified = models.DateTimeField(_('Last Modified'), auto_now=True, blank=True, help_text="The date and time of which the customer profile was last modified.")
+    last_modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile_modified_by', verbose_name="Last Modified By", blank=True, help_text="The user who last modified this profile.")
+
+    # Define BOOLEAN model fields
+    balance_owed = models.BooleanField(_("Balance Owed"), default=False, help_text="The status of the customer's account balance.")
+    credit_owed = models.BooleanField(_("Credit Owed"), default=False, help_text="The status of the customer's account credit.")
+
+    # Define OPTIONAL model fields
+    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, help_text="The language the customer speaks.")
+    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="The customer's chosen theme.")
+    
