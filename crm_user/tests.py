@@ -346,6 +346,13 @@ class CustomerFieldTests(TestCase):
         self.assertTrue(self.user1.profile.balance_owed)
         self.assertTrue(self.user1.profile.credit_owed)
 
+    def test_fields_optional(self):
+        """
+            Test that optional fields are correctly populating their defaults and change appropriately.
+        """
+        self.assertEqual(self.user1.profile.language, "ENGLISH")
+        self.assertEqual(self.user1.profile.theme, "GREEN")
+
 # Create a TestCase for Customer Permissions
 
 
