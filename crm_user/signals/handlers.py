@@ -15,7 +15,9 @@ from crm_user.models import Customer, Employee, Admin, CustomerProfile
 @receiver(post_save, sender=Customer)
 def create_customer_profile(sender, **kwargs):
     user = kwargs['instance']
-    new_profile = CustomerProfile.objects.create(
-        user = user,
-        last_modified_by = user,
-    )
+    created = kwargs['created']
+    if created :
+        new_profile = CustomerProfile.objects.create(
+            user = user,
+            last_modified_by = user,
+        )
