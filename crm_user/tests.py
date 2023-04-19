@@ -17,7 +17,8 @@ from django.core.management import call_command
 from django.contrib.auth.models import Group, Permission 
 from django.contrib.contenttypes.models import ContentType 
 
-
+# For Testing Email Services
+from django.core import mail 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 # Create your Variables here.
@@ -272,6 +273,27 @@ class CustomerCreateTests(TestCase):
         self.assertIsInstance(CustomerProfile.objects.get(user=self.user1), CustomerProfile)
         
 # Create a TestCase for Customer Methods
+# crm_user.tests.CustomerMethodTests
+class CustomerMethodTests(TestCase):
+    """
+        Test Customer model method functionality
+    """
+    def setUp(self):
+        """
+            CustomerMethodTests setUp method to create test users.
+        """
+        self.user1 = Customer.objects.create_user(email="test1@example.com")
+
+    def test_method_welcome(self):
+        """
+            Welcome email should be sent upon new customer creation.
+        """
+        self.assertEqual(len(mail.outbox),1)
+        self.user1.first_name = "Jessica"
+        self.user1.save()
+        self.assertEqual(len(mail.outbox),1)
+        user2 = Customer.objects.create_user(email="test2@example.com")
+        self.assertEqual(len(mail.outbox),2)
 
 # Create a TestCase for Customer Field Validations
 # crm_user.tests.CustomerFieldTests
