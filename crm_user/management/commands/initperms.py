@@ -28,19 +28,29 @@ GROUPS = {
         'employee': ['add', 'view', 'change', 'delete'],
         'admin': ['add', 'view', 'change', 'delete'],
         'customer': ['add', 'view', 'change', 'delete'],
+        'admin profile': ['add', 'view', 'change', 'delete'],
+        'customer profile': ['add', 'view', 'change', 'delete'],
+        'employee profile': ['add', 'view', 'change', 'delete'],
     },
     'empManagement': {
         'employee': ['add', 'view', 'change', 'delete'],
+        'employee profile': ['add', 'view', 'change', 'delete'],
         'admin': ['view'],
+        'admin profile': ['view'],
         'customer': ['add', 'view', 'change', 'delete'],
+        'customer profile': ['add', 'view', 'change', 'delete'],
     },
     'empStandard': {
         'employee': ['view', 'change'],
+        'employee profile': ['view', 'change'],
         'customer': ['add', 'view', 'change'],
+        'customer profile': ['add', 'view', 'change'],
     },
     'customers': {
         'employee': ['view'],
+        'employee profile': ['view'],
         'customer': ['view', 'change'],
+        'customer profile': ['view', 'change'],
     },
 }
 
