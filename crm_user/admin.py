@@ -4,7 +4,7 @@
 # IMPORTS
 
 from django.contrib import admin
-from crm_user.models import User, Customer, Employee, Admin
+from crm_user.models import *
 
 
 #-------------------------------------------------------------
