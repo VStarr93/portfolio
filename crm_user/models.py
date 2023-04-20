@@ -208,7 +208,7 @@ class Customer(User):
     class Meta:
         proxy = True
 
-# Add Employee Model
+# Add Employee Model - PROXY
 # crm_user.models.Employee
 class Employee(User):
     """
