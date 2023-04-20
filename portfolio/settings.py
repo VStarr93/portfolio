@@ -63,7 +63,7 @@ ROOT_URLCONF = 'portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -172,3 +172,9 @@ EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 RECIPIENT_ADDRESS = os.environ['RECIPIENT_ADDRESS']
+
+# Login Redirect
+LOGIN_REDIRECT_URL = 'home'
+
+# Logout Redirect
+LOGOUT_REDIRECT_URL = 'home'
