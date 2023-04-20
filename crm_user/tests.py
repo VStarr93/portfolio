@@ -5,7 +5,7 @@
 
 from threading import _profile_hook
 from django.test import TestCase, override_settings
-from .models import User, Customer, Employee, Admin, CustomerProfile, EmployeeProfile
+from .models import *
 from django.core.exceptions import ValidationError 
 import datetime 
 from django.core.files.uploadedfile import SimpleUploadedFile 
@@ -472,10 +472,108 @@ class EmployeeFieldTests(TestCase):
 # Create your Admin Model tests here.
 
 # Create a TestCase for Admin Creation
+# crm_user.tests.AdminCreateTests
+class AdminCreateTests(TestCase):
+    """
+        Test Admin type creation
+    """
+    def setUp(self):
+        """
+            AdminCreateTests setUp method to create test users.
+        """
+        self.user1 = Admin.objects.create_user(email="test1@example.com")
+        self.user2 = Admin.objects.create_user(email="test2@example.com")
 
+    def test_create_admin(self):
+        """
+            Test that admin was created successfully with type = ADMIN
+        """
+        self.assertEqual(self.user1.type, 'ADMIN')
+        self.assertNotEqual(self.user1.type, 'CUSTOMER')
+        self.assertEqual(self.user1, User.objects.get(email=self.user1.email))
+
+    def test_create_profile(self):
+        """
+            Test that admin profile is automatically created with the creation of new admin.
+        """
+        self.assertIsInstance(AdminProfile.objects.get(user=self.user1), AdminProfile)
+ 
 # Create a TestCase for Admin Methods
+# crm_user.tests.AdminMethodTests
+class AdminMethodTests(TestCase):
+    """
+        Test Admin model method functionality
+    """
+    def setUp(self):
+        """
+            AdminMethodTests setUp method to create test users.
+        """
+        self.user1 = Admin.objects.create_user(email="test1@example.com")
+
+    def test_method_welcome(self):
+        """
+            Welcome email should be sent upon new admin creation.
+        """
+        self.assertEqual(len(mail.outbox),1)
+        self.user1.first_name = "Jessica"
+        self.user1.save()
+        self.assertEqual(len(mail.outbox),1)
+        user2 = Admin.objects.create_user(email="test2@example.com")
+        self.assertEqual(len(mail.outbox),2)
+
+    def test_method_calc_work_id(self):
+        """
+            Work ID should increment by 1 integer from last admin.
+        """
+        user2 = Admin.objects.create_user(email="test2@example.com")
+        user3 = Admin.objects.create_user(email="test3@example.com")
+        self.assertNotEqual(self.user1.admin_profile.work_id, user2.admin_profile.work_id)
+        int1 = int(self.user1.admin_profile.work_id)
+        int2 = int(user2.admin_profile.work_id)
+        int3 = int(user3.admin_profile.work_id)
+        self.assertEqual(int2 - int1, 1)
+        self.assertEqual(int3 - int1, 2)
+        self.assertEqual(int3 - int2, 1)
 
 # Create a TestCase for Admin Field Validations
+# crm_user.tests.AdminFieldTests
+class AdminFieldTests(TestCase):
+    """
+        Test Admin Profile fields for proper validation
+    """
+    def setUp(self):
+        """
+            AdminFieldTests setUp method to create test users.
+        """
+        self.user1 = Admin.objects.create_user(email="test1@example.com")
+        self.user2 = Admin.objects.create_user(email="test2@example.com")
+
+    def test_fields_auto_generated(self):
+        """
+            Test that auto generated fields are correctly applied.
+        """
+        profile = AdminProfile.objects.get(user=self.user1)
+        self.assertEqual(self.user1, profile.user )
+        self.assertEqual(self.user1, profile.last_modified_by)
+        self.assertIsNotNone(profile.work_id)
+        self.assertEqual(profile.status, "TRAINING")
+        self.assertEqual(profile.last_modified.date(), datetime.date.today())
+
+    def test_fields_boolean(self):
+        """
+            Test that boolean fields are correctly populating their defaults and change appropriately
+        """
+        self.assertFalse(self.user1.admin_profile.is_manager)
+        self.user1.admin_profile.is_manager = True 
+        self.user1.save()
+        self.assertTrue(self.user1.admin_profile.is_manager)
+
+    def test_fields_optional(self):
+        """
+            Test that optional fields are correctly populating their defaults and change appropriately.
+        """
+        self.assertEqual(self.user1.admin_profile.language, "ENGLISH")
+        self.assertEqual(self.user1.admin_profile.theme, "GREEN")
 
 # Create a TestCase for Admin Permissions
 
