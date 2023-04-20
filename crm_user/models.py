@@ -264,7 +264,7 @@ class Employee(User):
     class Meta:
         proxy = True
         
-# Add Admin Model
+# Add Admin Model - PROXY
 # crm_user.models.Admin
 class Admin(User):
     """
@@ -275,12 +275,38 @@ class Admin(User):
     objects = AdminManager()
     
     # List model methods
+    def welcome(self, *args, **kwargs):
+        """
+            Define method to send welcome email upon creation of new Admin.
+        """
+        admin = self 
+
+        context={
+            'Admin' : self,
+
+        }
+        subject = render_to_string('crm_user/email/admins/welcome_subject.txt', context).strip()
+        text_message = render_to_string('crm_user/email/admins/welcome_body.txt', context)
+        html_message = render_to_string('crm_user/email/admins/welcome_body.html', context)
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=text_message, 
+            from_email=settings.EMAIL_HOST_USER,
+            to = [settings.RECIPIENT_ADDRESS],
+        )
+        email.attach_alternative(html_message, 'text/html')
+        email.send()
+    
     def save(self, *args, **kwargs):
         """
             Define custom Save method.
         """
+        # Creating a new user
         if not self.pk:
+            # Add default Type for Admin
             self.type = User.Types.ADMIN
+            # Send Welcome email to new Admin
+            self.welcome()
         return super().save(*args, **kwargs)
     
     def __str__(self):
