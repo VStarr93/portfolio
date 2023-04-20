@@ -353,6 +353,9 @@ class CustomerProfile(Model):
         PORTUGUESE = 'PORTUGUESE', 'Portuguese'
 
     class Colors(TextChoices):
+        """
+            Define TextChoices for customer's selected theme
+        """
         RED = 'RED', 'Red'
         BLUE = 'BLUE', 'Blue'
         GREEN = 'GREEN', 'Green'
