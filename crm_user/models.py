@@ -340,6 +340,9 @@ class CustomerProfile(Model):
         OLD = 'OLD', 'Old'
     
     class Language(TextChoices):
+        """
+            Define TextChoices for customer's primary language
+        """
         ENGLISH = 'ENGLISH', 'English'
         SPANISH = 'SPANISH', 'Spanish'
         MANDARIN = 'MANDARIN', 'Mandarin'
