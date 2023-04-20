@@ -5,7 +5,7 @@
 
 from threading import _profile_hook
 from django.test import TestCase, override_settings
-from .models import User, Customer, Employee, Admin, CustomerProfile
+from .models import User, Customer, Employee, Admin, CustomerProfile, EmployeeProfile
 from django.core.exceptions import ValidationError 
 import datetime 
 from django.core.files.uploadedfile import SimpleUploadedFile 
@@ -358,13 +358,111 @@ class CustomerFieldTests(TestCase):
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
-# Create your Employee Model tests here.
+# Create your Employee - PROXY Model tests here.
 
 # Create a TestCase for Employee Creation
+# crm_user.tests.EmployeeCreateTests
+class EmployeeCreateTests(TestCase):
+    """
+        Test Employee type creation
+    """
+    def setUp(self):
+        """
+            EmployeeCreateTests setUp method to create test users.
+        """
+        self.user1 = Employee.objects.create_user(email="test1@example.com")
+        self.user2 = Employee.objects.create_user(email="test2@example.com")
 
+    def test_create_employee(self):
+        """
+            Test that employee was created successfully with type = EMPLOYEE
+        """
+        self.assertEqual(self.user1.type, 'EMPLOYEE')
+        self.assertNotEqual(self.user1.type, 'CUSTOMER')
+        self.assertEqual(self.user1, User.objects.get(email=self.user1.email))
+
+    def test_create_profile(self):
+        """
+            Test that employee profile is automatically created with the creation of new employee.
+        """
+        self.assertIsInstance(EmployeeProfile.objects.get(user=self.user1), EmployeeProfile)
+ 
 # Create a TestCase for Employee Methods
+# crm_user.tests.EmployeeMethodTests
+class EmployeeMethodTests(TestCase):
+    """
+        Test Employee model method functionality
+    """
+    def setUp(self):
+        """
+            EmployeeMethodTests setUp method to create test users.
+        """
+        self.user1 = Employee.objects.create_user(email="test1@example.com")
+
+    def test_method_welcome(self):
+        """
+            Welcome email should be sent upon new employee creation.
+        """
+        self.assertEqual(len(mail.outbox),1)
+        self.user1.first_name = "Jessica"
+        self.user1.save()
+        self.assertEqual(len(mail.outbox),1)
+        user2 = Employee.objects.create_user(email="test2@example.com")
+        self.assertEqual(len(mail.outbox),2)
+
+    def test_method_calc_work_id(self):
+        """
+            Work ID should increment by 1 integer from last employee.
+        """
+        user2 = Employee.objects.create_user(email="test2@example.com")
+        user3 = Employee.objects.create_user(email="test3@example.com")
+        self.assertNotEqual(self.user1.emp_profile.work_id, user2.emp_profile.work_id)
+        int1 = int(self.user1.emp_profile.work_id)
+        int2 = int(user2.emp_profile.work_id)
+        int3 = int(user3.emp_profile.work_id)
+        self.assertEqual(int2 - int1, 1)
+        self.assertEqual(int3 - int1, 2)
+        self.assertEqual(int3 - int2, 1)
 
 # Create a TestCase for Employee Field Validations
+# crm_user.tests.EmployeeFieldTests
+class EmployeeFieldTests(TestCase):
+    """
+        Test Employee Profile fields for proper validation
+    """
+    def setUp(self):
+        """
+            EmployeeFieldTests setUp method to create test users.
+        """
+        self.user1 = Employee.objects.create_user(email="test1@example.com")
+        self.user2 = Employee.objects.create_user(email="test2@example.com")
+
+    def test_fields_auto_generated(self):
+        """
+            Test that auto generated fields are correctly applied.
+        """
+        profile = EmployeeProfile.objects.get(user=self.user1)
+        self.assertEqual(self.user1, profile.user )
+        self.assertEqual(self.user1, profile.last_modified_by)
+        self.assertIsNotNone(profile.work_id)
+        self.assertEqual(profile.status, "TRAINING")
+        self.assertEqual(profile.last_modified.date(), datetime.date.today())
+
+    def test_fields_boolean(self):
+        """
+            Test that boolean fields are correctly populating their defaults and change appropriately
+        """
+        self.assertFalse(self.user1.emp_profile.is_manager)
+        self.user1.emp_profile.is_manager = True 
+        self.user1.save()
+        self.assertTrue(self.user1.emp_profile.is_manager)
+
+    def test_fields_optional(self):
+        """
+            Test that optional fields are correctly populating their defaults and change appropriately.
+        """
+        self.assertEqual(self.user1.emp_profile.language, "ENGLISH")
+        self.assertEqual(self.user1.emp_profile.theme, "GREEN")
 
 # Create a TestCase for Employee Permissions
 
