@@ -23,6 +23,7 @@ def create_customer_profile(sender, **kwargs):
             last_modified_by = user,
         )
 
+# Add Receiver for creating Employee Profile
 @receiver(post_save, sender=Employee)
 def create_employee_profile(sender, **kwargs):
     user = kwargs['instance']
