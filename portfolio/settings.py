@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'crm_user',
     'storages',
     'phonenumber_field',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
