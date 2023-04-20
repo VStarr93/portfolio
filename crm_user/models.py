@@ -482,7 +482,8 @@ class EmployeeProfile(Model):
     # Define OPTIONAL model fields
     language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, help_text="The language the employee speaks.")
     theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="The employee's chosen theme.")
-     
+    hire_date = models.DateField(_('Hire Date'), blank=True, null=True, help_text="The employee's hire date.") 
+
 # Add Admin Profile Model
 # crm_user.models.AdminProfile
 class AdminProfile(Model):
