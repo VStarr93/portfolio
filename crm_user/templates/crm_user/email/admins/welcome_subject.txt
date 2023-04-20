@@ -1,0 +1,1 @@
+Hello {{Admin.first_name}} {{Admin.last_name}}, Welcome to our team!
