@@ -375,4 +375,79 @@ class CustomerProfile(Model):
     # Define OPTIONAL model fields
     language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, help_text="The language the customer speaks.")
     theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="The customer's chosen theme.")
+  
+# Add Employee Profile Model
+# crm_user.models.EmployeeProfile
+class EmployeeProfile(Model):
+    """
+        Define a profile model for Users with type = Employee
+    """
+
+    # Define model methods
+    def calc_work_id():
+        """
+            Define method to calculate employee work id
+        """
+        # Define last customer
+        last_employee = EmployeeProfile.objects.all().order_by('pk').last()
+        if not last_employee:
+            return 10001
+        # Define work id from last employee
+        last_id_no = last_employee.work_id
+        # Increment last work id by 1
+        new_work_id = last_id_no + 1
+        # Return new work id
+        return new_work_id
+        
+    # Define model subclasses
+    class Status(TextChoices):
+        """
+            Define TextChoices for employee status.
+        """
+        ACTIVE = 'ACTIVE', 'Active'
+        SUSPENDED = 'SUSPENDED', 'Suspended'
+        TERMINATED = 'TERMINATED', 'Terminated'
+        LEAVE = 'LEAVE', 'Leave'
+        TRAINING = 'TRAINING', 'Training'
+    
+    class Language(TextChoices):
+        """
+            Define TextChoices for employee primary language
+        """
+        ENGLISH = 'ENGLISH', 'English'
+        SPANISH = 'SPANISH', 'Spanish'
+        MANDARIN = 'MANDARIN', 'Mandarin'
+        HINDI = 'HINDI', 'Hindi'
+        FRENCH = 'FRENCH', 'French'
+        ARABIC = 'ARABIC', 'Arabic'
+        RUSSIAN = 'RUSSIAN', 'Russian'
+        PORTUGUESE = 'PORTUGUESE', 'Portuguese'
+
+    class Colors(TextChoices):
+        """
+            Define TextChoices for employee selected theme.
+        """
+        RED = 'RED', 'Red'
+        BLUE = 'BLUE', 'Blue'
+        GREEN = 'GREEN', 'Green'
+        YELLOW = 'YELLOW', 'Yellow'
+        ORANGE = 'ORANGE', 'Orange'
+        PURPLE = 'PURPLE', 'Purple'
+        BLACK = 'BLACK', 'Black'
+        WHITE = 'WHITE', 'White'
+
+    # Define AUTO-GENERATED model fields
+    id = models.BigAutoField(primary_key=True) # Primary Key
+    work_id = models.IntegerField(_('Account Number'), unique=True, default=calc_work_id, help_text="Your employee work ID is auto-generated and cannot be changed.")
+    status = models.CharField(_('Status'), max_length=10, default=Status.TRAINING, choices=Status.choices, help_text="Your employee status is adjusted based on employment status.")
+    user = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name='emp_profile', verbose_name="Employee", unique=True, help_text="The Employee these details/model are associated with.")
+    last_modified = models.DateTimeField(_('Last Modified'), auto_now=True, blank=True, null=True, help_text="The date and time of which the employee profile was last modified.")
+    last_modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='emp_profile_modified_by', verbose_name="Last Modified By", blank=True, null=True, help_text="The user who last modified this profile.")
+
+    # Define BOOLEAN model fields
+    is_manager = models.BooleanField(_("Is Manager"), default=False, help_text="Is this employee a manager?")
+
+    # Define OPTIONAL model fields
+    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, help_text="The language the employee speaks.")
+    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="The employee's chosen theme.")
     
