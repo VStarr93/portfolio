@@ -173,9 +173,9 @@ class Customer(User):
             'Customer' : self,
 
         }
-        subject = render_to_string('crm_user/email/welcome_subject.txt', context).strip()
-        text_message = render_to_string('crm_user/email/welcome_body.txt', context)
-        html_message = render_to_string('crm_user/email/welcome_body.html', context)
+        subject = render_to_string('crm_user/email/customers/welcome_subject.txt', context).strip()
+        text_message = render_to_string('crm_user/email/customers/welcome_body.txt', context)
+        html_message = render_to_string('crm_user/email/customers/welcome_body.html', context)
         email = EmailMultiAlternatives(
             subject=subject,
             body=text_message, 
