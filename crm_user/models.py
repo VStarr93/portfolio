@@ -219,12 +219,39 @@ class Employee(User):
     objects = EmployeeManager()
 
     # List model methods    
+    def welcome(self, *args, **kwargs):
+        """
+            Define method to send welcome email upon creation of new Employee.
+        """
+        employee = self 
+
+        context={
+            'Employee' : self,
+
+        }
+        subject = render_to_string('crm_user/email/employees/welcome_subject.txt', context).strip()
+        text_message = render_to_string('crm_user/email/employees/welcome_body.txt', context)
+        html_message = render_to_string('crm_user/email/employees/welcome_body.html', context)
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=text_message, 
+            from_email=settings.EMAIL_HOST_USER,
+            to = [settings.RECIPIENT_ADDRESS],
+        )
+        email.attach_alternative(html_message, 'text/html')
+        email.send()
+    
     def save(self, *args, **kwargs):
         """
             Define custom Save method.
         """
+        # Creating a new user
         if not self.pk:
+            # Add default Type for Employee
             self.type = User.Types.EMPLOYEE
+            # Send Welcome email to new Employee
+            self.welcome()
+
         return super().save(*args, **kwargs)
     
     def __str__(self):
