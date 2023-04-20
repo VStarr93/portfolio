@@ -12,6 +12,7 @@ from crm_user.models import Customer, Employee, Admin, CustomerProfile, Employee
 #-------------------------------------------------------------
 # Create your handlers here.
 
+# Add Receiver for creating Customer Profile
 @receiver(post_save, sender=Customer)
 def create_customer_profile(sender, **kwargs):
     user = kwargs['instance']
