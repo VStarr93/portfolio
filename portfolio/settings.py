@@ -179,7 +179,7 @@ RECIPIENT_ADDRESS = os.environ['RECIPIENT_ADDRESS']
 LOGIN_REDIRECT_URL = 'home'
 
 # Logout Redirect
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Crispy Forms Settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
