@@ -40,3 +40,20 @@ def user_registration(request):
                 'message': message,
             }
             return render(request, 'registration/user_registration.html', context)
+
+# User Change View
+def user_change(request):
+    """
+        This is a user change view.
+    """
+    if request.method == 'GET':
+        form = CustomUserChangeForm(instance=request.user)
+        return render(request, 'registration/user_change.html', context={'form': form})
+
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            return render(request, 'registration/user_change.html', context={'form':form})
