@@ -33,3 +33,16 @@ urlpatterns = [
     path('user/', include('crm_user.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 ]
+
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+# URL Notes
+
+# If you want specified url paths,
+# you can call each view separately as follows:
+# path('login/', views.LoginView.as_view(), name='login'),
+
+# If you wish to change the template name a view uses,
+# you can provide the template_name argument as follows:
+# path('login/', views.LoginView.as_view(template_name="login-template.html")),
+
