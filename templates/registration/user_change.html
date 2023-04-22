@@ -1,0 +1,21 @@
+<!-- templates/registration/user_change.html -->
+{% extends 'base.html' %}
+
+{% block title %}User Change{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="card m-3 p-3">
+    <h2 class="text-center">Update User Profile</h2>
+    <p class='text-center'>
+        Update any necessary information below. 
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <div>Password</div>
+        <div>To change your password, click <a href="{% url 'password_change' %} ">here</a>.</div>
+        <div class="text-center mt-3"><button type="submit" class="btn btn-primary">Update My Info</button></div>
+    </form>
+</div>
+{% endblock %}
