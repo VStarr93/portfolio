@@ -15,6 +15,7 @@ urlpatterns = [
     # path for index view
     path('', views.index, name='index'),
     path('register/', views.user_registration, name='register'),
+    path('change/', views.user_change, name='change'),
 
 ]
 
