@@ -4,10 +4,14 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h2>Log In</h2>
+{% load crispy_forms_tags %}
+<div class="card m-3 p-3">
+<h2 class="text-center">Log In</h2>
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
+  {{ form | crispy }}
+  <div class="text-center m-2"><button type="submit" class="btn btn-primary">Log In</button></div>
+  <div class="text-center mt-2"><a href="{% url 'password_reset' %}">Forgot Password?</a></div>
 </form>
+</div>
 {% endblock %}
