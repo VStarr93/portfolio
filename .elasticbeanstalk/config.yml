@@ -1,12 +1,11 @@
 branch-defaults:
+  dev:
+    environment: Portfolio-env
   main:
     environment: Portfolio-env
     group_suffix: null
 environment-defaults:
   Portfolio-env:
-    branch: null
-    repository: null
-  portfolio-dev:
     branch: null
     repository: null
 global:
