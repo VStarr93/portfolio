@@ -1,0 +1,17 @@
+<!-- crm_user/appbase.html -->
+
+{% extends 'main/base.html' %}
+
+{% block title %}CRM Home{% endblock %}
+
+{% block css %} 
+{% load static %}
+<link rel="stylesheet" href="{% static 'crm_user/css/styles.css' %}" />
+{% endblock %}
+
+{% block content %} 
+{% include 'crm_user/snippets/header.html' %}
+
+{% block app %} {% endblock app %}
+
+{% endblock content %}
