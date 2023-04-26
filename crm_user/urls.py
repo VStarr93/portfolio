@@ -5,6 +5,8 @@
 
 from django.urls import path 
 from . import views 
+from django.views.generic.base import TemplateView
+
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -13,7 +15,7 @@ from . import views
 app_name = 'crm_user'
 urlpatterns = [
     # path for index view
-    path('', views.index, name='index'),
+    path('', TemplateView.as_view(template_name='crm_user/home.html'), name='home'),
     path('register/', views.user_registration, name='register'),
     path('change/', views.user_change, name='change'),
 
