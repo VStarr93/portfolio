@@ -1,0 +1,46 @@
+<!-- main/snippets/header.html -->
+<header class="navbar sticky-top container-fluid m-0 p-0 main-header">
+    <div class="row w-100 m-0" style="height:50px">
+        <div class="col-6 col-lg-4 h-100 p-0">
+            <!--LOGO-->
+            <div class="d-flex h-100 w-100 align-items-center">
+                <a href="{% url 'main:home' %}" class="text-decoration-none h-75 d-flex align-items-center">
+                    <i class="fa-solid fa-dragon m-1 h4"></i>
+                    <h3 style="font-family:'Colonna MT';" class="ms-2 mb-0">Starr Development</h3>
+                </a>
+            </div>
+        </div>
+        <div class="d-none d-lg-inline col-lg-4 h-100 p-0">
+            <div class="d-flex h-100 align-items-center">
+                <i class="fa-solid fa-magnifying-glass m-1"></i> 
+                <input class="form-control w-75 m-0 h-75" style="display:inline-block" type="search" placeholder="Search Portfolio" aria-label="Search" />
+            </div>
+        </div>
+        <div class="d-sm-none col-6 h-100 p-0">
+            <div class="d-flex align-items-center justify-content-center h-100">
+                <button class="navbar-toggler collapsed d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div class="sticky-top d-flex-column d-sm-inline col-sm-6 col-lg-4 h-100 p-0 m-0 collapse main-dropdown" id="mainMenu">
+            <menu class="d-flex h-100 m-0 p-0">
+                <ul class="nav d-flex w-100 m-0 align-items-center justify-content-center">
+                    <li class="nav-item ms-2 h-75 main-dropdown-item">
+                        <div class="dropdown ">
+                            <button class="btn dropdown-toggle" type="button" id="portfolioMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                                Projects
+                            </button>
+                            <ul class="dropdown-menu main-sub-dropdown" aria-labelledby="portfolioMenu">
+                                <li><a class="dropdown-item main-dropdown-item" href="{% url 'crm_user:home' %}">CRM Template</a></li>
+                                <li><a class="dropdown-item main-dropdown-item" href="#">Project 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item ms-2 h-75 main-dropdown-item"><a class="btn" href="#">About</a></li>
+                    <li class="nav-item ms-2 h-75 main-dropdown-item"><a class="btn" href="#">Contact</a></li>
+                </ul>
+            </menu>
+        </div>
+    </div>
+</header>
