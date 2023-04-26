@@ -1,0 +1,29 @@
+/* crm_user/css/styles.css */
+
+.crm-header {
+    border: 1px solid green;
+    background-image: linear-gradient(green, lightgreen, green);
+    color: indigo !important;
+}
+
+.crm-header i{
+    color:indigo !important;
+    text-shadow: 0 0 7px lightgreen;
+}
+
+.crm-header a, button {
+    color: white !important;
+}
+
+.crm-dropdown {
+    background-color: green;
+    color:white;
+}
+
+.crm-dropdown p {
+    color:white;
+}
+
+.crm-dropdown-item:focus, .crm-dropdown-item:hover, .crm-dropdown-item:active {
+    background-color: lightgreen;
+}
