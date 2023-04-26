@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'crispy_bootstrap5',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -152,9 +153,6 @@ if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
@@ -179,7 +177,7 @@ EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 RECIPIENT_ADDRESS = os.environ['RECIPIENT_ADDRESS']
 
 # Login Redirect
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'crm_user:home'
 
 # Logout Redirect
 LOGOUT_REDIRECT_URL = 'login'
