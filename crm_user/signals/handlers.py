@@ -55,13 +55,21 @@ def create_profile(sender, **kwargs):
             user = user,
             last_modified_by = user,
         )
+        customer = Customer.objects.get(email=user.email)
+        customer.welcome()
+        
     elif created and user.type == "EMPLOYEE":
         new_profile = EmployeeProfile.objects.create(
             user = user,
             last_modified_by = user,
         )
+        employee = Employee.objects.get(email=user.email)
+        employee.welcome()
+        
     elif created and user.type == "ADMIN":
         new_profile = AdminProfile.objects.create(
             user = user,
             last_modified_by = user,
         )
+        admin = Admin.objects.get(email=user.email)
+        admin.welcome()
