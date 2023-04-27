@@ -148,7 +148,7 @@ class User(AbstractUser):
     type = models.CharField(_('type'), max_length=50, choices=Types.choices, default=Types.CUSTOMER, help_text="Please select the user type")
     email = models.EmailField(_('email address'), unique=True, help_text="Please enter your email address")
     middle_name = models.CharField(_('middle name'), max_length=50, blank=True, help_text="Please enter your middle name")
-    birth_date = models.DateField(_('birth date'), null=True, blank=True, help_text="Please enter your birth date")
+    birth_date = models.DateField(_('birth date'), null=True, blank=True, help_text="Please enter your birth date as yyyy-MM-dd")
     profile_photo = models.ImageField(_('profile photo'), upload_to='profile_images/', blank=True, help_text="Upload a photo of yourself")
     phone_number = PhoneNumberField(_('phone number'), blank=True, help_text="Enter a good contact phone number")
     
