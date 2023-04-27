@@ -36,3 +36,9 @@
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
     background-color: rgb(143, 0, 245);
 }
+
+body {
+    background-image: url('/static/main/images/purple_smoke.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
