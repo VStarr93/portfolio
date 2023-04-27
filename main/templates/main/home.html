@@ -4,11 +4,32 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.first_name }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
+
+<!-- Hero Banner -->
+<div class="d-flex flex-column w-100 align-items-start justify-content-center ps-5" style="height:500px; font-family:'Courgette'">
+  <h1 class="display-3">Welcome,</h1>
+  <h2 class="h1">
+    My name is <span class="display-1" style="font-family:'Colonna MT';">VERONICA STARR</span>.
+  </h2>
+  <p class="h5">
+    I'm a Full Stack Software Developer focused on clean, efficient, and functional code for responsive web apps.
+  </p>
+</div>
+
+<!-- Coding Languages, Fameworks, Etc. -->
+<div class="d-flex flex-row flex-wrap align-items-center justify-content-center">
+  <p class="v-icon-btn ms-3">Python</p>
+  <p class="v-icon-btn ms-3">HTML 5</p>
+  <p class="v-icon-btn ms-3">CSS</p>
+  <p class="v-icon-btn ms-3">JavaScript</p>
+  <p class="v-icon-btn ms-3">Django</p>
+  <p class="v-icon-btn ms-3">NodeJS</p>
+  <p class="v-icon-btn ms-3">Bootstrap5</p>
+  <p class="v-icon-btn ms-3">JQuery</p>
+  <p class="v-icon-btn ms-3">Git</p>
+  <p class="v-icon-btn ms-3">GitHub</p>
+  <p class="v-icon-btn ms-3">AWS</p>
+  <p class="v-icon-btn ms-3">IBM</p>
+</div>
+
 {% endblock %}
