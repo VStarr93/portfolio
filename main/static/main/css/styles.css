@@ -38,4 +38,6 @@ body {
     background-image: url('/static/main/images/purple_smoke.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    background-attachment: fixed;
+    font-family:'Franklin Gothic Book' !important;
 }
