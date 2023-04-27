@@ -577,4 +577,140 @@ class AdminFieldTests(TestCase):
 
 # Create a TestCase for Admin Permissions
 
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+# Create your User Model tests here.
+
+# Create a TestCase for User Creation
+# crm_user.tests.UserCreateTests
+class UserCreateTests(TestCase):
+    """
+        Test User type creation
+    """
+    def setUp(self):
+        """
+            UserCreateTests setUp method to create test users.
+        """
+        self.user1 = User.objects.create_user(email="test1@example.com", type="CUSTOMER")
+        self.user2 = User.objects.create_user(email="test2@example.com", type="EMPLOYEE")
+        self.user3 = User.objects.create_user(email="test3@example.com", type="ADMIN")
+
+    def test_create_profiles(self):
+        """
+            Test that user was created successfully with correct profile
+        """
+        self.assertIsInstance(CustomerProfile.objects.get(user=self.user1), CustomerProfile)
+        self.assertIsInstance(EmployeeProfile.objects.get(user=self.user2), EmployeeProfile)
+        self.assertIsInstance(AdminProfile.objects.get(user=self.user3), AdminProfile)
+
+# Create a TestCase for User Methods
+# crm_user.tests.UserMethodTests
+class UserMethodTests(TestCase):
+    """
+        Test User model method functionality
+    """
+    def setUp(self):
+        """
+            UserMethodTests setUp method to create test users.
+        """
+        self.user1 = User.objects.create_user(email="test1@example.com", type="CUSTOMER")
+        self.user2 = User.objects.create_user(email="test2@example.com", type="EMPLOYEE")
+        self.user3 = User.objects.create_user(email="test3@example.com", type="ADMIN")
+
+    def test_method_welcome(self):
+        """
+            Welcome email should be sent upon new user creation.
+        """
+        self.assertEqual(len(mail.outbox),3)
+        self.user1.first_name = "Jessica"
+        self.user1.save()
+        self.assertEqual(len(mail.outbox),3)
+        user2 = User.objects.create_user(email="test4@example.com", type="CUSTOMER")
+        self.assertEqual(len(mail.outbox),4)
+
+    def test_method_age(self):
+        """
+            Age should be calculated based on user birthday
+        """
+        self.user1.birth_date = '1993-04-14'
+        self.user1.save()
+        self.assertEqual(self.user1.age(), 30)
+        self.assertNotEqual(self.user1.age(), 40)
+        
+    def test_method_full_name(self):
+        """
+            Full name should display first name and last name
+        """
+        self.user1.first_name = "John"
+        self.user1.last_name = "Smith"
+        self.user1.save()
+        self.assertEqual(self.user1.full_name(), "John Smith")
+        self.assertNotEqual(self.user1.full_name(), "JohnSmith")
+
+# Create a TestCase for User Field Validations
+# crm_user.tests.UserFieldTests
+class UserFieldTests(TestCase):
+    """
+        Test User fields for proper validation
+    """
+    def setUp(self):
+        """
+            UserFieldTests setUp method to create test users.
+        """
+        self.user1 = User.objects.create_user(email="test1@example.com", type="CUSTOMER")
+        self.user2 = User.objects.create_user(email="test2@example.com", type="EMPLOYEE")
+        self.user3 = User.objects.create_user(email="test3@example.com", type="ADMIN")
+        self.custProfile = CustomerProfile.objects.get(user=self.user1)
+        self.empProfile = EmployeeProfile.objects.get(user=self.user2)
+        self.adminProfile = AdminProfile.objects.get(user=self.user3)
+
+    def test_fields_auto_generated(self):
+        """
+            Test that auto generated fields are correctly applied.
+        """
+        user4 = User.objects.create_user(email="temp@example.com")
+        self.assertIsInstance(Customer.objects.get(email=user4.email), Customer)
+        self.assertEqual(self.user1, self.custProfile.last_modified_by )
+        self.assertEqual(self.user2, self.empProfile.last_modified_by )
+        self.assertEqual(self.user3, self.adminProfile.last_modified_by )
+        self.assertIsNotNone(self.custProfile.acct_no)
+        self.assertIsNotNone(self.empProfile.work_id)
+        self.assertIsNotNone(self.adminProfile.work_id)
+        self.assertEqual(self.custProfile.status, "NEW")
+        self.assertEqual(self.empProfile.status, "TRAINING")
+        self.assertEqual(self.adminProfile.status, "TRAINING")
+        self.assertEqual(self.custProfile.last_modified.date(), datetime.date.today())
+        self.assertEqual(self.empProfile.last_modified.date(), datetime.date.today())
+        self.assertEqual(self.adminProfile.last_modified.date(), datetime.date.today())
+
+    def test_fields_boolean(self):
+        """
+            Test that boolean fields are correctly populating their defaults and change appropriately
+        """
+        self.assertFalse(self.adminProfile.is_manager)
+        self.assertFalse(self.empProfile.is_manager)
+        self.assertFalse(self.custProfile.balance_owed)
+        self.assertFalse(self.custProfile.credit_owed)
+        
+    def test_fields_optional(self):
+        """
+            Test that optional fields are correctly populating their defaults and change appropriately.
+        """
+        # Defaults
+        self.assertEqual(self.adminProfile.language, "ENGLISH")
+        self.assertEqual(self.adminProfile.theme, "GREEN")
+        self.assertEqual(self.custProfile.language, "ENGLISH")
+        self.assertEqual(self.custProfile.theme, "GREEN")
+        self.assertEqual(self.empProfile.language, "ENGLISH")
+        self.assertEqual(self.empProfile.theme, "GREEN")
+        # Provided
+        self.user1.middle_name = "Jane"
+        self.user1.save()
+        self.assertEqual(self.user1.middle_name, "Jane")
+        self.user1.birth_date = "1993-04-14"
+        self.user1.save()
+        self.assertEqual(self.user1.birth_date, datetime.date(1993,4,14))
+
+# Create a TestCase for User Permissions
+
 
