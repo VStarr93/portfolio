@@ -28,11 +28,7 @@
         background-color: transparent;
     }
   }
-
-.main-sub-dropdown {
-    background-color: indigo;
-}
-  
+ 
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
     background-color: rgb(143, 0, 245);
     border-radius: 5px;
