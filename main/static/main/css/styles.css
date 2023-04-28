@@ -1,38 +1,10 @@
 /* main/css/styles.css */
 
-.main-header {
-    border: 1px solid #400080;
-    background-image: linear-gradient(indigo, rgb(143, 0, 245), indigo);
-    color: white;
-}
+/* HTML Tags */
 
-.main-header i{
-    color: #2aa749 !important;
-    text-shadow: 0 0 5px indigo;
-}
-
-.main-header a, button{
-    color: white !important
-}
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 576px) {
-    .main-dropdown {
-        background-color: indigo;
-    }
-  }
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 576px) {
-    .main-dropdown {
-        background-color: transparent;
-    }
-  }
- 
-.main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
-    background-color: rgb(143, 0, 245);
-    border-radius: 5px;
-}
+main {
+    color: whitesmoke;
+}    
 
 body {
     background-image: url('/static/main/images/purple_smoke.jpg');
@@ -42,9 +14,38 @@ body {
     font-family:'Franklin Gothic Book' !important;
 }
 
-main {
-    color: whitesmoke;
-}
+/* Media */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 576px) {
+    .main-dropdown {
+        background-color: indigo;
+    }    
+  }  
+  
+/* Small devices (portrait tablets and large phones, 600px and up) */  
+@media only screen and (min-width: 576px) {
+    .main-dropdown {
+        background-color: transparent;
+    }    
+}  
+  
+/* Custom Classes */
+
+.main-header {
+    border: 1px solid #400080;
+    background-image: linear-gradient(indigo, rgb(143, 0, 245), indigo);
+    color: white;
+}    
+
+.main-header i{
+    color: #2aa749 !important;
+    text-shadow: 0 0 5px indigo;
+}    
+
+.main-header a, button{
+    color: white !important
+}    
 
 .v-icon-btn {
     border: 1px solid indigo ;
@@ -54,3 +55,11 @@ main {
     border-radius: 10px;
     box-shadow: 0px 0px 3px indigo;
 }
+
+/* Pseudo-Class */
+
+.main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
+    background-color: rgb(143, 0, 245);
+    border-radius: 5px;
+}    
+    
