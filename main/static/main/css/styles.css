@@ -41,3 +41,7 @@ body {
     background-attachment: fixed;
     font-family:'Franklin Gothic Book' !important;
 }
+
+main {
+    color: whitesmoke;
+}
