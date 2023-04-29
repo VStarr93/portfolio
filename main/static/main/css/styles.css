@@ -44,6 +44,8 @@ footer div{
     display: flex;
 }
 
+footer a {
+    color: grey;
 }
 
 /* Media */
