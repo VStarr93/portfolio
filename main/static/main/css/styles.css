@@ -106,7 +106,7 @@ footer a {
     background-image: none;
     background-color: rgb(143, 0, 245);
     color: whitesmoke;
-    box-shadow: 5px 5px 7px indigo;
+    box-shadow: 5px 5px 7px indigo, 5px 5px 7px indigo;
 }
 
 .v-green:hover {
