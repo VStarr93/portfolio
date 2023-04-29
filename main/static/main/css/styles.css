@@ -113,6 +113,10 @@ footer a {
     color:green;
 }
 
+.v-name:hover {
+    color: rgb(143, 0, 245);
+}
+
 /* Scrollbar */
 
 main::-webkit-scrollbar {
