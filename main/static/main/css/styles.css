@@ -35,6 +35,15 @@ footer {
     color: grey;
 }
 
+footer div{
+    background-color:transparent;
+    padding: 0px;
+    height: 100%;
+    align-items: flex-start;
+    justify-content: flex-end;
+    display: flex;
+}
+
 }
 
 /* Media */
