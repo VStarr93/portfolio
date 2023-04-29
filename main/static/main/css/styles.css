@@ -88,6 +88,8 @@ footer a {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 3px indigo;
+    position: relative;
+    top:0px;
 }
 
 .v-name {
