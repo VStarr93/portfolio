@@ -101,7 +101,9 @@ footer a {
     background-color: rgb(143, 0, 245);
     border-radius: 5px;
 }    
-    
+  
+/* Scrollbar */
+
 main::-webkit-scrollbar {
     width: 15px;
     background-color: transparent;
