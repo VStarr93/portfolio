@@ -4,6 +4,13 @@
 
 main {
     color: whitesmoke;
+    top:50px;
+    left:0px;
+    bottom:30px;
+    right:20px;
+    padding-right:10px;
+    overflow-y:scroll;
+    position: fixed;
 }    
 
 body {
