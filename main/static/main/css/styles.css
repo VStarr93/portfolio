@@ -22,7 +22,7 @@ body {
     position:static;
     overflow:hidden;
     height: 100vh;
-    cursor: url('/static/main/images/green-hand.svg'), auto;
+    cursor: url('/static/main/images/arrow-cursor.svg'), auto;
 }
 
 footer {
