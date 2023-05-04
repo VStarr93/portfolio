@@ -98,6 +98,10 @@ footer a {
     text-shadow: 0 0 15px rgb(143, 0, 245), 0 0 15px rgb(143, 0, 245); /* creae a brighter shadow */
 }
 
+.v-forms {
+    width: 100%;
+}
+
 /* Pseudo-Class */
 
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
