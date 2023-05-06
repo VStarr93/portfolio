@@ -16,8 +16,7 @@ app_name = 'main'
 urlpatterns = [
     # path for index view
     path('', TemplateView.as_view(template_name='main/home.html'), name='home'),
-    path('about/', TemplateView.as_view(template_name='main/about.html'), name='about'),
+    path('about/', views.about_view, name='about'),
     path('contact/', views.contact_view, name='contact'),
-
 ]
 
