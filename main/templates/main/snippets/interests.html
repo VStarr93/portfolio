@@ -1,0 +1,37 @@
+<!-- main/snippets/interests.html -->
+
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accThree" aria-expanded="false" aria-controls="accThree">
+            Interests
+        </button>
+    </h2>
+    <div id="accThree" class="accordion-collapse collapse" data-bs-parent="#aboutAccordion">
+        <div class="accordion-body">
+            <h3>Personal</h3>
+            <p>The following is a list of personal interests and what I wish to learn more about.</p>
+
+            <ul class="d-flex flex-row flex-wrap">
+                {% for interest in interests %}
+                {% if interest.type == 'PERSONAL' %}
+                <li class="me-5">{{interest.name}}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            
+            <hr/>
+            
+            <h3>Career</h3>
+            <p>The following is a list of career interests and what I wish to learn more about.</p>
+            
+            <ul class="d-flex flex-row flex-wrap">
+                {% for interest in interests %}
+                {% if interest.type == 'CAREER' %}
+                <li class="me-5">{{interest.name}}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</div>
