@@ -17,6 +17,7 @@ media
 # in your Git repository. Update and uncomment the following line accordingly.
 # portfolio/static/
 /staticfiles/
+/mediafiles/
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
