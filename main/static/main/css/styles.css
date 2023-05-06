@@ -154,6 +154,10 @@ header {
     overflow-x: scroll;
 }
 
+.v-scroll-y {
+    overflow-y: scroll;
+}
+
 /* Pseudo-Class */
 
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
