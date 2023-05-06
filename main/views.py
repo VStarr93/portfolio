@@ -5,7 +5,7 @@
 
 from django.shortcuts import render, redirect
 from main.forms import ContactForm
-from main.models import Certificate, Skill
+from main.models import Certificate, Skill, Interest 
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -41,5 +41,6 @@ def about_view(request):
     if request.method == 'GET':
         certs = Certificate.objects.all()
         skills = Skill.objects.all()
-        return render(request, 'main/about.html', context={'certs': certs, 'skills': skills})
+        interests = Interest.objects.all()
+        return render(request, 'main/about.html', context={'certs': certs, 'skills': skills, 'interests': interests})
  
