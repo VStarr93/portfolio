@@ -150,6 +150,10 @@ header {
     border: 1px /*--bs-accordion-border-width */ solid #dee6df; /*--bs-accordion-border-color */ 
 }
 
+.v-scroll-x {
+    overflow-x: scroll;
+}
+
 /* Pseudo-Class */
 
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
