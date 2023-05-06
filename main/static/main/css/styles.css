@@ -139,6 +139,11 @@ header {
     box-shadow: inset 0 calc(-1 * 1px /*--bs-accordion-border-width */) 0 #dee6df /*--bs-accordion-border-color */;
 }
 
+.v-accordion .accordion-button:focus {
+    border-color: #86fe9a; /*--bs-accordion-btn-focus-border-color */
+    box-shadow: 0 0 10px 0.25rem rgba(13, 253, 25, 0.25); /*--bs-accordion-btn-focus-box-shadow */
+}
+
 /* Pseudo-Class */
 
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
