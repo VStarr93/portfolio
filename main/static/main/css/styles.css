@@ -223,9 +223,9 @@ main::-webkit-scrollbar-track, .v-scroll-x::-webkit-scrollbar-track, .v-scroll-y
 }
 
 main::-webkit-scrollbar-track-piece, .v-scroll-x::-webkit-scrollbar-track-piece, .v-scroll-y::-webkit-scrollbar-track-piece {
-    box-shadow: inset 0 0 5px indigo;
+    box-shadow: inset 0 0 5px green;
 
-    background-color: rgba(158, 93, 243, 0.626);
+    background-color: #cfffd7;
     border-radius: 10px;
 }
 
