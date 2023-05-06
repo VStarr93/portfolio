@@ -128,6 +128,11 @@ header {
     font-size: large;
 }
 
+.v-accordion .accordion-button{
+    color: #212529; /* --bs-accordion-btn-color */
+    background-color: #fff; /* --bs-accordion-btn-bg */
+}
+
 /* Pseudo-Class */
 
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
