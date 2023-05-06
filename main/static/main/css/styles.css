@@ -150,6 +150,28 @@ header {
     border: 1px /*--bs-accordion-border-width */ solid #dee6df; /*--bs-accordion-border-color */ 
 }
 
+.v-accordion-sub .accordion-button{
+    color: #212529; /* --bs-accordion-btn-color */
+    background-color: #fff; /* --bs-accordion-btn-bg */
+}
+
+.v-accordion-sub .accordion-button:not(.collapsed) {
+    color: inherit; /* --bs-accordion-active-color */
+    background-color: inherit; /* --bs-accordion-active-bg */
+    box-shadow: inherit;
+}
+
+.v-accordion-sub .accordion-button:focus {
+    border-color: inherit; /*--bs-accordion-btn-focus-border-color */
+    box-shadow: inherit; /*--bs-accordion-btn-focus-box-shadow */
+}
+
+.v-accordion-sub .accordion-item {
+    color: #212529; /*--bs-accordion-color*/
+    background-color: #fff; /*--bs-accordion-bg */ 
+    border: 1px /*--bs-accordion-border-width */ solid #dee6df; /*--bs-accordion-border-color */ 
+}
+
 .v-scroll-x {
     overflow-x: scroll;
 }
