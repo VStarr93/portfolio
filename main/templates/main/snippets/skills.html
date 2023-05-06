@@ -1,0 +1,132 @@
+<!-- main/snippets/skills.html -->
+
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accTwo" aria-expanded="false" aria-controls="accTwo">
+            Skills
+        </button>
+    </h2>
+    <div id="accTwo" class="accordion-collapse collapse" data-bs-parent="#aboutAccordion">
+        <div class="accordion-body">
+            <h3>Software</h3>
+
+            <div class="accordion v-accordion-sub" id="skillAccordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <button class="accordion-button flex-wrap" type="button" data-bs-toggle="collapse" data-bs-target="#skillBusiness" aria-expanded="false" aria-controls="skillBusiness">
+                            <h5>Business</h5>
+                            <p>
+                                This list encompasses all software platforms and programs that I utilized during my experience as a business owner.
+                            </p>
+                        </button>
+                    </div>
+                    <div id="skillBusiness" class="accordion-collapse collapse" data-bs-parent="#skillAccordion">
+                        <div class="accordion-body">
+                            <ul class="d-flex flex-row flex-wrap">
+                                {% for skill in skills %}
+                                {% if skill.type == 'BUSINESS' %}
+                                <li class="me-5">{{skill.name}}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <button class="accordion-button flex-wrap" type="button" data-bs-toggle="collapse" data-bs-target="#skillProgramming" aria-expanded="false" aria-controls="skillProgramming">
+                            <h5>Programming</h5>
+                            <p>
+                                This list encompasses all software platforms and programs that I currently utilized as a Software Developer.
+                            </p>
+                        </button>
+                    </div>
+                    <div id="skillProgramming" class="accordion-collapse collapse" data-bs-parent="#skillAccordion">
+                        <div class="accordion-body">
+                            <ul class="d-flex flex-row flex-wrap">
+                                {% for skill in skills %}
+                                {% if skill.type == 'PROGRAMMING' %}
+                                <li class="me-5">{{skill.name}}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <button class="accordion-button flex-wrap" type="button" data-bs-toggle="collapse" data-bs-target="#skillDesign" aria-expanded="false" aria-controls="skillDesign">
+                            <h5>Design</h5>
+                            <p>
+                                This list encompasses all software platforms and programs that I currently utilized as a Software Designer.
+                            </p>
+                        </button>
+                    </div>
+                    <div id="skillDesign" class="accordion-collapse collapse" data-bs-parent="#skillAccordion">
+                        <div class="accordion-body">
+                            <ul class="d-flex flex-row flex-wrap">
+                                {% for skill in skills %}
+                                {% if skill.type == 'DESIGN' %}
+                                <li class="me-5">{{skill.name}}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+            <hr/>
+            <h3>Languages</h3>
+            <p>This list encompasses all of the languages I am able to code efficiently.</p>
+            
+            <ul class="d-flex flex-row flex-wrap">
+                {% for skill in skills %}
+                {% if skill.type == 'LANGUAGE' %}
+                <li class="me-5">{{skill.name}}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+            <hr/>
+            <h3>Frameworks</h3>
+            <p>This list encompasses all of the Frameworks I am able to utilize efficiently.</p>
+            
+            <ul class="d-flex flex-row flex-wrap">
+                {% for skill in skills %}
+                {% if skill.type == 'FRAMEWORK' %}
+                <li class="me-5">{{skill.name}}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+            <hr/>
+            <h3>Libraries</h3>
+            <p>This list encompasses a variety of libraries and extensions that I am able to utilize efficiently.</p>
+            
+            <ul class="d-flex flex-row flex-wrap">
+                {% for skill in skills %}
+                {% if skill.type == 'LIBRARY' %}
+                <li class="me-5">{{skill.name}}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+            <hr/>
+            <h3>Personal</h3>
+            <p>This list encompasses a variety of skill sets that are not industry specific.</p>
+            
+            <ul class="d-flex flex-row flex-wrap">
+                {% for skill in skills %}
+                {% if skill.type == 'PERSONAL' %}
+                <li class="me-5">{{skill.name}}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</div>
