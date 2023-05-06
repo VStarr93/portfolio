@@ -1,0 +1,57 @@
+<!-- main/snippets/certs.html -->
+
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accOne" aria-expanded="false" aria-controls="accOne">
+            Certifications
+        </button>
+    </h2>
+    <div id="accOne" class="accordion-collapse collapse" data-bs-parent="#aboutAccordion">
+        <div class="accordion-body">
+            <h3>Specializations</h3>
+            <p>I obtained these specialization certifications through completing multiple courses through Coursera.com .</p>
+            
+            <div class="d-flex flex-row flex-nowrap v-scroll-x">
+                {% for cert in certs %}
+                {% if cert.type == 'SPEC' %}
+                <div class="card v-card-inner" style="min-width:250px; max-width:50%;">
+                    <div class="card-body">
+                        <div class="card-img">
+                            <a href="{{cert.pdf.url}}">
+                                <img src="{{cert.img.url}}" alt="IBM Full Stack Software Developer Certificate" width="100%"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h4>{{cert.name}}</h4>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <hr/>
+            <h3>Courses</h3>
+            <p>I obtained these certifications through Coursera.com while enrolled in IBM Full Stack Software Developer Program.</p>
+            
+            <div class="d-flex flex-row flex-nowrap v-scroll-x">
+                {% for cert in certs %}
+                {% if cert.type == 'COURSE' %}
+                <div class="card v-card-inner" style="min-width:250px; max-width:50%;">
+                    <div class="card-body">
+                        <div class="card-img">
+                            <a href="{{cert.pdf.url}}">
+                                <img src="{{cert.img.url}}" alt="IBM Full Stack Software Developer Certificate" width="100%"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h4>{{cert.name}}</h4>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
