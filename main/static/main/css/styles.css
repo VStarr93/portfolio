@@ -78,7 +78,7 @@ footer a {
     text-shadow: 0 0 5px indigo;
 }    
 
-.main-header a, button{
+.main-header a, .main-header button{
     color: white !important
 }    
 
