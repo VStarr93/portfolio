@@ -5,6 +5,7 @@
 
 from django.shortcuts import render, redirect
 from main.forms import ContactForm
+from main.models import Certificate
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -32,3 +33,12 @@ def contact_view(request):
                 'message': message,
             }
             return render(request, 'main/contact.html', context)
+        
+# About View
+def about_view(request):
+    """ This is an About view."""
+    
+    if request.method == 'GET':
+        certs = Certificate.objects.all()
+        return render(request, 'main/about.html', context={'certs': certs})
+ 
