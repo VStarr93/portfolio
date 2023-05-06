@@ -180,6 +180,12 @@ header {
     overflow-y: scroll;
 }
 
+.v-story {
+    font-size: large;
+    text-align: start;
+    margin-top: 5px;
+}
+
 /* Pseudo-Class */
 
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
