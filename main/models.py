@@ -52,4 +52,42 @@ class Contact(Model):
     email = models.EmailField(_('Email'), help_text="The email address of the contact")
     message = models.TextField(_('Message'), help_text="The message of the contact")
     
-    
+ # Create Certificate Model
+ # main.models.Certificate 
+class Certificate(Model):   
+    """
+    Define a certificate model to collect information about certifications completed.
+    """
+
+    # Define model methods
+    def __str__(self):
+        return self.name
+
+    # Define model subclasses
+    class Type(TextChoices):
+        """
+            Define TextChoices for certificate types.
+        """
+        SPEC = 'SPEC', 'Specialization'
+        COURSE = 'COURSE', 'Course'
+        DIPLOMA = 'DIPLOMA', 'Diploma'
+        DEGREE = 'DEGREE', 'Degree'
+
+    # Define auto-generated model fields
+    id = models.BigAutoField(primary_key=True) # Primary key
+    date_submit = models.DateTimeField(_('Date Submitted'), auto_now=True, blank=True, null=True, help_text="The date and time of submission")
+
+    # Define Boolean model fields
+
+    # Define Optional model fields
+    img = models.ImageField(_('Image'), upload_to='main/images/certs/', blank=True, null=True, help_text="Upload image for certificate")
+    pdf = models.FileField(_('PDF'), upload_to='main/pdf/certs/', blank=True, null=True, help_text="Upload pdf for certificate")
+    issued_by = models.CharField(_('Issued By'), max_length=50, blank=True, null=True, help_text="The issuer of the certificate")
+    link = models.URLField(_('URL'), max_length=200, blank=True, null=True, help_text="The URL to the certificate")
+    grade = models.DecimalField(_('Grade'), decimal_places=2, max_digits=5, blank=True, null=True, help_text="The grade of the certificate")
+
+    # Define Required model fields
+    name = models.CharField(_('Name'), max_length=100, help_text="The name of the certificate")
+    type = models.CharField(_('Type'), max_length=7, default=Type.SPEC, choices=Type.choices, help_text="The type of certificate")
+    date_complete = models.DateField(_('Date Complete'), help_text="The date of the certificate")
+
