@@ -109,6 +109,12 @@ header {
     box-shadow: 0px 0px 20px 10px rgb(143, 0, 245);
 }
 
+.v-card-inner {
+    box-shadow: 0px 0px 20px 1px rgba(0, 245, 78, 0.11);
+    border-color: rgba(0, 245, 78, 0.508);
+    margin: 1rem;
+}
+
 /* Pseudo-Class */
 
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
