@@ -52,8 +52,8 @@ class Contact(Model):
     email = models.EmailField(_('Email'), help_text="The email address of the contact")
     message = models.TextField(_('Message'), help_text="The message of the contact")
     
- # Create Certificate Model
- # main.models.Certificate 
+# Create Certificate Model
+# main.models.Certificate 
 class Certificate(Model):   
     """
     Define a certificate model to collect information about certifications completed.
