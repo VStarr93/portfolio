@@ -113,6 +113,7 @@ class Skill(Model):
         FRAMEWORK = 'FRAMEWORK', 'Framework'
         PERSONAL = 'PERSONAL', 'Personal'
         LIBRARY = 'LIBRARY', 'Library'
+        DESIGN = 'DESIGN', 'Software - Design'
 
     # Define auto-generated model fields
     id = models.BigAutoField(primary_key=True) # Primary key
