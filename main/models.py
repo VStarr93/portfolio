@@ -107,13 +107,13 @@ class Skill(Model):
         """
             Define TextChoices for certificate types.
         """
-        BUSINESS = 'BUSINESS', 'Software - Business'
-        PROGRAMMING = 'PROGRAMMING', 'Software - Programming'
-        LANGUAGE = 'LANGUAGE', 'Language'
         FRAMEWORK = 'FRAMEWORK', 'Framework'
-        PERSONAL = 'PERSONAL', 'Personal'
+        LANGUAGE = 'LANGUAGE', 'Language'
         LIBRARY = 'LIBRARY', 'Library'
+        PERSONAL = 'PERSONAL', 'Personal'
+        BUSINESS = 'BUSINESS', 'Software - Business'
         DESIGN = 'DESIGN', 'Software - Design'
+        PROGRAMMING = 'PROGRAMMING', 'Software - Programming'
 
     # Define auto-generated model fields
     id = models.BigAutoField(primary_key=True) # Primary key
