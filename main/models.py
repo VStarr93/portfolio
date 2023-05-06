@@ -127,3 +127,34 @@ class Skill(Model):
     name = models.CharField(_('Name'), max_length=100, help_text="The name of the skill")
     type = models.CharField(_('Type'), max_length=11, default=Type.PERSONAL, choices=Type.choices, help_text="The type of skill")
 
+# Create Interest Model
+# main.models.Interest 
+class Interest(Model):   
+    """
+    Define a interest model to collect information about interests.
+    """
+
+    # Define model methods
+    def __str__(self):
+        return self.name
+
+    # Define model subclasses
+    class Type(TextChoices):
+        """
+            Define TextChoices for certificate types.
+        """
+        PERSONAL = 'PERSONAL', 'Personal'
+        CAREER = 'CAREER', 'Career'
+
+    # Define auto-generated model fields
+    id = models.BigAutoField(primary_key=True) # Primary key
+    date_submit = models.DateTimeField(_('Date Submitted'), auto_now=True, blank=True, null=True, help_text="The date and time of submission")
+
+    # Define Boolean model fields
+
+    # Define Optional model fields
+    
+    # Define Required model fields
+    name = models.CharField(_('Name'), max_length=100, help_text="The name of the interest")
+    type = models.CharField(_('Type'), max_length=8, default=Type.PERSONAL, choices=Type.choices, help_text="The type of interest")
+
