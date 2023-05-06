@@ -4,7 +4,7 @@
 # IMPORTS
 
 from django.contrib import admin
-from main.models import Contact, Certificate, Skill
+from main.models import Contact, Certificate, Skill, Interest
 
 
 #-------------------------------------------------------------
@@ -24,4 +24,9 @@ class CertificateAdmin(admin.ModelAdmin):
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
     """ This is the admin interface for the Skill Model."""
+    readonly_fields = ['id', 'date_submit']
+    
+@admin.register(Interest)
+class InterestAdmin(admin.ModelAdmin):
+    """ This is the admin interface for the Interest Model."""
     readonly_fields = ['id', 'date_submit']
