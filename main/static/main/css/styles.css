@@ -144,6 +144,12 @@ header {
     box-shadow: 0 0 10px 0.25rem rgba(13, 253, 25, 0.25); /*--bs-accordion-btn-focus-box-shadow */
 }
 
+.v-accordion .accordion-item {
+    color: #212529; /*--bs-accordion-color*/
+    background-color: #fff; /*--bs-accordion-bg */ 
+    border: 1px /*--bs-accordion-border-width */ solid #dee6df; /*--bs-accordion-border-color */ 
+}
+
 /* Pseudo-Class */
 
 .main-dropdown-item:focus, .main-dropdown-item:hover, .main-dropdown-item:active {
