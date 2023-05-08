@@ -1,0 +1,134 @@
+<!-- main/projects.html -->
+{% extends 'main/base.html' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="d-flex w-100 justify-content-center p-5" style="font-family:'Courgette'">
+    <p class="display-3 h1">
+        Projects
+    </p>
+</div>
+
+<div class="d-flex flex-column w-100 align-items-center">
+    <div class="card v-card w-50"></div>
+
+    <div class="card v-card-dark w-75">
+        <h2 class="ms-3">Featured</h2>
+        <hr/>
+        <div class="flex-row flex-nowrap v-scroll-x">
+            {% for project in projects %}
+            {% if project.is_featured %}
+            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+                <div class="card-card-img">
+                    <a href="#">
+                        <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
+                    </a>
+                </div>
+                <div class="card-footer">{{project.name }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="card v-card-dark w-75">
+        <h2 class="ms-3">For Fun</h2>
+        <hr/>
+        <div class="flex-row flex-nowrap v-scroll-x">
+            {% for project in projects %}
+            {% if project.type == 'PROJECT' %}
+            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+                <div class="card-card-img">
+                    <a href="#">
+                        <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
+                    </a>
+                </div>
+                <div class="card-footer">{{project.name }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="card v-card-dark w-75">
+        <h2 class="ms-3">Templates</h2>
+        <hr/>
+        <div class="flex-row flex-nowrap v-scroll-x">
+            {% for project in projects %}
+            {% if project.type == 'TEMPLATE' %}
+            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+                <div class="card-card-img">
+                    <a href="#">
+                        <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
+                    </a>
+                </div>
+                <div class="card-footer">{{project.name }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="card v-card-dark w-75">
+        <h2 class="ms-3">Client Projects</h2>
+        <hr/>
+        <div class="flex-row flex-nowrap v-scroll-x">
+            {% for project in projects %}
+            {% if project.type == 'WORK' %}
+            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+                <div class="card-card-img">
+                    <a href="#">
+                        <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
+                    </a>
+                </div>
+                <div class="card-footer">{{project.name }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="card v-card-dark w-75">
+        <h2 class="ms-3">School Projects</h2>
+        <hr/>
+        <div class="flex-row flex-nowrap v-scroll-x">
+            {% for project in projects %}
+            {% if project.type == 'SCHOOL' %}
+            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+                <div class="card-card-img">
+                    <a href="#">
+                        <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
+                    </a>
+                </div>
+                <div class="card-footer">{{project.name }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="card v-card-dark w-75">
+        <h2 class="ms-3">Library Projects</h2>
+        <hr/>
+        <div class="flex-row flex-nowrap v-scroll-x">
+            {% for project in projects %}
+            {% if project.type == 'LIBRARY' %}
+            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+                <div class="card-card-img">
+                    <a href="#">
+                        <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
+                    </a>
+                </div>
+                <div class="card-footer">{{project.name }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}
