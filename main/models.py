@@ -201,9 +201,9 @@ class Project(Model):
 
 # Create Project Images Model
 # main.models.ProjectImages 
-class ProjectImages(Model):   
+class ProjectImage(Model):   
     """
-    Define a project images model to collect images for specific project.
+    Define a project image model to collect images for specific project.
     """
 
     # Define model methods
