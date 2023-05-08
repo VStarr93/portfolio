@@ -21,9 +21,9 @@
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.is_featured %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
                 <div class="card-card-img">
-                    <a href="#">
+                    <a href="{% url 'main:project' id=project.id %}">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
                     </a>
                 </div>
@@ -40,9 +40,9 @@
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'PROJECT' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
                 <div class="card-card-img">
-                    <a href="#">
+                    <a href="{% url 'main:project' id=project.id %}">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
                     </a>
                 </div>
@@ -59,9 +59,9 @@
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'TEMPLATE' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
                 <div class="card-card-img">
-                    <a href="#">
+                    <a href="{% url 'main:project' id=project.id %}">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
                     </a>
                 </div>
@@ -78,9 +78,9 @@
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'WORK' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
                 <div class="card-card-img">
-                    <a href="#">
+                    <a href="{% url 'main:project' id=project.id %}">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
                     </a>
                 </div>
@@ -97,9 +97,9 @@
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'SCHOOL' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
                 <div class="card-card-img">
-                    <a href="#">
+                    <a href="{% url 'main:project' id=project.id %}">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
                     </a>
                 </div>
@@ -116,9 +116,9 @@
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'LIBRARY' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:50%;">
+            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
                 <div class="card-card-img">
-                    <a href="#">
+                    <a href="{% url 'main:project' id=project.id %}">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
                     </a>
                 </div>
