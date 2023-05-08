@@ -158,3 +158,44 @@ class Interest(Model):
     name = models.CharField(_('Name'), max_length=100, help_text="The name of the interest")
     type = models.CharField(_('Type'), max_length=8, default=Type.PERSONAL, choices=Type.choices, help_text="The type of interest")
 
+
+# Create Project Model
+# main.models.Project 
+class Project(Model):   
+    """
+    Define a project model to collect information about projects.
+    """
+
+    # Define model methods
+    def __str__(self):
+        return self.name
+
+    # Define model subclasses
+    class Type(TextChoices):
+        """
+            Define TextChoices for project types.
+        """
+        LIBRARY = 'LIBRARY', 'Library'
+        PROJECT = 'PROJECT', 'Project'
+        SCHOOL = 'SCHOOL', 'School'
+        TEMPLATE = 'TEMPLATE', 'Template'
+        WORK = 'WORK', 'Work'
+
+    # Define auto-generated model fields
+    id = models.BigAutoField(primary_key=True) # Primary key
+    date_submit = models.DateTimeField(_('Date Submitted'), auto_now=True, blank=True, null=True, help_text="The date and time of submission")
+
+    # Define Boolean model fields
+    is_featured = models.BooleanField(_('Is Featured'), default=False, help_text="Whether or not the project is featured")
+    
+
+    # Define Optional model fields
+    description = models.TextField(_('Description'), blank=True, null=True, help_text="This is the description of the project")
+    img = models.ImageField(_('Image'), upload_to="main/images/projects/", blank=True, null=True, help_text="The image to display for this project")
+    link = models.URLField(_('Link'), max_length=200, blank=True, null=True, help_text="The link to this project")
+    github = models.URLField(_('Github'), max_length=200, blank=True, null=True, help_text="The Github URL to this project")
+    
+    # Define Required model fields
+    name = models.CharField(_('Name'), max_length=100, help_text="The name of the project")
+    type = models.CharField(_('Type'), max_length=8, default=Type.PROJECT, choices=Type.choices, help_text="The type of project")
+
