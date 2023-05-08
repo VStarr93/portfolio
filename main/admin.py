@@ -9,6 +9,13 @@ from main.models import Contact, Certificate, Skill, Interest, Project, ProjectI
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
+# Create your Inline models here.
+
+class ProjectImageInline(admin.TabularInline):
+    model = ProjectImage
+
+#-------------------------------------------------------------
+#-------------------------------------------------------------
 # Register your models here.
 
 @admin.register(Contact)
@@ -35,8 +42,10 @@ class InterestAdmin(admin.ModelAdmin):
 class ProjectAdmin(admin.ModelAdmin):
     """ This is the admin interface for the Project Model."""
     readonly_fields = ['id', 'date_submit']
+    inlines = [ProjectImageInline,]
     
 @admin.register(ProjectImage)
 class ProjectImageAdmin(admin.ModelAdmin):
     """ This is the admin interface for the Project Images Model."""
     readonly_fields = ['id', 'date_submit']
+
