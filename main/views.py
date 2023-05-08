@@ -44,10 +44,11 @@ def about_view(request):
         interests = Interest.objects.all()
         return render(request, 'main/about.html', context={'certs': certs, 'skills': skills, 'interests': interests})
 
-# Portfolio View
-def project_view(request):
-    """ This is a Project view."""
+# Projects View
+def projects_view(request):
+    """ This is a Project List view."""
     
     if request.method == 'GET':
         projects = Project.objects.all()
         return render(request, 'main/projects.html', context={'projects': projects})
+    
