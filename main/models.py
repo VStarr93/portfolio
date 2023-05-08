@@ -199,3 +199,37 @@ class Project(Model):
     name = models.CharField(_('Name'), max_length=100, help_text="The name of the project")
     type = models.CharField(_('Type'), max_length=8, default=Type.PROJECT, choices=Type.choices, help_text="The type of project")
 
+# Create Project Images Model
+# main.models.ProjectImages 
+class ProjectImages(Model):   
+    """
+    Define a project images model to collect images for specific project.
+    """
+
+    # Define model methods
+    def __str__(self):
+        return self.name
+
+    # Define model subclasses
+    class Type(TextChoices):
+        """
+            Define TextChoices for image types.
+        """
+        HOME = 'HOME', 'Home'
+        CONTACT = 'CONTACT', 'Contact'
+        MENU = 'MENU', 'Menu'
+        OTHER = 'OTHER', 'Other'
+
+    # Define auto-generated model fields
+    id = models.BigAutoField(primary_key=True) # Primary key
+    date_submit = models.DateTimeField(_('Date Submitted'), auto_now=True, blank=True, null=True, help_text="The date and time of submission")
+
+    # Define Boolean model fields
+
+    # Define Optional model fields
+    
+    # Define Required model fields
+    name = models.CharField(_('Name'), max_length=100, help_text="The name of the image")
+    type = models.CharField(_('Type'), max_length=8, default=Type.OTHER, choices=Type.choices, help_text="The type of image")
+    img = models.ImageField(_('Image'), upload_to='main/images/projects/', help_text="The image to disply for this project")
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="Images", help_text="The project attached to this image")
