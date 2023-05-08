@@ -5,7 +5,7 @@
 
 from django.shortcuts import render, redirect
 from main.forms import ContactForm
-from main.models import Certificate, Skill, Interest, Project 
+from main.models import Certificate, Skill, Interest, Project, ProjectImage 
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -52,3 +52,11 @@ def projects_view(request):
         projects = Project.objects.all()
         return render(request, 'main/projects.html', context={'projects': projects})
     
+# Project View
+def project_view(request, id):
+    """ This is an individual Project view."""
+    
+    if request.method == 'GET':
+        project = Project.objects.get(id=id)
+        images = ProjectImage.objects.filter(project=project)
+        return render(request, 'main/project.html', context={'project': project, 'images': images})
