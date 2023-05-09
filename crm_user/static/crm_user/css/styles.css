@@ -13,6 +13,18 @@ main {
     position: fixed;
 }    
 
+body {
+    background-image: linear-gradient(rgba(144, 238, 144, 0.25),rgba(144, 238, 144, 0.75),rgb(144, 238, 144), rgba(0, 128, 0, 0.25));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    font-family:'Franklin Gothic Book' !important;
+    position:static;
+    overflow:hidden;
+    height: 100vh;
+    cursor: url('/static/crm_user/images/arrow-cursor.svg'), auto;
+}
+
 footer {
     position:fixed;
     bottom:0px;
