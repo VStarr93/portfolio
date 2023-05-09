@@ -101,6 +101,10 @@ header h3:first-of-type {
     margin: 25px;
 }
 
+.v-profile-header {
+    height: 150px;
+}
+
 .crm-dropdown {
     background-color: green;
     color:white;
