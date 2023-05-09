@@ -51,7 +51,19 @@ footer a {
 
 header {
     color: whitesmoke;
+    border: 1px solid #400080;
+    background-image: linear-gradient(indigo, rgb(143, 0, 245), indigo);
 }
+
+header i{
+    color: #2aa749 !important;
+    text-shadow: 0 0 5px indigo;
+}    
+
+header a, header button{
+    color: white !important
+}    
+
 /* Media */
 
 /* Extra small devices (phones, 600px and down) */
@@ -69,21 +81,6 @@ header {
 }  
   
 /* Custom Classes */
-
-.main-header {
-    border: 1px solid #400080;
-    background-image: linear-gradient(indigo, rgb(143, 0, 245), indigo);
-    color: white;
-}    
-
-.main-header i{
-    color: #2aa749 !important;
-    text-shadow: 0 0 5px indigo;
-}    
-
-.main-header a, .main-header button{
-    color: white !important
-}    
 
 .v-icon-btn {
     border: 1px solid indigo ;
