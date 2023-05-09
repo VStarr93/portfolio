@@ -27,6 +27,15 @@
 .crm-dropdown-item:focus, .crm-dropdown-item:hover, .crm-dropdown-item:active {
     background-color: lightgreen;
 }
+
+.v-scroll-x {
+    overflow-x: scroll;
+}
+
+.v-scroll-y {
+    overflow-y: scroll;
+}
+
 /* Scrollbar */
 
 main::-webkit-scrollbar, .v-scroll-x::-webkit-scrollbar, .v-scroll-y::-webkit-scrollbar {
