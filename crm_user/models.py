@@ -559,3 +559,40 @@ class AdminProfile(Model):
     language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, help_text="The language the employee speaks.")
     theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="The employee's chosen theme.")
     
+# Add Address Model
+# crm_user.models.Address 
+class Address(Model):
+    """ Define an Address model for users """
+    
+    # Define model methods
+    def __str__(self):
+        return self.name + ' - ' + self.address_line1 + ' ' + self.city + ', ' + self.state
+       
+    # Define model subclasses
+    class Type(TextChoices):
+        """
+            Define TextChoices for address types.
+        """
+        RESIDENTIAL = 'RESIDENTIAL', 'Home'
+        COMMERCIAL = 'COMMERCIAL', 'Commercial'
+        INDUSTRIAL = 'INDUSTRIAL', 'Industrial'
+    
+    # Define Auto-Generated model fields
+    id = models.BigAutoField(primary_key=True) # Primary Key
+    last_modified = models.DateTimeField(_('Last Modified'), auto_now=True, blank=True, null=True, help_text="The date and time of which the address was last modified.")
+    last_modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='address_modified_by', verbose_name="Last Modified By", blank=True, null=True, help_text="The user who last modified this address.")
+
+    # Define Boolean model fields
+
+    # Define Optional model fields
+    address_line2 = models.CharField(_('Address Line 2'), max_length=254, blank=True, null=True, help_text="The apartment or suite number of the address" )
+    
+    # Define Required model fields
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="User", help_text="The user who lives at this address")
+    address_line1 = models.CharField(_('Address Line 1'), max_length=254, help_text="The street number and name of the address" )
+    city = models.CharField(_('City'), max_length=254, help_text="The city of the address")
+    state = models.CharField(_('State'), max_length=2, help_text="The state of the address")
+    zip = models.IntegerField(_('Zip'), help_text="The zip of the address")
+    type = models.CharField(_('Type'), max_length=11, default=Type.RESIDENTIAL, choices=Type.choices, help_text="The type of address")
+    name = models.CharField(_('Name'), max_length=100, help_text="The name of the address")
+    
