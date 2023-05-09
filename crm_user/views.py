@@ -40,28 +40,25 @@ def user_registration(request):
                 'message': message,
             }
             return render(request, 'registration/user_registration.html', context)
-
-# User Change View
-def user_change(request):
-    """
-        This is a user change view.
-    """
-    if request.method == 'GET':
-        form = CustomUserChangeForm(instance=request.user)
-        return render(request, 'registration/user_change.html', context={'form': form})
-
-    if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            return render(request, 'registration/user_change.html', context={'form':form})
-        
+    
 # User Profile View
 def profile_view(request):
     """ This is a User Profile view"""
     
+    context = {
+        'user': request.user,
+    }
+    
     if request.method == 'GET':
-        user = request.user
-        return render(request, 'crm_user/profile.html', context={'user':user})
+        context['changeForm'] = CustomUserChangeForm(instance=request.user)
+        return render(request, 'crm_user/profile.html', context=context)
+    
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('crm_user:profile')
+        else:
+            context['changeForm'] = form
+            return render(request, 'crm_user/profile.html', context=context)
+        
