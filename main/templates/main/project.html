@@ -28,7 +28,13 @@
     <div class="card v-card-dark w-75">
         <p class="h4">Details</p>
         <hr />
-        <p>link : {{project.link}}</p>
+        <p>link : 
+            {% if project.name == 'CRM Template' %}
+            <a href="{% url 'crm_user:home' %}">View Project Here</a>
+            {% else %}
+            <a href="{{project.link.url}}">View Project Here</a>
+            {% endif %}
+        </p>
         <p>GitHub : {{project.github}}</p>
 
     </div>
