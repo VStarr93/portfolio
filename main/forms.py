@@ -72,9 +72,7 @@ class ContactForm(ModelForm):
                 css_class="text-center",
             ),
         )
-        
-        # self.helper.add_input(Submit('submit', 'Submit'))
-    
+            
     class Meta:
         model = Contact 
         fields = ['first_name', 'last_name', 'business', 'email', 'phone_number', 'type', 'message']
