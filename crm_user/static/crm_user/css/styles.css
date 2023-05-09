@@ -1,6 +1,29 @@
 /* crm_user/css/styles.css */
 
-.crm-header {
+footer {
+    position:fixed;
+    bottom:0px;
+    height: 30px;
+    width: 100%;
+    padding-right: 10px;
+    margin: 0px;
+    background-color: transparent;
+    color: grey;
+}
+
+footer div{
+    background-color:transparent;
+    padding: 0px;
+    height: 100%;
+    align-items: flex-start;
+    justify-content: flex-end;
+    display: flex;
+}
+
+footer a {
+    color: grey;
+}
+
     border: 1px solid green;
     background-image: linear-gradient(green, lightgreen, green);
     color: indigo !important;
