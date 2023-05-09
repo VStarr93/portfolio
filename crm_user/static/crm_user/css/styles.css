@@ -49,19 +49,45 @@ footer a {
     color: grey;
 }
 
+header {
+    color: whitesmoke;
     border: 1px solid green;
     background-image: linear-gradient(green, lightgreen, green);
     color: indigo !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 50px;
 }
 
-.crm-header i{
+header i{
     color:indigo !important;
     text-shadow: 0 0 7px lightgreen;
 }
 
-.crm-header a, button {
+header a, header button {
     color: white !important;
+    text-decoration: none;
+    align-items: center !important;
 }
+
+header > div:first-child {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+header > div:first-child > div {
+    height: 100%;
+    padding: 0;
+}
+
+header h3:first-of-type {
+    color:indigo; 
+    font-family:'Colonna MT';
+    margin-bottom: 0;
+    margin-left: 0.5rem !important;
+}
+/* Custom Classes */
 
 .crm-dropdown {
     background-color: green;
