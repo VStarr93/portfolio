@@ -18,6 +18,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='crm_user/home.html'), name='home'),
     path('register/', views.user_registration, name='register'),
     path('change/', views.user_change, name='change'),
+    path('profile/', views.profile_view, name='profile'),
 
 ]
 
