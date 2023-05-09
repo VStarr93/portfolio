@@ -2,7 +2,13 @@
 <div class="card m-3">
 
   <div class="card-header">
-      <h3>{{user.first_name}} {{user.last_name}}</h3>
+    <div class="d-flex flex-row w-100 v-profile-header">
+        <img src="{{user.profile_photo.url}}" alt="{{user.first_name}}'s profile photo" class='v-profile-photo'>
+        <div class="d-flex flex-column justify-content-center">
+            <h3>{{user.first_name}} {{user.last_name}}</h3>
+            <p class="">{{user.type}}</p>
+        </div>
+    </div>
       <hr />
 
       <ul class="nav nav-tabs" role="tablist">
