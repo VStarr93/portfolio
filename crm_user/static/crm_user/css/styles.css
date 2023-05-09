@@ -110,6 +110,36 @@ header h3:first-of-type {
     overflow-y: scroll;
 }
 
+/* Media */
+
+/* XS */
+@media (max-width:576px) {
+}
+/* SM */
+@media (min-width: 576px) {
+}
+
+/* MD */
+@media (min-width: 768px) {
+
+}
+
+/* L */
+@media (min-width: 992px) {
+
+}
+
+/* XL */
+@media (min-width: 1200px) {
+
+}
+
+/* XXL */
+@media (min-width: 1400px) {
+
+}
+
+
 /* Scrollbar */
 
 main::-webkit-scrollbar, .v-scroll-x::-webkit-scrollbar, .v-scroll-y::-webkit-scrollbar {
