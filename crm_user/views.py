@@ -57,3 +57,11 @@ def user_change(request):
             return redirect('home')
         else:
             return render(request, 'registration/user_change.html', context={'form':form})
+        
+# User Profile View
+def profile_view(request):
+    """ This is a User Profile view"""
+    
+    if request.method == 'GET':
+        user = request.user
+        return render(request, 'crm_user/profile.html', context={'user':user})
