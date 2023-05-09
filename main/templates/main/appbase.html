@@ -1,0 +1,24 @@
+<!-- main/appbase.html -->
+
+{% extends 'main/base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block css %} 
+{% load static %}
+<link rel="stylesheet" href="{% static 'main/css/styles.css' %}?{% now ' U'%}" />
+{% endblock %}
+
+{% block content %} 
+{% include 'main/snippets/header.html' %}
+
+<main>
+    {% block app %} {% endblock app %}
+</main>
+
+<footer>
+    <div>
+      Image by &nbsp;<a href="https://www.freepik.com/free-photo/realistic-purple-smoke-waves-isolated-black-background_4225807.htm#query=purple%20smoke%20background&position=20&from_view=keyword&track=robertav1_2_sidr">Freepik</a>
+    </div>
+  </footer>
+{% endblock content %}
