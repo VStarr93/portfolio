@@ -1,0 +1,230 @@
+<!-- crm_user/snippets/emp_profile.html -->
+<div class="card m-3">
+
+  <div class="card-header">
+      <h3>{{user.first_name}} {{user.last_name}}</h3>
+      <hr />
+
+      <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+              <button class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#tab1content" id="tab1" type="button">
+                  Customer Info
+              </button>
+          </li>
+          <li class="nav-item">
+              <button class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#tab4content" id="tab2" type="button">
+                  Generator Info
+              </button>
+          </li>
+          <li class="nav-item">
+              <button class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#tab3content" id="tab3" type="button">
+                  Quotes
+              </button>
+          </li>
+          <li class="nav-item">
+              <button class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#tab2content" id="tab4" type="button">
+                  Invoices
+              </button>
+          </li>
+          <li class="nav-item">
+              <button class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#tab5content" id="tab5" type="button">
+                  Appointments
+              </button>
+          </li>
+      </ul>
+  </div>
+
+  <div class="card-body">
+      <div class="tab-content" id="tabcontent">
+          <!-- Contact Info -->
+          <div class="tab-pane fade show active " id="tab1content" role="tabpanel">
+              <!-- Row for First Name -->
+              <div class="row">
+                  <div class="col-3 fw-bold ps-5 mb-1">
+                      First Name:
+                  </div>
+                  <div class="col-9 text-left">
+                      {{user.first_name}}
+                      <a href="{% url 'crm_user:change' %}" class="">Edit</a>
+                  </div>
+              </div>
+              <!-- Row for Middle Name -->
+              <div class="row">
+                  <div class="col-3 fw-bold ps-5 mb-1">
+                      Middle Name:
+                  </div>
+                  <div class="col-9 text-left">
+                      {{user.middle_name}}
+                      <a href="#" class="">Edit</a>
+                  </div>
+              </div>
+              <!-- Row for Last Name -->
+              <div class="row">
+                  <div class="col-3 fw-bold ps-5 mb-1">
+                      Last Name:
+                  </div>
+                  <div class="col-9 text-left">
+                      {{user.last_name}}
+                      <a href="#" class="">Edit</a>
+                  </div>
+              </div>
+              <!-- Row for Email -->
+              <div class="row">
+                  <div class="col-3 fw-bold ps-5 mb-1">
+                      Email:
+                  </div>
+                  <div class="col-9 text-left">
+                      {{user.email}}
+                      <a href="#" class="">Edit</a>
+                  </div>
+              </div>
+              <!-- Row for Phone Number -->
+              <div class="row">
+                  <div class="col-3 fw-bold ps-5 mb-1">
+                      Phone Number:
+                  </div>
+                  <div class="col-9 text-left">
+                      {{user.phone_number.as_national}}
+                      <a href="#" class="">Edit</a>
+                  </div>
+              </div>
+              <!-- Row for Birth Date -->
+              <div class="row">
+                  <div class="col-3 fw-bold ps-5 mb-1">
+                      Birth Date:
+                  </div>
+                  <div class="col-9 text-left">
+                      {{user.birth_date}}
+                      <a href="#" class="">Edit</a>
+                  </div>
+              </div>
+              <!-- Table for Addresses -->
+              <div class="row">
+                  <div class="col">
+                      <div class="container mt-5">
+                          <span class="h5">Addresses  </span> <a href="#" class=""> Edit</a>
+                          <hr />
+                          <table class="table table-hover">
+                              <thead>
+                                  <tr>
+                                      <th>Type</th>
+                                      <th>Name</th>
+                                      <th>Address</th>
+                                      <th>City</th>
+                                      <th>State</th>
+                                      <th>Zip</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for a in user.address_set.all %}
+                                  <tr>
+                                      <td> {{a.type}} </td>
+                                      <td> {{a.name}} </td>
+                                      <td> {{a.address_line1}} {{a.address_line2}} </td>
+                                      <td> {{a.city}} </td>
+                                      <td> {{a.state}} </td>
+                                      <td> {{a.zip}} </td>
+                                  </tr>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- Invoices -->
+          <div class="tab-pane fade " id="tab2content" role="tabpanel">
+              {% if user.Invoice_Customers.all %}
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Invoice No.</th>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for invoice in user.Invoice_Customers.all %}
+                      <tr>
+                          <td>{{invoice.report_no}}</td>
+                          <td>{{invoice.date}}</td>
+                          <td>{{invoice.report_total}}</td>
+                          <td>Paid In Full</td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+              {% else %}
+              <p> There are no Invoices to display</p>
+              {% endif %}
+          </div>
+          <!-- Estimates -->
+          <div class="tab-pane fade " id="tab3content" role="tabpanel">
+              {% if user.Estimate_Customers.all %}
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Estimate No.</th>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for estimate in user.Estimate_Customers.all %}
+                      <tr>
+                          <td>{{estimate.report_no}}</td>
+                          <td>{{estimate.date}}</td>
+                          <td>{{estimate.report_total}}</td>
+                          <td>Paid In Full</td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+              {% else %}
+              <p> There are no Estimates to display</p>
+              {% endif %}
+          </div>
+          <!-- Inventory -->
+          <div class="tab-pane fade " id="tab4content" role="tabpanel">
+              {% if InventoryList %}
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Serial No.</th>
+                          <th>Type</th>
+                          <th>Address</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for inventory in InventoryList %}
+                      <tr>
+                          <td>{{inventory.name}}</td>
+                          <td>{{inventory.serial_number}}</td>
+                          <td>{{inventory.type}}</td>
+                          <td>
+                              {% for addr in user.address_set.all %}
+                                  {% if inventory in addr.inventory.all %}
+                                      {{addr.name}} 
+                                  {% endif %}
+                              {% endfor %}
+
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+              {% else %}
+              <p> There is not Inventory to display</p>
+              {% endif %}
+          </div>
+          <!-- Appointments -->
+          <div class="tab-pane fade " id="tab5content" role="tabpanel">
+              There are currently no scheduled appointments.
+          </div>
+      </div>
+  </div>
+
+</div>
