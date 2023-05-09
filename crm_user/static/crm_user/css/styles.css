@@ -89,6 +89,11 @@ header h3:first-of-type {
 }
 /* Custom Classes */
 
+.v-fields-name {
+    width:33%;
+    margin-left: 1rem;
+}
+
 .crm-dropdown {
     background-color: green;
     color:white;
@@ -114,9 +119,17 @@ header h3:first-of-type {
 
 /* XS */
 @media (max-width:576px) {
+    .v-fields-name {
+        width:100%;
+        margin-left: 0;
+    }
 }
 /* SM */
 @media (min-width: 576px) {
+    .v-fields-name {
+        width:33%;
+        margin-left: 1rem;
+    }
 }
 
 /* MD */
