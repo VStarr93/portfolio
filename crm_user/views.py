@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse 
 from django.contrib.auth.forms import UserCreationForm
 from crm_user.forms import *
+from django.apps import apps
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -47,6 +48,10 @@ def profile_view(request):
     
     context = {
         'user': request.user,
+        'apps': {
+            'crm_user': apps.is_installed('crm_user'), 
+            'crm_invoice': apps.is_installed('crm_invoice'),
+        },
     }
     
     if request.method == 'GET':
