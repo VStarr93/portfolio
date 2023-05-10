@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from crm_user.forms import *
 from django.apps import apps
+from crm_user.models import Address
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -52,6 +53,7 @@ def profile_view(request):
             'crm_user': apps.is_installed('crm_user'), 
             'crm_invoice': apps.is_installed('crm_invoice'),
         },
+        'address_list': Address.objects.filter(user=request.user),
     }
     
     if request.method == 'GET':
