@@ -64,7 +64,7 @@ class CustomUserChangeForm(UserChangeForm):
                 <div>To change your password, click <a href="{% url 'password_change' %} ">here</a>.</div>
             """),
             Div(
-                Submit('submit', 'Update My Info'),
+                Submit('submitChange', 'Update My Info'),
                 HTML("""
                     <a type="button" class="btn ms-3" href="{% url 'crm_user:profile' %}">Cancel</a>
                 """),
