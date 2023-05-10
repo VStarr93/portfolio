@@ -85,3 +85,15 @@ class AddressForm(forms.ModelForm):
         model = Address
         fields = ('type', 'name', 'address_line1', 'address_line2', 'city', 'state', 'zip')
 
+class AddressFormHelper(FormHelper):
+    """ Define a FormHelper for AddressForm """
+    
+    def __init__(self, *args, **kwargs):
+        """ Define init method for AddressFormHelper """
+        super().__init__(*args, **kwargs)
+        self.form_method = 'post'
+        self.form_class = 'v-forms'
+        self.field_class = 'v-table-fields'
+        self.add_input(Submit('submitAddress', 'Save My Addresses'))
+        self.template = 'crm_user/snippets/table_inline_formset.html'
+    
