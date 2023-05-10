@@ -76,3 +76,12 @@ class CustomUserChangeForm(UserChangeForm):
         model = get_user_model()
         fields = ('first_name','middle_name', 'last_name', 'email', 'birth_date', 'phone_number', 'profile_photo')
         exclude = ('password',)
+        
+# Create Address Form
+class AddressForm(forms.ModelForm):
+    """ Define an Address form """
+    
+    class Meta:
+        model = Address
+        fields = ('type', 'name', 'address_line1', 'address_line2', 'city', 'state', 'zip')
+
