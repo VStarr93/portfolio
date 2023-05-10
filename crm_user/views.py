@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from crm_user.forms import *
 from django.apps import apps
 from crm_user.models import Address
+from django.forms.models import modelformset_factory 
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
@@ -47,6 +48,10 @@ def user_registration(request):
 def profile_view(request):
     """ This is a User Profile view"""
     
+    #FormSet 
+    AddressFormSet = modelformset_factory(Address, form=AddressForm, extra=1, can_delete=True)
+    
+    # Global context for this view
     context = {
         'user': request.user,
         'apps': {
@@ -54,6 +59,8 @@ def profile_view(request):
             'crm_invoice': apps.is_installed('crm_invoice'),
         },
         'address_list': Address.objects.filter(user=request.user),
+        'addressFormSet': AddressFormSet(queryset=Address.objects.filter(user=request.user)),
+        'addressFormHelper': AddressFormHelper(),
     }
     
     if request.method == 'GET':
@@ -62,10 +69,25 @@ def profile_view(request):
     
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('crm_user:profile')
-        else:
-            context['changeForm'] = form
-            return render(request, 'crm_user/profile.html', context=context)
+        AddressFormSet = modelformset_factory(Address, form=AddressForm, can_delete=True)
+        addressFormSet = AddressFormSet(request.POST)
+        
+        if 'submitChange' in request.POST:
+            if form.is_valid():
+                form.save()
+            else:
+                context['changeForm'] = form
+                return render(request, 'crm_user/profile.html', context=context)
+        
+        if 'submitAddress' in request.POST:
+            if addressFormSet.is_valid():
+                addresses = addressFormSet.save(commit = False)
+                for address in addresses:
+                    address.user = request.user 
+                    address.save()
+            else:
+                context['addressFormSet'] = addressFormSet
+                return render(request, 'crm_user/profile.html', context=context)
+        
+        return redirect('crm_user:profile')
         
