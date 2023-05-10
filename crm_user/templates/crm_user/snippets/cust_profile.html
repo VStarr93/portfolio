@@ -1,4 +1,6 @@
 <!-- crm_user/snippets/cust_profile.html -->
+{% load crispy_forms_tags %}
+
 <div class="card m-3">
 
   <div class="card-header">
@@ -43,9 +45,11 @@
   <div class="card-body">
       <div class="tab-content" id="tabcontent">
           <!-- Personal Info -->
-          <div class="tab-pane fade show active " id="tab1content" role="tabpanel">
-              {% include 'crm_user/snippets/user_change.html' %}
-          </div>
+            <div class="tab-pane fade show active " id="tab1content" role="tabpanel">
+                <div class="card m-3 p-3">
+                    {% crispy changeForm %}
+                </div>
+            </div>
           <!-- Invoices -->
           <div class="tab-pane fade " id="tab2content" role="tabpanel">
               {% if user.Invoice_Customers.all %}
