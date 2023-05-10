@@ -89,6 +89,10 @@ header h3:first-of-type {
 }
 /* Custom Classes */
 
+.v-forms {
+    width: 100%;
+}
+
 .v-fields-name {
     width:33%;
     margin-left: 1rem;
