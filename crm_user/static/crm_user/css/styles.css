@@ -89,6 +89,10 @@ header h3:first-of-type {
 }
 /* Custom Classes */
 
+.v-table-fields {
+    min-width:100px;
+}
+
 .v-forms {
     width: 100%;
 }
