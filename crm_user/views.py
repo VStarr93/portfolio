@@ -34,6 +34,12 @@ def user_registration(request):
             }
             return render(request, 'crm_user/registration.html', context)
 
+        if 'empBtn' in request.GET:
+            context = {
+                'form': SimpleEmployeeCreationForm
+            }
+            return render(request, 'crm_user/registration.html', context)
+
 
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
