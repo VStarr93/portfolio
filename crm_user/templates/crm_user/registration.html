@@ -1,0 +1,11 @@
+<!-- crm_user/registration.html -->
+{% extends 'crm_user/appbase.html' %}
+
+{% block title %}Registration{% endblock %}
+
+{% block app %}
+{% load crispy_forms_tags %}
+<div class="card m-3 p-3">
+    {%crispy form%}
+</div>
+{% endblock %}
