@@ -259,6 +259,59 @@ class SimpleEmployeeCreationForm(forms.ModelForm):
         model = Employee 
         fields = ('first_name', 'middle_name', 'last_name', 'email')
 
+# Create AdminCreationForm without password Required
+class SimpleAdminCreationForm(forms.ModelForm):
+    """ Define a SimpleAdminCreationForm without password"""
+       
+    def __init__(self, *args, **kwargs):
+        """ Define init method for Simple Admin Creation Form """
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-simpleadmincreationform'
+        self.helper.form_class = 'v-forms'
+        self.helper.form_method = 'post'
+        
+        self.helper.layout = Layout(
+            HTML("""
+                <h2 class="text-center">Register</h2>
+                <p class='text-center'>
+                    Fill out the form below to create a new admin account. 
+                </p>
+            """),
+            Div(
+                Div(
+                    Field('first_name', wrapper_class='v-fields-name', css_class="w-100"),
+                    Field('middle_name', wrapper_class='v-fields-name', css_class="w-100"),
+                    Field('last_name', wrapper_class='v-fields-name', css_class="w-100"),
+                    css_class="d-flex flex-column flex-sm-row justify-content-start",
+                ),
+                'email',
+                'password1',
+                'password2',
+                css_class="text-start",
+            ),
+            Div(
+                Submit('submitAdminSimple', 'Create My Account'),
+                css_class="d-flex justify-content-center mt-3",
+            )
+        )
+    
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        email = self.cleaned_data['email']
+        password = None 
+        first_name = self.cleaned_data['first_name']
+        middle_name = self.cleaned_data['middle_name']
+        last_name = self.cleaned_data['last_name']
+        if commit:
+            user = Admin.objects.create_user(email, password, first_name=first_name, last_name=last_name, middle_name=middle_name)
+        return instance
+        
+    
+    class Meta:
+        model = Admin 
+        fields = ('first_name', 'middle_name', 'last_name', 'email')
+
 # Create User Change Form
 class CustomUserChangeForm(UserChangeForm):
     """
