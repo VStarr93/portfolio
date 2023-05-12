@@ -28,8 +28,12 @@ def user_registration(request):
         This is a user registration view.
     """
     if request.method == 'GET':
-        form = CustomUserCreationForm
-        return render(request, 'registration/user_registration.html', context={'form':form})
+        if 'customerBtn' in request.GET:
+            context = {
+                'form': CustomerCreationForm
+            }
+            return render(request, 'crm_user/registration.html', context)
+
 
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
