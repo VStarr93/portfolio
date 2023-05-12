@@ -1,0 +1,19 @@
+<!-- crm_user/snippets/profile/profile_header.html -->
+
+{% load static %}
+
+<div class="d-flex flex-row w-100 v-profile-header">
+      
+    {% if user.profile_photo.url == None %}
+        <img src="{{user.profile_photo.url}}" alt="{{user.first_name}}'s profile photo" class='v-profile-photo'>
+    {% else %}
+        <img src="{% static 'crm_user/images/question.jpg' %}" alt="{{user.first_name}}'s profile photo" class='v-profile-photo'>
+    {% endif %}
+
+    <div class="d-flex flex-column justify-content-center">
+        <h3>{{user.first_name}} {{user.last_name}}</h3>
+        <p class="">{{user.profile.acct_no}}</p>
+        <p class="">{{user.type}}</p>
+        <a href="{% url 'logout' %}" class="d-flex text-decoration-none justify-content-start align-content-center" style="height:40px;"><i class="fa-solid fa-right-from-bracket me-3"></i> Logout </a>
+    </div>
+</div>
