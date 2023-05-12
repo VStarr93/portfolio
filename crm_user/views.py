@@ -73,6 +73,17 @@ def user_registration(request):
                 }
                 return render(request, 'crm_user/registration.html', context)
         
+        if 'submitAdminSimple' in request.POST:
+            form = SimpleAdminCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/accounts/login/')
+            else:
+                context = {
+                    'form': SimpleAdminCreationForm(request.POST),
+                }
+                return render(request, 'crm_user/registration.html', context)
+        
     
 # User Profile View
 def profile_view(request):
