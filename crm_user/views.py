@@ -62,6 +62,17 @@ def user_registration(request):
                 }
                 return render(request, 'crm_user/registration.html', context)
         
+        if 'submitEmployeeSimple' in request.POST:
+            form = SimpleEmployeeCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/accounts/login/')
+            else:
+                context = {
+                    'form': SimpleEmployeeCreationForm(request.POST),
+                }
+                return render(request, 'crm_user/registration.html', context)
+        
     
 # User Profile View
 def profile_view(request):
