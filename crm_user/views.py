@@ -45,6 +45,9 @@ def user_registration(request):
                 'form': SimpleAdminCreationForm
             }
             return render(request, 'crm_user/registration.html', context)
+        else:
+            context = {}
+            return render(request, 'crm_user/user_registration.html', context)
 
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
