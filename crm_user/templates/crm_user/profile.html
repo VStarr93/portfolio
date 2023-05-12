@@ -7,10 +7,29 @@
 {% block app %} 
 {% if user.is_authenticated %}
 
-{% if user.type == 'CUSTOMER' %} {% include 'crm_user/snippets/cust_profile.html' %}
-{% elif user.type == 'EMPLOYEE' %} {% include 'crm_user/snippets/emp_profile.html' %}
-{% elif user.type == 'ADMIN' %} {% include 'crm_user/snippets/admin_profile.html' %}
-{% endif %}
+<div class="card m-3">
+
+  <div class="card-header">
+    {% include 'crm_user/snippets/profile/profile_header.html' %}
+    <hr />
+    {% include 'crm_user/snippets/profile/profile_tabs.html' %}
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content" id="tabcontent">
+      <!-- Personal -->
+      {% include 'crm_user/snippets/profile/tab1content.html' %}
+      <!-- Invoices -->
+      {% include 'crm_user/snippets/profile/tab2content.html' %}
+      <!-- Estimates -->
+      {% include 'crm_user/snippets/profile/tab3content.html' %}
+      <!-- Account -->
+      {% include 'crm_user/snippets/profile/tab4content.html' %}
+      <!-- Appointments -->
+      {% include 'crm_user/snippets/profile/tab5content.html' %}
+    </div>
+  </div>
+</div>
 
 {% else %}
   <p>You are not logged in</p>
