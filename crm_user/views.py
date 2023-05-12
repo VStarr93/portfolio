@@ -40,6 +40,11 @@ def user_registration(request):
             }
             return render(request, 'crm_user/registration.html', context)
 
+        if 'adminBtn' in request.GET:
+            context = {
+                'form': SimpleAdminCreationForm
+            }
+            return render(request, 'crm_user/registration.html', context)
 
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
