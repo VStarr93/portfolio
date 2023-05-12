@@ -153,6 +153,60 @@ class AdminCreationForm(UserCreationForm):
         model = Admin 
         fields = ('first_name', 'middle_name', 'last_name', 'email', 'password1', 'password2')
 
+# Create CustomerCreationForm without password Required
+class SimpleCustomerCreationForm(forms.ModelForm):
+    """ Define a SimpleCustomerCreationForm without password"""
+    
+    def __init__(self, *args, **kwargs):
+        """ Define init method for Simple Customer Creation Form """
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-simplecustomercreationform'
+        self.helper.form_class = 'v-forms'
+        self.helper.form_method = 'post'
+        
+        self.helper.layout = Layout(
+            HTML("""
+                <h2 class="text-center">Register</h2>
+                <p class='text-center'>
+                    Fill out the form below to create a new customer account. 
+                </p>
+            """),
+            Div(
+                Div(
+                    Field('first_name', wrapper_class='v-fields-name', css_class="w-100"),
+                    Field('middle_name', wrapper_class='v-fields-name', css_class="w-100"),
+                    Field('last_name', wrapper_class='v-fields-name', css_class="w-100"),
+                    css_class="d-flex flex-column flex-sm-row justify-content-start",
+                ),
+                'email',
+                'password1',
+                'password2',
+                css_class="text-start",
+            ),
+            Div(
+                Submit('submitCustomerSimple', 'Create My Account'),
+                css_class="d-flex justify-content-center mt-3",
+            )
+        )
+    
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        email = self.cleaned_data['email']
+        password = None 
+        first_name = self.cleaned_data['first_name']
+        middle_name = self.cleaned_data['middle_name']
+        last_name = self.cleaned_data['last_name']
+        if commit:
+            user = Customer.objects.create_user(email, password, first_name=first_name, last_name=last_name, middle_name=middle_name)
+        return instance
+        
+    
+    class Meta:
+        model = Customer 
+        fields = ('first_name', 'middle_name', 'last_name', 'email')
+        # exclude = ('password1', 'password2')
+
 # Create User Change Form
 class CustomUserChangeForm(UserChangeForm):
     """
