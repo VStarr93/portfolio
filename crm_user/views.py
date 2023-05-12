@@ -50,17 +50,18 @@ def user_registration(request):
             return render(request, 'crm_user/user_registration.html', context)
 
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/accounts/login/')
-        else:
-            message = form.errors
-            context = {
-                'form': CustomUserCreationForm(request.POST),
-                'message': message,
-            }
-            return render(request, 'registration/user_registration.html', context)
+        
+        if 'submitCustomer' in request.POST:
+            form = CustomerCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/accounts/login/')
+            else:
+                context = {
+                    'form': CustomerCreationForm(request.POST)
+                }
+                return render(request, 'crm_user/registration.html', context)
+        
     
 # User Profile View
 def profile_view(request):
