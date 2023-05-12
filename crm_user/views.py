@@ -123,6 +123,9 @@ def profile_view(request):
         if 'submitAddress' in request.POST:
             if addressFormSet.is_valid():
                 addresses = addressFormSet.save(commit = False)
+                for obj in addressFormSet.deleted_objects:
+                    obj.delete()
+                    
                 for address in addresses:
                     address.user = request.user 
                     address.save()
