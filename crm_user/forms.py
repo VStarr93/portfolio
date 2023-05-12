@@ -24,6 +24,49 @@ class CustomUserCreationForm(UserCreationForm):
         model = get_user_model() 
         fields = ('first_name', 'last_name', 'type', 'email', 'password1', 'password2', )
 
+# Create CustomerCreationForm
+class CustomerCreationForm(UserCreationForm):
+    """ Define a CustomerCreationForm """
+    
+    type = User.Types.CUSTOMER
+    
+    def __init__(self, *args, **kwargs):
+        """ Define init method for Custom User Change Form """
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-customercreationform'
+        self.helper.form_class = 'v-forms'
+        self.helper.form_method = 'post'
+        
+        self.helper.layout = Layout(
+            HTML("""
+                <h2 class="text-center">Register</h2>
+                <p class='text-center'>
+                    Fill out the form below to create a new customer account. 
+                </p>
+            """),
+            Div(
+                Div(
+                    Field('first_name', wrapper_class='v-fields-name', css_class="w-100"),
+                    Field('middle_name', wrapper_class='v-fields-name', css_class="w-100"),
+                    Field('last_name', wrapper_class='v-fields-name', css_class="w-100"),
+                    css_class="d-flex flex-column flex-sm-row justify-content-start",
+                ),
+                'email',
+                'password1',
+                'password2',
+                css_class="text-start",
+            ),
+            Div(
+                Submit('submitCustomer', 'Create My Account'),
+                css_class="d-flex justify-content-center mt-3",
+            )
+        )
+    
+    class Meta:
+        model = Customer 
+        fields = ('first_name', 'middle_name', 'last_name', 'email', 'password1', 'password2')
+
 # Create User Change Form
 class CustomUserChangeForm(UserChangeForm):
     """
