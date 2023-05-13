@@ -508,7 +508,9 @@ class AdminProfile(Model):
         new_work_id = last_id_no + 1
         # Return new work id
         return new_work_id
-        
+       
+    def __str__(self):
+        return self.user.first_name + ' ' + self.user.last_name
     # Define model subclasses
     class Status(TextChoices):
         """
