@@ -433,6 +433,8 @@ class EmployeeProfile(Model):
         # Return new work id
         return new_work_id
         
+    def __str__(self):
+        return self.user.first_name + " " + self.user.last_name
     # Define model subclasses
     class Status(TextChoices):
         """
