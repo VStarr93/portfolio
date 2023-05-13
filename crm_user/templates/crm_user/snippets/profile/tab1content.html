@@ -4,7 +4,15 @@
 
 <div class="tab-pane fade show active " id="tab1content" role="tabpanel">
     <div class="card m-3 p-3">
-        {% crispy changeForm %}
+        <h2 class="text-center">Account Information</h2>
+        <hr />
+        {% if user.type == 'CUSTOMER' %}
+            {% include 'crm_user/snippets/profile/cust_acct.html' %}
+        {% elif user.type == 'EMPLOYEE' %}
+            {% include 'crm_user/snippets/profile/emp_acct.html' %}
+        {% elif user.type == 'ADMIN' %}
+            {% include 'crm_user/snippets/profile/admin_acct.html' %}
+        {% endif %}
     </div>
     <div class="card m-3 p-3">
         {% crispy addressFormSet addressFormHelper %}
