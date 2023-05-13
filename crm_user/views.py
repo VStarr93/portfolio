@@ -164,6 +164,18 @@ def profile_view(request):
                 for address in addresses:
                     address.user = request.user 
                     address.save()
+                    
+                user = request.user
+                if user.type == "CUSTOMER":
+                    user.profile.last_modified_by = user 
+                    user.profile.save()
+                elif user.type == "ADMIN":
+                    user.admin_profile.last_modified_by = user 
+                    user.admin_profile.save()
+                elif user.type == "EMPLOYEE":
+                    user.emp_profile.last_modified_by = user 
+                    user.emp_profile.save()
+                    
             else:
                 context['addressFormSet'] = addressFormSet
                 return render(request, 'crm_user/profile.html', context=context)
