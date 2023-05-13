@@ -107,7 +107,6 @@ def profile_view(request):
             'crm_user': apps.is_installed('crm_user'), 
             'crm_invoice': apps.is_installed('crm_invoice'),
         },
-        'address_list': Address.objects.filter(user=request.user),
         'addressFormSet': AddressFormSet(queryset=Address.objects.filter(user=request.user)),
         'addressFormHelper': AddressFormHelper(),
         'changeForm': CustomUserChangeForm(instance=request.user),
