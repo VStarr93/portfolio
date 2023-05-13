@@ -329,10 +329,8 @@ class CustomUserChangeForm(UserChangeForm):
         
         self.helper.layout = Layout(
             HTML("""
-                <h2 class="text-center">Update User Profile</h2>
-                <p class='text-center'>
-                    Update any necessary information below. 
-                </p>
+                <h2 class="text-center">User Profile</h2>
+                <hr />
             """),
             Div(
                 Div(
