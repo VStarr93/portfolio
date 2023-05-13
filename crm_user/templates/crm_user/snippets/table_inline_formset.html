@@ -14,10 +14,8 @@
         {{ formset.management_form|crispy }}
     </div>
 
-    <h2 class="text-center">Update Addresses</h2>
-    <p class='text-center'>
-        Update any necessary information below. 
-    </p>
+    <h2 class="text-center">Addresses</h2>
+    <hr />
 
     <div class="v-scroll-x">
         <table{% if form_id %} id="{{ form_id }}_table"{% endif%} class="table table-striped table-sm table-responsive w-100">
