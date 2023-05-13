@@ -368,6 +368,7 @@ class AddressForm(forms.ModelForm):
         model = Address
         fields = ('type', 'name', 'address_line1', 'address_line2', 'city', 'state', 'zip')
 
+# Create Address Form Helper
 class AddressFormHelper(FormHelper):
     """ Define a FormHelper for AddressForm """
     
