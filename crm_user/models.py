@@ -350,7 +350,9 @@ class CustomerProfile(Model):
         formatted = (width - len(str(new_account_int))) * "0" + str(new_account_int)
         new_account_no = 'ACCT' + str(formatted)
         return new_account_no
-        
+    
+    def __str__(self):
+        return self.user.first_name + " " + self.user.last_name
     # Define model subclasses
     class Status(TextChoices):
         """
