@@ -439,3 +439,31 @@ class EmployeeCustomizeForm(forms.ModelForm):
         model = EmployeeProfile 
         fields = ( 'language', 'theme')
    
+# Create Admin Customize Form 
+class AdminCustomizeForm(forms.ModelForm):
+    """ Define an Admin Customize Form for admin to customize their profile. """
+    
+    def __init__(self, *args, **kwargs):
+        """ Define init method for AdminCustomizeForm """
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'v-forms'
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            HTML("""
+                <h2 class="text-center">Personalization</h2>
+                <hr />
+            """),
+            Div(
+                'language',
+                'theme',
+            ),
+            Div(
+                Submit('submitCustomize', 'Save Personalizations' ),
+                css_class="d-flex justify-content-center mt-3",
+            ),
+        )
+    
+    class Meta:
+        model = AdminProfile 
+        fields = ( 'language', 'theme')
