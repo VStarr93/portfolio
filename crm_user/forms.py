@@ -378,7 +378,7 @@ class AddressFormHelper(FormHelper):
         self.form_method = 'post'
         self.form_class = 'v-forms'
         self.field_class = 'v-table-fields'
-        self.add_input(Submit('submitAddress', 'Save My Addresses'))
+        self.add_input(Submit('submitAddress', 'Update Addresses'))
         self.template = 'crm_user/snippets/table_inline_formset.html'
    
 # Create Customer Customize Form 
