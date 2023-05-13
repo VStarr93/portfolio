@@ -119,6 +119,7 @@ def profile_view(request):
     elif request.user.type == 'EMPLOYEE':
         context['customizeForm'] = EmployeeCustomizeForm(instance=profile)
     
+    # GEt Method
     if request.method == 'GET':
         return render(request, 'crm_user/profile.html', context=context)
     
