@@ -1,28 +1,9 @@
 <!-- crm_user/snippets/profile/tab3content.html -->
 
+{% load crispy_forms_tags %}
+
 <div class="tab-pane fade " id="tab3content" role="tabpanel">
-    {% if user.Estimate_Customers.all %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Estimate No.</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for estimate in user.Estimate_Customers.all %}
-            <tr>
-                <td>{{estimate.report_no}}</td>
-                <td>{{estimate.date}}</td>
-                <td>{{estimate.report_total}}</td>
-                <td>Paid In Full</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p> There are no Estimates to display</p>
-    {% endif %}
+    <div class="card m-3 p-3">
+        {% crispy customizeForm %}
+    </div>
 </div>
