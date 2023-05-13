@@ -110,10 +110,10 @@ def profile_view(request):
         'address_list': Address.objects.filter(user=request.user),
         'addressFormSet': AddressFormSet(queryset=Address.objects.filter(user=request.user)),
         'addressFormHelper': AddressFormHelper(),
+        'changeForm': CustomUserChangeForm(instance=request.user),
     }
     
     if request.method == 'GET':
-        context['changeForm'] = CustomUserChangeForm(instance=request.user)
         return render(request, 'crm_user/profile.html', context=context)
     
     if request.method == 'POST':
