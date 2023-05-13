@@ -180,5 +180,23 @@ def profile_view(request):
                 context['addressFormSet'] = addressFormSet
                 return render(request, 'crm_user/profile.html', context=context)
         
+        if 'submitCustomize' in request.POST:
+            if customizeForm.is_valid():
+                user = request.user
+                if user.type == "CUSTOMER":
+                    user.profile.last_modified_by = user 
+                    user.profile.save()
+                elif user.type == "ADMIN":
+                    user.admin_profile.last_modified_by = user 
+                    user.admin_profile.save()
+                elif user.type == "EMPLOYEE":
+                    user.emp_profile.last_modified_by = user 
+                    user.emp_profile.save()
+                    
+                customizeForm.save()
+            else:
+                context['customizeForm'] = customizeForm
+                return render(request, 'crm_user/profile.html', context=context)
+        
         return redirect('crm_user:profile')
         
