@@ -2,7 +2,7 @@
 
 {% load static %}
 
-<div class="d-flex flex-row w-100 v-profile-header">
+<div class="d-flex flex-row w-100 ">
       
     {% if user.profile_photo.url == None %}
         <img src="{{user.profile_photo.url}}" alt="{{user.first_name}}'s profile photo" class='v-profile-photo'>
