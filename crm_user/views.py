@@ -112,6 +112,13 @@ def profile_view(request):
         'changeForm': CustomUserChangeForm(instance=request.user),
     }
     
+    if request.user.type == 'CUSTOMER':
+        context['customizeForm'] = CustomerCustomizeForm(instance=profile)
+    elif request.user.type == 'ADMIN':
+        context['customizeForm'] = AdminCustomizeForm(instance=profile)
+    elif request.user.type == 'EMPLOYEE':
+        context['customizeForm'] = EmployeeCustomizeForm(instance=profile)
+    
     if request.method == 'GET':
         return render(request, 'crm_user/profile.html', context=context)
     
