@@ -129,6 +129,13 @@ def profile_view(request):
         AddressFormSet = modelformset_factory(Address, form=AddressForm, can_delete=True)
         addressFormSet = AddressFormSet(request.POST)
         
+        if request.user.type == 'CUSTOMER':
+            customizeForm = CustomerCustomizeForm(request.POST, instance=profile)
+        elif request.user.type == 'ADMIN':
+            customizeForm = AdminCustomizeForm(request.POST, instance=profile)
+        elif request.user.type == 'EMPLOYEE':
+            customizeForm = EmployeeCustomizeForm(request.POST, instance=profile)
+            
         if 'submitChange' in request.POST:
             if form.is_valid():
                 form.save()
