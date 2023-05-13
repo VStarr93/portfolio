@@ -410,3 +410,32 @@ class CustomerCustomizeForm(forms.ModelForm):
         model = CustomerProfile 
         fields = ( 'language', 'theme')
    
+# Create Employee Customize Form 
+class EmployeeCustomizeForm(forms.ModelForm):
+    """ Define an Employee Customize Form for employee to customize their profile. """
+    
+    def __init__(self, *args, **kwargs):
+        """ Define init method for EmployeeCustomizeForm """
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'v-forms'
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            HTML("""
+                <h2 class="text-center">Personalization</h2>
+                <hr />
+            """),
+            Div(
+                'language',
+                'theme',
+            ),
+            Div(
+                Submit('submitCustomize', 'Save Personalizations' ),
+                css_class="d-flex justify-content-center mt-3",
+            ),
+        )
+    
+    class Meta:
+        model = EmployeeProfile 
+        fields = ( 'language', 'theme')
+   
