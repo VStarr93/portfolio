@@ -92,6 +92,14 @@ def profile_view(request):
     #FormSet 
     AddressFormSet = modelformset_factory(Address, form=AddressForm, extra=1, can_delete=True)
     
+    #Global Variables
+    if request.user.type == 'CUSTOMER':
+        profile = CustomerProfile.objects.get(user=request.user)
+    if request.user.type == 'ADMIN':
+        profile = AdminProfile.objects.get(user=request.user)
+    if request.user.type == 'EMPLOYEE':
+        profile = EmployeeProfile.objects.get(user=request.user)
+    
     # Global context for this view
     context = {
         'user': request.user,
