@@ -380,4 +380,33 @@ class AddressFormHelper(FormHelper):
         self.field_class = 'v-table-fields'
         self.add_input(Submit('submitAddress', 'Save My Addresses'))
         self.template = 'crm_user/snippets/table_inline_formset.html'
+   
+# Create Customer Customize Form 
+class CustomerCustomizeForm(forms.ModelForm):
+    """ Define a Customer Customize Form for customer to customize their profile. """
     
+    def __init__(self, *args, **kwargs):
+        """ Define init method for CustomerCustomizeForm """
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'v-forms'
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            HTML("""
+                <h2 class="text-center">Personalization</h2>
+                <hr />
+            """),
+            Div(
+                'language',
+                'theme',
+            ),
+            Div(
+                Submit('submitCustomize', 'Save Personalizations' ),
+                css_class="d-flex justify-content-center mt-3",
+            ),
+        )
+    
+    class Meta:
+        model = CustomerProfile 
+        fields = ( 'language', 'theme')
+   
