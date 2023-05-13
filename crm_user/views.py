@@ -123,6 +123,7 @@ def profile_view(request):
     if request.method == 'GET':
         return render(request, 'crm_user/profile.html', context=context)
     
+    # POST Method
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
         AddressFormSet = modelformset_factory(Address, form=AddressForm, can_delete=True)
