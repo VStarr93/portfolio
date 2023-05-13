@@ -138,7 +138,19 @@ def profile_view(request):
             
         if 'submitChange' in request.POST:
             if form.is_valid():
+                user = request.user
+                if user.type == "CUSTOMER":
+                    user.profile.last_modified_by = user 
+                    user.profile.save()
+                elif user.type == "ADMIN":
+                    user.admin_profile.last_modified_by = user 
+                    user.admin_profile.save()
+                elif user.type == "EMPLOYEE":
+                    user.emp_profile.last_modified_by = user 
+                    user.emp_profile.save()
+                    
                 form.save()
+                
             else:
                 context['changeForm'] = form
                 return render(request, 'crm_user/profile.html', context=context)
