@@ -108,6 +108,59 @@ header h3:first-of-type {
     box-shadow: inset 0 0 5px indigo, 0 0 5px rgba(143, 0, 245, 0.36);
 }
 
+.v-card {
+    box-shadow: inset 0 0 5px rgb(40, 46, 40), 0px 0px 20px 2px rgba(0, 245, 78, 0.25);
+    border-color: rgba(0, 245, 78, 0.508);
+    background-color:rgb(228, 248, 228);
+    border-radius: 15px;
+}
+
+.v-card input {
+    box-shadow: inset 1px 1px 2px rgb(40, 46, 40);
+    border-color: rgb(208, 251, 208);
+}
+
+.v-card input[type="file"]::file-selector-button,
+.v-card input[type="file"]::-webkit-file-upload-button,
+.v-card input[type="submit"] {
+    background-color:rgb(0, 165, 0);
+    box-shadow: inset 0 0 10px rgb(179, 248, 179);
+    color: whitesmoke;
+    text-shadow: white;
+}
+
+.v-card input[type="file"]:hover::file-selector-button {
+    background-color: rgb(0, 165, 0) !important;
+    box-shadow: inset .5px .5px 2px rgba(40, 46, 40);
+    border-color: rgb(208, 251, 208);
+}
+.v-card input[type="file"]:hover::-webkit-file-upload-button {
+    background-color: rgb(0, 165, 0) !important;
+    box-shadow: inset .5px .5px 2px rgba(40, 46, 40);
+    border-color: rgb(208, 251, 208);
+}
+.v-card input[type="file"]:hover::-ms-browse {
+    background-color:rgb(0, 165, 0) !important;
+    box-shadow: inset .5px .5px 2px rgba(40, 46, 40);
+    border-color: rgb(208, 251, 208);
+}
+
+.v-card input:hover,
+.v-card input:focus {
+    box-shadow: inset .5px .5px 2px rgba(40, 46, 40);
+    border-color: rgb(208, 251, 208);
+}
+
+.v-card .form-select {
+    background-color: rgb(208, 251, 208);
+    box-shadow: inset 0 0 10px rgba(81, 134, 81, 0.15), 0 0 2px rgb(81, 134, 81);
+    border-color: rgba(208, 251, 208);
+}
+
+.v-card .form-select:focus {
+    box-shadow: 0 0 3px 0.25rem rgba(102, 0, 219, 0.25);
+}
+
 .v-table-fields {
     min-width:100px;
 }
