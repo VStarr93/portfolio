@@ -251,6 +251,17 @@ header h3:first-of-type {
 
 /* Media */
 
+/* Mobile */
+@media (max-width:385px) {
+
+    .v-profile-header > div:last-child {
+        justify-content: start !important;
+    }
+
+    .v-profile-header > div:first-child {
+        justify-content: center;
+    }
+}
 /* XS */
 @media (max-width:576px) {
     .v-fields-name {
