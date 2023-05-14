@@ -273,7 +273,7 @@ header h3:first-of-type {
     }
 }
 /* XS */
-@media (max-width:576px) {
+@media (min-width:385px) {
     .v-fields-name {
         width:100%;
         margin-left: 0;
