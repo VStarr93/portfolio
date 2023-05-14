@@ -135,8 +135,13 @@ header h3:first-of-type {
     box-shadow: 0 0 5px rgba(0, 128, 0, 0.25);
 }
 
-.v-profile-header > div:first-of-type {
-    height: 150px;
+.v-profile > .card-header {
+    background-color:lightgreen;
+    box-shadow: inset 0 0 15px 5px rgba(0, 128, 0, 0.25), 0 0 25px 10px rgb(208, 251, 208);
+    border: 1px solid rgba(0, 128, 0, 0.25);
+    border-radius: 30px !important;
+}
+
 }
 
 .crm-dropdown {
