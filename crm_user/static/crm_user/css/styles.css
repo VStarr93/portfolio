@@ -253,6 +253,11 @@ header h3:first-of-type {
 
 /* Mobile */
 @media (max-width:385px) {
+    .v-fields-name {
+        width:100%;
+        margin-left: 0;
+    }
+
 
     .v-profile-header > div:last-child {
         justify-content: start !important;
