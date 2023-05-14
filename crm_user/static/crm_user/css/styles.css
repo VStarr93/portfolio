@@ -142,6 +142,32 @@ header h3:first-of-type {
     border-radius: 30px !important;
 }
 
+.v-profile-tabs {
+    background-color: transparent;
+    justify-content: center;
+}
+
+.v-profile-tabs .nav-tabs {
+    border-bottom: 1px solid green;
+}
+
+.v-profile-tabs .nav-tabs .nav-link {
+    color: darkgreen;
+    text-shadow: 0 0 2px rgb(179, 248, 179);
+}
+
+.v-profile-tabs .nav-tabs .nav-link:hover,
+.v-profile-tabs .nav-tabs .nav-link:focus {
+    border-color: green green lightgreen green;
+    box-shadow: 3px -1px 4px rgb(81, 134, 81);
+}
+
+.v-profile-tabs .nav-tabs .nav-link.active {
+    color: white;
+    text-shadow: none;
+    background-color: darkgreen !important;
+    border-color: green !important;
+    box-shadow: inset 0 0 15px 3px green, 3px -1px 4px rgb(81, 134, 81);
 }
 
 .crm-dropdown {
