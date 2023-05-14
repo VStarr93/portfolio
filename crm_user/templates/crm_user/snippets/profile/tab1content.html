@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 <div class="tab-pane fade show active " id="tab1content" role="tabpanel">
-    <div class="card m-3 p-3">
+    <div class="card m-3 p-3 v-card">
         <h2 class="text-center">Account Information</h2>
         <hr />
         {% if user.type == 'CUSTOMER' %}
@@ -14,7 +14,7 @@
             {% include 'crm_user/snippets/profile/admin_acct.html' %}
         {% endif %}
     </div>
-    <div class="card m-3 p-3">
+    <div class="card m-3 p-3 v-card">
         {% crispy changeForm %}
     </div>
 </div>
