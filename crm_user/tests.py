@@ -637,6 +637,8 @@ class CustomUserMethodTests(TestCase):
         self.user1.first_name = "Jessica"
         self.user1.save()
         self.assertEqual(len(mail.outbox),6)
+        Customer.objects.get(email=self.user1.email).welcome()
+        self.assertEqual(len(mail.outbox),7)
 
     def test_method_age(self):
         """
