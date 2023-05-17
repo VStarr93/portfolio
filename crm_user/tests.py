@@ -362,7 +362,7 @@ class CustomerFieldTests(TestCase):
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
-# Create your Employee - PROXY Model tests here.
+# Create your Employee - PROXY and EmployeeProfile Model tests here.
 
 # Create a TestCase for Employee Creation
 # crm_user.tests.EmployeeCreateTests
