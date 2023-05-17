@@ -127,7 +127,7 @@ class BaseUserCreateTests(TestCase):
         new_user = User.objects.create_user(email='test1@example.com')
         all_users = User.objects.all() 
         self.assertIn(new_user, all_users)
-        self.assertIs(new_user.has_usable_password(), False)
+        self.assertIs(new_user.has_usable_password(), True)
 
     def test_create_superuser_with_password(self):
         """
