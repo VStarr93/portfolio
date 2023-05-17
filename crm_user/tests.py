@@ -102,13 +102,13 @@ class CreatepermTests(TestCase):
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
-# Create your User Model tests here.
+# Create your base User Model tests here.
 
 # Create a TestCase for User Creation
-# crm_user.tests.UserCreateTests
-class UserCreateTests(TestCase):
+# crm_user.tests.BaseUserCreateTests
+class BaseUserCreateTests(TestCase):
     """
-        Test user creation for regular user and superuser with and without passwords.
+        Test Base User creation for regular user and superuser with and without passwords.
     """
     def test_create_user_with_password(self):
         """
