@@ -189,6 +189,10 @@ header h3:first-of-type {
     color: whitesmoke;
 }
 
+.v-card .v-select li a:hover {
+    background-color: rgb(144, 238, 144);
+    box-shadow: inset 0 0 5px rgb(81, 134, 81);
+    color: darkgreen;
 }
 
 .v-table-fields {
