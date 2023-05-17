@@ -19,6 +19,7 @@
   {% block content %} {% endblock %}
   
   <!-- JavaScript -->
+  <script src="{% static 'main/js/jquery.js' %}?{% now ' U ' %}" type="text/javascript"></script>
   <script src="{% static 'main/js/bootstrap.bundle.js' %}?{% now ' U ' %}" type="text/javascript"></script>
   {% block js %}{% endblock %}
 </body>
