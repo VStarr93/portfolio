@@ -639,6 +639,10 @@ class CustomUserMethodTests(TestCase):
         self.assertEqual(len(mail.outbox),6)
         Customer.objects.get(email=self.user1.email).welcome()
         self.assertEqual(len(mail.outbox),7)
+        subject1 = mail.outbox[0].subject 
+        subject2 = mail.outbox[1].subject 
+        self.assertIn("Welcome", subject1)
+        self.assertIn("Password", subject2)
 
     def test_method_age(self):
         """
