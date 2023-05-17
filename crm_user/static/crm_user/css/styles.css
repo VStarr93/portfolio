@@ -156,6 +156,11 @@ header h3:first-of-type {
     box-shadow: inset 0 0 10px rgba(81, 134, 81, 0.24), 0 0 2px rgb(81, 134, 81);
     border-color: rgba(208, 251, 208);
 }
+
+.v-card .v-select-btn:focus,
+.v-card .v-select-btn:hover {
+    box-shadow: inset 0 0 15px rgba(81, 134, 81, 0.50);
+    background-color: rgb(208, 251, 208) !important;
     border-color: rgba(208, 251, 208);
 }
 
