@@ -591,13 +591,13 @@ class AdminFieldTests(TestCase):
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
-# Create your User Model tests here.
+# Create your custom User Model tests here.
 
-# Create a TestCase for User Creation
-# crm_user.tests.UserCreateTests
-class UserCreateTests(TestCase):
+# Create a TestCase for Custom User Creation
+# crm_user.tests.CustomUserCreateTests
+class CustomUserCreateTests(TestCase):
     """
-        Test User type creation
+        Test Custom User type creation
     """
     def setUp(self):
         """
