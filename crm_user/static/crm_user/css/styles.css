@@ -178,6 +178,11 @@ header h3:first-of-type {
     margin-top: .25rem;
 }
 
+.v-card .v-select li a{
+    color: whitesmoke;
+    border-radius: 5px;
+}
+
 }
 
 .v-table-fields {
