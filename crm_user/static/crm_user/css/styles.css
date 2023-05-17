@@ -151,9 +151,11 @@ header h3:first-of-type {
     border-color: rgb(208, 251, 208);
 }
 
-.v-card .form-select {
-    background-color: rgb(208, 251, 208);
-    box-shadow: inset 0 0 10px rgba(81, 134, 81, 0.15), 0 0 2px rgb(81, 134, 81);
+.v-card .v-select-btn {
+    background-color: rgb(208, 251, 208) !important;
+    box-shadow: inset 0 0 10px rgba(81, 134, 81, 0.24), 0 0 2px rgb(81, 134, 81);
+    border-color: rgba(208, 251, 208);
+}
     border-color: rgba(208, 251, 208);
 }
 
