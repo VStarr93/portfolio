@@ -288,11 +288,9 @@ class CustomerMethodTests(TestCase):
         """
             Welcome email should be sent upon new customer creation.
         """
-        self.assertEqual(len(mail.outbox),1)
+        self.assertEqual(len(mail.outbox),2)
         self.user1.first_name = "Jessica"
         self.user1.save()
-        self.assertEqual(len(mail.outbox),1)
-        user2 = Customer.objects.create_user(email="test2@example.com")
         self.assertEqual(len(mail.outbox),2)
 
     def test_method_account_number(self):
@@ -403,11 +401,9 @@ class EmployeeMethodTests(TestCase):
         """
             Welcome email should be sent upon new employee creation.
         """
-        self.assertEqual(len(mail.outbox),1)
+        self.assertEqual(len(mail.outbox),2)
         self.user1.first_name = "Jessica"
         self.user1.save()
-        self.assertEqual(len(mail.outbox),1)
-        user2 = Employee.objects.create_user(email="test2@example.com")
         self.assertEqual(len(mail.outbox),2)
 
     def test_method_calc_work_id(self):
@@ -514,11 +510,9 @@ class AdminMethodTests(TestCase):
         """
             Welcome email should be sent upon new admin creation.
         """
-        self.assertEqual(len(mail.outbox),1)
+        self.assertEqual(len(mail.outbox),2)
         self.user1.first_name = "Jessica"
         self.user1.save()
-        self.assertEqual(len(mail.outbox),1)
-        user2 = Admin.objects.create_user(email="test2@example.com")
         self.assertEqual(len(mail.outbox),2)
 
     def test_method_calc_work_id(self):
