@@ -147,9 +147,9 @@ class BaseUserCreateTests(TestCase):
 
 # Create a TestCase for User Methods
 # crm_user.tests.UserMethodTests
-class UserMethodTests(TestCase):
+class BaseUserMethodTests(TestCase):
     """
-        Test User model method functionality
+        Test Base User model method functionality
     """
     def setUp(self):
         """
