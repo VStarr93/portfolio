@@ -659,11 +659,11 @@ class CustomUserMethodTests(TestCase):
         self.assertEqual(self.user1.full_name(), "John Smith")
         self.assertNotEqual(self.user1.full_name(), "JohnSmith")
 
-# Create a TestCase for User Field Validations
-# crm_user.tests.UserFieldTests
-class UserFieldTests(TestCase):
+# Create a TestCase for Custom User Field Validations
+# crm_user.tests.CustomUserFieldTests
+class CustomUserFieldTests(TestCase):
     """
-        Test User fields for proper validation
+        Test Custom User fields for proper validation
     """
     def setUp(self):
         """
