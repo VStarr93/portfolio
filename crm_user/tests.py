@@ -477,7 +477,7 @@ class EmployeeFieldTests(TestCase):
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
-# Create your Admin - PROXY Model tests here.
+# Create your Admin - PROXY and AdminProfile Model tests here.
 
 # Create a TestCase for Admin Creation
 # crm_user.tests.AdminCreateTests
