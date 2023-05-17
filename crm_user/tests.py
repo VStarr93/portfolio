@@ -615,11 +615,11 @@ class UserCreateTests(TestCase):
         self.assertIsInstance(EmployeeProfile.objects.get(user=self.user2), EmployeeProfile)
         self.assertIsInstance(AdminProfile.objects.get(user=self.user3), AdminProfile)
 
-# Create a TestCase for User Methods
-# crm_user.tests.UserMethodTests
-class UserMethodTests(TestCase):
+# Create a TestCase for Custom User Methods
+# crm_user.tests.CustomUserMethodTests
+class CustomUserMethodTests(TestCase):
     """
-        Test User model method functionality
+        Test Custom User model method functionality
     """
     def setUp(self):
         """
