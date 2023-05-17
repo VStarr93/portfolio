@@ -243,7 +243,7 @@ class BaseUserFieldTests(TestCase):
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
-# Create your Customer - PROXY Model tests here.
+# Create your Customer - PROXY and CustomerProfile Model tests here.
 
 # Create a TestCase for Customer Creation
 # crm_user.tests.CustomerCreateTests
