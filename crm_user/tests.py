@@ -633,7 +633,7 @@ class CustomUserMethodTests(TestCase):
         """
             Welcome email should be sent upon new user creation.
         """
-        self.assertEqual(len(mail.outbox),3)
+        self.assertEqual(len(mail.outbox),6)
         self.user1.first_name = "Jessica"
         self.user1.save()
         self.assertEqual(len(mail.outbox),3)
