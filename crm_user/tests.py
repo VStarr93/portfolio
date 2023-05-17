@@ -294,6 +294,10 @@ class CustomerMethodTests(TestCase):
         self.assertEqual(len(mail.outbox),2)
         self.user1.welcome()
         self.assertEqual(len(mail.outbox),3)
+        subject1 = mail.outbox[0].subject
+        subject2 = mail.outbox[1].subject
+        self.assertIn("Welcome", subject1)
+        self.assertIn("Password", subject2)
 
     def test_method_account_number(self):
         """
@@ -409,6 +413,10 @@ class EmployeeMethodTests(TestCase):
         self.assertEqual(len(mail.outbox),2)
         self.user1.welcome()
         self.assertEqual(len(mail.outbox),3)
+        subject1 = mail.outbox[0].subject 
+        subject2 = mail.outbox[1].subject 
+        self.assertIn("Welcome", subject1)
+        self.assertIn("Password", subject2)
 
     def test_method_calc_work_id(self):
         """
@@ -520,6 +528,10 @@ class AdminMethodTests(TestCase):
         self.assertEqual(len(mail.outbox),2)
         self.user1.welcome()
         self.assertEqual(len(mail.outbox),3)
+        subject1 = mail.outbox[0].subject 
+        subject2 = mail.outbox[1].subject 
+        self.assertIn("Welcome", subject1)
+        self.assertIn("Password", subject2)
 
     def test_method_calc_work_id(self):
         """
