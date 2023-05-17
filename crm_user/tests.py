@@ -180,9 +180,9 @@ class BaseUserMethodTests(TestCase):
 # Create a TestCase for User Field Validations
 # crm_user.tests.UserFieldTests
 @override_settings(MEDIA_ROOT=MEDIA_ROOT)
-class UserFieldTests(TestCase):
+class BaseUserFieldTests(TestCase):
     """
-        Test user fields for proper validation
+        Test Base User fields for proper validation
     """
     @classmethod 
     def tearDownClass(cls):
