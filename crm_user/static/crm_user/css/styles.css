@@ -170,6 +170,10 @@ header h3:first-of-type {
     border: 1px solid rgb(144, 238, 144);
 }
 
+.v-card .v-select ul {
+    background-color: transparent ;
+}
+
 }
 
 .v-table-fields {
