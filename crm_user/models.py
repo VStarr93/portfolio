@@ -577,7 +577,14 @@ class Address(Model):
     # Define model methods
     def __str__(self):
         return self.name + ' - ' + self.address_line1 + ' ' + self.city + ', ' + self.state
-       
+    
+    def save(self, *args, **kwargs):
+        if 'request' in kwargs:
+            request = kwargs.get('request')
+            self.last_modified_by = request.user
+        else:
+            self.last_modified_by = self.user
+        return super().save(*args, **kwargs)   
     # Define model subclasses
     class Type(TextChoices):
         """
@@ -598,7 +605,7 @@ class Address(Model):
     address_line2 = models.CharField(_('Address Line 2'), max_length=254, blank=True, null=True, help_text="The apartment or suite number of the address" )
     
     # Define Required model fields
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="User", help_text="The user who lives at this address")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses', verbose_name="User", help_text="The user who lives at this address")
     address_line1 = models.CharField(_('Address Line 1'), max_length=254, help_text="The street number and name of the address" )
     city = models.CharField(_('City'), max_length=254, help_text="The city of the address")
     state = models.CharField(_('State'), max_length=2, help_text="The state of the address")
