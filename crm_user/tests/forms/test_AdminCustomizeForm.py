@@ -106,3 +106,24 @@ class FormReqTests(TestCase):
         form = AdminCustomizeForm(self.formdata)
         self.assertFalse(form.is_valid())
         
+# Create a TestCase for AdminCustomizeForm Labels 
+# crm_user.tests.forms.test_AdminCustomizeForm.FormLabelTests 
+class FormLabelTests(TestCase):
+    """ Define a TestCase for AdminCustomizeForm Labels """
+    def setUp(self):
+        """ FormLabel setUp method to create form data """
+        self.formdata = {
+            'language': 'ENGLISH',
+            'theme': 'GREEN',
+        }
+    
+    def test_customize_field_language_label(self):
+        """ Define a test for language field label """
+        form = AdminCustomizeForm(self.formdata)
+        self.assertTrue(form.fields['language'].label == 'Language')
+        
+    def test_customize_field_theme_label(self):
+        """ Define a test for theme field label """
+        form = AdminCustomizeForm(self.formdata)
+        self.assertTrue(form.fields['theme'].label == 'Theme')
+        
