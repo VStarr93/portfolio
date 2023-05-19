@@ -4,7 +4,7 @@
 # IMPORTS
 
 from django.test import TestCase, override_settings
-from crm_user.forms import *
+from crm_user.forms import CustomerCustomizeForm
 from crm_user.models import *
 from django.core.exceptions import ValidationError 
 import datetime 
