@@ -123,32 +123,32 @@ class FormLabelTests(TestCase):
             'password2': 'T3st3x@mpl3'
         }
     
-    def test_customize_field_first_name_label(self):
+    def test_customer_field_first_name_label(self):
         """ Define a test for first_name field label """
         form = CustomerCreationForm(self.formdata)
         self.assertTrue(form.fields['first_name'].label == 'First Name')
         
-    def test_customize_field_middle_name_label(self):
+    def test_customer_field_middle_name_label(self):
         """ Define a test for middle_name field label """
         form = CustomerCreationForm(self.formdata)
         self.assertTrue(form.fields['middle_name'].label == 'Middle Name')
         
-    def test_customize_field_last_name_label(self):
+    def test_customer_field_last_name_label(self):
         """ Define a test for last_name field label """
         form = CustomerCreationForm(self.formdata)
         self.assertTrue(form.fields['last_name'].label == 'Last Name')
         
-    def test_customize_field_email_label(self):
+    def test_customer_field_email_label(self):
         """ Define a test for email field label """
         form = CustomerCreationForm(self.formdata)
         self.assertTrue(form.fields['email'].label == 'Email')
         
-    def test_customize_field_password1_label(self):
+    def test_customer_field_password1_label(self):
         """ Define a test for password1 field label """
         form = CustomerCreationForm(self.formdata)
         self.assertTrue(form.fields['password1'].label == 'Password')
         
-    def test_customize_field_password2_label(self):
+    def test_customer_field_password2_label(self):
         """ Define a test for password2 field label """
         form = CustomerCreationForm(self.formdata)
         self.assertTrue(form.fields['password2'].label == 'Password confirmation')
