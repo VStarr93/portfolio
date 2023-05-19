@@ -255,3 +255,61 @@ class FormLabelTests(TestCase):
         self.assertTrue(form.fields['type'].label == 'Type')
         
         
+# Create a TestCase for AddressForm Help Test 
+# crm_user.tests.forms.test_AddressForm.FormHelpTests 
+class FormHelpTests(TestCase):
+    """ Define a TestCase for AddressForm Help Text """
+    @classmethod
+    def setUpTestData(cls):
+        """ FormHelp setUp method to create test users """
+        User.objects.create_user(email="test1@example.com", type="CUSTOMER", password="t3st13x@mpl3")
+    
+    def setUp(self):
+        """ FormHelp setUp method to create test user variables """
+        self.user = User.objects.get(id=1)
+        self.formdata = {
+            'user': self.user,
+            'name': 'home',
+            'type': 'RESIDENTIAL',
+            'address_line1': '123 Sara Lane',
+            'city': 'Houston',
+            'state': 'TX',
+            'zip': '77891',
+        }
+    
+    def test_address_field_address_line1_help_text(self):
+        """ Define a test for address_line1 field help text """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['address_line1'].help_text == 'Enter the street number and street name')
+        
+    def test_address_field_address_line2_help_text(self):
+        """ Define a test for address_line2 field help text """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['address_line2'].help_text == 'Enter the apartment or suite number')
+        
+    def test_address_field_city_help_text(self):
+        """ Define a test for city field help text """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['city'].help_text == 'Enter the city')
+        
+    def test_address_field_state_help_text(self):
+        """ Define a test for state field help text """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['state'].help_text == 'Enter the state as a 2 letter initial')
+        
+    def test_address_field_zip_help_text(self):
+        """ Define a test for zip field help text """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['zip'].help_text == 'Enter the zip code')
+        
+    def test_address_field_name_help_text(self):
+        """ Define a test for name field help text """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['name'].help_text == 'Enter a nickname for this address')
+        
+    def test_address_field_type_help_text(self):
+        """ Define a test for type field help text """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['type'].help_text == 'Select the correct address type')
+        
+        
