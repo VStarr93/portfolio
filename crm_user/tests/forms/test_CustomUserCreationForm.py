@@ -135,3 +135,53 @@ class FormLabelTests(TestCase):
         form = CustomUserCreationForm(self.formdata)
         self.assertTrue(form.fields['password2'].label == 'Password confirmation')
               
+# Create a TestCase for CustomUserCreationForm Help Text 
+# crm_user.tests.forms.test_CustomUserCreationForm.FormHelpTests 
+class FormHelpTests(TestCase):
+    """ Define a TestCase for CustomUserCreationForm Help Text """
+    def setUp(self):
+        """ FormHelp setUp method to create form data """
+        self.formdata = {
+            'first_name': 'Sara',
+            'middle_name': 'Elizabeth',
+            'last_name': 'Jackson',
+            'type': 'CUSTOMER',
+            'email': 'test@example.com',
+            'password1': 'T3st3x@mpl3',
+            'password2': 'T3st3x@mpl3'
+        }
+    
+    def test_user_field_first_name_help_text(self):
+        """ Define a test for first_name field help text """
+        form = CustomUserCreationForm(self.formdata)
+        self.assertTrue(form.fields['first_name'].help_text == 'Enter your first name')
+        
+    def test_user_field_middle_name_help_text(self):
+        """ Define a test for middle_name field help text """
+        form = CustomUserCreationForm(self.formdata)
+        self.assertTrue(form.fields['middle_name'].help_text == 'Enter your middle name')
+        
+    def test_user_field_last_name_help_text(self):
+        """ Define a test for last_name field help text """
+        form = CustomUserCreationForm(self.formdata)
+        self.assertTrue(form.fields['last_name'].help_text == 'Enter your last name')
+        
+    def test_user_field_type_help_text(self):
+        """ Define a test for type field help text """
+        form = CustomUserCreationForm(self.formdata)
+        self.assertTrue(form.fields['type'].help_text == 'Select the user type')
+        
+    def test_user_field_email_help_text(self):
+        """ Define a test for email field help text """
+        form = CustomUserCreationForm(self.formdata)
+        self.assertTrue(form.fields['email'].help_text == 'Enter your email address')
+        
+    def test_user_field_password1_help_text(self):
+        """ Define a test for password1 field help text """
+        form = CustomUserCreationForm(self.formdata)
+        self.assertTrue(form.fields['password1'].help_text == '<ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul>')
+        
+    def test_user_field_password2_help_text(self):
+        """ Define a test for password2 field help text """
+        form = CustomUserCreationForm(self.formdata)
+        self.assertTrue(form.fields['password2'].help_text == 'Enter the same password as before, for verification.')
