@@ -78,3 +78,31 @@ class FormChoiceTests(TestCase):
         form = AdminCustomizeForm(self.formdata)
         self.assertFalse(form.is_valid())
         
+# Create a TestCase for AdminCustomizeForm Required Fields
+# crm_user.tests.forms.test_AdminCustomizeForm.FormReqTests 
+class FormReqTests(TestCase):
+    """ Define a TestCase for AdminCustomizeForm Required Fields """
+    def setUp(self):
+        """ FormReq setUp method to create form data """
+        self.formdata = {
+            'language': 'ENGLISH',
+            'theme': 'GREEN',
+        }
+
+    def test_valid_data(self):
+        """ Define a test for valid data """
+        form = AdminCustomizeForm(self.formdata)
+        self.assertTrue(form.is_valid())
+
+    def test_no_language(self):
+        """ Define a test for no language """
+        self.formdata['language'] = ''
+        form = AdminCustomizeForm(self.formdata)
+        self.assertFalse(form.is_valid())
+
+    def test_no_theme(self):
+        """ Define a test for no theme """
+        self.formdata['theme'] = ''
+        form = AdminCustomizeForm(self.formdata)
+        self.assertFalse(form.is_valid())
+        
