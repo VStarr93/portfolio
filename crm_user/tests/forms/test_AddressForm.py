@@ -5,7 +5,7 @@
 
 from django.test import TestCase
 from crm_user.forms import AddressForm
-from crm_user.models import User, Address
+from crm_user.models import User, Customer, Admin, Employee
 from django.core.exceptions import ValidationError 
 import datetime 
 
