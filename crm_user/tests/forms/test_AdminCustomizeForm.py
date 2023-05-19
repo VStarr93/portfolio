@@ -127,3 +127,28 @@ class FormLabelTests(TestCase):
         form = AdminCustomizeForm(self.formdata)
         self.assertTrue(form.fields['theme'].label == 'Theme')
         
+# Create a TestCase for AdminCustomizeForm Help Text 
+# crm_user.tests.forms.test_AdminCustomizeForm.FormHelpTests 
+class FormHelpTests(TestCase):
+    """ Define a TestCase for AdminCreationForm Help Text """
+    def setUp(self):
+        """ FormHelp setUp method to create form data """
+        self.formdata = {
+            'first_name': 'Sara',
+            'middle_name': 'Elizabeth',
+            'last_name': 'Jackson',
+            'email': 'test@example.com',
+            'password1': 'T3st3x@mpl3',
+            'password2': 'T3st3x@mpl3'
+        }
+    
+    def test_customize_field_language_help_text(self):
+        """ Define a test for language field help text """
+        form = AdminCustomizeForm(self.formdata)
+        self.assertTrue(form.fields['language'].help_text == 'What language do you speak?')
+        
+    def test_customize_field_theme_help_text(self):
+        """ Define a test for theme field help text """
+        form = AdminCustomizeForm(self.formdata)
+        self.assertTrue(form.fields['theme'].help_text == 'Choose a theme to use.')
+        
