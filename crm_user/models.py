@@ -602,14 +602,14 @@ class Address(Model):
     # Define Boolean model fields
 
     # Define Optional model fields
-    address_line2 = models.CharField(_('Address Line 2'), max_length=254, blank=True, null=True, help_text="The apartment or suite number of the address" )
+    address_line2 = models.CharField(_('Address Line 2'), max_length=254, blank=True, null=True, help_text="Enter the apartment or suite number" )
     
     # Define Required model fields
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses', verbose_name="User", help_text="The user who lives at this address")
-    address_line1 = models.CharField(_('Address Line 1'), max_length=254, help_text="The street number and name of the address" )
-    city = models.CharField(_('City'), max_length=254, help_text="The city of the address")
-    state = models.CharField(_('State'), max_length=2, help_text="The state of the address")
-    zip = models.IntegerField(_('Zip'), help_text="The zip of the address")
-    type = models.CharField(_('Type'), max_length=11, default=Type.RESIDENTIAL, choices=Type.choices, help_text="The type of address")
-    name = models.CharField(_('Name'), max_length=100, help_text="The name of the address")
+    address_line1 = models.CharField(_('Address Line 1'), max_length=254, help_text="Enter the street number and street name" )
+    city = models.CharField(_('City'), max_length=254, help_text="Enter the city")
+    state = models.CharField(_('State'), max_length=2, help_text="Enter the state as a 2 letter initial")
+    zip = models.IntegerField(_('Zip'), help_text="Enter the zip code")
+    type = models.CharField(_('Type'), max_length=11, default=Type.RESIDENTIAL, choices=Type.choices, help_text="Select the correct address type")
+    name = models.CharField(_('Name'), max_length=100, help_text="Enter a nickname for this address")
     
