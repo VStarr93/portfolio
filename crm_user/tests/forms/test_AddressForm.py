@@ -197,3 +197,61 @@ class FormUserTests(TestCase):
         form = AddressForm(self.formdata)
         self.assertTrue(form.is_valid())
     
+# Create a TestCase for AddressForm Labels 
+# crm_user.tests.forms.test_AddressForm.FormLabelTests 
+class FormLabelTests(TestCase):
+    """ Define a TestCase for AddressForm Labels """
+    @classmethod
+    def setUpTestData(cls):
+        """ FormLabel setUp method to create test users """
+        User.objects.create_user(email="test1@example.com", type="CUSTOMER", password="t3st13x@mpl3")
+    
+    def setUp(self):
+        """ FormHelp setUp method to create test user variables """
+        self.user = User.objects.get(id=1)
+        self.formdata = {
+            'user': self.user,
+            'name': 'home',
+            'type': 'RESIDENTIAL',
+            'address_line1': '123 Sara Lane',
+            'city': 'Houston',
+            'state': 'TX',
+            'zip': '77891',
+        }
+    
+    def test_address_field_address_line1_label(self):
+        """ Define a test for address_line1 field label """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['address_line1'].label == 'Address Line 1')
+        
+    def test_address_field_address_line2_label(self):
+        """ Define a test for address_line2 field label """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['address_line2'].label == 'Address Line 2')
+        
+    def test_address_field_city_label(self):
+        """ Define a test for city field label """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['city'].label == 'City')
+        
+    def test_address_field_state_label(self):
+        """ Define a test for state field label """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['state'].label == 'State')
+        
+    def test_address_field_zip_label(self):
+        """ Define a test for zip field label """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['zip'].label == 'Zip')
+        
+    def test_address_field_name_label(self):
+        """ Define a test for name field label """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['name'].label == 'Name')
+        
+    def test_address_field_type_label(self):
+        """ Define a test for type field label """
+        form = AddressForm(self.formdata)
+        self.assertTrue(form.fields['type'].label == 'Type')
+        
+        
