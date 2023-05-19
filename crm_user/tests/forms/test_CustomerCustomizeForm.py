@@ -6,6 +6,7 @@
 from django.test import TestCase, override_settings
 from crm_user.forms import CustomerCustomizeForm
 
+from parameterized import parameterized
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
