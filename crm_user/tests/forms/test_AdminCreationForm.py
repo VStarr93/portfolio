@@ -5,14 +5,6 @@
 
 from django.test import TestCase
 from crm_user.forms import AdminCreationForm
-from crm_user.models import User, Admin 
-from django.core.exceptions import ValidationError 
-import datetime 
-from django.core.files.uploadedfile import SimpleUploadedFile 
-import shutil, tempfile 
-
-# For Testing Email Services
-from django.core import mail 
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
