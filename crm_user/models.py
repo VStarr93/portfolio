@@ -438,7 +438,9 @@ class EmployeeProfile(Model):
         return new_work_id
         
     def __str__(self):
-        return self.user.first_name + " " + self.user.last_name
+        """String for representing the EmployeeProfile object (in Admin site etc.)."""
+        return self.user.last_name + ", " + self.user.first_name
+    
     # Define model subclasses
     class Status(TextChoices):
         """
