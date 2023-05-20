@@ -626,6 +626,7 @@ class Address(Model):
         else:
             self.last_modified_by = self.user
         return super().save(*args, **kwargs)   
+    
     # Define model subclasses
     class Meta:
         """ Address Model Meta Class """
