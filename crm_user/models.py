@@ -149,12 +149,14 @@ class User(AbstractUser):
         ADMIN = "ADMIN", "Admin"
     
     # list model fields
-    type = models.CharField(_('type'), max_length=50, choices=Types.choices, default=Types.CUSTOMER, help_text="Please select the user type")
-    email = models.EmailField(_('email address'), unique=True, help_text="Please enter your email address")
-    middle_name = models.CharField(_('middle name'), max_length=50, blank=True, help_text="Please enter your middle name")
-    birth_date = models.DateField(_('birth date'), null=True, blank=True, help_text="Please enter your birth date as yyyy-MM-dd")
-    profile_photo = models.ImageField(_('profile photo'), upload_to='profile_images/', blank=True, help_text="Upload a photo of yourself")
-    phone_number = PhoneNumberField(_('phone number'), blank=True, help_text="Enter a good contact phone number")
+    type = models.CharField(_('Type'), max_length=50, choices=Types.choices, default=Types.CUSTOMER, help_text="Select the user type")
+    email = models.EmailField(_('Email'), unique=True, help_text="Enter your email address")
+    first_name = models.CharField(_('First Name'), max_length=50, blank=True, help_text="Enter your first name")
+    middle_name = models.CharField(_('Middle Name'), max_length=50, blank=True, help_text="Enter your middle name")
+    last_name = models.CharField(_('Last Name'), max_length=50, blank=True, help_text="Enter your last name")
+    birth_date = models.DateField(_('Birth Date'), null=True, blank=True, help_text="Enter your birth date as yyyy-MM-dd")
+    profile_photo = models.ImageField(_('Profile Photo'), upload_to='profile_images/', blank=True, help_text="Upload a photo of yourself")
+    phone_number = PhoneNumberField(_('Phone Number'), blank=True, help_text="Enter a good contact phone number")
     
 # Add Customer Model - PROXY
 # crm_user.models.Customer
@@ -411,8 +413,8 @@ class CustomerProfile(Model):
     credit_owed = models.BooleanField(_("Credit Owed"), default=False, help_text="The status of the customer's account credit.")
 
     # Define OPTIONAL model fields
-    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, help_text="The language the customer speaks.")
-    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="The customer's chosen theme.")
+    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, choices=Language.choices, help_text="What language do you speak?")
+    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="Choose a theme to use.")
   
 # Add Employee Profile Model
 # crm_user.models.EmployeeProfile
@@ -488,8 +490,8 @@ class EmployeeProfile(Model):
     is_manager = models.BooleanField(_("Is Manager"), default=False, help_text="Is this employee a manager?")
 
     # Define OPTIONAL model fields
-    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, help_text="The language the employee speaks.")
-    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="The employee's chosen theme.")
+    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, choices=Language.choices, help_text="What language do you speak?")
+    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="Choose a theme to use.")
     hire_date = models.DateField(_('Hire Date'), blank=True, null=True, help_text="The employee's hire date.") 
 
 # Add Admin Profile Model
@@ -566,8 +568,8 @@ class AdminProfile(Model):
     is_manager = models.BooleanField(_("Is Manager"), default=False, help_text="Is this admin a manager?")
 
     # Define OPTIONAL model fields
-    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, help_text="The language the employee speaks.")
-    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="The employee's chosen theme.")
+    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, choices=Language.choices, help_text="What language do you speak?")
+    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="Choose a theme to use.")
     
 # Add Address Model
 # crm_user.models.Address 
