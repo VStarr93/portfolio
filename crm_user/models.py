@@ -627,6 +627,12 @@ class Address(Model):
             self.last_modified_by = self.user
         return super().save(*args, **kwargs)   
     # Define model subclasses
+    class Meta:
+        """ Address Model Meta Class """
+        ordering = ['user']
+        verbose_name = "Address"
+        verbose_name_plural = "Addresses"
+        
     class Type(TextChoices):
         """
             Define TextChoices for address types.
