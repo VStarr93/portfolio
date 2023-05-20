@@ -276,7 +276,11 @@ class Employee(User):
          
     # List model subclasses
     class Meta:
+        """ Employee Model Meta Class """
         proxy = True
+        ordering = ['last_name', 'first_name']
+        verbose_name = "Employee"
+        verbose_name_plural = "Employees"
         
 # Add Admin Model - PROXY
 # crm_user.models.Admin
