@@ -90,3 +90,36 @@ class FormLabelTests(TestCase):
         form = SimpleEmployeeCreationForm(self.formdata)
         self.assertTrue(form.fields['email'].label == 'Email')
                  
+# Create a TestCase for SimpleEmployeeCreationForm Help Text 
+# crm_user.tests.forms.test_SimpleEmployeeCreationForm.FormHelpTests 
+class FormHelpTests(TestCase):
+    """ Define a TestCase for SimpleEmployeeCreationForm Help Text """
+    def setUp(self):
+        """ FormHelp setUp method to create form data """
+        self.formdata = {
+            'first_name': 'Sara',
+            'middle_name': 'Elizabeth',
+            'last_name': 'Jackson',
+            'email': 'test@example.com',
+        }
+    
+    def test_simple_employee_field_first_name_help_text(self):
+        """ Define a test for first_name field help text """
+        form = SimpleEmployeeCreationForm(self.formdata)
+        self.assertTrue(form.fields['first_name'].help_text == 'Enter your first name')
+        
+    def test_simple_employee_field_middle_name_help_text(self):
+        """ Define a test for middle_name field help text """
+        form = SimpleEmployeeCreationForm(self.formdata)
+        self.assertTrue(form.fields['middle_name'].help_text == 'Enter your middle name')
+        
+    def test_simple_employee_field_last_name_help_text(self):
+        """ Define a test for last_name field help text """
+        form = SimpleEmployeeCreationForm(self.formdata)
+        self.assertTrue(form.fields['last_name'].help_text == 'Enter your last name')
+        
+    def test_simple_employee_field_email_help_text(self):
+        """ Define a test for email field help text """
+        form = SimpleEmployeeCreationForm(self.formdata)
+        self.assertTrue(form.fields['email'].help_text == 'Enter your email address')
+        
