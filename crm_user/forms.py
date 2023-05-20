@@ -300,7 +300,6 @@ class SimpleAdminCreationForm(forms.ModelForm):
             user = Admin.objects.create_user(email, password, first_name=first_name, last_name=last_name, middle_name=middle_name)
         return instance
         
-    
     class Meta:
         model = Admin 
         fields = ('first_name', 'middle_name', 'last_name', 'email')
