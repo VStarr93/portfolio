@@ -5,14 +5,8 @@
 
 from django.test import TestCase
 from crm_user.forms import AdminCustomizeForm
-from crm_user.models import User, Admin, AdminProfile
-from django.core.exceptions import ValidationError 
-import datetime 
+
 from parameterized import parameterized
-
-# For Testing Email Services
-from django.core import mail 
-
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
