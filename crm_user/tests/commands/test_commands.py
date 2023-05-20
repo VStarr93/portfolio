@@ -21,3 +21,17 @@ from django.contrib.contenttypes.models import ContentType
 #-------------------------------------------------------------
 # Create your Management Commands tests here.
 
+# Create a TestCase for creategroup command
+# crm_user.tests.test_commands.CreategroupTests
+class CreategroupTests(TestCase):
+    """
+        Test creategroup command
+    """
+    def test_creategroup_output(self):
+        """
+            creategroup command runs successfully with 1 argument
+        """
+        out = StringIO()
+        call_command("creategroup", 'new_group', stdout=out)
+        self.assertIn("Successfully created", out.getvalue())
+
