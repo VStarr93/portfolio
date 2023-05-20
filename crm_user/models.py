@@ -138,7 +138,9 @@ class User(AbstractUser):
         return self.first_name + ' ' + self.last_name 
 
     def __str__(self):
-        return self.full_name()
+        """String for representing the User object (in Admin site etc.)."""
+        return self.last_name + ', ' + self.first_name
+    
     # list model subclasses
     class Types(models.TextChoices):
         """
