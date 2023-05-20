@@ -57,3 +57,36 @@ class FormReqTests(TestCase):
         form = SimpleEmployeeCreationForm(self.formdata)
         self.assertFalse(form.is_valid())
     
+# Create a TestCase for SimpleEmployeeCreationForm Labels 
+# crm_user.tests.forms.test_SimpleEmployeeCreationForm.FormLabelTests 
+class FormLabelTests(TestCase):
+    """ Define a TestCase for SimpleEmployeeCreationForm Labels """
+    def setUp(self):
+        """ FormLabel setUp method to create form data """
+        self.formdata = {
+            'first_name': 'Sara',
+            'middle_name': 'Elizabeth',
+            'last_name': 'Jackson',
+            'email': 'test@example.com',
+        }
+    
+    def test_simple_employee_field_first_name_label(self):
+        """ Define a test for first_name field label """
+        form = SimpleEmployeeCreationForm(self.formdata)
+        self.assertTrue(form.fields['first_name'].label == 'First Name')
+        
+    def test_simple_employee_field_middle_name_label(self):
+        """ Define a test for middle_name field label """
+        form = SimpleEmployeeCreationForm(self.formdata)
+        self.assertTrue(form.fields['middle_name'].label == 'Middle Name')
+        
+    def test_simple_employee_field_last_name_label(self):
+        """ Define a test for last_name field label """
+        form = SimpleEmployeeCreationForm(self.formdata)
+        self.assertTrue(form.fields['last_name'].label == 'Last Name')
+        
+    def test_simple_employee_field_email_label(self):
+        """ Define a test for email field label """
+        form = SimpleEmployeeCreationForm(self.formdata)
+        self.assertTrue(form.fields['email'].label == 'Email')
+                 
