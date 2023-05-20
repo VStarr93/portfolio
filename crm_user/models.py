@@ -552,6 +552,12 @@ class AdminProfile(Model):
         return self.user.last_name + ', ' + self.user.first_name
     
     # Define model subclasses
+    class Meta:
+        """ Admin Profile Model Meta Class """
+        ordering = ['user']
+        verbose_name = "Admin Profile"
+        verbose_name_plural = "Admin Profiles"
+        
     class Status(TextChoices):
         """
             Define TextChoices for admin status.
