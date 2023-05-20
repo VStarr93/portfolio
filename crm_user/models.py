@@ -142,6 +142,12 @@ class User(AbstractUser):
         return self.last_name + ', ' + self.first_name
     
     # list model subclasses
+    class Meta:
+        """ User Model Meta Class """
+        ordering = ['last_name', 'first_name']
+        verbose_name = "User"
+        verbose_name_plural = "Users"
+    
     class Types(models.TextChoices):
         """
             Define text choices for user types.
