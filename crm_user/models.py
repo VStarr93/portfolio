@@ -374,6 +374,12 @@ class CustomerProfile(Model):
         return self.user.last_name + ", " + self.user.first_name
     
     # Define model subclasses
+    class Meta:
+        """ Customer Profile Model Meta Class """
+        ordering = ['user']
+        verbose_name = "Customer Profile"
+        verbose_name_plural = "Customer Profiles"
+        
     class Status(TextChoices):
         """
             Define TextChoices for customer status.
