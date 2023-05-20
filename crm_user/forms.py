@@ -27,9 +27,7 @@ class CustomUserCreationForm(UserCreationForm):
 # Create CustomerCreationForm
 class CustomerCreationForm(UserCreationForm):
     """ Define a CustomerCreationForm """
-    
-    type = User.Types.CUSTOMER
-    
+        
     def __init__(self, *args, **kwargs):
         """ Define init method for Custom User Change Form """
         super().__init__(*args, **kwargs)
@@ -70,9 +68,7 @@ class CustomerCreationForm(UserCreationForm):
 # Create EmployeeCreationForm
 class EmployeeCreationForm(UserCreationForm):
     """ Define a EmployeeCreationForm """
-    
-    type = User.Types.EMPLOYEE
-    
+        
     def __init__(self, *args, **kwargs):
         """ Define init method for Employee Creation Form """
         super().__init__(*args, **kwargs)
@@ -113,9 +109,7 @@ class EmployeeCreationForm(UserCreationForm):
 # Create AdminCreationForm
 class AdminCreationForm(UserCreationForm):
     """ Define a AdminCreationForm """
-    
-    type = User.Types.ADMIN
-    
+       
     def __init__(self, *args, **kwargs):
         """ Define init method for Admin Creation Form """
         super().__init__(*args, **kwargs)
