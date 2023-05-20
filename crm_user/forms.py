@@ -9,7 +9,6 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from crispy_forms.helper import FormHelper 
 from crispy_forms.layout import Layout, Submit, HTML, Div, Field 
-from crispy_forms.bootstrap import FormActions, StrictButton
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
