@@ -261,10 +261,8 @@ class Employee(User):
         return super().save(*args, **kwargs)
     
     def __str__(self):
-        """
-            Define custom String method.
-        """
-        return self.first_name + ' ' + self.last_name
+        """String for representing the Employee object (in Admin site etc.)."""
+        return self.last_name + ', ' + self.first_name
          
     # List model subclasses
     class Meta:
