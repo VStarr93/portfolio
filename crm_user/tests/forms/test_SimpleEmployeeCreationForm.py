@@ -3,7 +3,7 @@
 #-------------------------------------------------------------
 # IMPORTS
 
-from django.test import TestCase, override_settings
+from django.test import TestCase
 from crm_user.forms import SimpleEmployeeCreationForm
 
 #-------------------------------------------------------------
