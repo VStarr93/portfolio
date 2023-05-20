@@ -373,6 +373,10 @@ class CustomerProfile(Model):
         """String for representing the CustomerProfile object (in Admin site etc.)."""
         return self.user.last_name + ", " + self.user.first_name
     
+    def get_absolute_url(self):
+        """Returns the URL to access a particular instance of CustomerProfile."""
+        return reverse('customer-profile', args=[int(self.id)])
+    
     # Define model subclasses
     class Meta:
         """ Customer Profile Model Meta Class """
