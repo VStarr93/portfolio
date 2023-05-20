@@ -333,7 +333,11 @@ class Admin(User):
  
     # List model subclasses
     class Meta:
+        """ Admin Model Meta Class """
         proxy = True
+        ordering = ['last_name', 'first_name']
+        verbose_name = "Admin"
+        verbose_name_plural = "Admins"
 
 # Add Customer Profile Model
 # crm_user.models.CustomerProfile
