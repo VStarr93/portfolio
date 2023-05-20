@@ -580,7 +580,8 @@ class Address(Model):
     
     # Define model methods
     def __str__(self):
-        return self.name + ' - ' + self.address_line1 + ' ' + self.city + ', ' + self.state
+        """String for representing the Address object (in Admin site etc.)."""
+        return self.user.first_name + "'s " + self.name + ' - ' + self.address_line1 + ' ' + self.city + ', ' + self.state
     
     def save(self, *args, **kwargs):
         if 'request' in kwargs:
