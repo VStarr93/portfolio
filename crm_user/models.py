@@ -655,7 +655,7 @@ class Address(Model):
         INDUSTRIAL = 'INDUSTRIAL', 'Industrial'
     
     # Define Auto-Generated model fields
-    id = models.BigAutoField(primary_key=True) # Primary Key
+    id = models.BigAutoField(_('ID'), primary_key=True) # Primary Key
     last_modified = models.DateTimeField(_('Last Modified'), auto_now=True, blank=True, null=True, help_text="The date and time of which the address was last modified.")
     last_modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='address_modified_by', verbose_name="Last Modified By", blank=True, null=True, help_text="The user who last modified this address.")
 
