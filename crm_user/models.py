@@ -559,6 +559,10 @@ class AdminProfile(Model):
         """String for representing the AdminProfile object (in Admin site etc.)."""
         return self.user.last_name + ', ' + self.user.first_name
     
+    def get_absolute_url(self):
+        """Returns the URL to access a particular instance of AdminProfile."""
+        return reverse('admin-profile', args=[int(self.id)])
+    
     # Define model subclasses
     class Meta:
         """ Admin Profile Model Meta Class """
