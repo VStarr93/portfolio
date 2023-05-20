@@ -352,7 +352,9 @@ class CustomerProfile(Model):
         return new_account_no
     
     def __str__(self):
-        return self.user.first_name + " " + self.user.last_name
+        """String for representing the CustomerProfile object (in Admin site etc.)."""
+        return self.user.last_name + ", " + self.user.first_name
+    
     # Define model subclasses
     class Status(TextChoices):
         """
