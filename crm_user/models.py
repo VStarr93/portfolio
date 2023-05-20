@@ -466,6 +466,12 @@ class EmployeeProfile(Model):
         return self.user.last_name + ", " + self.user.first_name
     
     # Define model subclasses
+    class Meta:
+        """ Employee Profile Model Meta Class """
+        ordering = ['user']
+        verbose_name = "Employee Profile"
+        verbose_name_plural = "Employee Profiles"
+        
     class Status(TextChoices):
         """
             Define TextChoices for employee status.
