@@ -5,7 +5,7 @@
 
 from django.test import TestCase, override_settings
 from crm_user.forms import CustomUserChangeForm
-from crm_user.models import *
+from crm_user.models import User
 from django.core.exceptions import ValidationError 
 import datetime 
 from django.core.files.uploadedfile import SimpleUploadedFile 
