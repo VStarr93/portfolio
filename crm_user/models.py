@@ -218,8 +218,12 @@ class Customer(User):
         
     # List model subclasses
     class Meta:
+        """ Customer Model Meta Class """
         proxy = True
-
+        ordering = ['last_name', 'first_name']
+        verbose_name = "Customer"
+        verbose_name_plural = "Customers"
+        
 # Add Employee Model - PROXY
 # crm_user.models.Employee
 class Employee(User):
