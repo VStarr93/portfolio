@@ -546,3 +546,41 @@ class MethodTests(TestCase):
         expected_string = f"{self.address.user.first_name}'s {self.address.name} - {self.address.address_line1} {self.address.city}, {self.address.state}"
         self.assertEqual(str(self.address), expected_string)
         
+# Create a TestCase for Address Meta
+# crm_user.tests.models.test_AddressModel.MetaTests 
+class MetaTests(TestCase):
+    """ Define a TestCase for Address Model Meta """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Address Model Meta """
+        User.objects.create_user(
+            first_name="Sara",
+            last_name="Doe",
+            email="doe@example.com",
+            type="CUSTOMER"
+        )
+        Address.objects.create(
+            user=User.objects.get(id=1),
+            name='home',
+            type='RESIDENTIAL',
+            address_line1='123 Sara Lane',
+            city='Spring',
+            state='TX',
+            zip=77091
+        )
+        
+    def test_verbose_name(self):
+        """ Test Address Model verbose name """
+        address = Address.objects.get(id=1)
+        self.assertEqual(address._meta.verbose_name, 'Address')
+        
+    def test_verbose_name_plural(self):
+        """ Test Address Model verbose name plural """
+        address = Address.objects.get(id=1)
+        self.assertEqual(address._meta.verbose_name_plural, 'Addresses')
+        
+    def test_ordering(self):
+        """ Test Address Model ordering """
+        address = Address.objects.get(id=1)
+        self.assertEqual(address._meta.ordering, ['user'])
+        
