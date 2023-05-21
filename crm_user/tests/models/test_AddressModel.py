@@ -513,3 +513,36 @@ class ForeignKeyTests(TestCase):
         user.delete()
         self.assertEqual(Address.objects.filter(id=1).exists(), False)
         
+# Create a TestCase for Address Methods
+# crm_user.tests.models.test_AddressModel.MethodTests 
+class MethodTests(TestCase):
+    """ Define a TestCase for Address Model Methods """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Address Model Methods """
+        User.objects.create_user(
+            first_name="Sara",
+            last_name="Doe",
+            email="doe@example.com",
+            type="CUSTOMER"
+        )
+        Address.objects.create(
+            user=User.objects.get(id=1),
+            name='home',
+            type='RESIDENTIAL',
+            address_line1='123 Sara Lane',
+            city='Spring',
+            state='TX',
+            zip=77091
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Address Model Methods """
+        self.address = Address.objects.get(id=1)
+        self.user = User.objects.get(id=1)
+        
+    def test_string_method(self):
+        """ Test for Address Model String Method """
+        expected_string = f"{self.address.user.first_name}'s {self.address.name} - {self.address.address_line1} {self.address.city}, {self.address.state}"
+        self.assertEqual(str(self.address), expected_string)
+        
