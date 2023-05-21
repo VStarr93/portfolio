@@ -22,5 +22,5 @@ admin.site.register(EmployeeProfile)
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
     """ This is the admin interface for the Address model. """
-    readonly_fields = ['id', 'last_modified', 'last_modified_by']
+    readonly_fields = ['id']
     
