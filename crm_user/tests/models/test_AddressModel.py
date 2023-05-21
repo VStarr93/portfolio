@@ -237,3 +237,94 @@ class HelpTextTests(TestCase):
         field_help_text = self.address._meta.get_field('name').help_text 
         self.assertEqual(field_help_text, 'Enter a nickname for this address')
         
+# Create a TestCase for Address Required Fields
+# crm_user.tests.models.test_AddressModel.ReqTests
+class ReqTests(TestCase):
+    """ Define a TestCase for Address Model Required Fields """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Address Model Required Fields """
+        User.objects.create_user(
+            first_name="Sara",
+            last_name="Doe",
+            email="doe@example.com",
+            type="CUSTOMER"
+        )
+        Address.objects.create(
+            user=User.objects.get(id=1),
+            name='home',
+            type='RESIDENTIAL',
+            address_line1='123 Sara Lane',
+            city='Spring',
+            state='TX',
+            zip=77091
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Address Model Required Fields """
+        self.address = Address.objects.get(id=1)
+        self.user = User.objects.get(id=1)
+        
+    def test_id_required(self):
+        """ Test that Address Model ID is Not Required """
+        field_blank = self.address._meta.get_field('id').blank 
+        field_null = self.address._meta.get_field('id').null 
+        self.assertEqual(field_blank, True)
+        self.assertEqual(field_null, False)
+        
+    def test_address_line2_required(self):
+        """ Test that Address Model Address Line2 is Not Required """
+        field_blank = self.address._meta.get_field('address_line2').blank 
+        field_null = self.address._meta.get_field('address_line2').null 
+        self.assertEqual(field_blank, True)
+        self.assertEqual(field_null, True)
+        
+    def test_user_required(self):
+        """ Test that Address Model User is Required """
+        field_blank = self.address._meta.get_field('user').blank 
+        field_null = self.address._meta.get_field('user').null 
+        self.assertEqual(field_blank, False )
+        self.assertEqual(field_null, False )
+
+    def test_address_line1_required(self):
+        """ Test that Address Model Address Line1 is Required """
+        field_blank = self.address._meta.get_field('address_line1').blank 
+        field_null = self.address._meta.get_field('address_line1').null 
+        self.assertEqual(field_blank, False)
+        self.assertEqual(field_null, False)
+        
+    def test_city_required(self):
+        """ Test that Address Model City is Required """
+        field_blank = self.address._meta.get_field('city').blank
+        field_null = self.address._meta.get_field('city').null
+        self.assertEqual(field_blank, False)
+        self.assertEqual(field_null, False)
+        
+    def test_state_required(self):
+        """ Test that Address Model State is Required """
+        field_blank = self.address._meta.get_field('state').blank 
+        field_null = self.address._meta.get_field('state').null 
+        self.assertEqual(field_blank, False)
+        self.assertEqual(field_null, False)
+        
+    def test_zip_required(self):
+        """ Test that Address Model Zip is Required """
+        field_blank = self.address._meta.get_field('zip').blank 
+        field_null = self.address._meta.get_field('zip').null 
+        self.assertEqual(field_blank, False)
+        self.assertEqual(field_null, False)
+        
+    def test_type_required(self):
+        """ Test that Address Model Type is Required """
+        field_blank = self.address._meta.get_field('type').blank
+        field_null = self.address._meta.get_field('type').null
+        self.assertEqual(field_blank, False)
+        self.assertEqual(field_null, False)
+        
+    def test_name_required(self):
+        """ Test that Address Model Name is Required """
+        field_blank = self.address._meta.get_field('name').blank 
+        field_null = self.address._meta.get_field('name').null 
+        self.assertEqual(field_blank, False)
+        self.assertEqual(field_null, False)
+        
