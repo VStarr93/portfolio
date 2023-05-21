@@ -628,14 +628,6 @@ class Address(Model):
         """String for representing the Address object (in Admin site etc.)."""
         return self.user.first_name + "'s " + self.name + ' - ' + self.address_line1 + ' ' + self.city + ', ' + self.state
     
-    def save(self, *args, **kwargs):
-        if 'request' in kwargs:
-            request = kwargs.get('request')
-            self.last_modified_by = request.user
-        else:
-            self.last_modified_by = self.user
-        return super().save(*args, **kwargs)   
-    
     # Define model subclasses
     class Meta:
         """ Address Model Meta Class """
