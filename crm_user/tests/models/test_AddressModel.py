@@ -164,3 +164,76 @@ class MaxLengthTests(TestCase):
         """ Test for Address Model Name Max Length """
         field_label = self.address._meta.get_field('name').max_length 
         self.assertEqual(field_label, 100)
+# Create a TestCase for Address Help Text
+# crm_user.tests.models.test_AddressModel.HelpTextTests
+class HelpTextTests(TestCase):
+    """ Define a TestCase for Address Model Help Text """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Address Model Help Text """
+        User.objects.create_user(
+            first_name="Sara",
+            last_name="Doe",
+            email="doe@example.com",
+            type="CUSTOMER"
+        )
+        Address.objects.create(
+            user=User.objects.get(id=1),
+            name='home',
+            type='RESIDENTIAL',
+            address_line1='123 Sara Lane',
+            city='Spring',
+            state='TX',
+            zip=77091
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Address Model Help Text """
+        self.address = Address.objects.get(id=1)
+        self.user = User.objects.get(id=1)
+        
+    def test_id_help_text(self):
+        """ Test for Address Model ID Help Text """
+        field_help_text = self.address._meta.get_field('id').help_text 
+        self.assertEqual(field_help_text, '')
+        
+    def test_address_line2_help_text(self):
+        """ Test for Address Model Address Line2 Help Text """
+        field_help_text = self.address._meta.get_field('address_line2').help_text 
+        self.assertEqual(field_help_text, 'Enter the apartment or suite number')
+        
+    def test_user_help_text(self):
+        """ Test for Address Model User Help Text """
+        field_help_text = self.address._meta.get_field('user').help_text 
+        self.assertEqual(field_help_text, 'The user who lives at this address' )
+
+    def test_address_line1_help_text(self):
+        """ Test for Address Model Address Line1 Help Text """
+        field_help_text = self.address._meta.get_field('address_line1').help_text 
+        self.assertEqual(field_help_text, 'Enter the street number and street name')
+        
+    def test_city_help_text(self):
+        """ Test for Address Model City Help Text """
+        field_help_text = self.address._meta.get_field('city').help_text
+        self.assertEqual(field_help_text, 'Enter the city')
+        
+    def test_state_help_text(self):
+        """ Test for Address Model State Help Text """
+        field_help_text = self.address._meta.get_field('state').help_text 
+        self.assertEqual(field_help_text, 'Enter the state as a 2 letter initial')
+        
+    def test_zip_help_text(self):
+        """ Test for Address Model Zip Help Text """
+        field_help_text = self.address._meta.get_field('zip').help_text 
+        self.assertEqual(field_help_text, 'Enter the zip code')
+        
+    def test_type_help_text(self):
+        """ Test for Address Model Type Help Text """
+        field_help_text = self.address._meta.get_field('type').help_text
+        self.assertEqual(field_help_text, 'Select the correct address type')
+        
+    def test_name_help_text(self):
+        """ Test for Address Model Name Help Text """
+        field_help_text = self.address._meta.get_field('name').help_text 
+        self.assertEqual(field_help_text, 'Enter a nickname for this address')
+        
