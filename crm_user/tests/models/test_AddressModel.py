@@ -474,3 +474,42 @@ class ChoicesTests(TestCase):
         field_choices = self.address._meta.get_field('name').choices 
         self.assertEqual(field_choices, None)
         
+# Create a TestCase for Address Foreign Key Fields
+# crm_user.tests.models.test_AddressModel.ForeignKeyTests
+class ForeignKeyTests(TestCase):
+    """ Define a TestCase for Address Model Foreign Key Fields """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Address Model Foreign Key Fields """
+        User.objects.create_user(
+            first_name="Sara",
+            last_name="Doe",
+            email="doe@example.com",
+            type="CUSTOMER"
+        )
+        Address.objects.create(
+            user=User.objects.get(id=1),
+            name='home',
+            type='RESIDENTIAL',
+            address_line1='123 Sara Lane',
+            city='Spring',
+            state='TX',
+            zip=77091
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Address Model Foreign Key Fields """
+        self.address = Address.objects.get(id=1)
+        self.user = User.objects.get(id=1)
+        
+    def test_user_foreign_key_related_name(self):
+        """ Test that Address Model User has a related name value """
+        self.assertIn(self.address, self.user.addresses.all())
+        
+    def test_user_foreign_key_on_delete(self):
+        """ Test that Address Model user has on_delete models.CASCADE """
+        address = Address.objects.get(id=1)
+        user = User.objects.get(id=1)
+        user.delete()
+        self.assertEqual(Address.objects.filter(id=1).exists(), False)
+        
