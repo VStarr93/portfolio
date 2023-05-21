@@ -328,3 +328,76 @@ class ReqTests(TestCase):
         self.assertEqual(field_blank, False)
         self.assertEqual(field_null, False)
         
+# Create a TestCase for Address Defaults
+# crm_user.tests.models.test_AddressModel.DefaultTests
+class DefaultTests(TestCase):
+    """ Define a TestCase for Address Model Defaults """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Address Model Defaults """
+        User.objects.create_user(
+            first_name="Sara",
+            last_name="Doe",
+            email="doe@example.com",
+            type="CUSTOMER"
+        )
+        Address.objects.create(
+            user=User.objects.get(id=1),
+            name='home',
+            type='RESIDENTIAL',
+            address_line1='123 Sara Lane',
+            city='Spring',
+            state='TX',
+            zip=77091
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Address Model Defaults """
+        self.address = Address.objects.get(id=1)
+        self.user = User.objects.get(id=1)
+        
+    def test_id_default(self):
+        """ Test that Address Model ID has no default value """
+        field_default = self.address._meta.get_field('id').default 
+        self.assertEqual(field_default, NOT_PROVIDED)
+        
+    def test_address_line2_default(self):
+        """ Test that Address Model Address Line2 has no default value """
+        field_default = self.address._meta.get_field('address_line2').default 
+        self.assertEqual(field_default, NOT_PROVIDED)
+        
+    def test_user_default(self):
+        """ Test that Address Model User has no default value """
+        field_default = self.address._meta.get_field('user').default 
+        self.assertEqual(field_default, NOT_PROVIDED )
+
+    def test_address_line1_default(self):
+        """ Test that Address Model Address Line1 has no default value """
+        field_default = self.address._meta.get_field('address_line1').default 
+        self.assertEqual(field_default, NOT_PROVIDED)
+        
+    def test_city_default(self):
+        """ Test that Address Model City has no default value """
+        field_default = self.address._meta.get_field('city').default
+        self.assertEqual(field_default, NOT_PROVIDED)
+        
+    def test_state_default(self):
+        """ Test that Address Model State has no default value """
+        field_default = self.address._meta.get_field('state').default 
+        self.assertEqual(field_default, NOT_PROVIDED)
+        
+    def test_zip_default(self):
+        """ Test that Address Model Zip has no default value """
+        field_default = self.address._meta.get_field('zip').default 
+        self.assertEqual(field_default, NOT_PROVIDED)
+        
+    def test_type_default(self):
+        """ Test that Address Model Type has default value """
+        field_default = self.address._meta.get_field('type').default
+        self.assertEqual(field_default, self.address.Type.RESIDENTIAL)
+        
+    def test_name_default(self):
+        """ Test that Address Model Name has no default value """
+        field_default = self.address._meta.get_field('name').default 
+        self.assertEqual(field_default, NOT_PROVIDED)
+        
