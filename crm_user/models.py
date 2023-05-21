@@ -610,9 +610,7 @@ class AdminProfile(Model):
     work_id = models.IntegerField(_('Work ID'), unique=True, default=calc_work_id, help_text="Your admin work ID is auto-generated and cannot be changed.")
     status = models.CharField(_('Status'), max_length=10, default=Status.TRAINING, choices=Status.choices, help_text="Your admin status is adjusted based on employment status.")
     user = models.OneToOneField(Admin, on_delete=models.CASCADE, related_name='admin_profile', verbose_name="Admin", unique=True, help_text="The Admin these details/model are associated with.")
-    last_modified = models.DateTimeField(_('Last Modified'), auto_now=True, blank=True, null=True, help_text="The date and time of which the admin profile was last modified.")
-    last_modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin_profile_modified_by', verbose_name="Last Modified By", blank=True, null=True, help_text="The user who last modified this profile.")
-
+    
     # Define BOOLEAN model fields
     is_manager = models.BooleanField(_("Is Manager"), default=False, help_text="Is this admin a manager?")
 
