@@ -140,7 +140,7 @@ class User(AbstractUser):
 
     def __str__(self):
         """String for representing the User object (in Admin site etc.)."""
-        return self.last_name + ', ' + self.first_name
+        return f'{self.last_name}, {self.first_name}'
     
     # list model subclasses
     class Meta:
