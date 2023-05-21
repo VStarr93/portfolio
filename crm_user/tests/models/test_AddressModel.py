@@ -125,16 +125,6 @@ class MaxLengthTests(TestCase):
         field_label = self.address._meta.get_field('id').max_length 
         self.assertEqual(field_label, None)
         
-    def test_last_modified_max_length(self):
-        """ Test for Address Model Last Modified Max Length """
-        field_label = self.address._meta.get_field('last_modified').max_length
-        self.assertEqual(field_label, None)
-        
-    def test_last_modified_by_max_length(self):
-        """ Test for Address Model Last Modified By Max Length """
-        field_label = self.address._meta.get_field('last_modified_by').max_length
-        self.assertEqual(field_label, None)
-        
     def test_address_line2_max_length(self):
         """ Test for Address Model Address Line2 Max Length """
         field_label = self.address._meta.get_field('address_line2').max_length 
