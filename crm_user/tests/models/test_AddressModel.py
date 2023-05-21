@@ -401,3 +401,76 @@ class DefaultTests(TestCase):
         field_default = self.address._meta.get_field('name').default 
         self.assertEqual(field_default, NOT_PROVIDED)
         
+# Create a TestCase for Address Choices Fields
+# crm_user.tests.models.test_AddressModel.ChoicesTests
+class ChoicesTests(TestCase):
+    """ Define a TestCase for Address Model Choices Fields """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Address Model Choices Fields """
+        User.objects.create_user(
+            first_name="Sara",
+            last_name="Doe",
+            email="doe@example.com",
+            type="CUSTOMER"
+        )
+        Address.objects.create(
+            user=User.objects.get(id=1),
+            name='home',
+            type='RESIDENTIAL',
+            address_line1='123 Sara Lane',
+            city='Spring',
+            state='TX',
+            zip=77091
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Address Model Choices Fields """
+        self.address = Address.objects.get(id=1)
+        self.user = User.objects.get(id=1)
+        
+    def test_id_choices(self):
+        """ Test that Address Model ID has no choices value """
+        field_choices = self.address._meta.get_field('id').choices 
+        self.assertEqual(field_choices, None)
+        
+    def test_address_line2_choices(self):
+        """ Test that Address Model Address Line2 has no choices value """
+        field_choices = self.address._meta.get_field('address_line2').choices 
+        self.assertEqual(field_choices, None)
+        
+    def test_user_choices(self):
+        """ Test that Address Model User has no choices value """
+        field_choices = self.address._meta.get_field('user').choices 
+        self.assertEqual(field_choices, None )
+
+    def test_address_line1_choices(self):
+        """ Test that Address Model Address Line1 has no choices value """
+        field_choices = self.address._meta.get_field('address_line1').choices 
+        self.assertEqual(field_choices, None)
+        
+    def test_city_choices(self):
+        """ Test that Address Model City has no choices value """
+        field_choices = self.address._meta.get_field('city').choices
+        self.assertEqual(field_choices, None)
+        
+    def test_state_choices(self):
+        """ Test that Address Model State has no choices value """
+        field_choices = self.address._meta.get_field('state').choices 
+        self.assertEqual(field_choices, None)
+        
+    def test_zip_choices(self):
+        """ Test that Address Model Zip has no choices value """
+        field_choices = self.address._meta.get_field('zip').choices 
+        self.assertEqual(field_choices, None)
+        
+    def test_type_choices(self):
+        """ Test that Address Model Type has choices value """
+        field_choices = self.address._meta.get_field('type').choices
+        self.assertEqual(field_choices, self.address.Type.choices)
+        
+    def test_name_choices(self):
+        """ Test that Address Model Name has no choices value """
+        field_choices = self.address._meta.get_field('name').choices 
+        self.assertEqual(field_choices, None)
+        
