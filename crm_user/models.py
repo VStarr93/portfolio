@@ -163,7 +163,7 @@ class User(AbstractUser):
     first_name = models.CharField(_('First Name'), max_length=50, blank=True, null=True, help_text="Enter your first name")
     middle_name = models.CharField(_('Middle Name'), max_length=50, blank=True, null=True, help_text="Enter your middle name")
     last_name = models.CharField(_('Last Name'), max_length=50, blank=True, null=True,  help_text="Enter your last name")
-    birth_date = models.DateField(_('Birth Date'), null=True, blank=True, help_text="Enter your birth date as yyyy-MM-dd")
+    birth_date = models.DateField(_('Birth Date'), blank=True, null=True, help_text="Enter your birth date as yyyy-mm-dd")
     profile_photo = models.ImageField(_('Profile Photo'), upload_to='profile_images/', blank=True, null=True, help_text="Upload a photo of yourself")
     phone_number = PhoneNumberField(_('Phone Number'), blank=True, null=True, help_text="Enter a good contact phone number")
     last_modified = models.DateTimeField(_('Last Modified'), blank=True, null=True, help_text="The date and time of which the user was last modified.")
