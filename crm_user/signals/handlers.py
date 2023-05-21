@@ -149,4 +149,10 @@ def create_profile(sender, **kwargs):
             email_template_name='registration/password_reset_email.html'
         )
         
-    
+# Add Receiver for Updated last modified from Address Model
+@receiver(post_save, sender=Address)
+def address_change_update_last_modified(sender, **kwargs):
+    address = kwargs['instance']
+    user = address.user 
+    user.last_modified = timezone.now()
+    user.save()
