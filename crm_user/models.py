@@ -136,7 +136,7 @@ class User(AbstractUser):
         """
             Define method to display first and last name
         """
-        return self.first_name + ' ' + self.last_name 
+        return f'{self.first_name} {self.last_name }'
 
     def __str__(self):
         """String for representing the User object (in Admin site etc.)."""
