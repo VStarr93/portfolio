@@ -164,6 +164,7 @@ class MaxLengthTests(TestCase):
         """ Test for Address Model Name Max Length """
         field_label = self.address._meta.get_field('name').max_length 
         self.assertEqual(field_label, 100)
+        
 # Create a TestCase for Address Help Text
 # crm_user.tests.models.test_AddressModel.HelpTextTests
 class HelpTextTests(TestCase):
