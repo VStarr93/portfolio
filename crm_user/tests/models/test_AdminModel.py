@@ -5,7 +5,6 @@
 
 from django.test import TestCase, override_settings
 from crm_user.models import Admin
-import datetime 
 from django.core.files.uploadedfile import SimpleUploadedFile 
 import shutil, tempfile 
 
