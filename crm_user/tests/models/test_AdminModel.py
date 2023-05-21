@@ -177,3 +177,79 @@ class MaxLengthTests(TestCase):
         field_max_length = self.user._meta.get_field('last_modified_by').max_length 
         self.assertEqual(field_max_length, None)
         
+# Create a TestCase for Admin Help Text
+# crm_user.tests.models.test_AdminModel.HelpTextTests
+class HelpTextTests(TestCase):
+    """ Define a TestCase for Admin Model Help Text """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Admin Model Help Text """
+        Admin.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Admin Model Help Text """
+        self.user = Admin.objects.get(id=1)
+        
+    def test_id_help_text(self):
+        """ Test for Admin Model ID Help Text """
+        help_text = self.user._meta.get_field('id').help_text 
+        self.assertEqual(help_text, '')
+        
+    def test_type_help_text(self):
+        """ Test for Admin Model Type Help Text """
+        help_text = self.user._meta.get_field('type').help_text 
+        self.assertEqual(help_text, 'Select the user type')
+
+    def test_email_help_text(self):
+        """ Test for Admin Model Email Help Text """
+        help_text = self.user._meta.get_field('email').help_text 
+        self.assertEqual(help_text, 'Enter your email address')
+        
+    def test_first_name_help_text(self):
+        """ Test for Admin Model First Name Help Text """
+        help_text = self.user._meta.get_field('first_name').help_text 
+        self.assertEqual(help_text, 'Enter your first name')
+
+    def test_middle_name_help_text(self):
+        """ Test for Admin Model Middle Name Help Text """
+        help_text = self.user._meta.get_field('middle_name').help_text 
+        self.assertEqual(help_text, 'Enter your middle name')
+        
+    def test_last_name_help_text(self):
+        """ Test for Admin Model Last Name Help Text """
+        help_text = self.user._meta.get_field('last_name').help_text
+        self.assertEqual(help_text, 'Enter your last name')
+        
+    def test_birth_date_help_text(self):
+        """ Test for Admin Model Birth Date Help Text """
+        help_text = self.user._meta.get_field('birth_date').help_text
+        self.assertEqual(help_text, 'Enter your birth date as yyyy-mm-dd')
+
+    def test_profile_photo_help_text(self):
+        """ Test for Admin Model Profile Photo Help Text """
+        help_text = self.user._meta.get_field('profile_photo').help_text 
+        self.assertEqual(help_text, 'Upload a photo of yourself')
+        
+    def test_phone_number_help_text(self):
+        """ Test for Admin Model Phone Number Help Text """
+        help_text = self.user._meta.get_field('phone_number').help_text
+        self.assertEqual(help_text, 'Enter a good contact phone number')
+        
+    def test_last_modified_help_text(self):
+        """ Test for Admin Model Last Modified Help Text """
+        help_text = self.user._meta.get_field('last_modified').help_text 
+        self.assertEqual(help_text, 'The date and time of which the user was last modified.')
+        
+    def test_last_modified_by_help_text(self):
+        """ Test for Admin Model Last Modified By Help Text """
+        help_text = self.user._meta.get_field('last_modified_by').help_text
+        self.assertEqual(help_text, 'The user who last modified this user.')
+        
