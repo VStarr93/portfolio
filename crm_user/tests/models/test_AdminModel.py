@@ -353,3 +353,79 @@ class ReqTests(TestCase):
         self.assertEqual(blank, True)
         self.assertEqual(null, True)
         
+# Create a TestCase for Admin Defaults
+# crm_user.tests.models.test_AdminModel.DefaultTests
+class DefaultTests(TestCase):
+    """ Define a Testcase for Admin Model Defaults """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Admin Model Defaults """
+        Admin.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Admin Model Defaults """
+        self.user = Admin.objects.get(id=1)
+        
+    def test_id_default(self):
+        """ Test that Admin Model ID has no default value """
+        default = self.user._meta.get_field('id').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_type_default(self):
+        """ Test that Admin Model Type has a default value """
+        default = self.user._meta.get_field('type').default
+        self.assertEqual(default, self.user.Types.CUSTOMER)
+
+    def test_email_default(self):
+        """ Test that Admin Model Email has no default value """
+        default = self.user._meta.get_field('email').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_first_name_default(self):
+        """ Test that Admin Model First Name has no default value """
+        default = self.user._meta.get_field('first_name').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_middle_name_default(self):
+        """ Test that Admin Model Middle Name has no default value """
+        default = self.user._meta.get_field('middle_name').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_last_name_default(self):
+        """ Test that Admin Model Last Name has no default value """
+        default = self.user._meta.get_field('last_name').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_birth_date_default(self):
+        """ Test that Admin Model Birth Date has no default value """
+        default = self.user._meta.get_field('birth_date').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_profile_photo_default(self):
+        """ Test that Admin Model profile_photo has no default value """
+        default = self.user._meta.get_field('profile_photo').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_phone_number_default(self):
+        """ Test that Admin Model Phone Number has no default value """
+        default = self.user._meta.get_field('phone_number').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_last_modified_default(self):
+        """ Test that Admin Model Last Modified has no default value """
+        default = self.user._meta.get_field('last_modified').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_last_modified_by_default(self):
+        """ Test that Admin Model Last Modified By has no default value """
+        default = self.user._meta.get_field('last_modified_by').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
