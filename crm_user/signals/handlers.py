@@ -23,7 +23,6 @@ def create_customer_profile(sender, **kwargs):
     if created :
         new_profile = CustomerProfile.objects.create(
             user = user,
-            last_modified_by = user,
         )
         form = PasswordResetForm({'email': new_profile.user.email,})
         assert form.is_valid()
@@ -45,7 +44,6 @@ def create_employee_profile(sender, **kwargs):
     if created :
         new_profile = EmployeeProfile.objects.create(
             user = user,
-            last_modified_by = user,
         )
         form = PasswordResetForm({'email': new_profile.user.email,})
         assert form.is_valid()
@@ -67,7 +65,6 @@ def create_admin_profile(sender, **kwargs):
     if created :
         new_profile = AdminProfile.objects.create(
             user = user,
-            last_modified_by = user,
         )
         form = PasswordResetForm({'email': new_profile.user.email,})
         assert form.is_valid()
@@ -89,7 +86,6 @@ def create_profile(sender, **kwargs):
     if created and user.type == "CUSTOMER":
         new_profile = CustomerProfile.objects.create(
             user = user,
-            last_modified_by = user,
         )
         customer = Customer.objects.get(email=user.email)
         customer.welcome()
@@ -108,7 +104,6 @@ def create_profile(sender, **kwargs):
     elif created and user.type == "EMPLOYEE":
         new_profile = EmployeeProfile.objects.create(
             user = user,
-            last_modified_by = user,
         )
         employee = Employee.objects.get(email=user.email)
         employee.welcome()
@@ -127,7 +122,6 @@ def create_profile(sender, **kwargs):
     elif created and user.type == "ADMIN":
         new_profile = AdminProfile.objects.create(
             user = user,
-            last_modified_by = user,
         )
         admin = Admin.objects.get(email=user.email)
         admin.welcome()
