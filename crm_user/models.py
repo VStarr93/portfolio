@@ -160,12 +160,12 @@ class User(AbstractUser):
     # list model fields
     type = models.CharField(_('Type'), max_length=50, choices=Types.choices, default=Types.CUSTOMER, help_text="Select the user type")
     email = models.EmailField(_('Email'), unique=True, help_text="Enter your email address")
-    first_name = models.CharField(_('First Name'), max_length=50, blank=True, help_text="Enter your first name")
-    middle_name = models.CharField(_('Middle Name'), max_length=50, blank=True, help_text="Enter your middle name")
-    last_name = models.CharField(_('Last Name'), max_length=50, blank=True, help_text="Enter your last name")
+    first_name = models.CharField(_('First Name'), max_length=50, blank=True, null=True, help_text="Enter your first name")
+    middle_name = models.CharField(_('Middle Name'), max_length=50, blank=True, null=True, help_text="Enter your middle name")
+    last_name = models.CharField(_('Last Name'), max_length=50, blank=True, null=True,  help_text="Enter your last name")
     birth_date = models.DateField(_('Birth Date'), null=True, blank=True, help_text="Enter your birth date as yyyy-MM-dd")
-    profile_photo = models.ImageField(_('Profile Photo'), upload_to='profile_images/', blank=True, help_text="Upload a photo of yourself")
-    phone_number = PhoneNumberField(_('Phone Number'), blank=True, help_text="Enter a good contact phone number")
+    profile_photo = models.ImageField(_('Profile Photo'), upload_to='profile_images/', blank=True, null=True, help_text="Upload a photo of yourself")
+    phone_number = PhoneNumberField(_('Phone Number'), blank=True, null=True, help_text="Enter a good contact phone number")
     last_modified = models.DateTimeField(_('Last Modified'), blank=True, null=True, help_text="The date and time of which the user was last modified.")
     last_modified_by = models.ForeignKey('self', on_delete=models.CASCADE, related_name='modified_by', verbose_name="Last Modified By", blank=True, null=True, help_text="The user who last modified this user.")
 
