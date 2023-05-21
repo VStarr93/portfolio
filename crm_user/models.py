@@ -434,9 +434,7 @@ class CustomerProfile(Model):
     status = models.CharField(_('Status'), max_length=9, default=Status.NEW, choices=Status.choices, help_text="Your customer status is adjusted based on frequency of jobs.")
     user = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='profile', verbose_name="Customer", unique=True, help_text="The Customer these details/model are associated with.")
     last_job = models.DateField(_('Last Job'), blank=True, null=True, help_text="The date of which the last job for customer was performed.")
-    last_modified = models.DateTimeField(_('Last Modified'), auto_now=True, blank=True, null=True, help_text="The date and time of which the customer profile was last modified.")
-    last_modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile_modified_by', verbose_name="Last Modified By", blank=True, null=True, help_text="The user who last modified this profile.")
-
+    
     # Define BOOLEAN model fields
     balance_owed = models.BooleanField(_("Balance Owed"), default=False, help_text="The status of the customer's account balance.")
     credit_owed = models.BooleanField(_("Credit Owed"), default=False, help_text="The status of the customer's account credit.")
