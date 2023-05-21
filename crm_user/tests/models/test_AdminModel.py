@@ -7,6 +7,7 @@ from django.test import TestCase, override_settings
 from crm_user.models import Admin
 from django.core.files.uploadedfile import SimpleUploadedFile 
 import shutil, tempfile 
+from django.db.models.fields import NOT_PROVIDED
 
 # For Testing Email Services
 from django.core import mail 
