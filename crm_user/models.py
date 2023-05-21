@@ -158,7 +158,7 @@ class User(AbstractUser):
         ADMIN = "ADMIN", "Admin"
     
     # list model fields
-    type = models.CharField(_('Type'), max_length=50, choices=Types.choices, default=Types.CUSTOMER, help_text="Select the user type")
+    type = models.CharField(_('Type'), max_length=8, choices=Types.choices, default=Types.CUSTOMER, help_text="Select the user type")
     email = models.EmailField(_('Email'), unique=True, help_text="Enter your email address")
     first_name = models.CharField(_('First Name'), max_length=50, blank=True, null=True, help_text="Enter your first name")
     middle_name = models.CharField(_('Middle Name'), max_length=50, blank=True, null=True, help_text="Enter your middle name")
