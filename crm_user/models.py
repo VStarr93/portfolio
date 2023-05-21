@@ -128,6 +128,7 @@ class User(AbstractUser):
         """
             Define custom Save method.
         """
+        self.last_modified = timezone.now()
         self.clean_fields()
         return super().save(*args, **kwargs)
     
