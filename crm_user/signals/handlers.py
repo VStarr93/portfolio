@@ -24,6 +24,8 @@ def create_customer_profile(sender, **kwargs):
         new_profile = CustomerProfile.objects.create(
             user = user,
         )
+        user.last_modified_by = user 
+        user.save()
         form = PasswordResetForm({'email': new_profile.user.email,})
         assert form.is_valid()
         request = HttpRequest()
@@ -45,6 +47,8 @@ def create_employee_profile(sender, **kwargs):
         new_profile = EmployeeProfile.objects.create(
             user = user,
         )
+        user.last_modified_by = user 
+        user.save()
         form = PasswordResetForm({'email': new_profile.user.email,})
         assert form.is_valid()
         request = HttpRequest()
@@ -66,6 +70,8 @@ def create_admin_profile(sender, **kwargs):
         new_profile = AdminProfile.objects.create(
             user = user,
         )
+        user.last_modified_by = user 
+        user.save()
         form = PasswordResetForm({'email': new_profile.user.email,})
         assert form.is_valid()
         request = HttpRequest()
@@ -87,6 +93,8 @@ def create_profile(sender, **kwargs):
         new_profile = CustomerProfile.objects.create(
             user = user,
         )
+        user.last_modified_by = user 
+        user.save()
         customer = Customer.objects.get(email=user.email)
         customer.welcome()
         form = PasswordResetForm({'email': user.email,})
@@ -105,6 +113,8 @@ def create_profile(sender, **kwargs):
         new_profile = EmployeeProfile.objects.create(
             user = user,
         )
+        user.last_modified_by = user 
+        user.save()
         employee = Employee.objects.get(email=user.email)
         employee.welcome()
         form = PasswordResetForm({'email': user.email,})
@@ -123,6 +133,8 @@ def create_profile(sender, **kwargs):
         new_profile = AdminProfile.objects.create(
             user = user,
         )
+        user.last_modified_by = user 
+        user.save()
         admin = Admin.objects.get(email=user.email)
         admin.welcome()
         form = PasswordResetForm({'email': user.email,})
