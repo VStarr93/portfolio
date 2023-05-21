@@ -121,7 +121,7 @@ class FormHelpTests(TestCase):
     def test_change_field_birth_date_help_text(self):
         """ Define a test for birth date field help text """
         form = CustomUserChangeForm(self.formdata)
-        self.assertTrue(form.fields['birth_date'].help_text == 'Enter your birth date as yyyy-MM-dd')
+        self.assertTrue(form.fields['birth_date'].help_text == 'Enter your birth date as yyyy-mm-dd')
         
     def test_change_field_phone_number_help_text(self):
         """ Define a test for phone number field help text """
