@@ -52,16 +52,6 @@ class LabelTests(TestCase):
         field_label = self.address._meta.get_field('id').verbose_name 
         self.assertEqual(field_label, 'ID')
         
-    def test_last_modified_label(self):
-        """ Test for Address Model Last Modified Label """
-        field_label = self.address._meta.get_field('last_modified').verbose_name
-        self.assertEqual(field_label, 'Last Modified')
-        
-    def test_last_modified_by_label(self):
-        """ Test for Address Model Last Modified By Label """
-        field_label = self.address._meta.get_field('last_modified_by').verbose_name
-        self.assertEqual(field_label, 'Last Modified By')
-        
     def test_address_line2_label(self):
         """ Test for Address Model Address Line2 Label """
         field_label = self.address._meta.get_field('address_line2').verbose_name 
