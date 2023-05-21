@@ -5,7 +5,7 @@
 
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver 
-from crm_user.models import User, Customer, Employee, Admin, CustomerProfile, EmployeeProfile, AdminProfile
+from crm_user.models import User, Customer, Employee, Admin, CustomerProfile, EmployeeProfile, AdminProfile, Address
 from django.contrib.auth.forms import PasswordResetForm
 from django.http import HttpRequest 
 from django.conf import settings 
