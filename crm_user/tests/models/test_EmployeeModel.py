@@ -635,3 +635,39 @@ class MethodTests(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn('Welcome', mail.outbox[0].subject)
         
+# Create a TestCase for Employee Meta
+# crm_user.tests.models.test_EmployeeModel.MetaTests 
+class MetaTests(TestCase):
+    """ Define a TestCase for Employee Model Meta """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Model Meta """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Model Meta """
+        self.user = Employee.objects.get(id=1)
+        
+    def test_ordering(self):
+        """ Test Employee Model Ordering """
+        self.assertEqual(self.user._meta.ordering, ['last_name', 'first_name'])
+
+    def test_verbose_name(self):
+        """ Test Employee Model Verbose Name """
+        self.assertEqual(self.user._meta.verbose_name, 'Employee')
+        
+    def test_verbose_name_plural(self):
+        """ Test Employee Model Verbose Name Plural """
+        self.assertEqual(self.user._meta.verbose_name_plural, 'Employees')
+        
+    def test_proxy(self):
+        """ Test Employee Model Proxy """
+        self.assertEqual(self.user._meta.proxy, True)
