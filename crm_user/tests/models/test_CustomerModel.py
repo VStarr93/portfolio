@@ -429,3 +429,79 @@ class DefaultTests(TestCase):
         default = self.user._meta.get_field('last_modified_by').default 
         self.assertEqual(default, NOT_PROVIDED)
         
+# Create a TestCase for Customer Choices Fields
+# crm_user.tests.models.test_CustomerModel.ChoicesTests
+class ChoicesTests(TestCase):
+    """ Define a Testcase for Customer Model Choices """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Customer Model Choices """
+        Customer.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Customer Model Choices """
+        self.user = Customer.objects.get(id=1)
+        
+    def test_id_choices(self):
+        """ Test that Customer Model ID has no choices value """
+        choices = self.user._meta.get_field('id').choices 
+        self.assertEqual(choices, None)
+        
+    def test_type_choices(self):
+        """ Test that Customer Model Type has a choices value """
+        choices = self.user._meta.get_field('type').choices
+        self.assertEqual(choices, self.user.Types.choices)
+
+    def test_email_choices(self):
+        """ Test that Customer Model Email has no choices value """
+        choices = self.user._meta.get_field('email').choices 
+        self.assertEqual(choices, None)
+        
+    def test_first_name_choices(self):
+        """ Test that Customer Model First Name has no choices value """
+        choices = self.user._meta.get_field('first_name').choices 
+        self.assertEqual(choices, None)
+        
+    def test_middle_name_choices(self):
+        """ Test that Customer Model Middle Name has no choices value """
+        choices = self.user._meta.get_field('middle_name').choices 
+        self.assertEqual(choices, None)
+        
+    def test_last_name_choices(self):
+        """ Test that Customer Model Last Name has no choices value """
+        choices = self.user._meta.get_field('last_name').choices 
+        self.assertEqual(choices, None)
+        
+    def test_birth_date_choices(self):
+        """ Test that Customer Model Birth Date has no choices value """
+        choices = self.user._meta.get_field('birth_date').choices 
+        self.assertEqual(choices, None)
+        
+    def test_profile_photo_choices(self):
+        """ Test that Customer Model profile_photo has no choices value """
+        choices = self.user._meta.get_field('profile_photo').choices 
+        self.assertEqual(choices, None)
+        
+    def test_phone_number_choices(self):
+        """ Test that Customer Model Phone Number has no choices value """
+        choices = self.user._meta.get_field('phone_number').choices 
+        self.assertEqual(choices, None)
+        
+    def test_last_modified_choices(self):
+        """ Test that Customer Model Last Modified has no choices value """
+        choices = self.user._meta.get_field('last_modified').choices 
+        self.assertEqual(choices, None)
+        
+    def test_last_modified_by_choices(self):
+        """ Test that Customer Model Last Modified By has no choices value """
+        choices = self.user._meta.get_field('last_modified_by').choices 
+        self.assertEqual(choices, None)
+        
