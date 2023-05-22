@@ -253,3 +253,103 @@ class HelpTextTests(TestCase):
         help_text = self.user._meta.get_field('last_modified_by').help_text
         self.assertEqual(help_text, 'The user who last modified this user.')
         
+# Create a TestCase for Customer Required Fields
+# crm_user.tests.models.test_CustomerModel.ReqTests
+class ReqTests(TestCase):
+    """ Define a TestCase for Customer Model Required Fields"""
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Customer Model Required Fields """
+        Customer.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Customer Model Required Fields """
+        self.user = Customer.objects.get(id=1)
+        
+    def test_id_required(self):
+        """ Test that Customer Model ID is not required """
+        blank = self.user._meta.get_field('id').blank 
+        null = self.user._meta.get_field('id').null
+        self.assertEqual(blank, True)
+        self.assertEqual(null, False)
+        
+    def test_type_required(self):
+        """ Test that Customer Model Type is required """
+        blank = self.user._meta.get_field('type').blank 
+        null = self.user._meta.get_field('type').null
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+
+    def test_email_required(self):
+        """ Test that Customer Model Email is required """
+        blank = self.user._meta.get_field('email').blank 
+        null = self.user._meta.get_field('email').null 
+        unique = self.user._meta.get_field('email').unique
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+        self.assertEqual(unique, True)
+        
+    def test_first_name_required(self):
+        """ Test that Customer Model First name is not required """
+        blank = self.user._meta.get_field('first_name').blank 
+        null = self.user._meta.get_field('first_name').null
+        self.assertEqual(blank, True)
+        self.assertEqual(null, True)
+        
+    def test_middle_name_required(self):
+        """ Test that Customer Model Middle Name is not required """
+        blank = self.user._meta.get_field('middle_name').blank
+        null = self.user._meta.get_field('middle_name').null
+        self.assertEqual(blank, True)
+        self.assertEqual(null, True)
+        
+    def test_last_name_required(self):
+        """ Test that Customer Model Last Name is not required """
+        blank = self.user._meta.get_field('last_name').blank 
+        null = self.user._meta.get_field('last_name').null 
+        self.assertEqual(blank, True)
+        self.assertEqual(null, True)
+        
+    def test_birth_date_required(self):
+        """ Test that Customer Model Birth Date is not required """
+        blank = self.user._meta.get_field('birth_date').blank
+        null = self.user._meta.get_field('birth_date').null
+        self.assertEqual(blank, True)
+        self.assertEqual(null, True)
+        
+    def test_profile_photo_required(self):
+        """ Test that Customer Model Profile Photo is not required """
+        blank = self.user._meta.get_field('profile_photo').blank
+        null = self.user._meta.get_field('profile_photo').null
+        self.assertEqual(blank, True)
+        self.assertEqual(null, True)
+        
+    def test_phone_number_required(self):
+        """ Test that Customer Model Phone Number is not required """
+        blank = self.user._meta.get_field('phone_number').blank
+        null = self.user._meta.get_field('phone_number').null 
+        self.assertEqual(blank, True)
+        self.assertEqual(null, True)
+        
+    def test_last_modified_required(self):
+        """ Test that Customer Model Last Modified is not required """
+        blank = self.user._meta.get_field('last_modified').blank 
+        null = self.user._meta.get_field('last_modified').null
+        self.assertEqual(blank, True)
+        self.assertEqual(null, True)
+        
+    def test_last_modified_by_required(self):
+        """ Test that Customer Model Last Modified By is not required """
+        blank = self.user._meta.get_field('last_modified_by').blank 
+        null = self.user._meta.get_field('last_modified_by').null
+        self.assertEqual(blank, True)
+        self.assertEqual(null, True)
+        
