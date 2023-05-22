@@ -543,3 +543,34 @@ class ForeignKeyTests(TestCase):
         self.assertEqual(Employee.objects.filter(id=2).exists(), False)
         self.assertEqual(user1.last_modified_by, None)
  
+# Create a TestCase for Employee Image Fields
+# crm_user.tests.models.tests_EmployeeModel.ImageTests 
+@override_settings(MEDIA_ROOT=MEDIA_ROOT)
+class ImageTests(TestCase):
+    """ Define a TestCase for Employee Model Image Fields """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Model Image Fields """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Model Image Fields """
+        self.user = Employee.objects.get(id=1)
+        
+    @classmethod 
+    def tearDownClass(cls):
+        shutil.rmtree(MEDIA_ROOT, ignore_errors=True)
+        super().tearDownClass()
+
+    def test_profile_photo_url(self):
+        """ Test that Employee Model Profile Photo URL is correctly configured """
+        self.assertEqual(self.user.profile_photo.name, 'profile_images/test_image.jpg')
+        
