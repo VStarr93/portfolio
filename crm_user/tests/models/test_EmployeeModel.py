@@ -574,3 +574,64 @@ class ImageTests(TestCase):
         """ Test that Employee Model Profile Photo URL is correctly configured """
         self.assertEqual(self.user.profile_photo.name, 'profile_images/test_image.jpg')
         
+# Create a TestCase for Employee Methods
+# crm_user.tests.models.test_EmployeeModel.MethodTests 
+class MethodTests(TestCase):
+    """ Define a TestCase for Employee Model Methods """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Model Methods """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Model Methods """
+        self.user = Employee.objects.get(id=1)
+        
+    def test_age_method(self):
+        """ Test for Employee Model Age Method """
+        user = Employee.objects.get(id=1)
+        self.assertEqual(user.age(), 30)
+        
+    @freeze_time(timezone.now())
+    def test_save_method_last_modified(self):
+        """ Test that Employee Model Save Method updates last_modified field"""
+        user = Employee.objects.get(id=1)
+        self.assertNotEqual(user.last_modified, timezone.now())
+        user.first_name = 'John'
+        user.save()
+        self.assertEqual(user.last_modified, timezone.now())
+        
+    def test_save_method_type(self):
+        """ Test that Employee Model Save Method changes type to Employee """
+        self.assertEqual(self.user.type, 'EMPLOYEE')
+        
+    def test_save_method_welcome(self):
+        """ Test that Employee Model Save Method sends welcome email """
+        user2 = Employee.objects.create_user(email='user2@example.com')
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertIn('Welcome', mail.outbox[0].subject)
+        
+    def test_full_name_method(self):
+        """ Test for Employee Model Full Name Method """
+        full_name = f'{self.user.first_name} {self.user.last_name}'
+        self.assertEqual(self.user.full_name(), full_name)
+        
+    def test_string_method(self):
+        """ Test for Employee Model String Method """
+        string = f'{self.user.last_name}, {self.user.first_name}'
+        self.assertEqual(str(self.user), string)
+        
+    def test_welcome_method(self):
+        """ Test that Employee Model Welcome method sends welcome email """
+        self.user.welcome()
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn('Welcome', mail.outbox[0].subject)
+        
