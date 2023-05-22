@@ -505,3 +505,41 @@ class ChoicesTests(TestCase):
         choices = self.user._meta.get_field('last_modified_by').choices 
         self.assertEqual(choices, None)
         
+# Create a TestCase for Employee Foreign Key Fields
+# crm_user.tests.models.test_EmployeeModel.ForeignKeyTests
+class ForeignKeyTests(TestCase):
+    """ Define a TestCase for Employee Model Foreign Key Fields """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Model Foreign Key Fields """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Model Foreign Key Fields """
+        self.user = Employee.objects.get(id=1)
+        
+    def test_type_foreign_key_related_name(self):
+        """ Test that Employee Model Type has a related name value """
+        self.assertIn(self.user, self.user.modified_by.all())
+        
+    def test_type_foreign_key_on_delete(self):
+        """ Test that Employee Model Type has on_delete models.SET_NULL """
+        user1 = Employee.objects.get(id=1)
+        user2 = Employee.objects.create_user(email='test@example.com')
+        user1.last_modified_by = user2 
+        user1.save()
+        self.assertEqual(user1.last_modified_by, user2)
+        user2.delete()
+        user1 = Employee.objects.get(id=1)
+        self.assertEqual(Employee.objects.filter(id=1).exists(), True)
+        self.assertEqual(Employee.objects.filter(id=2).exists(), False)
+        self.assertEqual(user1.last_modified_by, None)
+ 
