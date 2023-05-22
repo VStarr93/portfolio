@@ -635,3 +635,39 @@ class MethodTests(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn('Welcome', mail.outbox[0].subject)
         
+# Create a TestCase for Customer Meta
+# crm_user.tests.models.test_CustomerModel.MetaTests 
+class MetaTests(TestCase):
+    """ Define a TestCase for Customer Model Meta """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Customer Model Meta """
+        Customer.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Customer Model Meta """
+        self.user = Customer.objects.get(id=1)
+        
+    def test_ordering(self):
+        """ Test Customer Model Ordering """
+        self.assertEqual(self.user._meta.ordering, ['last_name', 'first_name'])
+
+    def test_verbose_name(self):
+        """ Test Customer Model Verbose Name """
+        self.assertEqual(self.user._meta.verbose_name, 'Customer')
+        
+    def test_verbose_name_plural(self):
+        """ Test Customer Model Verbose Name Plural """
+        self.assertEqual(self.user._meta.verbose_name_plural, 'Customers')
+        
+    def test_proxy(self):
+        """ Test Customer Model Proxy """
+        self.assertEqual(self.user._meta.proxy, True)
