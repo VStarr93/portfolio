@@ -253,3 +253,58 @@ class ReqTests(TestCase):
         self.assertEqual(blank, False)
         self.assertEqual(null, False)
     
+# Create a TestCase for Employee Profile Defaults
+# crm_user.tests.models.test_EmployeeProfileModel.DefaultTests
+class DefaultTests(TestCase):
+    """ Define a Testcase for Employee Profile Model Defaults """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Profile Model Defaults """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Profile Model Defaults """
+        self.user = EmployeeProfile.objects.get(id=1)
+        
+    def test_id_default(self):
+        """ Test that Employee Profile Model ID has no default values """
+        default = self.user._meta.get_field('id').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_work_id_default(self):
+        """ Test that Employee Profile Model Work ID has a default value """
+        default = self.user._meta.get_field('work_id').default 
+        self.assertEqual(default, EmployeeProfile.calc_work_id)
+        
+    def test_status_default(self):
+        """ Test that Employee Profile Model Status has a default value """
+        default = self.user._meta.get_field('status').default
+        self.assertEqual(default, self.user.Status.TRAINING)
+        
+    def test_user_default(self):
+        """ Test that Employee Profile Model User has no default value """
+        default = self.user._meta.get_field('user').default 
+        self.assertEqual(default, NOT_PROVIDED)
+
+    def test_is_manager_default(self):
+        """ Test that Employee Profile Model Is Manager has a default value """
+        default = self.user._meta.get_field('is_manager').default 
+        self.assertEqual(default, False)
+
+    def test_language_default(self):
+        """ Test that Employee Profile Model Language has a default value """
+        default = self.user._meta.get_field('language').default 
+        self.assertEqual(default, self.user.Language.ENGLISH)
+        
+    def test_theme_default(self):
+        """ Test that Employee Profile Model Theme has a default value """
+        default = self.user._meta.get_field('theme').default
+        self.assertEqual(default, self.user.Colors.GREEN)
+       
