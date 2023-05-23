@@ -610,13 +610,13 @@ class AdminProfile(Model):
     work_id = models.IntegerField(_('Work ID'), unique=True, default=calc_work_id, help_text="Your admin work ID is auto-generated and cannot be changed.")
     status = models.CharField(_('Status'), max_length=10, default=Status.TRAINING, choices=Status.choices, help_text="Your admin status is adjusted based on employment status.")
     user = models.OneToOneField(Admin, on_delete=models.CASCADE, related_name='admin_profile', verbose_name="Admin", unique=True, help_text="The Admin these details/model are associated with.")
+    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, choices=Language.choices, help_text="What language do you speak?")
+    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="Choose a theme to use.")
     
     # Define BOOLEAN model fields
     is_manager = models.BooleanField(_("Is Manager"), default=False, help_text="Is this admin a manager?")
 
     # Define OPTIONAL model fields
-    language = models.CharField(_("Language"), max_length=10, default=Language.ENGLISH, choices=Language.choices, help_text="What language do you speak?")
-    theme = models.CharField(_("Theme"), max_length=6, default=Colors.GREEN, choices=Colors.choices, help_text="Choose a theme to use.")
     
 # Add Address Model
 # crm_user.models.Address 
