@@ -429,7 +429,7 @@ class CustomerProfile(Model):
         WHITE = 'WHITE', 'White'
 
     # Define AUTO-GENERATED model fields
-    id = models.BigAutoField(primary_key=True) # Primary Key
+    id = models.BigAutoField(_('ID'), primary_key=True) # Primary Key
     acct_no = models.CharField(_('Account Number'), max_length=10, unique=True, default=account_number, help_text="Your customer account number is auto-generated and cannot be changed.")
     status = models.CharField(_('Status'), max_length=9, default=Status.NEW, choices=Status.choices, help_text="Your customer status is adjusted based on frequency of jobs.")
     user = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='profile', verbose_name="Customer", unique=True, help_text="The Customer these details/model are associated with.")
