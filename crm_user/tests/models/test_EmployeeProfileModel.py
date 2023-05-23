@@ -129,3 +129,58 @@ class MaxLengthTests(TestCase):
         max_length = self.user._meta.get_field('theme').max_length
         self.assertEqual(max_length, 6)
         
+# Create a TestCase for Employee Profile Help Text
+# crm_user.tests.models.test_EmployeeProfileModel.HelpTextTests
+class HelpTextTests(TestCase):
+    """ Define a TestCase for Employee Profile Model Help Text """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Profile Model Help Text """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Profile Model Help Text """
+        self.user = EmployeeProfile.objects.get(id=1)
+        
+    def test_id_help_text(self):
+        """ Test for Employee Profile Model ID Help Text """
+        help_text = self.user._meta.get_field('id').help_text 
+        self.assertEqual(help_text, '')
+        
+    def test_work_id_help_text(self):
+        """ Test for Employee Profile Model Work ID Help Text """
+        help_text = self.user._meta.get_field('work_id').help_text 
+        self.assertEqual(help_text, "Your employee work ID is auto-generated and cannot be changed.")
+        
+    def test_status_help_text(self):
+        """ Test for Employee Profile Model Status Help Text """
+        help_text = self.user._meta.get_field('status').help_text
+        self.assertEqual(help_text, "Your employee status is adjusted based on employment status.")
+        
+    def test_user_help_text(self):
+        """ Test for Employee Profile Model User Help Text """
+        help_text = self.user._meta.get_field('user').help_text 
+        self.assertEqual(help_text, "The Employee these details/model are associated with.")
+
+    def test_is_manager_help_text(self):
+        """ Test for Employee Profile Model Is Manager Help Text """
+        help_text = self.user._meta.get_field('is_manager').help_text 
+        self.assertEqual(help_text, "Is this employee a manager?")
+
+    def test_language_help_text(self):
+        """ Test for Employee Profile Model Language Help Text """
+        help_text = self.user._meta.get_field('language').help_text 
+        self.assertEqual(help_text, "What language do you speak?")
+        
+    def test_theme_help_text(self):
+        """ Test for Employee Profile Model Theme Help Text """
+        help_text = self.user._meta.get_field('theme').help_text
+        self.assertEqual(help_text, "Choose a theme to use.")
+        
