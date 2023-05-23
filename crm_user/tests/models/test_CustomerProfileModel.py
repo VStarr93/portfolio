@@ -461,3 +461,37 @@ class OneToOneTests(TestCase):
         self.assertEqual(Customer.objects.filter(id=1).exists(), False)
         self.assertEqual(CustomerProfile.objects.filter(id=1).exists(), False)
  
+# Create a TestCase for Customer Profile Methods
+# crm_user.tests.models.test_CustomerProfileModel.MethodTests 
+class MethodTests(TestCase):
+    """ Define a TestCase for Customer Profile Model Methods """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Customer Profile Model Methods """
+        Customer.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Customer Profile Model Methods """
+        self.user = CustomerProfile.objects.get(id=1)
+        
+    def test_string_method(self):
+        """ Test for Customer Profile Model String Method """
+        string = f'{self.user.user.last_name}, {self.user.user.first_name}'
+        self.assertEqual(str(self.user), string)
+        
+    def test_calc_acct_no_method(self):
+        """ Test for Customer Model account_number Method """
+        self.assertEqual(self.user.acct_no, 'ACCT000001')
+        self.assertEqual(CustomerProfile.account_number(), 'ACCT000002')
+        
+    def test_get_absolute_url_method(self):
+        """ Test that Customer Model get_absolute_url method returns correct url """
+        self.assertEqual(self.user.get_absolute_url(), 'user/Customer/1')
+        
