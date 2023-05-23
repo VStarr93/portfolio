@@ -4,9 +4,7 @@
 # IMPORTS
 
 from django.test import TestCase, override_settings
-from crm_user.models import *
-from django.core.exceptions import ValidationError 
-import datetime 
+from crm_user.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile 
 import shutil, tempfile 
 
