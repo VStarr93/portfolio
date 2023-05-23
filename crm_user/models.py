@@ -606,7 +606,7 @@ class AdminProfile(Model):
         WHITE = 'WHITE', 'White'
 
     # Define AUTO-GENERATED model fields
-    id = models.BigAutoField(primary_key=True) # Primary Key
+    id = models.BigAutoField(_('ID'), primary_key=True) # Primary Key
     work_id = models.IntegerField(_('Work ID'), unique=True, default=calc_work_id, help_text="Your admin work ID is auto-generated and cannot be changed.")
     status = models.CharField(_('Status'), max_length=10, default=Status.TRAINING, choices=Status.choices, help_text="Your admin status is adjusted based on employment status.")
     user = models.OneToOneField(Admin, on_delete=models.CASCADE, related_name='admin_profile', verbose_name="Admin", unique=True, help_text="The Admin these details/model are associated with.")
