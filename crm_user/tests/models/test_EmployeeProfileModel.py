@@ -397,3 +397,37 @@ class OneToOneTests(TestCase):
         self.assertEqual(Employee.objects.filter(id=1).exists(), False)
         self.assertEqual(EmployeeProfile.objects.filter(id=1).exists(), False)
  
+# Create a TestCase for Employee Profile Methods
+# crm_user.tests.models.test_EmployeeProfileModel.MethodTests 
+class MethodTests(TestCase):
+    """ Define a TestCase for Employee Profile Model Methods """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Profile Model Methods """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Profile Model Methods """
+        self.user = EmployeeProfile.objects.get(id=1)
+        
+    def test_string_method(self):
+        """ Test for Employee Profile Model String Method """
+        string = f'{self.user.user.last_name}, {self.user.user.first_name}'
+        self.assertEqual(str(self.user), string)
+        
+    def test_calc_work_id_method(self):
+        """ Test for Employee Model cal_work_id Method """
+        self.assertEqual(self.user.work_id, 10001)
+        self.assertEqual(EmployeeProfile.calc_work_id(), 10002)
+        
+    def test_get_absolute_url_method(self):
+        """ Test that Employee Model get_absolute_url method returns correct url """
+        self.assertEqual(self.user.get_absolute_url(), 'user/Employee/1')
+        
