@@ -370,3 +370,38 @@ class ChoicesTests(TestCase):
         choices = self.user._meta.get_field('theme').choices
         self.assertEqual(choices, self.user.Colors.choices)
        
+# Create a TestCase for Admin Profile OneToOne Fields
+# crm_user.tests.models.test_AdminProfileModel.OneToOneTests
+class OneToOneTests(TestCase):
+    """ Define a TestCase for Admin Model OneToOne Fields """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Admin Profile Model OneToOne Fields """
+        Admin.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Admin Profile Model OneToOne Fields """
+        self.profile = AdminProfile.objects.get(id=1)
+        self.user = Admin.objects.get(id=1)
+        
+    def test_user_one_to_one_related_name(self):
+        """ Test that Admin Profile Model User has a related name value """
+        self.assertEqual(self.profile, self.user.admin_profile)
+        
+    def test_user_one_to_one_on_delete(self):
+        """ Test that Admin Profile Model User has on_delete models.CASCADE """
+        user = Admin.objects.get(id=1)
+        profile = AdminProfile.objects.get(id=1) 
+        self.assertEqual(profile.user, user)
+        user.delete()
+        self.assertEqual(Admin.objects.filter(id=1).exists(), False)
+        self.assertEqual(AdminProfile.objects.filter(id=1).exists(), False)
+ 
