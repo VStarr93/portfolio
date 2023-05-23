@@ -32,7 +32,6 @@ class LabelTests(TestCase):
             middle_name="Lee",
             last_name="Doe",
             birth_date='1993-04-14',
-            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
             phone_number="+12125556789",
         )
         
@@ -88,7 +87,6 @@ class MaxLengthTests(TestCase):
             middle_name="Lee",
             last_name="Doe",
             birth_date='1993-04-14',
-            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
             phone_number="+12125556789",
         )
         
@@ -144,7 +142,6 @@ class HelpTextTests(TestCase):
             middle_name="Lee",
             last_name="Doe",
             birth_date='1993-04-14',
-            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
             phone_number="+12125556789",
         )
         
@@ -200,7 +197,6 @@ class ReqTests(TestCase):
             middle_name="Lee",
             last_name="Doe",
             birth_date='1993-04-14',
-            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
             phone_number="+12125556789",
         )
         
@@ -270,7 +266,6 @@ class DefaultTests(TestCase):
             middle_name="Lee",
             last_name="Doe",
             birth_date='1993-04-14',
-            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
             phone_number="+12125556789",
         )
         
@@ -326,7 +321,6 @@ class ChoicesTests(TestCase):
             middle_name="Lee",
             last_name="Doe",
             birth_date='1993-04-14',
-            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
             phone_number="+12125556789",
         )
         
@@ -382,7 +376,6 @@ class OneToOneTests(TestCase):
             middle_name="Lee",
             last_name="Doe",
             birth_date='1993-04-14',
-            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
             phone_number="+12125556789",
         )
         
@@ -417,7 +410,6 @@ class MethodTests(TestCase):
             middle_name="Lee",
             last_name="Doe",
             birth_date='1993-04-14',
-            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
             phone_number="+12125556789",
         )
         
@@ -452,7 +444,6 @@ class MetaTests(TestCase):
             middle_name="Lee",
             last_name="Doe",
             birth_date='1993-04-14',
-            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
             phone_number="+12125556789",
         )
         
