@@ -308,3 +308,58 @@ class DefaultTests(TestCase):
         default = self.user._meta.get_field('theme').default
         self.assertEqual(default, self.user.Colors.GREEN)
        
+# Create a TestCase for Employee Profile Choices Fields
+# crm_user.tests.models.test_EmployeeProfileModel.ChoicesTests
+class ChoicesTests(TestCase):
+    """ Define a Testcase for Employee Profile Model Choices """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Profile Model Choices """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Profile Model Choices """
+        self.user = EmployeeProfile.objects.get(id=1)
+        
+    def test_id_choices(self):
+        """ Test that Employee Profile Model ID has no choices values """
+        choices = self.user._meta.get_field('id').choices 
+        self.assertEqual(choices, None)
+        
+    def test_work_id_choices(self):
+        """ Test that Employee Profile Model Work ID has no choices value """
+        choices = self.user._meta.get_field('work_id').choices 
+        self.assertEqual(choices, None)
+        
+    def test_status_choices(self):
+        """ Test that Employee Profile Model Status has a choices value """
+        choices = self.user._meta.get_field('status').choices
+        self.assertEqual(choices, self.user.Status.choices)
+        
+    def test_user_choices(self):
+        """ Test that Employee Profile Model User has no choices value """
+        choices = self.user._meta.get_field('user').choices 
+        self.assertEqual(choices, None)
+
+    def test_is_manager_choices(self):
+        """ Test that Employee Profile Model Is Manager has no choices value """
+        choices = self.user._meta.get_field('is_manager').choices 
+        self.assertEqual(choices, None)
+
+    def test_language_choices(self):
+        """ Test that Employee Profile Model Language has a choices value """
+        choices = self.user._meta.get_field('language').choices 
+        self.assertEqual(choices, self.user.Language.choices)
+        
+    def test_theme_choices(self):
+        """ Test that Employee Profile Model Theme has a choices value """
+        choices = self.user._meta.get_field('theme').choices
+        self.assertEqual(choices, self.user.Colors.choices)
+       
