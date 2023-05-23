@@ -374,7 +374,7 @@ class CustomerProfile(Model):
     
     def __str__(self):
         """String for representing the CustomerProfile object (in Admin site etc.)."""
-        return self.user.last_name + ", " + self.user.first_name
+        return f'{self.user.last_name}, {self.user.first_name}'
     
     def get_absolute_url(self):
         """Returns the URL to access a particular instance of CustomerProfile."""
