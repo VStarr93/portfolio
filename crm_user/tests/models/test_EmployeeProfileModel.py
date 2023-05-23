@@ -184,3 +184,72 @@ class HelpTextTests(TestCase):
         help_text = self.user._meta.get_field('theme').help_text
         self.assertEqual(help_text, "Choose a theme to use.")
         
+# Create a TestCase for Employee Profile Required Fields
+# crm_user.tests.models.test_EmployeeProfileModel.ReqTests
+class ReqTests(TestCase):
+    """ Define a TestCase for Employee Profile Model Required Fields"""
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Profile Model Required Fields """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Profile Model Required Fields """
+        self.user = EmployeeProfile.objects.get(id=1)
+        
+    def test_id_required(self):
+        """ Test that Employee Profile Model ID is not required """
+        blank = self.user._meta.get_field('id').blank 
+        null = self.user._meta.get_field('id').null  
+        self.assertEqual(blank, True)
+        self.assertEqual(null, False)
+        
+    def test_work_id_required(self):
+        """ Test that Employee Profile Model Work ID is required """
+        blank = self.user._meta.get_field('work_id').blank 
+        null = self.user._meta.get_field('work_id').null 
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+        
+    def test_status_required(self):
+        """ Test that Employee Profile Model Status is required """
+        blank = self.user._meta.get_field('status').blank
+        null = self.user._meta.get_field('status').null
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+        
+    def test_user_required(self):
+        """ Test that Employee Profile Model User is required """
+        blank = self.user._meta.get_field('user').blank 
+        null = self.user._meta.get_field('user').null 
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+
+    def test_is_manager_required(self):
+        """ Test that Employee Profile Model Is Manager is required """
+        blank = self.user._meta.get_field('is_manager').blank 
+        null = self.user._meta.get_field('is_manager').null 
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+
+    def test_language_required(self):
+        """ Test that Employee Profile Model Language is required """
+        blank = self.user._meta.get_field('language').blank 
+        null = self.user._meta.get_field('language').null 
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+        
+    def test_theme_required(self):
+        """ Test that Employee Profile Model Theme is required """
+        blank = self.user._meta.get_field('theme').blank
+        null = self.user._meta.get_field('theme').null
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+    
