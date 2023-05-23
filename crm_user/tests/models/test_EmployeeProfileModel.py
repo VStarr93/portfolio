@@ -363,3 +363,37 @@ class ChoicesTests(TestCase):
         choices = self.user._meta.get_field('theme').choices
         self.assertEqual(choices, self.user.Colors.choices)
        
+# Create a TestCase for Employee Profile OneToOne Fields
+# crm_user.tests.models.test_EmployeeProfileModel.OneToOneTests
+class OneToOneTests(TestCase):
+    """ Define a TestCase for Employee Model OneToOne Fields """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Employee Profile Model OneToOne Fields """
+        Employee.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Employee Profile Model OneToOne Fields """
+        self.profile = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(id=1)
+        
+    def test_user_one_to_one_related_name(self):
+        """ Test that Employee Profile Model User has a related name value """
+        self.assertEqual(self.profile, self.user.emp_profile)
+        
+    def test_user_one_to_one_on_delete(self):
+        """ Test that Employee Profile Model User has on_delete models.CASCADE """
+        user = Employee.objects.get(id=1)
+        profile = EmployeeProfile.objects.get(id=1) 
+        self.assertEqual(profile.user, user)
+        user.delete()
+        self.assertEqual(Employee.objects.filter(id=1).exists(), False)
+        self.assertEqual(EmployeeProfile.objects.filter(id=1).exists(), False)
+ 
