@@ -405,3 +405,38 @@ class OneToOneTests(TestCase):
         self.assertEqual(Admin.objects.filter(id=1).exists(), False)
         self.assertEqual(AdminProfile.objects.filter(id=1).exists(), False)
  
+# Create a TestCase for Admin Profile Methods
+# crm_user.tests.models.test_AdminProfileModel.MethodTests 
+class MethodTests(TestCase):
+    """ Define a TestCase for Admin Profile Model Methods """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Admin Profile Model Methods """
+        Admin.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Admin Profile Model Methods """
+        self.user = AdminProfile.objects.get(id=1)
+        
+    def test_string_method(self):
+        """ Test for Admin Profile Model String Method """
+        string = f'{self.user.user.last_name}, {self.user.user.first_name}'
+        self.assertEqual(str(self.user), string)
+        
+    def test_calc_work_id_method(self):
+        """ Test for Admin Model cal_work_id Method """
+        self.assertEqual(self.user.work_id, 500001)
+        self.assertEqual(AdminProfile.calc_work_id(), 500002)
+        
+    def test_get_absolute_url_method(self):
+        """ Test that Admin Model get_absolute_url method returns correct url """
+        self.assertEqual(self.user.get_absolute_url(), 'user/admin/1')
+        
