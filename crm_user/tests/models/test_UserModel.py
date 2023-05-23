@@ -574,3 +574,48 @@ class ImageTests(TestCase):
         """ Test that User Model Profile Photo URL is correctly configured """
         self.assertEqual(self.user.profile_photo.name, 'profile_images/test_image.jpg')
         
+# Create a TestCase for User Methods
+# crm_user.tests.models.test_UserModel.MethodTests 
+class MethodTests(TestCase):
+    """ Define a TestCase for User Model Methods """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for User Model Methods """
+        User.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for User Model Methods """
+        self.user = User.objects.get(id=1)
+        
+    def test_age_method(self):
+        """ Test for User Model Age Method """
+        user = User.objects.get(id=1)
+        self.assertEqual(user.age(), 30)
+        
+    @freeze_time(timezone.now())
+    def test_save_method_last_modified(self):
+        """ Test that User Model Save Method updates last_modified field"""
+        user = User.objects.get(id=1)
+        self.assertNotEqual(user.last_modified, timezone.now())
+        user.first_name = 'John'
+        user.save()
+        self.assertEqual(user.last_modified, timezone.now())
+        
+    def test_full_name_method(self):
+        """ Test for User Model Full Name Method """
+        full_name = f'{self.user.first_name} {self.user.last_name}'
+        self.assertEqual(self.user.full_name(), full_name)
+        
+    def test_string_method(self):
+        """ Test for User Model String Method """
+        string = f'{self.user.last_name}, {self.user.first_name}'
+        self.assertEqual(str(self.user), string)
+            
