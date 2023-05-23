@@ -362,3 +362,68 @@ class DefaultTests(TestCase):
         default = self.user._meta.get_field('credit_owed').default
         self.assertEqual(default, False)
        
+# Create a TestCase for Customer Profile Choices Fields
+# crm_user.tests.models.test_CustomerProfileModel.ChoicesTests
+class ChoicesTests(TestCase):
+    """ Define a Testcase for Customer Profile Model Choices """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Customer Profile Model Choices """
+        Customer.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Customer Profile Model Choices """
+        self.user = CustomerProfile.objects.get(id=1)
+        
+    def test_id_choices(self):
+        """ Test that Customer Profile Model ID has no choices values """
+        choices = self.user._meta.get_field('id').choices 
+        self.assertEqual(choices, None)
+        
+    def test_acct_no_choices(self):
+        """ Test that Customer Profile Model Account Number has no choices value """
+        choices = self.user._meta.get_field('acct_no').choices 
+        self.assertEqual(choices, None)
+        
+    def test_status_choices(self):
+        """ Test that Customer Profile Model Status has a choices value """
+        choices = self.user._meta.get_field('status').choices
+        self.assertEqual(choices, self.user.Status.choices)
+        
+    def test_user_choices(self):
+        """ Test that Customer Profile Model User has no choices value """
+        choices = self.user._meta.get_field('user').choices 
+        self.assertEqual(choices, None)
+
+    def test_last_job_choices(self):
+        """ Test that Customer Profile Model Last Job has no choices value """
+        choices = self.user._meta.get_field('last_job').choices 
+        self.assertEqual(choices, None)
+
+    def test_language_choices(self):
+        """ Test that Customer Profile Model Language has a choices value """
+        choices = self.user._meta.get_field('language').choices 
+        self.assertEqual(choices, self.user.Language.choices)
+        
+    def test_theme_choices(self):
+        """ Test that Customer Profile Model Theme has a choices value """
+        choices = self.user._meta.get_field('theme').choices
+        self.assertEqual(choices, self.user.Colors.choices)
+
+    def test_balance_owed_choices(self):
+        """ Test that Customer Profile Model Balance Owed has a choices value """
+        choices = self.user._meta.get_field('balance_owed').choices 
+        self.assertEqual(choices, None)
+        
+    def test_credit_owed_choices(self):
+        """ Test that Customer Profile Model Credit Owed has a choices value """
+        choices = self.user._meta.get_field('credit_owed').choices
+        self.assertEqual(choices, None)
+       
