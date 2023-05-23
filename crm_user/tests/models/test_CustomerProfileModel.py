@@ -297,3 +297,68 @@ class ReqTests(TestCase):
         self.assertEqual(blank, False)
         self.assertEqual(null, False)
     
+# Create a TestCase for Customer Profile Defaults
+# crm_user.tests.models.test_CustomerProfileModel.DefaultTests
+class DefaultTests(TestCase):
+    """ Define a Testcase for Customer Profile Model Defaults """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Customer Profile Model Defaults """
+        Customer.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Customer Profile Model Defaults """
+        self.user = CustomerProfile.objects.get(id=1)
+        
+    def test_id_default(self):
+        """ Test that Customer Profile Model ID has no default values """
+        default = self.user._meta.get_field('id').default 
+        self.assertEqual(default, NOT_PROVIDED)
+        
+    def test_acct_no_default(self):
+        """ Test that Customer Profile Model Account Number has a default value """
+        default = self.user._meta.get_field('acct_no').default 
+        self.assertEqual(default, CustomerProfile.account_number)
+        
+    def test_status_default(self):
+        """ Test that Customer Profile Model Status has a default value """
+        default = self.user._meta.get_field('status').default
+        self.assertEqual(default, self.user.Status.NEW)
+        
+    def test_user_default(self):
+        """ Test that Customer Profile Model User has no default value """
+        default = self.user._meta.get_field('user').default 
+        self.assertEqual(default, NOT_PROVIDED)
+
+    def test_last_job_default(self):
+        """ Test that Customer Profile Model Last Job has no default value """
+        default = self.user._meta.get_field('last_job').default 
+        self.assertEqual(default, NOT_PROVIDED)
+
+    def test_language_default(self):
+        """ Test that Customer Profile Model Language has a default value """
+        default = self.user._meta.get_field('language').default 
+        self.assertEqual(default, self.user.Language.ENGLISH)
+        
+    def test_theme_default(self):
+        """ Test that Customer Profile Model Theme has a default value """
+        default = self.user._meta.get_field('theme').default
+        self.assertEqual(default, self.user.Colors.GREEN)
+        
+    def test_balance_owed_default(self):
+        """ Test that Customer Profile Model Balance Owed has a default value """
+        default = self.user._meta.get_field('balance_owed').default
+        self.assertEqual(default, False)
+        
+    def test_credit_owed_default(self):
+        """ Test that Customer Profile Model Credit Owed has a default value """
+        default = self.user._meta.get_field('credit_owed').default
+        self.assertEqual(default, False)
+       
