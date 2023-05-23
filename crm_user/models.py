@@ -518,7 +518,7 @@ class EmployeeProfile(Model):
         WHITE = 'WHITE', 'White'
 
     # Define AUTO-GENERATED model fields
-    id = models.BigAutoField(primary_key=True) # Primary Key
+    id = models.BigAutoField(_('ID'), primary_key=True) # Primary Key
     work_id = models.IntegerField(_('Work ID'), unique=True, default=calc_work_id, help_text="Your employee work ID is auto-generated and cannot be changed.")
     status = models.CharField(_('Status'), max_length=10, default=Status.TRAINING, choices=Status.choices, help_text="Your employee status is adjusted based on employment status.")
     user = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name='emp_profile', verbose_name="Employee", unique=True, help_text="The Employee these details/model are associated with.")
