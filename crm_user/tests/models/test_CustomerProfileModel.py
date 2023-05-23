@@ -214,3 +214,86 @@ class HelpTextTests(TestCase):
         help_text = self.user._meta.get_field('credit_owed').help_text
         self.assertEqual(help_text, "The status of the customer's account credit.")
         
+# Create a TestCase for Customer Profile Required Fields
+# crm_user.tests.models.test_CustomerProfileModel.ReqTests
+class ReqTests(TestCase):
+    """ Define a TestCase for Customer Profile Model Required Fields"""
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Customer Profile Model Required Fields """
+        Customer.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Customer Profile Model Required Fields """
+        self.user = CustomerProfile.objects.get(id=1)
+        
+    def test_id_required(self):
+        """ Test that Customer Profile Model ID is not required """
+        blank = self.user._meta.get_field('id').blank 
+        null = self.user._meta.get_field('id').null  
+        self.assertEqual(blank, True)
+        self.assertEqual(null, False)
+        
+    def test_acct_no_required(self):
+        """ Test that Customer Profile Model Account Number is required """
+        blank = self.user._meta.get_field('acct_no').blank 
+        null = self.user._meta.get_field('acct_no').null 
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+        
+    def test_status_required(self):
+        """ Test that Customer Profile Model Status is required """
+        blank = self.user._meta.get_field('status').blank
+        null = self.user._meta.get_field('status').null
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+        
+    def test_user_required(self):
+        """ Test that Customer Profile Model User is required """
+        blank = self.user._meta.get_field('user').blank 
+        null = self.user._meta.get_field('user').null 
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+
+    def test_last_job_required(self):
+        """ Test that Customer Profile Model Last Job is not required """
+        blank = self.user._meta.get_field('last_job').blank 
+        null = self.user._meta.get_field('last_job').null 
+        self.assertEqual(blank, True)
+        self.assertEqual(null, True)
+
+    def test_language_required(self):
+        """ Test that Customer Profile Model Language is required """
+        blank = self.user._meta.get_field('language').blank 
+        null = self.user._meta.get_field('language').null 
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+        
+    def test_theme_required(self):
+        """ Test that Customer Profile Model Theme is required """
+        blank = self.user._meta.get_field('theme').blank
+        null = self.user._meta.get_field('theme').null
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+
+    def test_balance_owed_required(self):
+        """ Test that Customer Profile Model Balance Owed is required """
+        blank = self.user._meta.get_field('balance_owed').blank 
+        null = self.user._meta.get_field('balance_owed').null 
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+        
+    def test_credit_owed_required(self):
+        """ Test that Customer Profile Model Credit Owed is not required """
+        blank = self.user._meta.get_field('credit_owed').blank
+        null = self.user._meta.get_field('credit_owed').null
+        self.assertEqual(blank, False)
+        self.assertEqual(null, False)
+    
