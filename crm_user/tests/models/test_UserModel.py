@@ -619,3 +619,36 @@ class MethodTests(TestCase):
         string = f'{self.user.last_name}, {self.user.first_name}'
         self.assertEqual(str(self.user), string)
             
+# Create a TestCase for User Meta
+# crm_user.tests.models.test_UserModel.MetaTests 
+class MetaTests(TestCase):
+    """ Define a TestCase for User Model Meta """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for User Model Meta """
+        User.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            profile_photo=SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg"),
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for User Model Meta """
+        self.user = User.objects.get(id=1)
+        
+    def test_ordering(self):
+        """ Test User Model Ordering """
+        self.assertEqual(self.user._meta.ordering, ['last_name', 'first_name'])
+
+    def test_verbose_name(self):
+        """ Test User Model Verbose Name """
+        self.assertEqual(self.user._meta.verbose_name, 'User')
+        
+    def test_verbose_name_plural(self):
+        """ Test User Model Verbose Name Plural """
+        self.assertEqual(self.user._meta.verbose_name_plural, 'Users')
+        
