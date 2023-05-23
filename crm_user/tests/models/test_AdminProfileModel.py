@@ -5,6 +5,7 @@
 
 from django.test import TestCase
 from crm_user.models import Admin, AdminProfile
+from django.core.files.uploadedfile import SimpleUploadedFile 
 
 # For Testing Email Services
 from django.core import mail 
