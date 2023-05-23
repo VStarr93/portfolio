@@ -495,3 +495,35 @@ class MethodTests(TestCase):
         """ Test that Customer Model get_absolute_url method returns correct url """
         self.assertEqual(self.user.get_absolute_url(), 'user/Customer/1')
         
+# Create a TestCase for Customer Profile Meta
+# crm_user.tests.models.test_CustomerProfileModel.MetaTests 
+class MetaTests(TestCase):
+    """ Define a TestCase for Customer Profile Model Meta """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Customer Profile Model Meta """
+        Customer.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Customer Profile Model Meta """
+        self.user = CustomerProfile.objects.get(id=1)
+        
+    def test_ordering(self):
+        """ Test Customer Profile Model Ordering """
+        self.assertEqual(self.user._meta.ordering, ['user'])
+
+    def test_verbose_name(self):
+        """ Test Customer Profile Model Verbose Name """
+        self.assertEqual(self.user._meta.verbose_name, 'Customer Profile')
+        
+    def test_verbose_name_plural(self):
+        """ Test Customer Profile Model Verbose Name Plural """
+        self.assertEqual(self.user._meta.verbose_name_plural, 'Customer Profiles')
+        
