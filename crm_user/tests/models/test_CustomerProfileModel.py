@@ -4,7 +4,7 @@
 # IMPORTS
 
 from django.test import TestCase
-from crm_user.models import CustomerProfile
+from crm_user.models import Customer, CustomerProfile
 import datetime 
 
 # For Testing Email Services
