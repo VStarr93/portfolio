@@ -5,7 +5,7 @@
 
 from django.test import TestCase
 from crm_user.models import Employee, EmployeeProfile
-import datetime 
+from django.db.models.fields import NOT_PROVIDED
 
 # For Testing Email Services
 from django.core import mail 
