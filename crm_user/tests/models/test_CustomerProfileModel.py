@@ -427,3 +427,37 @@ class ChoicesTests(TestCase):
         choices = self.user._meta.get_field('credit_owed').choices
         self.assertEqual(choices, None)
        
+# Create a TestCase for Customer Profile OneToOne Fields
+# crm_user.tests.models.test_CustomerProfileModel.OneToOneTests
+class OneToOneTests(TestCase):
+    """ Define a TestCase for Customer Model OneToOne Fields """
+    @classmethod 
+    def setUpTestData(cls):
+        """ Define setUpTestData method for Customer Profile Model OneToOne Fields """
+        Customer.objects.create_user(
+            email="doe@example.com",
+            first_name="Sara",
+            middle_name="Lee",
+            last_name="Doe",
+            birth_date='1993-04-14',
+            phone_number="+12125556789",
+        )
+        
+    def setUp(self):
+        """ Define setUp method for Customer Profile Model OneToOne Fields """
+        self.profile = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(id=1)
+        
+    def test_user_one_to_one_related_name(self):
+        """ Test that Customer Profile Model User has a related name value """
+        self.assertEqual(self.profile, self.user.profile)
+        
+    def test_user_one_to_one_on_delete(self):
+        """ Test that Customer Profile Model User has on_delete models.CASCADE """
+        user = Customer.objects.get(id=1)
+        profile = CustomerProfile.objects.get(id=1) 
+        self.assertEqual(profile.user, user)
+        user.delete()
+        self.assertEqual(Customer.objects.filter(id=1).exists(), False)
+        self.assertEqual(CustomerProfile.objects.filter(id=1).exists(), False)
+ 
