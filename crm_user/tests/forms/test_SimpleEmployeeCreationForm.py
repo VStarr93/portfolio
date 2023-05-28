@@ -124,3 +124,22 @@ class FormHelpTests(TestCase):
         form = SimpleEmployeeCreationForm(self.formdata)
         self.assertTrue(form.fields['email'].help_text == 'Enter your email address')
         
+# Create a TestCase for SimpleEmployeeCreationForm Methods
+# crm_user.tests.forms.test_SimpleEmployeeCreationForm.MethodTests
+class MethodTests(TestCase):
+    """ Define a TestCase for SimpleEmployeeCreationForm Methods """
+    def setUp(self):
+        """ MethodTests setUp method to create form data """
+        self.formdata = {
+            'first_name': 'Sara',
+            'middle_name': 'Elizabeth',
+            'last_name': 'Jackson',
+            'email': 'test@example.com',
+        }
+    
+    def test_save_method(self):
+        """ Test that SimpleEmployeeCreationForm will create an Employee instance upon saving. """
+        form = SimpleEmployeeCreationForm(self.formdata)
+        self.assertEqual(form.is_valid(), True)
+        form.save()
+        self.assertEqual(Employee.objects.filter(first_name=self.formdata['first_name']).exists(), True)
