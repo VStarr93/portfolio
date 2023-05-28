@@ -5,6 +5,7 @@
 
 from django.test import TestCase
 from crm_user.forms import SimpleCustomerCreationForm
+from crm_user.models import Customer
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
