@@ -21,6 +21,7 @@ from django.contrib.auth.models import Permission
 admin.site.register(AdminProfile)
 admin.site.register(CustomerProfile)
 admin.site.register(EmployeeProfile)
+admin.site.register(Permission)
 
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
