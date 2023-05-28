@@ -625,6 +625,12 @@ class MethodTests(TestCase):
             User.objects.create_user(email='', first_name='John')
         self.assertEqual('You must provide an email address for user.', str(context.exception))
                  
+    def test_create_superuser(self):
+        """ Test that create_superuser will create a new user with is_staff and is_superuser set to True """
+        superuser = User.objects.create_superuser(email='admin@example.com', password='@dm1n3x@mpl3')
+        self.assertEqual(superuser.is_staff, True)
+        self.assertEqual(superuser.is_superuser, True)
+        
 # Create a TestCase for User Meta
 # crm_user.tests.models.test_UserModel.MetaTests 
 class MetaTests(TestCase):
