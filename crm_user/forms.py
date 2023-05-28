@@ -22,7 +22,8 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = get_user_model() 
         fields = ('first_name', 'middle_name', 'last_name', 'type', 'email', 'password1', 'password2', )
-
+        exclude = ('username',)
+        
 # Create CustomerCreationForm
 class CustomerCreationForm(UserCreationForm):
     """ Define a CustomerCreationForm """
@@ -344,7 +345,7 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = get_user_model()
         fields = ('first_name','middle_name', 'last_name', 'email', 'birth_date', 'phone_number', 'profile_photo')
-        exclude = ('password',)
+        exclude = ('password', 'username',)
         
 # Create Address Form
 class AddressForm(forms.ModelForm):
