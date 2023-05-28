@@ -346,6 +346,11 @@ class CustomUserChangeForm(UserChangeForm):
         model = get_user_model()
         fields = ('first_name','middle_name', 'last_name', 'email', 'birth_date', 'phone_number', 'profile_photo')
         exclude = ('password', 'username',)
+        error_messages = {
+            'birth_date': {
+                'invalid': 'Enter a date in the format yyyy-mm-dd.',
+            },
+        }
         
 # Create Address Form
 class AddressForm(forms.ModelForm):
