@@ -33,6 +33,9 @@ class InlineCustomerProfile(admin.TabularInline):
 class InlineEmployeeProfile(admin.TabularInline):
     model = EmployeeProfile
     
+class InlineAdminProfile(admin.TabularInline):
+    model = AdminProfile
+    
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
     """ This is the admin interface for the Address model. """
