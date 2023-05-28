@@ -36,6 +36,10 @@ class InlineEmployeeProfile(admin.TabularInline):
 class InlineAdminProfile(admin.TabularInline):
     model = AdminProfile
     
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+# Create your Admin Models here.
+
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
     """ This is the admin interface for the Address model. """
