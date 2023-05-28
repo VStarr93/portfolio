@@ -618,7 +618,13 @@ class MethodTests(TestCase):
         """ Test for User Model String Method """
         string = f'{self.user.last_name}, {self.user.first_name}'
         self.assertEqual(str(self.user), string)
-            
+        
+    def test_create_user_without_email_error(self):
+        """ Test that create_user method will raise a ValueError if email is not supplied. """
+        with self.assertRaises(ValueError) as context:
+            User.objects.create_user(email='', first_name='John')
+        self.assertEqual('You must provide an email address for user.', str(context.exception))
+                 
 # Create a TestCase for User Meta
 # crm_user.tests.models.test_UserModel.MetaTests 
 class MetaTests(TestCase):
