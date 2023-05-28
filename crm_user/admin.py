@@ -27,6 +27,9 @@ class AddressAdmin(admin.ModelAdmin):
     """ This is the admin interface for the Address model. """
     readonly_fields = ['id']
     
+    class Meta:
+        model = Address 
+    
 @admin.register(User)
 class CustomUserAdmin(BaseUserAdmin):
     """ This is the customer user admin interface for the CustomUser model. """
