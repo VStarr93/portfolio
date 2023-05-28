@@ -17,7 +17,7 @@ from django.contrib.auth.models import Permission
 
 
 
-admin.site.register(Admin)
+
 admin.site.register(AdminProfile)
 admin.site.register(CustomerProfile)
 admin.site.register(EmployeeProfile)
@@ -97,6 +97,13 @@ class CustomUserAdmin(BaseUserAdmin):
     
     class Meta:
         model = User 
+        
+@admin.register(Admin)
+class AdminAdmin(CustomUserAdmin):
+    inlines = [InlineAdminProfile,]
+    
+    class Meta:
+        model = Admin 
         
 @admin.register(Customer)
 class CustomerAdmin(CustomUserAdmin):
