@@ -124,3 +124,22 @@ class FormHelpTests(TestCase):
         form = SimpleAdminCreationForm(self.formdata)
         self.assertTrue(form.fields['email'].help_text == 'Enter your email address')
         
+# Create a TestCase for SimpleAdminCreationForm Methods
+# crm_user.tests.forms.test_SimpleAdminCreationForm.MethodTests
+class MethodTests(TestCase):
+    """ Define a TestCase for SimpleAdminCreationForm Methods """
+    def setUp(self):
+        """ MethodTests setUp method to create form data """
+        self.formdata = {
+            'first_name': 'Sara',
+            'middle_name': 'Elizabeth',
+            'last_name': 'Jackson',
+            'email': 'test@example.com',
+        }
+    
+    def test_save_method(self):
+        """ Test that SimpleAdminCreationForm will create an Admin instance upon saving. """
+        form = SimpleAdminCreationForm(self.formdata)
+        self.assertEqual(form.is_valid(), True)
+        form.save()
+        self.assertEqual(Admin.objects.filter(first_name=self.formdata['first_name']).exists(), True)
