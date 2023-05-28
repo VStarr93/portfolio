@@ -173,8 +173,6 @@ class SimpleCustomerCreationForm(forms.ModelForm):
                     css_class="d-flex flex-column flex-sm-row justify-content-start",
                 ),
                 'email',
-                'password1',
-                'password2',
                 css_class="text-start",
             ),
             Div(
@@ -227,8 +225,6 @@ class SimpleEmployeeCreationForm(forms.ModelForm):
                     css_class="d-flex flex-column flex-sm-row justify-content-start",
                 ),
                 'email',
-                'password1',
-                'password2',
                 css_class="text-start",
             ),
             Div(
@@ -279,8 +275,6 @@ class SimpleAdminCreationForm(forms.ModelForm):
                     css_class="d-flex flex-column flex-sm-row justify-content-start",
                 ),
                 'email',
-                'password1',
-                'password2',
                 css_class="text-start",
             ),
             Div(
