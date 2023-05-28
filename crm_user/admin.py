@@ -8,6 +8,7 @@ from crm_user.models import User, Customer, Employee, Admin, AdminProfile, Custo
 from crm_user.models import Address 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from crm_user.forms import CustomUserChangeForm, CustomUserCreationForm
+from django.contrib.auth.models import Permission
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
