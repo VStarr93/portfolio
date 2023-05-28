@@ -6,6 +6,7 @@
 from django.contrib import admin
 from crm_user.models import User, Customer, Employee, Admin, AdminProfile, CustomerProfile, EmployeeProfile 
 from crm_user.models import Address 
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
