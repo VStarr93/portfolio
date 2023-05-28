@@ -30,6 +30,9 @@ admin.site.register(Permission)
 class InlineCustomerProfile(admin.TabularInline):
     model = CustomerProfile 
    
+class InlineEmployeeProfile(admin.TabularInline):
+    model = EmployeeProfile
+    
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
     """ This is the admin interface for the Address model. """
