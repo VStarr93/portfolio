@@ -23,6 +23,9 @@ admin.site.register(CustomerProfile)
 admin.site.register(EmployeeProfile)
 admin.site.register(Permission)
 
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+# Create your Inline Models here.
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
     """ This is the admin interface for the Address model. """
