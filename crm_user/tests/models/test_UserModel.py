@@ -631,6 +631,12 @@ class MethodTests(TestCase):
         self.assertEqual(superuser.is_staff, True)
         self.assertEqual(superuser.is_superuser, True)
         
+    def test_create_superuser_is_staff_false_error(self):
+        """ Test that create_superuser method will raise a ValueError if is_staff is False """
+        with self.assertRaises(ValueError) as context:
+            superuser = User.objects.create_superuser(email='admin@example.com', password='@dm1n3x@mple', is_staff=False)
+        self.assertEqual('Superuser must have is_staff=True.', str(context.exception))
+        
 # Create a TestCase for User Meta
 # crm_user.tests.models.test_UserModel.MetaTests 
 class MetaTests(TestCase):
