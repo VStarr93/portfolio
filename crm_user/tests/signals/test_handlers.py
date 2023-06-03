@@ -4,7 +4,7 @@
 # IMPORTS
 
 from django.test import TestCase
-from crm_user.models import Address, User, AdminProfile, EmployeeProfile, CustomerProfile
+from crm_user.models import Address, User, AdminProfile, EmployeeProfile, CustomerProfile, Customer, Employee, Admin
 from crm_user.signals import handlers 
 
 # For Testing Permissions
