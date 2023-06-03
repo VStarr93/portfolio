@@ -11,6 +11,7 @@ from crm_user.forms import *
 from django.apps import apps
 from crm_user.models import Address
 from django.forms.models import modelformset_factory 
+from django.conf import settings 
 
 from guardian.decorators import permission_required_or_403
 
