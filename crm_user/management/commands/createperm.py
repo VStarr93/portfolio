@@ -57,7 +57,7 @@ class Command(BaseCommand):
                 name = "Can " + perm + " " + model
                 contenttype = ContentType.objects.get(app_label='crm_user', model=model)
                 try:
-                    permission = Permission.objects.get(codename=codename, name=name, content_type=contenttype)
+                    permission = Permission.objects.get(codename=codename, content_type=contenttype)
                     self.stdout.write("Permission already exists.")
                 except Permission.DoesNotExist:
                     permission = Permission.objects.create(codename=codename, name=name, content_type=contenttype)
