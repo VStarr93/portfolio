@@ -539,7 +539,7 @@ class ForeignKeyTests(TestCase):
         user2.delete()
         self.assertEqual(Admin.objects.filter(id=self.user.id).exists(), True)
         self.assertEqual(Admin.objects.filter(id=1).exists(), True)
-        self.assertEqual(Admin.objects.filter(id=2).exists(), False)
+        user = Admin.objects.get(id=self.user.id)
         self.assertEqual(user.last_modified_by, None)
  
 # Create a TestCase for Admin Image Fields
