@@ -665,6 +665,9 @@ class Address(Model):
         ordering = ['user']
         verbose_name = "Address"
         verbose_name_plural = "Addresses"
+        permissions = (
+            ('disable_address', 'Can Disable Address'),
+        )
         
     class Type(TextChoices):
         """
