@@ -290,7 +290,11 @@ class Employee(User):
     def __str__(self):
         """String for representing the Employee object (in Admin site etc.)."""
         return f'{self.last_name}, {self.first_name}'
-         
+        
+    def get_absolute_url(self):
+        """Returns the URL to access a particular instance of Employee."""
+        return reverse('crm_user:user-details', args=[int(self.id)])
+    
     # List model subclasses
     class Meta:
         """ Employee Model Meta Class """
