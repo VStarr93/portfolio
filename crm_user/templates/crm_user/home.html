@@ -5,11 +5,15 @@
 {% block title %}CRM Home{% endblock %}
 
 {% block app %} 
-{% if user.is_authenticated %}
-  Hi {{ user.first_name }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
+
+{% if user.type == 'CUSTOMER' %}
+{% include 'crm_user/snippets/dashboard/cust_menu.html' %}
+{% include 'crm_user/snippets/dashboard/cust_dashboard.html' %}
+{% elif user.type == 'ADMIN' %}
+{% include 'crm_user/snippets/dashboard/admin_menu.html' %}
+{% include 'crm_user/snippets/dashboard/admin_dashboard.html' %}
+{% elif user.type == 'EMPLOYEE' %}
+{% include 'crm_user/snippets/dashboard/emp_menu.html' %}
+{% include 'crm_user/snippets/dashboard/emp_dashboard.html' %}
 {% endif %}
 {% endblock %}
