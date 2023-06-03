@@ -198,3 +198,272 @@ class GetTests(TestCase):
         self.assertIsInstance(response.context['addressFormSet'].forms[0], AddressForm)
         self.assertIsInstance(response.context['addressFormHelper'], AddressFormHelper)
 
+# Create a TestCase for Profile View Post Request
+# crm_user.tests.views.test_ProfileView.PostTests
+@freeze_time(timezone.now())
+@override_settings(MEDIA_ROOT=MEDIA_ROOT)
+class PostTests(TestCase):
+    """ Define a TestCase for Profile View Post Request """
+    @classmethod 
+    def setUpTestData(cls):
+        # Create password 
+        cls.password = 'P@ssw0rd3x@mpl3'
+        
+        # Create users 
+        cls.admin = Admin.objects.create_user(email='admin@example.com', password=cls.password)
+        cls.employee = Employee.objects.create_user(email='employee@example.com', password=cls.password)
+        cls.customer = Customer.objects.create_user(email='customer@example.com', password=cls.password)
+        
+        # Create Form Data
+        cls.photo = SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg")
+        cls.files = {
+            'profile_photo': cls.photo,
+        }
+        cls.changedata = {
+            'first_name': 'John',
+            'middle_name': 'Jacob',
+            'last_name': 'Smith',
+            'email': 'jsmith@example.com',
+            'birth_date': '1993-04-14',
+            'phone_number': '+12124448769',
+            #'profile_photo': self.photo,
+            'submitChange': True,
+        }
+        cls.customizedata = {
+            'theme': 'PURPLE',
+            'language': 'SPANISH',
+            'submitCustomize': True,
+        }
+        cls.addressdata1 = {
+            'form-0-name': 'home',
+            'form-0-type': 'RESIDENTIAL',
+            'form-0-address_line1': '123 Sara Lane',
+            'form-0-city': 'Houston',
+            'form-0-state': 'TX',
+            'form-0-zip': '77891',
+            'form-TOTAL_FORMS': 1,
+            'form-INITIAL_FORMS': 0,
+            'form-MAX-NUM_FORMS': 1000,            
+            'form-MIN-NUM_FORMS': 0,
+            'submitAddress': True,
+        }
+        cls.addressdatadelete = {
+            'form-0-name': 'home',
+            'form-0-type': 'RESIDENTIAL',
+            'form-0-address_line1': '123 Sara Lane',
+            'form-0-city': 'Houston',
+            'form-0-state': 'TX',
+            'form-0-zip': '77891',
+            'form-0-DELETE': True,
+            'form-0-id': 1,
+            'form-TOTAL_FORMS': 1,
+            'form-INITIAL_FORMS': 1,
+            'form-MAX-NUM_FORMS': 1000,            
+            'form-MIN-NUM_FORMS': 0,
+            'submitAddress': True,
+        }
+        cls.addressdata2 = {
+            'form-0-name': 'home',
+            'form-0-type': 'RESIDENTIAL',
+            'form-0-address_line1': '123 Sara Lane',
+            'form-0-city': 'Houston',
+            'form-0-state': 'TX',
+            'form-0-zip': '77891',
+            'form-1-name': 'work',
+            'form-1-type': 'COMMERCIAL',
+            'form-1-address_line1': '567 Business Lane',
+            'form-1-city': 'Spring',
+            'form-1-state': 'TX',
+            'form-1-zip': '77801',
+            'form-TOTAL_FORMS': 2,
+            'form-INITIAL_FORMS': 0,
+            'form-MAX-NUM_FORMS': 1000,            
+            'form-MIN-NUM_FORMS': 0,
+            'submitAddress': True,
+        }
+
+        # Create User Clients
+        cls.aclient = Client()
+        cls.eclient = Client()
+        cls.cclient = Client()
+        
+        # Log in User for each client
+        cls.aclient.login(email=cls.admin.email, password=cls.password)
+        cls.eclient.login(email=cls.employee.email, password=cls.password)
+        cls.cclient.login(email=cls.customer.email, password=cls.password)
+        
+        # Create Post Request for Customize Form 
+        cls.aCustomizeResponse = cls.aclient.post(reverse('crm_user:profile'), cls.customizedata)
+        cls.eCustomizeResponse = cls.eclient.post(reverse('crm_user:profile'), cls.customizedata)
+        cls.cCustomizeResponse = cls.cclient.post(reverse('crm_user:profile'), cls.customizedata)
+        
+        # Create Post Request for Address Form
+        cls.aAddressResponse = cls.aclient.post(reverse('crm_user:profile'), cls.addressdata1)
+        cls.eAddressResponse = cls.eclient.post(reverse('crm_user:profile'), cls.addressdata1)
+        cls.cAddressResponse = cls.cclient.post(reverse('crm_user:profile'), cls.addressdata1)
+        
+        # Create Post Request for Change Form 
+        cls.aChangeResponse = cls.aclient.post(reverse('crm_user:profile'), cls.changedata)
+        cls.eChangeResponse = cls.eclient.post(reverse('crm_user:profile'), cls.changedata)
+        cls.cChangeResponse = cls.cclient.post(reverse('crm_user:profile'), cls.changedata)
+        
+    @classmethod 
+    def tearDownClass(cls):
+        shutil.rmtree(MEDIA_ROOT, ignore_errors=True)
+        super().tearDownClass()
+
+    def test_redirect_on_success_change_form(self):
+        """ Test that Profile View redirects user to profile after successful CustomUserChangeForm post """
+        # Create Response variable
+        response = self.__class__.aChangeResponse
+        
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects successful post to profile view
+        self.assertRedirects(response, reverse('crm_user:profile'))
+        
+    def test_redirect_on_success_admin_customize_form(self):
+        """ Test that Profile View redirects user to profile after successful AdminCustomizeForm post """
+        # Create Response variable
+        response = self.__class__.aCustomizeResponse
+        
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects successful post to profile view
+        self.assertRedirects(response, reverse('crm_user:profile'))
+        
+    def test_redirect_on_success_employee_customize_form(self):
+        """ Test that Profile View redirects user to profile after successful EmployeeCustomizeForm post """
+        # Create Response variable
+        response = self.__class__.eCustomizeResponse
+        
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects successful post to profile view
+        self.assertRedirects(response, reverse('crm_user:profile'))
+        
+    def test_redirect_on_success_customer_customize_form(self):
+        """ Test that Profile View redirects user to profile after successful CustomerCustomizeForm post """
+        # Create Response variable
+        response = self.__class__.cCustomizeResponse
+        
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects successful post to profile view
+        self.assertRedirects(response, reverse('crm_user:profile'))
+        
+    def test_redirect_on_success_address_form(self):
+        """ Test that Profile View redirects user to profile after successful AddressForm post """
+        # Create Response variable
+        response = self.__class__.cAddressResponse
+        
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects successful post to profile view
+        self.assertRedirects(response, reverse('crm_user:profile'))
+        
+    def test_db_change_form(self):
+        """ Test that a valid CustomUserChangeForm submitted by user updates database correctly. """
+        # Create Response variable
+        response = self.__class__.aChangeResponse
+
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that database was updated correctly
+        admin = Admin.objects.get(id=self.admin.id)
+        self.assertEqual(admin.first_name, 'John')
+        self.assertEqual(admin.middle_name, 'Jacob')
+        self.assertEqual(admin.last_name, 'Smith')
+        self.assertEqual(admin.email, 'jsmith@example.com')
+        self.assertEqual(admin.birth_date, datetime.date(1993, 4, 14))
+        self.assertEqual(admin.phone_number, '+12124448769')
+        self.assertEqual(admin.last_modified_by, admin)
+        self.assertEqual(admin.last_modified, timezone.now())
+        #self.assertEqual(admin.profile_photo, self.photo )
+    
+    def test_db_address_form(self):
+        """ Test that a valid AddressForm submitted by user updates database correctly. """
+        # Create Response variable
+        response = self.__class__.aAddressResponse
+
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that database was updated correctly
+        user = User.objects.get(id=self.admin.id)
+        address = Address.objects.filter(user=user).first()
+        self.assertIn(address, user.addresses.all())
+        self.assertEqual(user.last_modified_by, user)
+        self.assertEqual(user.last_modified, timezone.now())
+        
+    def test_db_admin_customize_form(self):
+        """ Test that a valid AdminCustomizeForm submitted by user updates database correctly. """
+        # Create Response variable
+        response = self.__class__.aCustomizeResponse
+
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that database was updated correctly
+        user = Admin.objects.get(id=self.admin.id)
+        self.assertEqual(user.last_modified_by, user)
+        self.assertEqual(user.last_modified, timezone.now())
+        self.assertEqual(user.admin_profile.theme, 'PURPLE')
+        self.assertEqual(user.admin_profile.language, 'SPANISH')
+        
+    def test_db_employee_customize_form(self):
+        """ Test that a valid EmployeeCustomizeForm submitted by user updates database correctly. """
+        # Create Response variable
+        response = self.__class__.eCustomizeResponse
+
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that database was updated correctly
+        user = Employee.objects.get(id=self.employee.id)
+        self.assertEqual(user.last_modified_by, user)
+        self.assertEqual(user.last_modified, timezone.now())
+        self.assertEqual(user.emp_profile.theme, 'PURPLE')
+        self.assertEqual(user.emp_profile.language, 'SPANISH')
+        
+    def test_db_customer_customize_form(self):
+        """ Test that a valid CustomerCustomizeForm submitted by user updates database correctly. """
+        # Create Response variable
+        response = self.__class__.cCustomizeResponse
+
+        # Check that response status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that database was updated correctly
+        user = Customer.objects.get(id=self.customer.id)
+        self.assertEqual(user.last_modified_by, user)
+        self.assertEqual(user.last_modified, timezone.now())
+        self.assertEqual(user.profile.theme, 'PURPLE')
+        self.assertEqual(user.profile.language, 'SPANISH')
+        
+    def test_address_delete(self):
+        """ Test that address is deleted successfully when checked """
+        # Create Response variable
+        response = self.__class__.aAddressResponse
+
+        # Check that status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that address was created
+        self.assertEqual(Address.objects.filter(id=1).exists(), True)
+        
+        # Create a Post request to delete Address in AddressForm
+        response = self.aclient.post(reverse('crm_user:profile'), self.addressdatadelete)
+
+        # Check that status is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that address was deleted
+        self.assertEqual(Address.objects.filter(id=1).exists(), False)
+        
