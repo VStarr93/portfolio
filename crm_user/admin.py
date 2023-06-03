@@ -16,10 +16,6 @@ from guardian.admin import GuardedModelAdmin
 #-------------------------------------------------------------
 # Register your models here.
 
-
-
-
-
 admin.site.register(AdminProfile)
 admin.site.register(CustomerProfile)
 admin.site.register(EmployeeProfile)
