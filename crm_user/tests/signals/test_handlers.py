@@ -403,3 +403,210 @@ class EmployeeSetPermsTests(TestCase):
         # check that employee is not in Customer group
         self.assertEqual(self.employee.groups.filter(name='Customer').exists(), False)
    
+# Create a TestCase for Employee Profile Set Permissions Reciever 
+# crm_user.tests.signals.test_handlers.EmployeeProfileSetPermsTests
+class EmployeeProfileSetPermsTests(TestCase):
+    """ Define a TestCase for Employee Profile Set Permissions Reciever """
+    def setUp(self):
+        """ Define a setUp method for EmployeeProfileSetPermsTests to create test users and groups """
+        # Create Employee 
+        self.employee = Employee.objects.create_user(email="test@example.com")
+        self.profile = EmployeeProfile.objects.get(user=self.employee)
+        self.user = User.objects.create_user(email="test1@example.com")
+        # Get Admin Group
+        self.admin_group = Group.objects.get(name='Admins')
+        self.employee_manager_group = Group.objects.get(name='Employee - Manager')
+        self.employee_standard_group = Group.objects.get(name='Employee - Standard')
+        
+    def test_employee_profile_created_employee_view_permission(self):
+        """ Test that when an employee profile is created, the employee receives view permission for that object (their profile) """
+
+        self.assertEqual(self.employee.has_perm('view_employeeprofile', self.profile), True)
+        
+    def test_employee_profile_created_employee_change_permission(self):
+        """ Test that when an employee profile is created, the employee receives change permission for that object (their profile) """
+
+        self.assertEqual(self.employee.has_perm('change_employeeprofile', self.profile), True)
+        
+    def test_employee_profile_created_admin_group_view_permission(self):
+        """ Test that when an employee profile is created, Admin group has view permission for this profile """
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has view permissions for this profile 
+        self.assertEqual(self.user.has_perm('view_employeeprofile', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have view permissions for this profile
+        self.assertEqual(self.user.has_perm('view_employeeprofile', self.profile), False)
+        
+    def test_employee_profile_created_admin_group_delete_permission(self):
+        """ Test that when an employee profile is created, Admin group has delete permission for this profile"""
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_employeeprofile', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_employeeprofile', self.profile), False)
+        
+    def test_employee_profile_created_admin_group_change_hire_date_permission(self):
+        """ Test that when an employee profile is created, Admin group has change hire date permission for this profile"""
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has change hire date permission for this profile
+        self.assertEqual(self.user.has_perm('change_employee_hire_date', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have change hire date permission for this profile
+        self.assertEqual(self.user.has_perm('change_employee_hire_date', self.profile), False)
+        
+    def test_employee_profile_created_admin_group_change_status_permission(self):
+        """ Test that when an employee profile is created, Admin group has change status permission for this profile """
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has change status permissions for this profile 
+        self.assertEqual(self.user.has_perm('change_employee_status', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have change status permissions for this profile
+        self.assertEqual(self.user.has_perm('change_employee_status', self.profile), False)
+        
+    def test_employee_profile_created_admin_group_make_manager_permission(self):
+        """ Test that when an employee profile is created, Admin group has make manager permission for this profile"""
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has make manager permission for this profile
+        self.assertEqual(self.user.has_perm('make_employee_manager', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have make manager permission for this profile
+        self.assertEqual(self.user.has_perm('make_employee_manager', self.profile), False)
+        
+    def test_employee_profile_created_employee_manager_group_view_permission(self):
+        """ Test that when an employee profile is created, Employee Manager Group has view permission for this profile """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has view permission for this profile
+        self.assertEqual(self.user.has_perm('view_employeeprofile', self.profile), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have view permission for this profile
+        self.assertEqual(self.user.has_perm('view_employeeprofile', self.profile), False)
+        
+    def test_employee_profile_created_employee_manager_group_delete_permission(self):
+        """ Test that when an employee profile is created, Employee Manager Group has delete permission for this profile """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_employeeprofile', self.profile), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_employeeprofile', self.profile), False)
+        
+    def test_employee_profile_created_employee_manager_group_change_hire_date_permission(self):
+        """ Test that when an employee profile is created, Employee Manager Group has change hire date permission for this profile """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has change hire date permission for this profile
+        self.assertEqual(self.user.has_perm('change_employee_hire_date', self.profile), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have change hire date permission for this profile
+        self.assertEqual(self.user.has_perm('change_employee_hire_date', self.profile), False)
+        
+    def test_employee_profile_created_employee_manager_group_change_status_permission(self):
+        """ Test that when an employee profile is created, Employee Manager Group has change status permission for this profile """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has change status permission for this profile
+        self.assertEqual(self.user.has_perm('change_employee_status', self.profile), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have change status permission for this profile
+        self.assertEqual(self.user.has_perm('change_employee_status', self.profile), False)
+        
+    def test_employee_profile_created_employee_manager_group_make_manager_permission(self):
+        """ Test that when an employee profile is created, Employee Manager Group has make manager permission for this profile """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has make manager permission for this profile
+        self.assertEqual(self.user.has_perm('make_employee_manager', self.profile), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have make manager permission for this profile
+        self.assertEqual(self.user.has_perm('make_employee_manager', self.profile), False)
+        
+    def test_employee_profile_update_nonmanager_to_manager_permission(self):
+        """ Test that if a nonmanager gets changed to manager, that permissions are correctly updated """
+        # Check that employee profile is set as nonmanager
+        self.assertEqual(self.profile.is_manager, False)
+        
+        # Check that employee has permissions for nonmanager
+        self.assertIn(self.employee_standard_group, self.employee.groups.all())
+        self.assertNotIn(self.employee_manager_group, self.employee.groups.all())
+        
+        # Change employee profile to manager
+        self.profile.is_manager = True
+        self.profile.save()
+        
+        # Check that employee has permissions for manager
+        self.assertIn(self.employee_manager_group, self.employee.groups.all())
+        self.assertNotIn(self.employee_standard_group, self.employee.groups.all())
+        
+    def test_employee_profile_update_manager_to_nonmanager_permission(self):
+        """" Test that if a manager gets changed to nonmanager, that permissions are correctly updated """
+        # Check that employee profile is set as nonmanager
+        self.assertEqual(self.profile.is_manager, False)
+        
+        # Check that employee has permissions for nonmanager
+        self.assertIn(self.employee_standard_group, self.employee.groups.all())
+        self.assertNotIn(self.employee_manager_group, self.employee.groups.all())
+        
+        # Change employee profile to manager
+        self.profile.is_manager = True
+        self.profile.save()
+        
+        # Check that employee has permissions for manager
+        self.assertIn(self.employee_manager_group, self.employee.groups.all())
+        self.assertNotIn(self.employee_standard_group, self.employee.groups.all())
+        
+        # Change employee profile to nonmanager
+        self.profile.is_manager = False
+        self.profile.save()
+        
+        # Check that employee has permissions for nonmanager
+        self.assertIn(self.employee_standard_group, self.employee.groups.all())
+        self.assertNotIn(self.employee_manager_group, self.employee.groups.all())
+        
