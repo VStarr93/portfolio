@@ -89,6 +89,44 @@ def customer_set_permissions(sender, **kwargs):
         group, create = Group.objects.get_or_create(name='Customer')
         user.groups.add(group)
     
+# Add Receiver for setting permissions on new customer profile creation
+@receiver(post_save, sender=CustomerProfile)
+def customer_profile_set_permissions(sender, **kwargs):
+    """
+    Set object-level permissions. 
+    The customer user can view and change the object, 
+    The Admin group can view, and delete the object,
+    The Employee - Manager group can view, and delete the object,
+    The Employee - Standard group can view the object.
+    """
+    
+    profile, created = kwargs["instance"], kwargs["created"]
+    user = profile.user
+    if created and user.email != settings.ANONYMOUS_USER_NAME:      
+        # Get permissions
+        content_type = ContentType.objects.get_for_model(CustomerProfile)
+        view_perm = Permission.objects.get(content_type__app_label='crm_user', codename='view_customerprofile')  
+        change_perm = Permission.objects.get(content_type__app_label='crm_user', codename='change_customerprofile')  
+        delete_perm = Permission.objects.get(content_type__app_label='crm_user', codename='delete_customerprofile')  
+        
+        # Assign the customer view and change permission
+        assign_perm(view_perm, user, profile)
+        assign_perm(change_perm, user, profile)
+
+        # Assign Admin Group view and delete permissions
+        group, created = Group.objects.get_or_create(name='Admins')
+        assign_perm(view_perm, group, profile)
+        assign_perm(delete_perm, group, profile)
+
+        # Assign Employee - Manager Group view and delete permissions
+        group, created = Group.objects.get_or_create(name='Employee - Manager')
+        assign_perm(view_perm, group, profile)
+        assign_perm(delete_perm, group, profile)
+
+        # Assign Employee - Standard Group view permission
+        group, created = Group.objects.get_or_create(name='Employee - Standard')
+        assign_perm(view_perm, group, profile)
+    
 # Add Receiver for creating Employee Profile from Employee Model
 @receiver(post_save, sender=Employee)
 def create_employee_profile(sender, **kwargs):
