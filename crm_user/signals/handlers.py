@@ -331,17 +331,6 @@ def user_create_profile(sender, **kwargs):
         user.save()
         customer = Customer.objects.get(email=user.email)
         customer.welcome()
-        form = PasswordResetForm({'email': user.email,})
-        assert form.is_valid()
-        request = HttpRequest()
-        request.META['SERVER_NAME'] = 'localhost'
-        request.META['SERVER_PORT'] = '8000'
-        form.save(
-            request=request, 
-            use_https=False,
-            from_email='veronicastarr93@gmail.com',
-            email_template_name='registration/password_reset_email.html'
-        )
         
     elif created and user.type == "EMPLOYEE":
         new_profile = EmployeeProfile.objects.create(
@@ -351,17 +340,6 @@ def user_create_profile(sender, **kwargs):
         user.save()
         employee = Employee.objects.get(email=user.email)
         employee.welcome()
-        form = PasswordResetForm({'email': user.email,})
-        assert form.is_valid()
-        request = HttpRequest()
-        request.META['SERVER_NAME'] = 'localhost'
-        request.META['SERVER_PORT'] = '8000'
-        form.save(
-            request=request, 
-            use_https=False,
-            from_email='veronicastarr93@gmail.com',
-            email_template_name='registration/password_reset_email.html'
-        )
         
     elif created and user.type == "ADMIN":
         new_profile = AdminProfile.objects.create(
@@ -371,17 +349,6 @@ def user_create_profile(sender, **kwargs):
         user.save()
         admin = Admin.objects.get(email=user.email)
         admin.welcome()
-        form = PasswordResetForm({'email': user.email,})
-        assert form.is_valid()
-        request = HttpRequest()
-        request.META['SERVER_NAME'] = 'localhost'
-        request.META['SERVER_PORT'] = '8000'
-        form.save(
-            request=request, 
-            use_https=False,
-            from_email='veronicastarr93@gmail.com',
-            email_template_name='registration/password_reset_email.html'
-        )
         
 # Add Receiver for Updated last modified from Address Model
 @receiver(post_save, sender=Address)
