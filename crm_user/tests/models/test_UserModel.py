@@ -44,7 +44,7 @@ class LabelTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Labels """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     def test_id_label(self):
         """ Test for User Model ID Label """
@@ -120,7 +120,7 @@ class MaxLengthTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Max Lengths """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     def test_id_max_length(self):
         """ Test for User Model ID Max Length """
@@ -196,7 +196,7 @@ class HelpTextTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Help Text """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     def test_id_help_text(self):
         """ Test for User Model ID Help Text """
@@ -272,7 +272,7 @@ class ReqTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Required Fields """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     def test_id_required(self):
         """ Test that User Model ID is not required """
@@ -372,7 +372,7 @@ class DefaultTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Defaults """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     def test_id_default(self):
         """ Test that User Model ID has no default value """
@@ -448,7 +448,7 @@ class ChoicesTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Choices """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     def test_id_choices(self):
         """ Test that User Model ID has no choices value """
@@ -524,7 +524,7 @@ class ForeignKeyTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Foreign Key Fields """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     def test_type_foreign_key_related_name(self):
         """ Test that User Model Type has a related name value """
@@ -563,7 +563,7 @@ class ImageTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Image Fields """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     @classmethod 
     def tearDownClass(cls):
@@ -662,7 +662,7 @@ class MetaTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Meta """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     def test_ordering(self):
         """ Test User Model Ordering """
