@@ -194,3 +194,12 @@ LOGOUT_REDIRECT_URL = 'login'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# Guardian Settings
+ANONYMOUS_USER_NAME = 'anonymoususer@example.com'
+
+GUARDIAN_MONKEY_PATCH = False
+
+GUARDIAN_GET_INIT_ANONYMOUS_USER = 'crm_user.models.get_anonymous_user_instance'
+
+GUARDIAN_RAISE_403 = True
