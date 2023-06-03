@@ -183,16 +183,8 @@ def profile_view(request):
         if 'submitChange' in request.POST:
             if form.is_valid():
                 user = request.user
-                if user.type == "CUSTOMER":
-                    user.profile.last_modified_by = user 
-                    user.profile.save()
-                elif user.type == "ADMIN":
-                    user.admin_profile.last_modified_by = user 
-                    user.admin_profile.save()
-                elif user.type == "EMPLOYEE":
-                    user.emp_profile.last_modified_by = user 
-                    user.emp_profile.save()
-                    
+                user.last_modified_by = user 
+                user.save()    
                 form.save()
                 
             else:
@@ -210,15 +202,8 @@ def profile_view(request):
                     address.save()
                     
                 user = request.user
-                if user.type == "CUSTOMER":
-                    user.profile.last_modified_by = user 
-                    user.profile.save()
-                elif user.type == "ADMIN":
-                    user.admin_profile.last_modified_by = user 
-                    user.admin_profile.save()
-                elif user.type == "EMPLOYEE":
-                    user.emp_profile.last_modified_by = user 
-                    user.emp_profile.save()
+                user.last_modified_by = user 
+                user.save()
                     
             else:
                 context['addressFormSet'] = addressFormSet
@@ -227,15 +212,8 @@ def profile_view(request):
         if 'submitCustomize' in request.POST:
             if customizeForm.is_valid():
                 user = request.user
-                if user.type == "CUSTOMER":
-                    user.profile.last_modified_by = user 
-                    user.profile.save()
-                elif user.type == "ADMIN":
-                    user.admin_profile.last_modified_by = user 
-                    user.admin_profile.save()
-                elif user.type == "EMPLOYEE":
-                    user.emp_profile.last_modified_by = user 
-                    user.emp_profile.save()
+                user.last_modified_by = user 
+                user.save()
                     
                 customizeForm.save()
             else:
