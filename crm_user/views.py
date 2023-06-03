@@ -17,11 +17,15 @@ from django.forms.models import modelformset_factory
 
 # INDEX view
 def index(request):
-    """
-        This is a basic view for crm_user app.
-    """
-    return HttpResponse("This is the Index for CRM_USER app.")
-
+    """ This is a basic view for crm_user app. """
+    context = {
+        'user': request.user,
+    }
+    if request.user.is_authenticated and request.user.email != settings.ANONYMOUS_USER_NAME:
+        return render(request, 'crm_user/home.html', context)
+    else:
+        return redirect('login')
+        
 # User Registration View
 def user_registration(request):
     """
