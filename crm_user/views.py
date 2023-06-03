@@ -35,25 +35,41 @@ def user_registration(request):
     """ This is a user registration view. """
     if request.method == 'GET':
         if 'customerBtn' in request.GET:
-            context = {
-                'form': CustomerCreationForm
-            }
-            return render(request, 'crm_user/registration.html', context)
+            if request.user.is_anonymous or request.user.type == 'EMPLOYEE' or request.user.type == 'ADMIN':
+                context = {
+                    'form': CustomerCreationForm
+                }
+                return render(request, 'crm_user/registration.html', context)
+            else:
+                return redirect('crm_user:home')
 
         if 'empBtn' in request.GET:
-            context = {
-                'form': SimpleEmployeeCreationForm
-            }
-            return render(request, 'crm_user/registration.html', context)
+            if request.user.is_anonymous or request.user.email == settings.ANONYMOUS_USER_NAME:
+                return redirect('crm_user:home')
+            elif request.user.type == 'ADMIN' or (request.user.type == 'EMPLOYEE' and request.user.emp_profile.is_manager == True):
+                context = {
+                    'form': SimpleEmployeeCreationForm
+                }
+                return render(request, 'crm_user/registration.html', context)
+            else:
+                return redirect('crm_user:home')
 
         if 'adminBtn' in request.GET:
-            context = {
-                'form': SimpleAdminCreationForm
-            }
-            return render(request, 'crm_user/registration.html', context)
+            if request.user.is_anonymous or request.user.email == settings.ANONYMOUS_USER_NAME:
+                return redirect('crm_user:home')
+            elif request.user.type == 'ADMIN' or (request.user.type == 'EMPLOYEE' and request.user.emp_profile.is_manager == True):
+                context = {
+                    'form': SimpleAdminCreationForm
+                }
+                return render(request, 'crm_user/registration.html', context)
+            else:
+                return redirect('crm_user:home')
         else:
-            context = {}
-            return render(request, 'crm_user/user_registration.html', context)
+            if request.user.is_anonymous or request.user.email == settings.ANONYMOUS_USER_NAME or request.user.type == 'EMPLOYEE' or request.user.type == 'ADMIN':
+                context = {}
+                return render(request, 'crm_user/user_registration.html', context)
+            else:
+                return redirect('crm_user:home')
 
     if request.method == 'POST':
         
