@@ -37,7 +37,7 @@ class LabelTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Employee Profile Model Labels """
-        self.user = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(email="doe@example.com")
         
     def test_id_label(self):
         """ Test for Employee Profile Model ID Label """
@@ -92,7 +92,7 @@ class MaxLengthTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Employee Profile Model Max Lengths """
-        self.user = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(email="doe@example.com")
         
     def test_id_max_length(self):
         """ Test for Employee Profile Model ID Max Length """
@@ -147,7 +147,7 @@ class HelpTextTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Employee Profile Model Help Text """
-        self.user = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(email="doe@example.com")
         
     def test_id_help_text(self):
         """ Test for Employee Profile Model ID Help Text """
@@ -202,7 +202,7 @@ class ReqTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Employee Profile Model Required Fields """
-        self.user = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(email="doe@example.com")
         
     def test_id_required(self):
         """ Test that Employee Profile Model ID is not required """
@@ -271,7 +271,7 @@ class DefaultTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Employee Profile Model Defaults """
-        self.user = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(email="doe@example.com")
         
     def test_id_default(self):
         """ Test that Employee Profile Model ID has no default values """
@@ -326,7 +326,7 @@ class ChoicesTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Employee Profile Model Choices """
-        self.user = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(email="doe@example.com")
         
     def test_id_choices(self):
         """ Test that Employee Profile Model ID has no choices values """
@@ -381,7 +381,7 @@ class OneToOneTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Employee Profile Model OneToOne Fields """
-        self.profile = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(email="doe@example.com")
         self.user = Employee.objects.get(id=1)
         
     def test_user_one_to_one_related_name(self):
@@ -415,7 +415,7 @@ class MethodTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Employee Profile Model Methods """
-        self.user = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(email="doe@example.com")
         
     def test_string_method(self):
         """ Test for Employee Profile Model String Method """
@@ -449,7 +449,7 @@ class MetaTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Employee Profile Model Meta """
-        self.user = EmployeeProfile.objects.get(id=1)
+        self.user = Employee.objects.get(email="doe@example.com")
         
     def test_ordering(self):
         """ Test Employee Profile Model Ordering """
