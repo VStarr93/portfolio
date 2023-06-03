@@ -681,6 +681,7 @@ class Address(Model):
     id = models.BigAutoField(_('ID'), primary_key=True) # Primary Key
     
     # Define Boolean model fields
+    is_disabled = models.BooleanField(_('Is Disabled'), default=False, help_text="Is this Address disabled?")
 
     # Define Optional model fields
     address_line2 = models.CharField(_('Address Line 2'), max_length=254, blank=True, null=True, help_text="Enter the apartment or suite number" )
