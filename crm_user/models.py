@@ -504,6 +504,7 @@ class EmployeeProfile(Model):
         verbose_name_plural = "Employee Profiles"
         permissions = (
             ('change_employee_hire_date', 'Can Change Employee Hire Date'),
+            ('change_employee_status', 'Can Change Employee Status'),
         )
         
     class Status(TextChoices):
