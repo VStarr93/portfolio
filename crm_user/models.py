@@ -494,7 +494,7 @@ class EmployeeProfile(Model):
     
     def get_absolute_url(self):
         """Returns the URL to access a particular instance of EmployeeProfile."""
-        return reverse('employee-profile', args=[int(self.id)])
+        return reverse('crm_user:user-details', args=[int(self.user.id)])
     
     # Define model subclasses
     class Meta:
