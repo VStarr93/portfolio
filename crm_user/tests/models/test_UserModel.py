@@ -592,7 +592,7 @@ class MethodTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for User Model Methods """
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.get(email='doe@example.com')
         
     def test_age_method(self):
         """ Test for User Model Age Method """
