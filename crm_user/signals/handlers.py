@@ -11,6 +11,7 @@ from django.http import HttpRequest
 from django.conf import settings 
 from django.utils import timezone 
 
+from guardian.shortcuts import assign_perm
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 # Create your handlers here.
