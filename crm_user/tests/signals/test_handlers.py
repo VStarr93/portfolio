@@ -980,3 +980,32 @@ class AddressSetPermsTests(TestCase):
         # Check that user does not have view permission for that address
         self.assertEqual(self.user1.has_perm('view_address', self.address), False)
         
+# create a TestCase for Address Change Update Last Modfied Receiver 
+class AddressChangeUpdateLastModifiedTests(TestCase):
+    """ Define a TestCase for Address Change Update Last Modfied Receiver """
+    def setUp(self):
+        """ Define a setUp method for Address Change Update Last Modfied Receiver """
+        self.user = User.objects.create_user(email='user@example.com')
+        self.address = Address.objects.create(
+            name = 'home',
+            type = 'RESIDENTIAL',
+            address_line1 = '123 Sara lane',
+            city = 'Houston', 
+            state = 'TX',
+            zip = 77301,
+            user = self.user,
+        )
+        
+    @freeze_time(timezone.now())
+    def test_user_updated_on_address_change(self):
+        """ Test that User last_modified field is updated on Address Change """
+        # Check that user last modified does not equal current timestamp
+        self.assertNotEqual(self.user.last_modified, timezone.now())
+        
+        # Update address
+        self.address.name = 'work'
+        self.address.save()
+        
+        # Check that user last modified was updated with current timestamp
+        self.assertEqual(self.user.last_modified, timezone.now())
+        
