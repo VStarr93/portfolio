@@ -592,7 +592,7 @@ class MethodTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Methods """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email="doe@example.com")
         
     def test_age_method(self):
         """ Test for Admin Model Age Method """
