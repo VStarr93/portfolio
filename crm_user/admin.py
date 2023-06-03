@@ -129,7 +129,6 @@ class CustomerAdmin(CustomUserAdmin):
         
 @admin.register(Employee)
 class EmployeeAdmin(CustomUserAdmin):
-    inlines = [InlineEmployeeProfile,]
     
     class Meta:
         model = Employee
