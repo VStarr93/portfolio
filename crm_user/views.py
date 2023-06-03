@@ -122,7 +122,6 @@ def user_registration(request):
 # User Profile View
 def profile_view(request):
     """ This is a User Profile view"""
-    
     #FormSet 
     AddressFormSet = modelformset_factory(Address, form=AddressForm, extra=1, can_delete=True)
     
