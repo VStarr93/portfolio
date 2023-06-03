@@ -834,3 +834,149 @@ class EmployeeProfileChangePermsTests(TestCase):
         # Check that employee is not in employee manager group
         self.assertEqual(self.employee.groups.filter(name='Employee - Manager').exists(), False)
         
+# create a TestCase for Address Set Permissions Receiver 
+# crm_user.tests.signals.test_handlers.AddressSetPermsTests 
+class AddressSetPermsTests(TestCase):
+    """ Define a TestCase for Address Set Permissions Receiver """
+    def setUp(self):
+        """ Define a setUp method for Address Set Permissions Receiver to create test users and addresses """
+        self.user1 = User.objects.create_user(email='user1@example.com')
+        self.user = User.objects.create_user(email='user@example.com')
+        self.address = Address.objects.create(
+            name = 'home',
+            type = 'RESIDENTIAL',
+            address_line1 = '123 Sara lane',
+            city = 'Houston', 
+            state = 'TX',
+            zip = 77301,
+            user = self.user,
+        )
+        # Get Groups
+        self.admin_group = Group.objects.get(name='Admins')
+        self.employee_manager_group = Group.objects.get(name='Employee - Manager')
+        self.employee_standard_group = Group.objects.get(name='Employee - Standard')
+        
+    def test_new_address_user_view_permission(self):
+        """ Test that when a new address is created, the user has view permission for that address """
+        self.assertEqual(self.user.has_perm('view_address', self.address), True)
+        
+    def test_new_address_user_change_permission(self):
+        """ Test that when a new address is created, the user has change permission for that address """
+        self.assertEqual(self.user.has_perm('change_address', self.address), True)
+        
+    def test_new_address_user_disable_permission(self):
+        """ Test that when a new address is created, the user has disable permission for that address """
+        self.assertEqual(self.user.has_perm('disable_address', self.address), True)
+        
+    def test_new_address_admin_group_view_permission(self):
+        """ Test that when a new address is created, Admin Group has view permission for that address """
+        # add user to admin group
+        self.user1.groups.add(self.admin_group)
+        
+        # Check that user in admin group has view permission
+        self.assertEqual(self.user1.has_perm('view_address', self.address), True)
+        
+        # remove user from admin group
+        self.user1.groups.remove(self.admin_group)
+        
+        # Check that user does not have view permission
+        self.assertEqual(self.user1.has_perm('view_address', self.address), False)
+        
+    def test_new_address_admin_group_change_permission(self):
+        """ Test that when a new address is created, Admin Group has change permission for that address """
+        # add user to admin group
+        self.user1.groups.add(self.admin_group)
+        
+        # Check that user in admin group has change permission
+        self.assertEqual(self.user1.has_perm('change_address', self.address), True) 
+        
+        # remove user from admin group
+        self.user1.groups.remove(self.admin_group)
+        
+        # Check that user does not have change permission
+        self.assertEqual(self.user1.has_perm('change_address', self.address), False)
+        
+    def test_new_address_admin_group_delete_permission(self):
+        """ Test that when a new address is created, Admin Group has delete permission for that address """
+        # add user to admin group
+        self.user1.groups.add(self.admin_group)
+        
+        # Check that user in admin group has delete permission for that address
+        self.assertEqual(self.user1.has_perm('delete_address', self.address), True) 
+        
+        # remove user from admin group
+        self.user1.groups.remove(self.admin_group)
+        
+        # Check that user does not have delete permission 
+        self.assertEqual(self.user1.has_perm('delete_address', self.address), False)
+        
+    def test_new_address_admin_group_disable_permission(self):
+        """ Test that when a new address is created, Admin Group has disable permission for that address """
+        # add user to admin group
+        self.user1.groups.add(self.admin_group)
+        
+        # Check that user in admin group has disable permission for that address
+        self.assertEqual(self.user1.has_perm('disable_address', self.address), True) 
+        
+        # remove user from admin group
+        self.user1.groups.remove(self.admin_group)
+        
+        # Check that user does not have disable permission for that address
+        self.assertEqual(self.user1.has_perm('disable_address', self.address), False)
+        
+    def test_new_address_employee_manager_group_view_permission(self):
+        """ Test that when a new addres is created, Employee Manager Group has view permission for that address """
+        # add user to employee manager group
+        self.user1.groups.add(self.employee_manager_group)
+        
+        # Check that user in employee manager group has view permission for that address
+        self.assertEqual(self.user1.has_perm('view_address', self.address), True)
+        
+        # remove user from employee manager group
+        self.user1.groups.remove(self.employee_manager_group)
+        
+        # check that user does not have view permission for that address
+        self.assertEqual(self.user1.has_perm('view_address', self.address), False)
+        
+    def test_new_address_employee_manager_group_change_permission(self):
+        """ Test that when a new address is created, Employee Manager Group has change permission for that address """
+        # add user to employee manager group
+        self.user1.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has change permission for that address
+        self.assertEqual(self.user1.has_perm('change_address', self.address), True)
+        
+        # remove user from employee manager group
+        self.user1.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have change permission for that address
+        self.assertEqual(self.user1.has_perm('change_address', self.address), False)
+        
+    def test_new_address_employee_manager_group_disable_permission(self):
+        """" Test that when a new address is created, Employee Manager Group has disable permission for that address """
+        # add user to employee manager group
+        self.user1.groups.add(self.employee_manager_group)
+        
+        # Check that user in employee manager group has disable permission for that address
+        self.assertEqual(self.user1.has_perm('disable_address', self.address), True) 
+        
+        # remove user from employee manager group
+        self.user1.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have disable permission for that address
+        self.assertEqual(self.user1.has_perm('disable_address', self.address), False)
+        
+    def test_new_address_employee_standard_group_view_permission(self):
+        """ Test that when a new address is created, Employee Standard Group has view permission for that address """
+        # add user to employee standard group
+        self.user1.groups.add(self.employee_standard_group)
+        
+        # Check that user in employee standard group has view permission for that address
+        self.assertEqual(self.user1.has_perm('view_address', self.address), True)
+        
+        # remove user from employee standard group
+        self.user1.groups.remove(self.employee_standard_group)
+        
+        # Check that user does not have view permission for that address
+        self.assertEqual(self.user1.has_perm('view_address', self.address), False)
+        
