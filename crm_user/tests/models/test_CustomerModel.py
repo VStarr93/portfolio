@@ -540,7 +540,7 @@ class ForeignKeyTests(TestCase):
         self.assertEqual(Customer.objects.filter(email='doe@example.com').exists(), True)
         self.assertEqual(Customer.objects.filter(email='test@example.com').exists(), False)
         user = Customer.objects.get(email='doe@example.com')
-        self.assertEqual(user1.last_modified_by, None)
+        self.assertEqual(user.last_modified_by, None)
  
 # Create a TestCase for Customer Image Fields
 # crm_user.tests.models.tests_CustomerModel.ImageTests 
