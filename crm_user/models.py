@@ -352,6 +352,10 @@ class Admin(User):
         """String for representing the Admin object (in Admin site etc.)."""
         return f'{self.last_name}, {self.first_name}'
  
+    def get_absolute_url(self):
+        """Returns the URL to access a particular instance of Admin."""
+        return reverse('crm_user:user-details', args=[int(self.id)])
+    
     # List model subclasses
     class Meta:
         """ Admin Model Meta Class """
