@@ -88,7 +88,6 @@ class CustomUserAdmin(GuardedModelAdmin, BaseUserAdmin):
 
         if not is_superuser:
             disabled_fields |= {
-                'email',
                 'is_superuser',
                 'user_permissions',
             }
