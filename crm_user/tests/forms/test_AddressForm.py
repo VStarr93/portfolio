@@ -161,9 +161,9 @@ class FormUserTests(TestCase):
     
     def setUp(self):
         """ FormUser setUp method to create test user variables """
-        self.customer = Customer.objects.get(id=1)
-        self.admin = Admin.objects.get(id=2)
-        self.employee = Employee.objects.get(id=3)
+        self.customer = Customer.objects.get(email='customer@example.com')
+        self.admin = Admin.objects.get(email='admin@example.com')
+        self.employee = Employee.objects.get(email='employee@example.com')
         self.formdata = {
             'name': 'home',
             'type': 'RESIDENTIAL',
