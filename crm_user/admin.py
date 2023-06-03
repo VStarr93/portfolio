@@ -67,9 +67,7 @@ class CustomUserAdmin(GuardedModelAdmin, BaseUserAdmin):
         ("Account Information", {'fields': ['type', ]}),
         ("Permissions", {'fields': ['is_superuser', 'is_staff', 'is_active', 'groups', 'user_permissions']}),
     ]
-    actions = [
-        'activate_users',
-    ]
+    actions = ['activate_users']
 
     def activate_users(self, request, queryset):
         assert request.user.has_perm('auth.change_user')
