@@ -319,7 +319,7 @@ def admin_profile_set_permissions(sender, **kwargs):
 
 # Add Receiver for creating Profiles from User Model
 @receiver(post_save, sender=User)
-def create_profile(sender, **kwargs):
+def user_create_profile(sender, **kwargs):
     user = kwargs['instance']
     created = kwargs['created']
     if created and user.type == "CUSTOMER":
