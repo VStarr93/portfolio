@@ -74,39 +74,51 @@ def user_registration(request):
     if request.method == 'POST':
         
         if 'submitCustomer' in request.POST:
-            form = CustomerCreationForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('/accounts/login/')
+            if request.user.is_anonymous or request.user.email == settings.ANONYMOUS_USER_NAME or request.user.type == 'EMPLOYEE' or request.user.type == 'ADMIN':
+                form = CustomerCreationForm(request.POST)
+                if form.is_valid():
+                    form.save()
+                    return redirect('/accounts/login/')
+                else:
+                    context = {
+                        'form': CustomerCreationForm(request.POST)
+                    }
+                    return render(request, 'crm_user/registration.html', context)
             else:
-                context = {
-                    'form': CustomerCreationForm(request.POST)
-                }
-                return render(request, 'crm_user/registration.html', context)
+                return redirect('crm_user:home')
         
         if 'submitEmployeeSimple' in request.POST:
-            form = SimpleEmployeeCreationForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('/accounts/login/')
+            if request.user.is_anonymous or request.user.email == settings.ANONYMOUS_USER_NAME:
+                return redirect('crm_user:home')
+            elif request.user.type == 'ADMIN' or (request.user.type == 'EMPLOYEE' and request.user.emp_profile.is_manager == True):
+                form = SimpleEmployeeCreationForm(request.POST)
+                if form.is_valid():
+                    form.save()
+                    return redirect('/accounts/login/')
+                else:
+                    context = {
+                        'form': SimpleEmployeeCreationForm(request.POST),
+                    }
+                    return render(request, 'crm_user/registration.html', context)
             else:
-                context = {
-                    'form': SimpleEmployeeCreationForm(request.POST),
-                }
-                return render(request, 'crm_user/registration.html', context)
+                return redirect('crm_user:home')
         
         if 'submitAdminSimple' in request.POST:
-            form = SimpleAdminCreationForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('/accounts/login/')
+            if request.user.is_anonymous or request.user.email == settings.ANONYMOUS_USER_NAME:
+                return redirect('crm_user:home')
+            elif request.user.type == 'ADMIN' or (request.user.type == 'EMPLOYEE' and request.user.emp_profile.is_manager == True):
+                form = SimpleAdminCreationForm(request.POST)
+                if form.is_valid():
+                    form.save()
+                    return redirect('/accounts/login/')
+                else:
+                    context = {
+                        'form': SimpleAdminCreationForm(request.POST),
+                    }
+                    return render(request, 'crm_user/registration.html', context)
             else:
-                context = {
-                    'form': SimpleAdminCreationForm(request.POST),
-                }
-                return render(request, 'crm_user/registration.html', context)
-        
-    
+                return redirect('crm_user:home')
+       
 # User Profile View
 def profile_view(request):
     """ This is a User Profile view"""
