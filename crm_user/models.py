@@ -166,6 +166,7 @@ class User(GuardianUserMixin, AbstractUser):
         CUSTOMER = "CUSTOMER", "Customer"
         EMPLOYEE = "EMPLOYEE", "Employee"
         ADMIN = "ADMIN", "Admin"
+        ANON = 'ANON', 'Anonymous'
     
     # list model fields
     type = models.CharField(_('Type'), max_length=8, choices=Types.choices, default=Types.CUSTOMER, help_text="Select the user type")
