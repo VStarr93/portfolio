@@ -29,8 +29,8 @@ from django.utils import timezone
 
 # Create a TestCase for Handler Tests
 # crm_user.tests.signals.test_handlers.HandlerTests
-class HandlerTests(TestCase):
-    """ Define a TestCase for Signal Handlers """
+class UserCreateProfileTests(TestCase):
+    """ Define a TestCase for New User creates Profile Tests """
     def test_user_type_customer_creates_customer(self):
         """ Test that creating a user type customer creates a Customer Profile object """
         User.objects.create_user(email='test@example.com', type='CUSTOMER')
