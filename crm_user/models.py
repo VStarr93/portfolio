@@ -595,6 +595,9 @@ class AdminProfile(Model):
         ordering = ['user']
         verbose_name = "Admin Profile"
         verbose_name_plural = "Admin Profiles"
+        permissions = (
+            ('change_admin_status', 'Can Change Admin Status'),
+        )
         
     class Status(TextChoices):
         """
