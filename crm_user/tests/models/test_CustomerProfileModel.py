@@ -37,7 +37,7 @@ class LabelTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Customer Profile Model Labels """
-        self.user = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(email="doe@example.com")
         
     def test_id_label(self):
         """ Test for Customer Profile Model ID Label """
@@ -102,7 +102,7 @@ class MaxLengthTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Customer Profile Model Max Lengths """
-        self.user = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(email="doe@example.com")
         
     def test_id_max_length(self):
         """ Test for Customer Profile Model ID Max Length """
@@ -167,7 +167,7 @@ class HelpTextTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Customer Profile Model Help Text """
-        self.user = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(email="doe@example.com")
         
     def test_id_help_text(self):
         """ Test for Customer Profile Model ID Help Text """
@@ -232,7 +232,7 @@ class ReqTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Customer Profile Model Required Fields """
-        self.user = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(email="doe@example.com")
         
     def test_id_required(self):
         """ Test that Customer Profile Model ID is not required """
@@ -315,7 +315,7 @@ class DefaultTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Customer Profile Model Defaults """
-        self.user = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(email="doe@example.com")
         
     def test_id_default(self):
         """ Test that Customer Profile Model ID has no default values """
@@ -380,7 +380,7 @@ class ChoicesTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Customer Profile Model Choices """
-        self.user = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(email="doe@example.com")
         
     def test_id_choices(self):
         """ Test that Customer Profile Model ID has no choices values """
@@ -445,7 +445,7 @@ class OneToOneTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Customer Profile Model OneToOne Fields """
-        self.profile = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(email="doe@example.com")
         self.user = Customer.objects.get(id=1)
         
     def test_user_one_to_one_related_name(self):
@@ -479,7 +479,7 @@ class MethodTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Customer Profile Model Methods """
-        self.user = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(email="doe@example.com")
         
     def test_string_method(self):
         """ Test for Customer Profile Model String Method """
@@ -513,7 +513,7 @@ class MetaTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Customer Profile Model Meta """
-        self.user = CustomerProfile.objects.get(id=1)
+        self.user = Customer.objects.get(email="doe@example.com")
         
     def test_ordering(self):
         """ Test Customer Profile Model Ordering """
