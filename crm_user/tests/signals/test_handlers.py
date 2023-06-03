@@ -7,6 +7,8 @@ from django.test import TestCase
 from crm_user.models import Address, User, AdminProfile, EmployeeProfile, CustomerProfile
 from crm_user.signals import handlers 
 
+# For Testing Permissions
+from guardian.shortcuts import assign_perm
 # For Testing Email Services
 from django.core import mail 
 
