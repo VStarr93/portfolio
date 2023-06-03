@@ -44,7 +44,7 @@ class LabelTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Labels """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email='doe@example.com')
         
     def test_id_label(self):
         """ Test for Admin Model ID Label """
@@ -120,7 +120,7 @@ class MaxLengthTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Max Lengths """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email="doe@example.com")
         
     def test_id_max_length(self):
         """ Test for Admin Model ID Max Length """
@@ -196,7 +196,7 @@ class HelpTextTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Help Text """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email="doe@example.com")
         
     def test_id_help_text(self):
         """ Test for Admin Model ID Help Text """
@@ -272,7 +272,7 @@ class ReqTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Required Fields """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email="doe@example.com")
         
     def test_id_required(self):
         """ Test that Admin Model ID is not required """
@@ -372,7 +372,7 @@ class DefaultTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Defaults """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email="doe@example.com")
         
     def test_id_default(self):
         """ Test that Admin Model ID has no default value """
@@ -448,7 +448,7 @@ class ChoicesTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Choices """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email="doe@example.com")
         
     def test_id_choices(self):
         """ Test that Admin Model ID has no choices value """
@@ -524,7 +524,7 @@ class ForeignKeyTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Foreign Key Fields """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email="doe@example.com")
         
     def test_type_foreign_key_related_name(self):
         """ Test that Admin Model Type has a related name value """
@@ -563,7 +563,7 @@ class ImageTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Image Fields """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email="doe@example.com")
         
     @classmethod 
     def tearDownClass(cls):
@@ -654,7 +654,7 @@ class MetaTests(TestCase):
         
     def setUp(self):
         """ Define setUp method for Admin Model Meta """
-        self.user = Admin.objects.get(id=1)
+        self.user = Admin.objects.get(email="doe@example.com")
         
     def test_ordering(self):
         """ Test Admin Model Ordering """
