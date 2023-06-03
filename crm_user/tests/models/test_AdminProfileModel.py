@@ -396,10 +396,8 @@ class OneToOneTests(TestCase):
         
     def test_user_one_to_one_on_delete(self):
         """ Test that Admin Profile Model User has on_delete models.CASCADE """
-        user = Admin.objects.get(id=1)
-        profile = AdminProfile.objects.get(id=1) 
-        self.assertEqual(profile.user, user)
-        user.delete()
+        self.assertEqual(self.profile.user, self.user)
+        self.user.delete()
         self.assertEqual(Admin.objects.filter(id=1).exists(), False)
         self.assertEqual(AdminProfile.objects.filter(id=1).exists(), False)
  
