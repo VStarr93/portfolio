@@ -130,6 +130,7 @@ def user_registration(request):
                 return redirect('crm_user:home')
        
 # User Profile View
+@user_passes_test(not_anonymous)
 def profile_view(request):
     """ This is a User Profile view"""
     #FormSet 
