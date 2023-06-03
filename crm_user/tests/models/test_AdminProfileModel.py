@@ -38,6 +38,7 @@ class LabelTests(TestCase):
     def setUp(self):
         """ Define setUp method for Admin Profile Model Labels """
         self.user = Admin.objects.get(email="doe@example.com")
+        self.profile = AdminProfile.objects.get(user=self.user)
         
     def test_id_label(self):
         """ Test for Admin Profile Model ID Label """
@@ -93,6 +94,7 @@ class MaxLengthTests(TestCase):
     def setUp(self):
         """ Define setUp method for Admin Profile Model Max Lengths """
         self.user = Admin.objects.get(email="doe@example.com")
+        self.profile = AdminProfile.objects.get(user=self.user)
         
     def test_id_max_length(self):
         """ Test for Admin Profile Model ID Max Length """
@@ -148,6 +150,7 @@ class HelpTextTests(TestCase):
     def setUp(self):
         """ Define setUp method for Admin Profile Model Help Text """
         self.user = Admin.objects.get(email="doe@example.com")
+        self.profile = AdminProfile.objects.get(user=self.user)
         
     def test_id_help_text(self):
         """ Test for Admin Profile Model ID Help Text """
@@ -203,6 +206,7 @@ class ReqTests(TestCase):
     def setUp(self):
         """ Define setUp method for Admin Profile Model Required Fields """
         self.user = Admin.objects.get(email="doe@example.com")
+        self.profile = AdminProfile.objects.get(user=self.user)
         
     def test_id_required(self):
         """ Test that Admin Profile Model ID is not required """
@@ -272,6 +276,7 @@ class DefaultTests(TestCase):
     def setUp(self):
         """ Define setUp method for Admin Profile Model Defaults """
         self.user = Admin.objects.get(email="doe@example.com")
+        self.profile = AdminProfile.objects.get(user=self.user)
         
     def test_id_default(self):
         """ Test that Admin Profile Model ID has no default values """
@@ -327,6 +332,7 @@ class ChoicesTests(TestCase):
     def setUp(self):
         """ Define setUp method for Admin Profile Model Choices """
         self.user = Admin.objects.get(email="doe@example.com")
+        self.profile = AdminProfile.objects.get(user=self.user)
         
     def test_id_choices(self):
         """ Test that Admin Profile Model ID has no choices values """
@@ -382,7 +388,7 @@ class OneToOneTests(TestCase):
     def setUp(self):
         """ Define setUp method for Admin Profile Model OneToOne Fields """
         self.user = Admin.objects.get(email="doe@example.com")
-        self.user = Admin.objects.get(id=1)
+        self.profile = AdminProfile.objects.get(user=self.user)
         
     def test_user_one_to_one_related_name(self):
         """ Test that Admin Profile Model User has a related name value """
@@ -416,6 +422,7 @@ class MethodTests(TestCase):
     def setUp(self):
         """ Define setUp method for Admin Profile Model Methods """
         self.user = Admin.objects.get(email="doe@example.com")
+        self.profile = AdminProfile.objects.get(user=self.user)
         
     def test_string_method(self):
         """ Test for Admin Profile Model String Method """
@@ -450,6 +457,7 @@ class MetaTests(TestCase):
     def setUp(self):
         """ Define setUp method for Admin Profile Model Meta """
         self.user = Admin.objects.get(email="doe@example.com")
+        self.profile = AdminProfile.objects.get(user=self.user)
         
     def test_ordering(self):
         """ Test Admin Profile Model Ordering """
