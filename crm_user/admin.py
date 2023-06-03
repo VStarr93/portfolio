@@ -116,7 +116,6 @@ class CustomUserAdmin(GuardedModelAdmin, BaseUserAdmin):
         
 @admin.register(Admin)
 class AdminAdmin(CustomUserAdmin):
-    inlines = [InlineAdminProfile,]
     
     class Meta:
         model = Admin 
