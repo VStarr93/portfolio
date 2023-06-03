@@ -222,3 +222,21 @@ def profile_view(request):
         
         return redirect('crm_user:profile')
         
+# User Details View
+@user_passes_test(not_anonymous)
+@permission_required_or_403('crm_user.view_user', (User, 'id', 'id'))
+def user_details_view(request, id):
+    """ Define a view to display customer details """
+    # Global Variables
+    context = {}
+    user = User.objects.get(id=id)
+    if user.type == 'CUSTOMER':
+        context['customer'] = user 
+    if user.type == 'ADMIN':
+        context['admin'] = user 
+    if user.type == 'EMPLOYEE':
+        context['employee'] = user 
+        
+    # GET Method
+    if request.method == 'GET':
+        return render(request, 'crm_user/user_details.html', context)
