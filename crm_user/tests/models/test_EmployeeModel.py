@@ -596,17 +596,15 @@ class MethodTests(TestCase):
         
     def test_age_method(self):
         """ Test for Employee Model Age Method """
-        user = Employee.objects.get(id=1)
-        self.assertEqual(user.age(), 30)
+        self.assertEqual(self.user.age(), 30)
         
     @freeze_time(timezone.now())
     def test_save_method_last_modified(self):
         """ Test that Employee Model Save Method updates last_modified field"""
-        user = Employee.objects.get(id=1)
-        self.assertNotEqual(user.last_modified, timezone.now())
-        user.first_name = 'John'
-        user.save()
-        self.assertEqual(user.last_modified, timezone.now())
+        self.assertNotEqual(self.user.last_modified, timezone.now())
+        self.user.first_name = 'John'
+        self.user.save()
+        self.assertEqual(self.user.last_modified, timezone.now())
         
     def test_save_method_type(self):
         """ Test that Employee Model Save Method changes type to Employee """
