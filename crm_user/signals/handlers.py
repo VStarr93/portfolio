@@ -26,7 +26,17 @@ def create_customer_profile(sender, **kwargs):
         )
         user.last_modified_by = user 
         user.save()
-        form = PasswordResetForm({'email': new_profile.user.email,})
+        
+# Add Receiver for sending password reset on new user creation
+@receiver(post_save, sender=User)
+@receiver(post_save, sender=Admin)
+@receiver(post_save, sender=Employee)
+@receiver(post_save, sender=Customer)
+def send_password_reset(sender, **kwargs):
+    user = kwargs['instance']
+    created = kwargs['created']
+    if created :
+        form = PasswordResetForm({'email': user.email,})
         assert form.is_valid()
         request = HttpRequest()
         request.META['SERVER_NAME'] = 'localhost'
