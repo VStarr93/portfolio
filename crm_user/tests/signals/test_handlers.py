@@ -186,3 +186,98 @@ class CustomerSetPermsTests(TestCase):
         # check that customer is not in Employee Standard group
         self.assertEqual(self.user.groups.filter(name='Employee - Standard').exists(), False)
 
+# Create a TestCase for Customer Profile Set Permissions Reciever 
+# crm_user.tests.signals.test_handlers.CustomerProfileSetPermsTests
+class CustomerProfileSetPermsTests(TestCase):
+    """ Define a TestCase for Customer Profile Set Permissions Reciever """
+    def setUp(self):
+        """ Define a setUp method for CustomerProfileSetPermsTests to create test users and groups """
+        # Create customer 
+        self.customer = Customer.objects.create_user(email="test@example.com")
+        self.profile = CustomerProfile.objects.get(user=self.customer)
+        self.user = User.objects.create_user(email="test1@example.com")
+        # Get Admin Group
+        self.admin_group = Group.objects.get(name='Admins')
+        self.employee_manager_group = Group.objects.get(name='Employee - Manager')
+        self.employee_standard_group = Group.objects.get(name='Employee - Standard')
+        
+    def test_customer_profile_created_customer_view_permission(self):
+        """ Test that when a customer profile is created, the customer receives view permission for that object (their profile) """
+
+        self.assertEqual(self.customer.has_perm('view_customerprofile', self.profile), True)
+        
+    def test_customer_profile_created_customer_change_permission(self):
+        """ Test that when a customer profile is created, the customer receives change permission for that object (their profile) """
+
+        self.assertEqual(self.customer.has_perm('change_customerprofile', self.profile), True)
+        
+    def test_customer_profile_created_admin_group_view_permission(self):
+        """ Test that when a customer profile is created, Admin group has view permission for this profile """
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has view permissions for this profile 
+        self.assertEqual(self.user.has_perm('view_customerprofile', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have view permissions for this profile
+        self.assertEqual(self.user.has_perm('view_customerprofile', self.profile), False)
+        
+    def test_customer_profile_created_admin_group_delete_permission(self):
+        """ Test that when a customer profile is created, Admin group has delete permission for this profile"""
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_customerprofile', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_customerprofile', self.profile), False)
+        
+    def test_customer_profile_created_employee_manager_group_view_permission(self):
+        """ Test that when a customer profile is created, Employee Manager Group has view permission for this profile """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has view permission for this profile
+        self.assertEqual(self.user.has_perm('view_customerprofile', self.profile), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have view permission for this profile
+        self.assertEqual(self.user.has_perm('view_customerprofile', self.profile), False)
+        
+    def test_customer_profile_created_employee_manager_group_delete_permission(self):
+        """ Test that when a customer profile is created, Employee Manager Group has delete permission for this profile """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_customerprofile', self.profile), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_customerprofile', self.profile), False)
+        
+    def test_customer_profile_created_employee_standard_group_view_permission(self):
+        """ Test that when a customer profile is created, Employee Standard Group has view permission for this profile """
+        # add user to Employee Standard Group
+        self.user.groups.add(self.employee_standard_group)
+        
+        # Check that user in Employee Standard Group has view permission for this profile
+        self.assertEqual(self.user.has_perm('view_customerprofile', self.profile), True)
+        
+        # remove user from Employee Standard Group
+        self.user.groups.remove(self.employee_standard_group)
+        
+        # Check that user does not have view permission for this profile
+        self.assertEqual(self.user.has_perm('view_customerprofile', self.profile), False)
+        
