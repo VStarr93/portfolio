@@ -532,7 +532,6 @@ class ForeignKeyTests(TestCase):
         
     def test_type_foreign_key_on_delete(self):
         """ Test that Customer Model Type has on_delete models.SET_NULL """
-        user1 = Customer.objects.get(id=1)
         user2 = Customer.objects.create_user(email='test@example.com')
         user1.last_modified_by = user2 
         user1.save()
