@@ -69,8 +69,8 @@ class Command(BaseCommand):
                         groupname = group + "_group"
                         groupname, created = Group.objects.get_or_create(name=group)
 
-                    # Add permissions to group
-                    groupname.permissions.add(permission.id)
+                        # Add permissions to group
+                        groupname.permissions.add(permission.id)
 
                 self.stdout.write(
                     self.style.SUCCESS('Successfully added %s to %s!' %(permission.name, groupname))
