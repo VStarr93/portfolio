@@ -287,6 +287,36 @@ def admin_set_permissions(sender, **kwargs):
         group, created = Group.objects.get_or_create(name='Admins')
         user.groups.add(group)
     
+# Add Receiver for setting permissions on new Admin Profile creation
+@receiver(post_save, sender=AdminProfile)
+def admin_profile_set_permissions(sender, **kwargs):
+    """
+    Set object-level permissions. 
+    The admin user can view, change, and delete the object, 
+    The Admin group can view, delete, change status, and make manager the object,
+    """
+    
+    profile, created = kwargs["instance"], kwargs["created"]
+    user = profile.user 
+    
+    if created and user.email != settings.ANONYMOUS_USER_NAME:      
+        # Get permissions
+        content_type = ContentType.objects.get_for_model(AdminProfile)
+        view_perm = Permission.objects.get(content_type__app_label='crm_user', codename='view_adminprofile')  
+        change_perm = Permission.objects.get(content_type__app_label='crm_user', codename='change_adminprofile')  
+        delete_perm = Permission.objects.get(content_type__app_label='crm_user', codename='delete_adminprofile')  
+        change_status_perm = Permission.objects.get(content_type__app_label='crm_user', codename='change_admin_status')
+        make_manager_perm = Permission.objects.get(content_type__app_label='crm_user', codename='make_admin_manager')
+        
+        # Assign the admin view, delete, and change permission
+        for perm in [view_perm, delete_perm, change_perm]:
+            assign_perm(perm,user,profile)
+
+        # Assign Admin Group view, delete, change status, and make manager permissions
+        group, created = Group.objects.get_or_create(name='Admins')
+        for perm in [view_perm, delete_perm, change_status_perm, make_manager_perm]:
+            assign_perm(perm, group, profile)
+
 # Add Receiver for creating Profiles from User Model
 @receiver(post_save, sender=User)
 def create_profile(sender, **kwargs):
