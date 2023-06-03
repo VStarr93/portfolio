@@ -42,37 +42,37 @@ class LabelTests(TestCase):
         
     def test_id_label(self):
         """ Test for Admin Profile Model ID Label """
-        field_label = self.user._meta.get_field('id').verbose_name 
+        field_label = self.profile._meta.get_field('id').verbose_name 
         self.assertEqual(field_label, 'ID')
         
     def test_work_id_label(self):
         """ Test for Admin Profile Model Work ID Label """
-        field_label = self.user._meta.get_field('work_id').verbose_name 
+        field_label = self.profile._meta.get_field('work_id').verbose_name 
         self.assertEqual(field_label, 'Work ID')
         
     def test_status_label(self):
         """ Test for Admin Profile Model Status Label """
-        field_label = self.user._meta.get_field('status').verbose_name
+        field_label = self.profile._meta.get_field('status').verbose_name
         self.assertEqual(field_label, 'Status')
         
     def test_user_label(self):
         """ Test for Admin Profile Model User Label """
-        field_label = self.user._meta.get_field('user').verbose_name 
+        field_label = self.profile._meta.get_field('user').verbose_name 
         self.assertEqual(field_label, 'Admin')
 
     def test_is_manager_label(self):
         """ Test for Admin Profile Model Is Manager Label """
-        field_label = self.user._meta.get_field('is_manager').verbose_name 
+        field_label = self.profile._meta.get_field('is_manager').verbose_name 
         self.assertEqual(field_label, 'Is Manager')
 
     def test_language_label(self):
         """ Test for Admin Profile Model Language Label """
-        field_label = self.user._meta.get_field('language').verbose_name 
+        field_label = self.profile._meta.get_field('language').verbose_name 
         self.assertEqual(field_label, 'Language')
         
     def test_theme_label(self):
         """ Test for Admin Profile Model Theme Label """
-        field_label = self.user._meta.get_field('theme').verbose_name
+        field_label = self.profile._meta.get_field('theme').verbose_name
         self.assertEqual(field_label, 'Theme')
         
 # Create a TestCase for Admin Profile Max Lengths
@@ -98,37 +98,37 @@ class MaxLengthTests(TestCase):
         
     def test_id_max_length(self):
         """ Test for Admin Profile Model ID Max Length """
-        max_length = self.user._meta.get_field('id').max_length 
+        max_length = self.profile._meta.get_field('id').max_length 
         self.assertEqual(max_length, None)
         
     def test_work_id_max_length(self):
         """ Test for Admin Profile Model Work ID Max Length """
-        max_length = self.user._meta.get_field('work_id').max_length 
+        max_length = self.profile._meta.get_field('work_id').max_length 
         self.assertEqual(max_length, None)
         
     def test_status_max_length(self):
         """ Test for Admin Profile Model Status Max Length """
-        max_length = self.user._meta.get_field('status').max_length
+        max_length = self.profile._meta.get_field('status').max_length
         self.assertEqual(max_length, 10)
         
     def test_user_max_length(self):
         """ Test for Admin Profile Model User Max Length """
-        max_length = self.user._meta.get_field('user').max_length 
+        max_length = self.profile._meta.get_field('user').max_length 
         self.assertEqual(max_length, None)
 
     def test_is_manager_max_length(self):
         """ Test for Admin Profile Model Is Manager Max Length """
-        max_length = self.user._meta.get_field('is_manager').max_length 
+        max_length = self.profile._meta.get_field('is_manager').max_length 
         self.assertEqual(max_length, None)
 
     def test_language_max_length(self):
         """ Test for Admin Profile Model Language Max Length """
-        max_length = self.user._meta.get_field('language').max_length 
+        max_length = self.profile._meta.get_field('language').max_length 
         self.assertEqual(max_length, 10)
         
     def test_theme_max_length(self):
         """ Test for Admin Profile Model Theme Max Length """
-        max_length = self.user._meta.get_field('theme').max_length
+        max_length = self.profile._meta.get_field('theme').max_length
         self.assertEqual(max_length, 6)
         
 # Create a TestCase for Admin Profile Help Text
@@ -154,37 +154,37 @@ class HelpTextTests(TestCase):
         
     def test_id_help_text(self):
         """ Test for Admin Profile Model ID Help Text """
-        help_text = self.user._meta.get_field('id').help_text 
+        help_text = self.profile._meta.get_field('id').help_text 
         self.assertEqual(help_text, '')
         
     def test_work_id_help_text(self):
         """ Test for Admin Profile Model Work ID Help Text """
-        help_text = self.user._meta.get_field('work_id').help_text 
+        help_text = self.profile._meta.get_field('work_id').help_text 
         self.assertEqual(help_text, "Your admin work ID is auto-generated and cannot be changed.")
         
     def test_status_help_text(self):
         """ Test for Admin Profile Model Status Help Text """
-        help_text = self.user._meta.get_field('status').help_text
+        help_text = self.profile._meta.get_field('status').help_text
         self.assertEqual(help_text, "Your admin status is adjusted based on employment status.")
         
     def test_user_help_text(self):
         """ Test for Admin Profile Model User Help Text """
-        help_text = self.user._meta.get_field('user').help_text 
+        help_text = self.profile._meta.get_field('user').help_text 
         self.assertEqual(help_text, "The Admin these details/model are associated with.")
 
     def test_is_manager_help_text(self):
         """ Test for Admin Profile Model Is Manager Help Text """
-        help_text = self.user._meta.get_field('is_manager').help_text 
+        help_text = self.profile._meta.get_field('is_manager').help_text 
         self.assertEqual(help_text, "Is this admin a manager?")
 
     def test_language_help_text(self):
         """ Test for Admin Profile Model Language Help Text """
-        help_text = self.user._meta.get_field('language').help_text 
+        help_text = self.profile._meta.get_field('language').help_text 
         self.assertEqual(help_text, "What language do you speak?")
         
     def test_theme_help_text(self):
         """ Test for Admin Profile Model Theme Help Text """
-        help_text = self.user._meta.get_field('theme').help_text
+        help_text = self.profile._meta.get_field('theme').help_text
         self.assertEqual(help_text, "Choose a theme to use.")
         
 # Create a TestCase for Admin Profile Required Fields
@@ -210,50 +210,50 @@ class ReqTests(TestCase):
         
     def test_id_required(self):
         """ Test that Admin Profile Model ID is not required """
-        blank = self.user._meta.get_field('id').blank 
-        null = self.user._meta.get_field('id').null  
+        blank = self.profile._meta.get_field('id').blank 
+        null = self.profile._meta.get_field('id').null  
         self.assertEqual(blank, True)
         self.assertEqual(null, False)
         
     def test_work_id_required(self):
         """ Test that Admin Profile Model Work ID is required """
-        blank = self.user._meta.get_field('work_id').blank 
-        null = self.user._meta.get_field('work_id').null 
+        blank = self.profile._meta.get_field('work_id').blank 
+        null = self.profile._meta.get_field('work_id').null 
         self.assertEqual(blank, False)
         self.assertEqual(null, False)
         
     def test_status_required(self):
         """ Test that Admin Profile Model Status is required """
-        blank = self.user._meta.get_field('status').blank
-        null = self.user._meta.get_field('status').null
+        blank = self.profile._meta.get_field('status').blank
+        null = self.profile._meta.get_field('status').null
         self.assertEqual(blank, False)
         self.assertEqual(null, False)
         
     def test_user_required(self):
         """ Test that Admin Profile Model User is required """
-        blank = self.user._meta.get_field('user').blank 
-        null = self.user._meta.get_field('user').null 
+        blank = self.profile._meta.get_field('user').blank 
+        null = self.profile._meta.get_field('user').null 
         self.assertEqual(blank, False)
         self.assertEqual(null, False)
 
     def test_is_manager_required(self):
         """ Test that Admin Profile Model Is Manager is required """
-        blank = self.user._meta.get_field('is_manager').blank 
-        null = self.user._meta.get_field('is_manager').null 
+        blank = self.profile._meta.get_field('is_manager').blank 
+        null = self.profile._meta.get_field('is_manager').null 
         self.assertEqual(blank, False)
         self.assertEqual(null, False)
 
     def test_language_required(self):
         """ Test that Admin Profile Model Language is required """
-        blank = self.user._meta.get_field('language').blank 
-        null = self.user._meta.get_field('language').null 
+        blank = self.profile._meta.get_field('language').blank 
+        null = self.profile._meta.get_field('language').null 
         self.assertEqual(blank, False)
         self.assertEqual(null, False)
         
     def test_theme_required(self):
         """ Test that Admin Profile Model Theme is required """
-        blank = self.user._meta.get_field('theme').blank
-        null = self.user._meta.get_field('theme').null
+        blank = self.profile._meta.get_field('theme').blank
+        null = self.profile._meta.get_field('theme').null
         self.assertEqual(blank, False)
         self.assertEqual(null, False)
     
@@ -280,38 +280,38 @@ class DefaultTests(TestCase):
         
     def test_id_default(self):
         """ Test that Admin Profile Model ID has no default values """
-        default = self.user._meta.get_field('id').default 
+        default = self.profile._meta.get_field('id').default 
         self.assertEqual(default, NOT_PROVIDED)
         
     def test_work_id_default(self):
         """ Test that Admin Profile Model Work ID has a default value """
-        default = self.user._meta.get_field('work_id').default 
+        default = self.profile._meta.get_field('work_id').default 
         self.assertEqual(default, AdminProfile.calc_work_id)
         
     def test_status_default(self):
         """ Test that Admin Profile Model Status has a default value """
-        default = self.user._meta.get_field('status').default
-        self.assertEqual(default, self.user.Status.TRAINING)
+        default = self.profile._meta.get_field('status').default
+        self.assertEqual(default, self.profile.Status.TRAINING)
         
     def test_user_default(self):
         """ Test that Admin Profile Model User has no default value """
-        default = self.user._meta.get_field('user').default 
+        default = self.profile._meta.get_field('user').default 
         self.assertEqual(default, NOT_PROVIDED)
 
     def test_is_manager_default(self):
         """ Test that Admin Profile Model Is Manager has a default value """
-        default = self.user._meta.get_field('is_manager').default 
+        default = self.profile._meta.get_field('is_manager').default 
         self.assertEqual(default, False)
 
     def test_language_default(self):
         """ Test that Admin Profile Model Language has a default value """
-        default = self.user._meta.get_field('language').default 
-        self.assertEqual(default, self.user.Language.ENGLISH)
+        default = self.profile._meta.get_field('language').default 
+        self.assertEqual(default, self.profile.Language.ENGLISH)
         
     def test_theme_default(self):
         """ Test that Admin Profile Model Theme has a default value """
-        default = self.user._meta.get_field('theme').default
-        self.assertEqual(default, self.user.Colors.GREEN)
+        default = self.profile._meta.get_field('theme').default
+        self.assertEqual(default, self.profile.Colors.GREEN)
        
 # Create a TestCase for Admin Profile Choices Fields
 # crm_user.tests.models.test_AdminProfileModel.ChoicesTests
@@ -336,38 +336,38 @@ class ChoicesTests(TestCase):
         
     def test_id_choices(self):
         """ Test that Admin Profile Model ID has no choices values """
-        choices = self.user._meta.get_field('id').choices 
+        choices = self.profile._meta.get_field('id').choices 
         self.assertEqual(choices, None)
         
     def test_work_id_choices(self):
         """ Test that Admin Profile Model Work ID has no choices value """
-        choices = self.user._meta.get_field('work_id').choices 
+        choices = self.profile._meta.get_field('work_id').choices 
         self.assertEqual(choices, None)
         
     def test_status_choices(self):
         """ Test that Admin Profile Model Status has a choices value """
-        choices = self.user._meta.get_field('status').choices
-        self.assertEqual(choices, self.user.Status.choices)
+        choices = self.profile._meta.get_field('status').choices
+        self.assertEqual(choices, self.profile.Status.choices)
         
     def test_user_choices(self):
         """ Test that Admin Profile Model User has no choices value """
-        choices = self.user._meta.get_field('user').choices 
+        choices = self.profile._meta.get_field('user').choices 
         self.assertEqual(choices, None)
 
     def test_is_manager_choices(self):
         """ Test that Admin Profile Model Is Manager has no choices value """
-        choices = self.user._meta.get_field('is_manager').choices 
+        choices = self.profile._meta.get_field('is_manager').choices 
         self.assertEqual(choices, None)
 
     def test_language_choices(self):
         """ Test that Admin Profile Model Language has a choices value """
-        choices = self.user._meta.get_field('language').choices 
-        self.assertEqual(choices, self.user.Language.choices)
+        choices = self.profile._meta.get_field('language').choices 
+        self.assertEqual(choices, self.profile.Language.choices)
         
     def test_theme_choices(self):
         """ Test that Admin Profile Model Theme has a choices value """
-        choices = self.user._meta.get_field('theme').choices
-        self.assertEqual(choices, self.user.Colors.choices)
+        choices = self.profile._meta.get_field('theme').choices
+        self.assertEqual(choices, self.profile.Colors.choices)
        
 # Create a TestCase for Admin Profile OneToOne Fields
 # crm_user.tests.models.test_AdminProfileModel.OneToOneTests
@@ -426,17 +426,17 @@ class MethodTests(TestCase):
         
     def test_string_method(self):
         """ Test for Admin Profile Model String Method """
-        string = f'{self.user.user.last_name}, {self.user.user.first_name}'
-        self.assertEqual(str(self.user), string)
+        string = f'{self.profile.user.last_name}, {self.profile.user.first_name}'
+        self.assertEqual(str(self.profile), string)
         
     def test_calc_work_id_method(self):
         """ Test for Admin Model cal_work_id Method """
-        self.assertEqual(self.user.work_id, 500001)
+        self.assertEqual(self.profile.work_id, 500001)
         self.assertEqual(AdminProfile.calc_work_id(), 500002)
         
     def test_get_absolute_url_method(self):
         """ Test that Admin Model get_absolute_url method returns correct url """
-        self.assertEqual(self.user.get_absolute_url(), 'user/admin/1')
+        self.assertEqual(self.profile.get_absolute_url(), f'/user/user-details/{self.user.id}')
         
 # Create a TestCase for Admin Profile Meta
 # crm_user.tests.models.test_AdminProfileModel.MetaTests 
@@ -461,13 +461,13 @@ class MetaTests(TestCase):
         
     def test_ordering(self):
         """ Test Admin Profile Model Ordering """
-        self.assertEqual(self.user._meta.ordering, ['user'])
+        self.assertEqual(self.profile._meta.ordering, ['user'])
 
     def test_verbose_name(self):
         """ Test Admin Profile Model Verbose Name """
-        self.assertEqual(self.user._meta.verbose_name, 'Admin Profile')
+        self.assertEqual(self.profile._meta.verbose_name, 'Admin Profile')
         
     def test_verbose_name_plural(self):
         """ Test Admin Profile Model Verbose Name Plural """
-        self.assertEqual(self.user._meta.verbose_name_plural, 'Admin Profiles')
+        self.assertEqual(self.profile._meta.verbose_name_plural, 'Admin Profiles')
         
