@@ -51,7 +51,15 @@ class CreatepermTests(TestCase):
         self.assertTrue(Group.objects.get(name='admins'))
         self.assertTrue(Permission.objects.get(name='Can modify user'))
         self.assertTrue(Group.objects.get(name='admins').permissions.get(name='Can modify user'))
-
+    
+    def test_createperm_already_exists(self):
+        """
+            createperm command runs successfully with 1 argument per option
+        """
+        out = StringIO()
+        call_command("createperm", "add", "-m", "user", stdout=out)
+        self.assertIn("Permission already exists", out.getvalue())
+        
     def test_createperm_two_models(self):
         """
             createperm command runs successfully with 2 arguments for model option
