@@ -229,6 +229,10 @@ class Customer(User):
         """String for representing the Customer object (in Admin site etc.)."""
         return f'{self.last_name}, {self.first_name}'
         
+    def get_absolute_url(self):
+        """Returns the URL to access a particular instance of Customer."""
+        return reverse('crm_user:user-details', args=[int(self.id)])
+    
     # List model subclasses
     class Meta:
         """ Customer Model Meta Class """
