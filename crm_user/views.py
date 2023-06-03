@@ -169,7 +169,7 @@ def profile_view(request):
     
     # POST Method
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         AddressFormSet = modelformset_factory(Address, form=AddressForm, can_delete=True)
         addressFormSet = AddressFormSet(request.POST)
         
