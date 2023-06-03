@@ -72,6 +72,6 @@ class Command(BaseCommand):
                         # Add permissions to group
                         groupname.permissions.add(permission.id)
 
-                self.stdout.write(
-                    self.style.SUCCESS('Successfully added %s to %s!' %(permission.name, groupname))
-                )
+                    self.stdout.write(
+                        self.style.SUCCESS('Successfully added %s to %s!' %(permission.name, groupname))
+                    )
