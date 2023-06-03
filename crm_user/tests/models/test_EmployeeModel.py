@@ -539,7 +539,7 @@ class ForeignKeyTests(TestCase):
         user2.delete()
         self.assertEqual(Employee.objects.filter(id=self.user.id).exists(), True)
         self.assertEqual(Employee.objects.filter(id=user2.id).exists(), False)
-        self.assertEqual(Employee.objects.filter(id=2).exists(), False)
+        user1 = Employee.objects.get(email='doe@example.com')
         self.assertEqual(user1.last_modified_by, None)
  
 # Create a TestCase for Employee Image Fields
