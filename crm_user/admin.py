@@ -10,6 +10,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from crm_user.forms import CustomUserChangeForm, CustomUserCreationForm
 from django.contrib.auth.models import Permission
 
+from guardian.admin import GuardedModelAdmin
+
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 # Register your models here.
