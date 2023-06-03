@@ -460,12 +460,10 @@ class OneToOneTests(TestCase):
         
     def test_user_one_to_one_on_delete(self):
         """ Test that Customer Profile Model User has on_delete models.CASCADE """
-        user = Customer.objects.get(id=1)
-        profile = CustomerProfile.objects.get(id=1) 
-        self.assertEqual(profile.user, user)
-        user.delete()
-        self.assertEqual(Customer.objects.filter(id=1).exists(), False)
-        self.assertEqual(CustomerProfile.objects.filter(id=1).exists(), False)
+        self.assertEqual(self.profile.user, self.user)
+        self.user.delete()
+        self.assertEqual(Customer.objects.filter(email='doe@example.com').exists(), False)
+        self.assertEqual(CustomerProfile.objects.filter(user=self.user).exists(), False)
  
 # Create a TestCase for Customer Profile Methods
 # crm_user.tests.models.test_CustomerProfileModel.MethodTests 
