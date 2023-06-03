@@ -39,7 +39,7 @@ class InlineAdminProfile(admin.TabularInline):
 # Create your Admin Models here.
 
 @admin.register(Address)
-class AddressAdmin(admin.ModelAdmin):
+class AddressAdmin(GuardedModelAdmin):
     """ This is the admin interface for the Address model. """
     readonly_fields = ['id']
     
