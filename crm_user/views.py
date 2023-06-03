@@ -31,9 +31,7 @@ def index(request):
         
 # User Registration View
 def user_registration(request):
-    """
-        This is a user registration view.
-    """
+    """ This is a user registration view. """
     if request.method == 'GET':
         if 'customerBtn' in request.GET:
             context = {
