@@ -357,3 +357,37 @@ def address_change_update_last_modified(sender, **kwargs):
     user = address.user 
     user.last_modified = timezone.now()
     user.save()
+    
+# Add Receiver for setting permissions on new Address creation
+@receiver(post_save, sender=Address)
+def address_set_permissions(sender, **kwargs):
+    """ Set permissions on new Address """
+    address, created = kwargs['instance'], kwargs['created']
+    user = address.user
+    if created and user.email != settings.ANONYMOUS_USER_NAME:
+        # Get Permissions
+        content_type = ContentType.objects.get_for_model(Address)
+        view = Permission.objects.get(content_type__app_label='crm_user', codename='view_address')
+        change = Permission.objects.get(content_type__app_label='crm_user', codename='change_address')
+        delete = Permission.objects.get(content_type__app_label='crm_user', codename='delete_address')
+        disable = Permission.objects.get(content_type__app_label='crm_user', codename='disable_address')
+    
+        # Add user view, change, and disable permissions
+        for perm in [view, change, disable]:
+            assign_perm(perm, user, address)
+            
+        # Add Admin Group view, change, delete, and disable permissions
+        group, created = Group.objects.get_or_create(name='Admins')
+        for perm in [view, change, delete, disable]:
+            assign_perm(perm, group, address)
+            
+        # Add Employee Manager Group view, change, and disable permissions
+        group, created = Group.objects.get_or_create(name='Employee - Manager')
+        for perm in [view, change, disable]:
+            assign_perm(perm, group, address)
+        
+        # Add Employee Standard Group view permissions 
+        group, created = Group.objects.get_or_create(name='Employee - Standard')
+        assign_perm(view, group, address)
+        
+    
