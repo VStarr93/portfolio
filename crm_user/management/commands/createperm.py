@@ -64,9 +64,10 @@ class Command(BaseCommand):
                     self.stdout.write("Permission was successfully created.")
 
                 # Get or Create Group
-                for group in options['group_name']:
-                    groupname = group + "_group"
-                    groupname, created = Group.objects.get_or_create(name=group)
+                if options['group_name']:
+                    for group in options['group_name']:
+                        groupname = group + "_group"
+                        groupname, created = Group.objects.get_or_create(name=group)
 
                     # Add permissions to group
                     groupname.permissions.add(permission.id)
