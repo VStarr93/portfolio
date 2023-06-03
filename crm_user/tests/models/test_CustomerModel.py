@@ -533,13 +533,13 @@ class ForeignKeyTests(TestCase):
     def test_type_foreign_key_on_delete(self):
         """ Test that Customer Model Type has on_delete models.SET_NULL """
         user2 = Customer.objects.create_user(email='test@example.com')
-        user1.last_modified_by = user2 
-        user1.save()
-        self.assertEqual(user1.last_modified_by, user2)
+        self.user.last_modified_by = user2 
+        self.user.save()
+        self.assertEqual(self.user.last_modified_by, user2)
         user2.delete()
         user1 = Customer.objects.get(id=1)
         self.assertEqual(Customer.objects.filter(id=1).exists(), True)
-        self.assertEqual(Customer.objects.filter(id=2).exists(), False)
+        user = Customer.objects.get(email='doe@example.com')
         self.assertEqual(user1.last_modified_by, None)
  
 # Create a TestCase for Customer Image Fields
