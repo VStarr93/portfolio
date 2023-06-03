@@ -18,6 +18,8 @@ from django.conf import settings
 from django.template.loader import render_to_string 
 import datetime 
 
+from guardian.mixins import GuardianUserMixin
+
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 # Create your ModelManagers here.
