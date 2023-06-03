@@ -437,3 +437,54 @@ class PostAnonUserTests(TestCase):
         # Check that user was created successfully
         self.assertEqual(Customer.objects.filter(email=self.customerdata['email']).exists(), True)
         
+# Create a TestCase for User Registration View Post Request with customer login
+# crm_user.tests.views.test_UserRegistrationView.PostLoginTests
+class PostCustomerLoginTests(TestCase):
+    """ Define a TestCase for User Registration View Post Request with Customer login """
+    def setUp(self):
+        """ Define setUp for User Registration View Post Request with Customer login """
+        self.password = 'P@ssw0rd3x@mpl3'
+        self.customer = Customer.objects.create_user(email='customer@example.com', password=self.password)
+
+    def test_redirect_on_customer_creation_form(self):
+        """ Test that User Registration View will redirect to home page if post is from customer user """
+        # Log in customer 
+        self.client.login(email=self.customer.email, password=self.password)
+        
+        # Create a Post Request with submitCustomer
+        response = self.client.post(reverse('crm_user:register'), {'submitCustomer': True})
+        
+        # Check that status code is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects to home page
+        self.assertRedirects(response, reverse('crm_user:home'), 302, 200)
+        
+    def test_redirect_on_employee_creation_form(self):
+        """ Test that User Registration View will redirect to home page if post is from customer user """
+        # Log in customer 
+        self.client.login(email=self.customer.email, password=self.password)
+        
+        # Create a Post Request with submitEmployee
+        response = self.client.post(reverse('crm_user:register'), {'submitEmployeeSimple': True})
+        
+        # Check that status code is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects to home page
+        self.assertRedirects(response, reverse('crm_user:home'), 302, 200)
+        
+    def test_redirect_on_admin_creation_form(self):
+        """ Test that user Registration View will redirect to home page if post is from customer user """
+        # Log in customer 
+        self.client.login(email=self.customer.email, password=self.password)
+        
+        # Create a Post Request with submitAdmin
+        response = self.client.post(reverse('crm_user:register'), {'submitAdminSimple': True})
+        
+        # Check that status code is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects to home page
+        self.assertRedirects(response, reverse('crm_user:home'), 302, 200)
+        
