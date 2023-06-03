@@ -794,3 +794,43 @@ class AdminProfileSetPermsTests(TestCase):
         # Check that user does not have make manager permission for this profile
         self.assertEqual(self.user.has_perm('make_admin_manager', self.profile), False)
            
+# Create a TestCase for Employee Profile Change Permissions Receiver
+# crm_user.tests.signals.test_handlers.EmployeeProfileChangePermsTests
+class EmployeeProfileChangePermsTests(TestCase):
+    """ Define a TestCase for Employee Profile Change Permissions Receiver """
+    def setUp(self):
+        """ Define a setUp method for Employee Profile Change Permissions Receiver to create test users and groups """
+        self.employee = Employee.objects.create_user(email='employee@example.com')
+        self.profile = EmployeeProfile.objects.get(user=self.employee)
+        self.user = User.objects.create_user(email='user@example.com')
+        # Set Group Variables
+        self.employee_group = Group.objects.get(name='Employee - Standard')
+        self.employee_manager_group = Group.objects.get(name='Employee - Manager')
+        
+    def test_employee_profile_is_manager_employee_manager_group(self):
+        """ Test that if an employee profile is manager is True, then employee user moves to Employee Manager Group """
+        # Check that employee is in employee standard group
+        self.assertEqual(self.employee.groups.filter(name='Employee - Standard').exists(), True)
+        
+        # Update employee profile to is manager is true
+        self.profile.is_manager = True
+        self.profile.save()
+        
+        # Check that employee is in employee manager group
+        self.assertEqual(self.employee.groups.filter(name='Employee - Manager').exists(), True)
+        
+        # Check that employee is not in employee standard group
+        self.assertEqual(self.employee.groups.filter(name='Employee - Standard').exists(), False)
+        
+    def test_employee_profile_is_not_manager_employee_standard_group(self):
+        """ Test that if an employee profile is manager is False, then employee user moves to Employee Standard Group """
+        # Update employee profile to is manager is False
+        self.profile.is_manager = False
+        self.profile.save()
+        
+        # Check that employee is in employee standard group
+        self.assertEqual(self.employee.groups.filter(name='Employee - Standard').exists(), True)
+        
+        # Check that employee is not in employee manager group
+        self.assertEqual(self.employee.groups.filter(name='Employee - Manager').exists(), False)
+        
