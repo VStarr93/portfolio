@@ -540,7 +540,7 @@ class ForeignKeyTests(TestCase):
         self.assertEqual(Admin.objects.filter(id=self.user.id).exists(), True)
         self.assertEqual(Admin.objects.filter(id=1).exists(), True)
         self.assertEqual(Admin.objects.filter(id=2).exists(), False)
-        self.assertEqual(user1.last_modified_by, None)
+        self.assertEqual(user.last_modified_by, None)
  
 # Create a TestCase for Admin Image Fields
 # crm_user.tests.models.tests_AdminModel.ImageTests 
