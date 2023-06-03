@@ -200,6 +200,43 @@ def employee_profile_set_permissions(sender, **kwargs):
                 group, created = Group.objects.get_or_create(name='Employee - Standard')
                 user.groups.add(group)
                 
+# Add Receiver for setting permissions on new employee creation
+@receiver(post_save, sender=Employee)
+def employee_set_permissions(sender, **kwargs):
+    """
+    Set object-level permissions. 
+    The employee user can view and change the object, 
+    The Admin group can view, change, and delete the object,
+    The Employee - Manager group can view, change, and delete the object,
+    The Employee - Standard group can view the object,
+    """
+    
+    user, created = kwargs["instance"], kwargs["created"]
+    if created and user.email != settings.ANONYMOUS_USER_NAME:      
+        # Get permissions
+        content_type = ContentType.objects.get_for_model(Employee)
+        view_perm = Permission.objects.get(content_type__app_label='crm_user', codename='view_user')  
+        change_perm = Permission.objects.get(content_type__app_label='crm_user', codename='change_user')  
+        delete_perm = Permission.objects.get(content_type__app_label='crm_user', codename='delete_user')  
+        
+        # Assign the employee view and change permission
+        assign_perm(view_perm, user, user)
+        assign_perm(change_perm, user, user)
+
+        # Assign Admin Group view, delete, and change permissions
+        group, created = Group.objects.get_or_create(name='Admins')
+        for perm in [view_perm, delete_perm, change_perm]:
+            assign_perm(perm, group, user)
+
+        # Assign Employee - Manager Group view, delete, and change permissions
+        group, created = Group.objects.get_or_create(name='Employee - Manager')
+        for perm in [view_perm, delete_perm, change_perm]:
+            assign_perm(perm, group, user)
+            
+        # Assign employee user to Employee Standard Group
+        group, created = Group.objects.get_or_create(name='Employee - Standard')
+        user.groups.add(group)
+    
 # Add Receiver for creating Admin Profile from Admin Model
 @receiver(post_save, sender=Admin)
 def create_admin_profile(sender, **kwargs):
