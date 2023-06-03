@@ -537,8 +537,8 @@ class ForeignKeyTests(TestCase):
         self.user.save()
         self.assertEqual(self.user.last_modified_by, user2)
         user2.delete()
-        user1 = Customer.objects.get(id=1)
-        self.assertEqual(Customer.objects.filter(id=1).exists(), True)
+        self.assertEqual(Customer.objects.filter(email='doe@example.com').exists(), True)
+        self.assertEqual(Customer.objects.filter(email='test@example.com').exists(), False)
         user = Customer.objects.get(email='doe@example.com')
         self.assertEqual(user1.last_modified_by, None)
  
