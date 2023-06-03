@@ -9,6 +9,8 @@ from crm_user.signals import handlers
 
 # For Testing Permissions
 from guardian.shortcuts import assign_perm
+from django.contrib.auth.models import Group, Permission
+
 # For Testing Email Services
 from django.core import mail 
 
