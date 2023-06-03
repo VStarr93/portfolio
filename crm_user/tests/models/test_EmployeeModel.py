@@ -538,7 +538,7 @@ class ForeignKeyTests(TestCase):
         self.assertEqual(self.user.last_modified_by, user2)
         user2.delete()
         self.assertEqual(Employee.objects.filter(id=self.user.id).exists(), True)
-        self.assertEqual(Employee.objects.filter(id=1).exists(), True)
+        self.assertEqual(Employee.objects.filter(id=user2.id).exists(), False)
         self.assertEqual(Employee.objects.filter(id=2).exists(), False)
         self.assertEqual(user1.last_modified_by, None)
  
