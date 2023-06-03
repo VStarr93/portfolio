@@ -19,7 +19,11 @@ from guardian.decorators import permission_required_or_403
 #-------------------------------------------------------------
 # Create your functions here.
 
-
+def not_anonymous(user):
+    if user.is_anonymous() or user.email == settings.ANONYMOUS_USER_NAME:
+        return False 
+    else:
+        return True
 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
