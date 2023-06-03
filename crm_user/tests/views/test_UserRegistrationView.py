@@ -488,3 +488,289 @@ class PostCustomerLoginTests(TestCase):
         # Check that view redirects to home page
         self.assertRedirects(response, reverse('crm_user:home'), 302, 200)
         
+# Create a TestCase for User Registration View Post Request with employee login
+# crm_user.tests.views.test_UserRegistrationView.PostEmployeeLoginTests
+class PostEmployeeLoginTests(TestCase):
+    """ Define a TestCase for User Registration View Post Request with Employee login """
+    def setUp(self):
+        """ Define setUp for User Registration View Post Request with Employee login """
+        self.password = 'P@ssw0rd3x@mpl3'
+        self.empManager = Employee.objects.create_user(email='empmanager@example.com', password=self.password)
+        self.empManager.emp_profile.is_manager = True
+        self.empManager.emp_profile.save()
+        self.employee = Employee.objects.create_user(email='employee@example.com', password=self.password)
+        self.data = {
+            'first_name': 'John',
+            'last_name': 'Smith',
+            'email': 'jsmith@example.com',
+            'password1': 'JSm1th3x@mpl3',
+            'password2': 'JSm1th3x@mpl3',
+        }
+        self.dataerror = {
+            'first_name': 'John'*50,
+            'last_name': 'Smith'*50,
+            'email': 'jsmith@example',
+            'password1': 'JSm1th',
+            'password2': 'JSm1th3x@mpl3',
+        }
+    
+    def test_redirect_on_success_customer_creation_form(self):
+        """ Test that User Registration View will redirect to login after successful post from Employee user """
+        # Log in employee
+        self.client.login(email=self.employee.email, password=self.password)
+        
+        # Add submitCustomer to data
+        self.data['submitCustomer'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), data=self.data)
+        
+        # Check that status code is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects to login
+        self.assertRedirects(response, reverse('login'), 302, 200)
+    
+    def test_redirect_manager_on_success_employee_creation_form(self):
+        """ Test that User Registration View will redirect to login if post is from Employee Manager user """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitEmployeeSimple to data
+        self.data['submitEmployeeSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), data=self.data)
+        
+        # Check that status code is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects to login
+        self.assertRedirects(response, reverse('login'), 302, 200)
+    
+    def test_redirect_manager_on_success_admin_creation_form(self):
+        """ Test that User Registration View will redirect to login if post is from Employee Manager user """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitAdminSimple to data
+        self.data['submitAdminSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), data=self.data)
+        
+        # Check that status code is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects to login
+        self.assertRedirects(response, reverse('login'), 302, 200)
+    
+    def test_redirect_nonmanager_on_employee_creation_form(self):
+        """ Test that User Registration View will redirect to home page if post is from Employee Nonmanager user """
+        # Log in employee
+        self.client.login(email=self.employee.email, password=self.password)
+        
+        # Add submitEmployeeSimple to data
+        self.data['submitEmployeeSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.data)
+        
+        # Check that status code is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects to login
+        self.assertRedirects(response, reverse('crm_user:home'), 302, 200)
+        
+        # Check that db was not updated
+        self.assertEqual(Employee.objects.filter(email=self.data['email']).exists(), False)
+    
+    def test_redirect_nonmanager_on_admin_creation_form(self):
+        """ Test that User Registration View will redirect to home page if post is from Employee Nonmanager user """
+        # Log in employee
+        self.client.login(email=self.employee.email, password=self.password)
+        
+        # Add submitAdminSimple to data
+        self.data['submitAdminSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.data)
+        
+        # Check that status code is 302
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that view redirects to login
+        self.assertRedirects(response, reverse('crm_user:home'), 302, 200)
+        
+        # Check that db was not updated
+        self.assertEqual(Employee.objects.filter(email=self.data['email']).exists(), False)
+    
+    def test_template_on_errors_customer_creation_form(self):
+        """ Test that User Registration View will render correct template and context when Employee user submits an invalid CustomerCreationForm """
+        # Log in employee
+        self.client.login(email=self.employee.email, password=self.password)
+        
+        # Add submitCustomer to data
+        self.dataerror['submitCustomer'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.dataerror)
+        
+        # Check that status code is 200
+        self.assertEqual(response.status_code, 200)
+        
+        # Check that the correct template is rendered
+        self.assertTemplateUsed(response, 'crm_user/registration.html')
+        
+        # Check that the correct template context is rendered
+        self.assertIsInstance(response.context['form'], CustomerCreationForm)
+        
+    def test_template_on_errors_employee_creation_form(self):
+        """ Test that User Registration View will render correct template and context when Employee user submits an invalid CustomerCreationForm """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitEmployeeSimple to data
+        self.dataerror['submitEmployeeSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.dataerror)
+        
+        # Check that status code is 200
+        self.assertEqual(response.status_code, 200)
+        
+        # Check that the correct template is rendered
+        self.assertTemplateUsed(response, 'crm_user/registration.html')
+        
+        # Check that the correct template context is rendered
+        self.assertIsInstance(response.context['form'], SimpleEmployeeCreationForm)
+        
+    def test_template_on_errors_admin_creation_form(self):
+        """ Test that User Registration View will render correct template and context when Employee user submits an invalid CustomerCreationForm """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitAdminSimple to data
+        self.dataerror['submitAdminSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.dataerror)
+        
+        # Check that status code is 200
+        self.assertEqual(response.status_code, 200)
+        
+        # Check that the correct template is rendered
+        self.assertTemplateUsed(response, 'crm_user/registration.html')
+        
+        # Check that the correct template context is rendered
+        self.assertIsInstance(response.context['form'], SimpleAdminCreationForm)
+        
+    def test_form_errors_customer_creation_form(self):
+        """" Test that User Registration View will render correct form errors when Employee user submits an invalid CustomerCreationForm """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitCustomer to data
+        self.dataerror['submitCustomer'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.dataerror)
+        
+        # Check that status code is 200
+        self.assertEqual(response.status_code, 200)
+        
+        # Check that form errors are correctly rendered
+        self.assertFormError(response, 'form', 'first_name', 'Ensure this value has at most 50 characters (it has 200).')
+        self.assertFormError(response, 'form', 'last_name', 'Ensure this value has at most 50 characters (it has 250).')
+        self.assertFormError(response, 'form', 'email', 'Enter a valid email address.')
+        self.assertFormError(response, 'form', 'password2', "The two password fields didn’t match.")
+        
+    def test_form_errors_employee_creation_form(self):
+        """" Test that User Registration View will render correct form errors when Employee user submits an invalid SimpleEmployeeCreationForm """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitEmployeeSimple to data
+        self.dataerror['submitEmployeeSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.dataerror)
+        
+        # Check that status code is 200
+        self.assertEqual(response.status_code, 200)
+        
+        # Check that form errors are correctly rendered
+        self.assertFormError(response, 'form', 'first_name', 'Ensure this value has at most 50 characters (it has 200).')
+        self.assertFormError(response, 'form', 'last_name', 'Ensure this value has at most 50 characters (it has 250).')
+        self.assertFormError(response, 'form', 'email', 'Enter a valid email address.')
+        
+    def test_form_errors_admin_creation_form(self):
+        """" Test that User Registration View will render correct form errors when Employee user submits an invalid SimpleAdminCreationForm """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitAdminSimple to data
+        self.dataerror['submitAdminSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.dataerror)
+        
+        # Check that status code is 200
+        self.assertEqual(response.status_code, 200)
+        
+        # Check that form errors are correctly rendered
+        self.assertFormError(response, 'form', 'first_name', 'Ensure this value has at most 50 characters (it has 200).')
+        self.assertFormError(response, 'form', 'last_name', 'Ensure this value has at most 50 characters (it has 250).')
+        self.assertFormError(response, 'form', 'email', 'Enter a valid email address.')
+        
+    def test_db_customer_creation_form(self):
+        """ Test that User Registration View will update database correctly when Employee user submits a valid CustomerCreationForm """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitCustomer to data
+        self.data['submitCustomer'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.data)
+        
+        # Check that status code is 200
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that user is created successfully
+        self.assertEqual(Customer.objects.filter(email=self.data['email']).exists(), True)
+        
+    def test_db_employee_creation_form(self):
+        """ Test that User Registration View will update database correctly when Employee user submits a valid SimpleEmployeeCreationForm """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitEmployeeSimple to data
+        self.data['submitEmployeeSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.data)
+        
+        # Check that status code is 200
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that user is created successfully
+        self.assertEqual(Employee.objects.filter(email=self.data['email']).exists(), True)
+        
+    def test_db_admin_creation_form(self):
+        """ Test that User Registration View will update database correctly when Employee user submits a valid SimpleAdminCreationForm """
+        # Log in employee manager
+        self.client.login(email=self.empManager.email, password=self.password)
+        
+        # Add submitAdminSimple to data
+        self.data['submitAdminSimple'] = True 
+        
+        # Create a Post Request with data
+        response = self.client.post(reverse('crm_user:register'), self.data)
+        
+        # Check that status code is 200
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that user is created successfully
+        self.assertEqual(Admin.objects.filter(email=self.data['email']).exists(), True)
+        
