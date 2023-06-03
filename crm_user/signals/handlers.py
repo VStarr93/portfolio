@@ -320,6 +320,7 @@ def admin_profile_set_permissions(sender, **kwargs):
 # Add Receiver for creating Profiles from User Model
 @receiver(post_save, sender=User)
 def user_create_profile(sender, **kwargs):
+    """ The creation of a new user should create corresponding profile """
     user = kwargs['instance']
     created = kwargs['created']
     if created and user.type == "CUSTOMER":
