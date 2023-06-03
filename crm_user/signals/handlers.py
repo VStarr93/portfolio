@@ -48,6 +48,47 @@ def send_password_reset(sender, **kwargs):
             email_template_name='registration/password_reset_email.html'
         )
 
+# Add Receiver for setting permissions on new customer creation
+@receiver(post_save, sender=Customer)
+def customer_set_permissions(sender, **kwargs):
+    """
+    Set object-level permissions. 
+    The customer user can view and change the object, 
+    The Admin group can view, change, and delete the object,
+    The Employee - Manager group can view, change, and delete the object,
+    The Employee - Standard group can view the object.
+    """
+    
+    user, created = kwargs["instance"], kwargs["created"]
+    if created and user.email != settings.ANONYMOUS_USER_NAME:      
+        # Get permissions
+        content_type = ContentType.objects.get_for_model(Customer)
+        view_perm = Permission.objects.get(content_type__app_label='crm_user', codename='view_user')  
+        change_perm = Permission.objects.get(content_type__app_label='crm_user', codename='change_user')  
+        delete_perm = Permission.objects.get(content_type__app_label='crm_user', codename='delete_user')  
+        
+        # Assign the customer view and change permission
+        assign_perm(view_perm, user, user)
+        assign_perm(change_perm, user, user)
+
+        # Assign Admin Group all permissions
+        group, created = Group.objects.get_or_create(name='Admins')
+        for perm in [view_perm, change_perm, delete_perm]:
+            assign_perm(perm, group, user)
+
+        # Assign Employee - Manager Group all permissions
+        group, created = Group.objects.get_or_create(name='Employee - Manager')
+        for perm in [view_perm, change_perm, delete_perm]:
+            assign_perm(perm, group, user)
+
+        # Assign Employee - Standard Group view permission
+        group, created = Group.objects.get_or_create(name='Employee - Standard')
+        assign_perm(view_perm, group, user)
+        
+        # Add customer user to Customer Group
+        group, create = Group.objects.get_or_create(name='Customer')
+        user.groups.add(group)
+    
 # Add Receiver for creating Employee Profile from Employee Model
 @receiver(post_save, sender=Employee)
 def create_employee_profile(sender, **kwargs):
