@@ -24,6 +24,10 @@ from guardian.mixins import GuardianUserMixin
 #-------------------------------------------------------------
 # Create your Functions here.
 
+def get_anonymous_user_instance(User):
+    return User.objects.create_user(email='anonymoususer@example.com', type='ANON')
+
+
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 # Create your ModelManagers here.
