@@ -47,7 +47,7 @@ class AddressAdmin(GuardedModelAdmin):
         model = Address 
     
 @admin.register(User)
-class CustomUserAdmin(BaseUserAdmin):
+class CustomUserAdmin(GuardedModelAdmin, BaseUserAdmin):
     """ This is the customer user admin interface for the CustomUser model. """
     ordering = ('last_name', 'first_name')
     search_fields = ('first_name', 'last_name', 'email')
