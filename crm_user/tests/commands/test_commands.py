@@ -46,11 +46,11 @@ class CreatepermTests(TestCase):
             createperm command runs successfully with 1 argument per option
         """
         out = StringIO()
-        call_command("createperm", "add", "-m", "user", "-g", "admins", stdout=out)
+        call_command("createperm", "modify", "-m", "user", "-g", "admins", stdout=out)
         self.assertIn("Successfully added", out.getvalue())
         self.assertTrue(Group.objects.get(name='admins'))
-        self.assertTrue(Permission.objects.get(name='Can add user'))
-        self.assertTrue(Group.objects.get(name='admins').permissions.get(name='Can add user'))
+        self.assertTrue(Permission.objects.get(name='Can modify user'))
+        self.assertTrue(Group.objects.get(name='admins').permissions.get(name='Can modify user'))
 
     def test_createperm_two_models(self):
         """
