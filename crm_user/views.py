@@ -6,7 +6,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse 
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from crm_user.forms import *
 from django.apps import apps
 from crm_user.models import Address
