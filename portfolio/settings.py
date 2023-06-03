@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'main',
     'parameterized',
     'freezegun',
+    'guardian',
 ]
 
 MIDDLEWARE = [
