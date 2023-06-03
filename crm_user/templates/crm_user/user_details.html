@@ -1,0 +1,26 @@
+<!-- crm_user/user_details.html -->
+
+{% extends 'crm_user/appbase.html' %}
+
+{% block title %}CRM - Customer Details{% endblock %}
+
+{% block app %} 
+
+<div class="card m-3 v-profile">
+  
+  <div class="card-header">
+    {% if customer %}
+    {{customer.firstname}} {{customer.lastname}}
+    {% elif employee %}
+    {{employee.firstname}} {{employee.lastname}}
+    {% elif admin %}
+    {{admin.firstname}} {{admin.lastname}}
+    {% endif %}
+  </div>
+
+  <div class="card-body v-profile-body">
+    This is where the customer details will be displayed.
+  </div>
+</div>
+
+{% endblock %}
