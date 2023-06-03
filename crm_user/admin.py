@@ -69,6 +69,7 @@ class CustomUserAdmin(GuardedModelAdmin, BaseUserAdmin):
     ]
     actions = ['activate_users']
 
+    @admin.action(description="Activate users")
     def activate_users(self, request, queryset):
         assert request.user.has_perm('auth.change_user')
         cnt = queryset.filter(is_active=False).update(is_active=True)
