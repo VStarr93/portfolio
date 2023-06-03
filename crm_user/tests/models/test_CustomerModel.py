@@ -635,6 +635,10 @@ class MethodTests(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn('Welcome', mail.outbox[0].subject)
         
+    def test_get_absolute_url_method(self):
+        """ Test that Customer Model get_absolute_url method returns correct url """
+        self.assertEqual(self.user.get_absolute_url(), f'/user/user-details/{self.user.id}')
+        
 # Create a TestCase for Customer Meta
 # crm_user.tests.models.test_CustomerModel.MetaTests 
 class MetaTests(TestCase):
