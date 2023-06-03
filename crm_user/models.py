@@ -505,6 +505,7 @@ class EmployeeProfile(Model):
         permissions = (
             ('change_employee_hire_date', 'Can Change Employee Hire Date'),
             ('change_employee_status', 'Can Change Employee Status'),
+            ('make_employee_manager', 'Can Make Employee a Manager'),
         )
         
     class Status(TextChoices):
