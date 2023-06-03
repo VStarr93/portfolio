@@ -708,3 +708,89 @@ class AdminSetPermsTests(TestCase):
         # check that employee is not in Customer group
         self.assertEqual(self.admin.groups.filter(name='Customers').exists(), False)
   
+# Create a TestCase for Admin Profile Set Permissions Reciever 
+# crm_user.tests.signals.test_handlers.AdminProfileSetPermsTests
+class AdminProfileSetPermsTests(TestCase):
+    """ Define a TestCase for Admin Profile Set Permissions Reciever """
+    def setUp(self):
+        """ Define a setUp method for AdminProfileSetPermsTests to create test users and groups """
+        # Create Admin 
+        self.admin = Admin.objects.create_user(email="test@example.com")
+        self.profile = AdminProfile.objects.get(user=self.admin)
+        self.user = User.objects.create_user(email="test1@example.com")
+        # Get Admin Group
+        self.admin_group = Group.objects.get(name='Admins')
+        self.employee_manager_group = Group.objects.get(name='Employee - Manager')
+        self.employee_standard_group = Group.objects.get(name='Employee - Standard')
+        
+    def test_admin_profile_created_admin_view_permission(self):
+        """ Test that when an admin profile is created, the admin receives view permission for that object (their profile) """
+
+        self.assertEqual(self.admin.has_perm('view_adminprofile', self.profile), True)
+        
+    def test_admin_profile_created_admin_change_permission(self):
+        """ Test that when an admin profile is created, the admin receives change permission for that object (their profile) """
+
+        self.assertEqual(self.admin.has_perm('change_adminprofile', self.profile), True)
+         
+    def test_admin_profile_created_admin_delete_permission(self):
+        """ Test that when an admin profile is created, the admin receives change permission for that object (their profile) """
+
+        self.assertEqual(self.admin.has_perm('change_adminprofile', self.profile), True)
+        
+    def test_admin_profile_created_admin_group_view_permission(self):
+        """ Test that when an admin profile is created, Admin group has view permission for this profile """
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has view permissions for this profile 
+        self.assertEqual(self.user.has_perm('view_adminprofile', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have view permissions for this profile
+        self.assertEqual(self.user.has_perm('view_adminprofile', self.profile), False)
+        
+    def test_admin_profile_created_admin_group_delete_permission(self):
+        """ Test that when an admin profile is created, Admin group has delete permission for this profile"""
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_adminprofile', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have delete permission for this profile
+        self.assertEqual(self.user.has_perm('delete_adminprofile', self.profile), False)
+        
+    def test_admin_profile_created_admin_group_change_status_permission(self):
+        """ Test that when an admin profile is created, Admin group has change status permission for this profile """
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has change status permissions for this profile 
+        self.assertEqual(self.user.has_perm('change_admin_status', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have change status permissions for this profile
+        self.assertEqual(self.user.has_perm('change_admin_status', self.profile), False)
+        
+    def test_admin_profile_created_admin_group_make_manager_permission(self):
+        """ Test that when an admin profile is created, Admin group has make manager permission for this profile"""
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has make manager permission for this profile
+        self.assertEqual(self.user.has_perm('make_admin_manager', self.profile), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have make manager permission for this profile
+        self.assertEqual(self.user.has_perm('make_admin_manager', self.profile), False)
+           
