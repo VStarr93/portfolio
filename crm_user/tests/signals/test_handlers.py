@@ -281,3 +281,125 @@ class CustomerProfileSetPermsTests(TestCase):
         # Check that user does not have view permission for this profile
         self.assertEqual(self.user.has_perm('view_customerprofile', self.profile), False)
         
+# Create a TestCase for Employee Set Permissions Reciever 
+# crm_user.tests.signals.test_handlers.EmployeeSetPermsTests
+class EmployeeSetPermsTests(TestCase):
+    """ Define a TestCase for Employee Set Permissions Reciever """
+    def setUp(self):
+        """ Define a setUp method for EmployeeSetPermsTests to create test users and groups """
+        # Create employee 
+        self.employee = Employee.objects.create_user(email="test@example.com")
+        self.user = User.objects.create_user(email="test1@example.com")
+        # Get Admin Group
+        self.admin_group = Group.objects.get(name='Admins')
+        self.employee_manager_group = Group.objects.get(name='Employee - Manager')
+        self.employee_standard_group = Group.objects.get(name='Employee - Standard')
+          
+    def test_employee_created_employee_view_permission(self):
+        """ Test that when an employee is created, they receive view permission for that object (their user) """
+
+        self.assertEqual(self.employee.has_perm('view_user', self.employee), True)
+        
+    def test_employee_created_employee_change_permission(self):
+        """ Test that when an employee is created, they receive change permission for that object (their user) """
+
+        self.assertEqual(self.employee.has_perm('change_user', self.employee), True)
+        
+    def test_employee_created_admin_group_view_permission(self):
+        """ Test that when an employee is created, Admin group has view permission for this employee """
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has view permissions for this employee 
+        self.assertEqual(self.user.has_perm('view_user', self.employee), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have view permissions for this employee
+        self.assertEqual(self.user.has_perm('view_user', self.employee), False)
+        
+    def test_employee_created_admin_group_change_permission(self):
+        """ Test that when an employee is created, Admin group has change permission for this employee """
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has change permissions for this employee
+        self.assertEqual(self.user.has_perm('change_user', self.employee), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have change permissions for this employee
+        self.assertEqual(self.user.has_perm('change_user', self.employee), False)
+        
+    def test_employee_created_admin_group_delete_permission(self):
+        """ Test that when an employee is created, Admin group has delete permission for this employee"""
+        # add user to Admin Group
+        self.user.groups.add(self.admin_group)
+        
+        # Check that user in Admin Group has delete permission for this employee
+        self.assertEqual(self.user.has_perm('delete_user', self.employee), True)
+        
+        # remove user from Admin Group
+        self.user.groups.remove(self.admin_group)
+        
+        # Check that user does not have delete permission for this employee
+        self.assertEqual(self.user.has_perm('delete_user', self.employee), False)
+        
+    def test_employee_created_employee_manager_group_view_permission(self):
+        """ Test that when an employee is created, Employee Manager Group has view permission for this employee """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has view permission for this employee
+        self.assertEqual(self.user.has_perm('view_user', self.employee), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have view permission for this employee
+        self.assertEqual(self.user.has_perm('view_user', self.employee), False)
+        
+    def test_employee_created_employee_manager_group_change_permission(self):
+        """ Test that when an employee is created, Employee Manager Group has change permission for this employee """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has change permission for this employee
+        self.assertEqual(self.user.has_perm('change_user', self.employee), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have change permission for this employee
+        self.assertEqual(self.user.has_perm('change_user', self.employee), False)
+        
+    def test_employee_created_employee_manager_group_delete_permission(self):
+        """ Test that when an employee is created, Employee Manager Group has delete permission for this employee """
+        # add user to Employee Manager Group
+        self.user.groups.add(self.employee_manager_group)
+        
+        # Check that user in Employee Manager Group has delete permission for this employee
+        self.assertEqual(self.user.has_perm('delete_user', self.employee), True)
+        
+        # remove user from Employee Manager Group
+        self.user.groups.remove(self.employee_manager_group)
+        
+        # Check that user does not have delete permission for this employee
+        self.assertEqual(self.user.has_perm('delete_user', self.employee), False)
+        
+    def test_employee_created_added_to_employee_standard_group(self):
+        """ Test that when an employee is created, they are added to Employee group """
+        
+        self.assertEqual(self.employee.groups.filter(name='Employee - Standard').exists(), True)
+        
+        # check that employee is not in Admin group
+        self.assertEqual(self.employee.groups.filter(name='Admins').exists(), False)
+        
+        # check that employee is not in Employee Manager group
+        self.assertEqual(self.employee.groups.filter(name='Employee - Manager').exists(), False)
+        
+        # check that employee is not in Customer group
+        self.assertEqual(self.employee.groups.filter(name='Customer').exists(), False)
+   
