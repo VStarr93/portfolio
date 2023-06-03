@@ -12,6 +12,7 @@ from django.conf import settings
 from django.utils import timezone 
 
 from guardian.shortcuts import assign_perm
+from django.contrib.auth.models import Group, Permission, ContentType 
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 # Create your handlers here.
