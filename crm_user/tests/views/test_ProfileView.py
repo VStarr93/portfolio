@@ -215,7 +215,7 @@ class PostTests(TestCase):
         cls.customer = Customer.objects.create_user(email='customer@example.com', password=cls.password)
         
         # Create Form Data
-        cls.photo = SimpleUploadedFile("test_image.jpg", b"test_content", "image/jpeg")
+        cls.photo = SimpleUploadedFile("test_content", b"test_content", "image/jpg")
         cls.files = {
             'profile_photo': cls.photo,
         }
@@ -226,7 +226,7 @@ class PostTests(TestCase):
             'email': 'jsmith@example.com',
             'birth_date': '1993-04-14',
             'phone_number': '+12124448769',
-            #'profile_photo': self.photo,
+            #'profile_photo': SimpleUploadedFile('test_content', b'test_content', 'image/jpg'),
             'submitChange': True,
         }
         cls.customizedata = {
