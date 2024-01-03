@@ -32,7 +32,7 @@
         <p>link : 
             {% if project.name == 'CRM Template' %}
             <a href="{% url 'crm_user:home' %}">View Project Here</a>
-            {% else %}
+            {% elif project.link.url %}
             <a href="{{project.link.url}}">View Project Here</a>
             {% endif %}
         </p>
