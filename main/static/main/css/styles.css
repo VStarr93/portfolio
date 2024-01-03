@@ -9,7 +9,7 @@ main {
     bottom:30px;
     right:20px;
     padding-right:10px;
-    overflow-y:scroll;
+    overflow-y:auto;
     position: fixed;
 }    
 
@@ -170,11 +170,11 @@ header a, header button{
 }
 
 .v-scroll-x {
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 .v-scroll-y {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .v-story {
