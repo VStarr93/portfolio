@@ -17,8 +17,9 @@
 
     <div class="card v-card-dark w-75">
         <div class=" d-flex flex-row flex-nowrap v-scroll-x">
+            {% if project.img %}
             <img src="{{project.img.url}}" alt="{{project.name}} Main" style="min-width:200px; max-width:350px;" class="card v-card m-5"/>
-
+            {% endif %}
             {% for image in images %}
             <img src="{{image.img.url}}" alt="{{image.name}}" style="min-width:200px; max-width:350px;" class="card v-card m-5" />
             {% endfor %}
