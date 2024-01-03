@@ -15,119 +15,143 @@
 <div class="d-flex flex-column w-100 align-items-center">
     <div class="card v-card w-50"></div>
 
+    {% if tfeatured %}
     <div class="card v-card-dark w-75">
         <h2 class="ms-3">Featured</h2>
         <hr/>
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.is_featured %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
-                <div class="card-card-img">
-                    <a href="{% url 'main:project' id=project.id %}">
+            <a class="text-decoration-none" href="{% url 'main:project' id=project.id %}">
+                <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
+                    {% if project.img %}
+                    <div class="card-card-img">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
-                    </a>
+                    </div>
+                    {% endif %}
+                    <div class="card-footer">{{project.name }}</div>
                 </div>
-                <div class="card-footer">{{project.name }}</div>
-            </div>
+            </a>
             {% endif %}
             {% endfor %}
         </div>
     </div>
+    {% endif %}
     
+    {% if tfun %}
     <div class="card v-card-dark w-75">
         <h2 class="ms-3">For Fun</h2>
         <hr/>
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'PROJECT' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
-                <div class="card-card-img">
-                    <a href="{% url 'main:project' id=project.id %}">
+            <a class="text-decoration-none" href="{% url 'main:project' id=project.id %}">
+                <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
+                    {% if project.img %}
+                    <div class="card-card-img">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
-                    </a>
+                    </div>
+                    {% endif %}
+                    <div class="card-footer">{{project.name }}</div>
                 </div>
-                <div class="card-footer">{{project.name }}</div>
-            </div>
+            </a>
             {% endif %}
             {% endfor %}
         </div>
     </div>
+    {% endif %}
     
+    {% if ttemplate %}
     <div class="card v-card-dark w-75">
         <h2 class="ms-3">Templates</h2>
         <hr/>
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'TEMPLATE' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
-                <div class="card-card-img">
-                    <a href="{% url 'main:project' id=project.id %}">
+            <a class="text-decoration-none" href="{% url 'main:project' id=project.id %}">
+                <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
+                    {% if project.img %}
+                    <div class="card-card-img">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
-                    </a>
+                    </div>
+                    {% endif %}
+                    <div class="card-footer">{{project.name }}</div>
                 </div>
-                <div class="card-footer">{{project.name }}</div>
-            </div>
+            </a>
             {% endif %}
             {% endfor %}
         </div>
     </div>
+    {% endif %}
     
+    {% if tclient %}
     <div class="card v-card-dark w-75">
         <h2 class="ms-3">Client Projects</h2>
         <hr/>
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'WORK' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
-                <div class="card-card-img">
-                    <a href="{% url 'main:project' id=project.id %}">
+            <a class="text-decoration-none" href="{% url 'main:project' id=project.id %}">
+                <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
+                    {% if project.img %}
+                    <div class="card-card-img">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
-                    </a>
+                    </div>
+                    {% endif %}
+                    <div class="card-footer">{{project.name}}</div>
                 </div>
-                <div class="card-footer">{{project.name }}</div>
-            </div>
+            </a>
             {% endif %}
             {% endfor %}
         </div>
     </div>
-    
+    {% endif %}
+
+    {% if tschool %}
     <div class="card v-card-dark w-75">
         <h2 class="ms-3">School Projects</h2>
         <hr/>
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'SCHOOL' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
-                <div class="card-card-img">
-                    <a href="{% url 'main:project' id=project.id %}">
+            <a class="text-decoration-none" href="{% url 'main:project' id=project.id %}">
+                <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
+                    {% if project.img %}
+                    <div class="card-card-img">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
-                    </a>
+                    </div>
+                    {% endif %}
+                    <div class="card-footer">{{project.name }}</div>
                 </div>
-                <div class="card-footer">{{project.name }}</div>
-            </div>
+            </a>
             {% endif %}
             {% endfor %}
         </div>
     </div>
-    
+    {% endif %}
+
+    {% if tlibrary %}
     <div class="card v-card-dark w-75">
         <h2 class="ms-3">Library Projects</h2>
         <hr/>
         <div class="flex-row flex-nowrap v-scroll-x">
             {% for project in projects %}
             {% if project.type == 'LIBRARY' %}
-            <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
-                <div class="card-card-img">
-                    <a href="{% url 'main:project' id=project.id %}">
+            <a class="text-decoration-none" href="{% url 'main:project' id=project.id %}">
+                <div class="card v-card m-5" style="min-width:250px; max-width:450px;">
+                    {% if project.img %}
+                    <div class="card-card-img">
                         <img src="{{project.img.url}}" alt="{{project.name}} Homepage" width=100% />
-                    </a>
+                    </div>
+                    {% endif %}
+                    <div class="card-footer">{{project.name }}</div>
                 </div>
-                <div class="card-footer">{{project.name }}</div>
-            </div>
+            </a>
             {% endif %}
             {% endfor %}
         </div>
     </div>
+    {% endif %}
     
 </div>
 
