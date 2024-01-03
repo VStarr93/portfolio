@@ -50,7 +50,22 @@ def projects_view(request):
     
     if request.method == 'GET':
         projects = Project.objects.all()
-        return render(request, 'main/projects.html', context={'projects': projects})
+        school = Project.objects.all().filter(type='SCHOOL')
+        fun = Project.objects.all().filter(type='FUN')
+        library = Project.objects.all().filter(type='LIBRARY')
+        client = Project.objects.all().filter(type='CLIENT')
+        template = Project.objects.all().filter(type='TEMPLATE')
+        featured = Project.objects.all().filter(is_featured=True)
+        context = {
+            'projects': projects,
+            'tschool': school,
+            'tfun': fun,
+            'tlibrary': library,
+            'tclient': client,
+            'ttemplate': template,
+            'tfeatured': featured,
+        }
+        return render(request, 'main/projects.html', context=context)
     
 # Project View
 def project_view(request, id):
